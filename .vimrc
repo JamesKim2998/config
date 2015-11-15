@@ -50,6 +50,9 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>a :Ag 
 
 " plugins
+" airline
+let g:airline#extensions#tabline#enabled = 1
+
 " Ag
 set runtimepath^=~/.vim/bundle/ag
 let g:ackprg = 'ag --nogroup --nocolor --column'

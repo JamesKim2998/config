@@ -10,6 +10,6 @@ alias zshso="source ~/.zshrc"
 
 function chpwd() {
     emulate -L zsh
-    ls -a
+    ls
 }
 
