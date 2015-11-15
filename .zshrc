@@ -7,8 +7,6 @@ source $ZSH/oh-my-zsh.sh
 
 alias zshedit="vi ~/.zshrc"
 alias zshso="source ~/.zshrc"
-alias mstcd="~/Develop/master"
-alias msto="open -a /Applications/AppCode.app ~/Develop/master/OBXCodeTrunk/OvenbreakX/OvenbreakX.xcodeproj"
 
 function chpwd() {
     emulate -L zsh
