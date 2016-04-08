@@ -14,10 +14,12 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'airblade/vim-gitgutter'
 
+Plug 'rking/ag.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
+Plug 'tfnico/vim-gradle'
 " TODO
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
@@ -50,6 +52,10 @@ nnoremap B ^
 nnoremap E $
 nnoremap $ <nop>
 nnoremap ^ <nop>
+
+" etc
+set scrolloff=15
+set clipboard=unnamed
 
 " leader shortcuts
 let mapleader=","
