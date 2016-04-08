@@ -19,10 +19,18 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-Plug 'tfnico/vim-gradle'
-" TODO
+" html/css
+Plug 'mattn/emmet-vim'
+
+" ruby
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
+
+" C#
+" Plug 'OmniSharp/omnisharp-vim'
+
+" gradle
+Plug 'tfnico/vim-gradle'
 
 call plug#end()
 
@@ -52,6 +60,9 @@ nnoremap B ^
 nnoremap E $
 nnoremap $ <nop>
 nnoremap ^ <nop>
+
+" navigation
+set autochdir
 
 " etc
 set scrolloff=15
