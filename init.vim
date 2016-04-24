@@ -6,31 +6,29 @@ filetype plugin indent on
 
 call plug#begin('~/.config/nvim/plugged')
 
+" appearance
 Plug 'altercation/vim-colors-solarized'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ervandew/supertab'
 
+" git
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'airblade/vim-gitgutter'
 
+" navigation
 Plug 'rking/ag.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-" html/css
-Plug 'mattn/emmet-vim'
-
-" ruby
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
-
-" C#
-" Plug 'OmniSharp/omnisharp-vim'
-
-" gradle
-Plug 'tfnico/vim-gradle'
+" language support
+" Plug 'Valloric/YouCompleteMe'
+Plug 'mattn/emmet-vim' " html/css
+Plug 'vim-ruby/vim-ruby' " ruby
+Plug 'tpope/vim-rails' " ruby
+" Plug 'OmniSharp/omnisharp-vim' " C#
+Plug 'tfnico/vim-gradle' " gradle
 
 call plug#end()
 
