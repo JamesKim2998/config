@@ -1,0 +1,15 @@
+[user]
+	name = 김대원
+	email = james.kim@devsisters.com
+[core]
+	editor = nvim
+[merge]
+	tool = nvim
+	ff = false
+[mergetool]
+	path = nvim
+[diff]
+	tool = nvim
+	prompt = false
+[difftool "nvim"]
+	cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
