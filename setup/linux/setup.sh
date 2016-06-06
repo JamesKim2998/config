@@ -6,3 +6,7 @@ xset r rate 200 100
 git clone git://github.com/ndbroadbent/scm_breeze.git ~/.scm_breeze
 ~/.scm_breeze/install.sh
 source ~/.zshrc
+
+# install cli tools
+sudo apt-get install tree
+sudo apt-get install tmux
