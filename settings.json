@@ -1,2 +1,7 @@
 {
+	// Controls whether the editor should render whitespace characters
+	"editor.renderWhitespace": true,
+	"files.associations": {
+        "*.lua.bytes": "lua"
+    }
 }
