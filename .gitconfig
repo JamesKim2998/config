@@ -3,6 +3,7 @@
 	email = james.kim@devsisters.com
 [core]
 	editor = nvim
+	quotepath = off
 [merge]
 	tool = nvim
 	ff = false
