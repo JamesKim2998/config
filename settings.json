@@ -1,7 +1,6 @@
 {
-    // Configure the update channel to receive updates from. Requires a restart after change.
-    "update.channel": "none",
-    // Controls whether the editor should render whitespace characters
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false,
     "editor.renderWhitespace": true,
     "files.associations": {
         "*.lua.bytes": "lua"

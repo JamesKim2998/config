@@ -9,7 +9,6 @@ call plug#begin('~/.config/nvim/plugged')
 " appearance
 Plug 'altercation/vim-colors-solarized'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'ervandew/supertab'
 
 " git
 Plug 'tpope/vim-fugitive'
@@ -22,12 +21,15 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
+" autocomplete
+Plug 'ervandew/supertab'
+
 " language support
 " Plug 'Valloric/YouCompleteMe'
 Plug 'mattn/emmet-vim' " html/css
 Plug 'vim-ruby/vim-ruby' " ruby
 Plug 'tpope/vim-rails' " ruby
-" Plug 'OmniSharp/omnisharp-vim' " C#
+Plug 'tbastos/vim-lua' " lua
 Plug 'tfnico/vim-gradle' " gradle
 
 call plug#end()
@@ -43,7 +45,6 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 set list
-autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 
 " ui config
 set number
@@ -88,3 +89,8 @@ let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
+" ruby
+autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+" defold lua
+au BufNewFile,BufRead *.script setf lua
