@@ -17,7 +17,7 @@ git checkout $BRANCH
 git rebase master
 
 git checkout master
-git merge $BRANCH
+git merge --no-ff $BRANCH
 git checkout $BRANCH
 git rebase master
 git checkout master
