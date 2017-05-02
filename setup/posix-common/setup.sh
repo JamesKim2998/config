@@ -2,10 +2,9 @@
 git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
 ~/.scm_breeze/install.sh
 
-# git - set user info
-git config --global core.editor nvim
-git config --global user.email "james.kim@devsisters.com"
-git config --global user.name "JamesKim"
+# nvim
+ln -s ../../.gitconfig ~
+ln -s ../../.gitglobal_ignore ~
 
 # nvim
 mkdir -p ~/.config/nvim
