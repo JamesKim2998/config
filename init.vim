@@ -26,11 +26,11 @@ Plug 'ervandew/supertab'
 
 " language support
 " Plug 'Valloric/YouCompleteMe'
-Plug 'mattn/emmet-vim' " html/css
-Plug 'vim-ruby/vim-ruby' " ruby
-Plug 'tpope/vim-rails' " ruby
-Plug 'tbastos/vim-lua' " lua
-Plug 'tfnico/vim-gradle' " gradle
+" Plug 'mattn/emmet-vim' " html/css
+" Plug 'vim-ruby/vim-ruby' " ruby
+" Plug 'tpope/vim-rails' " ruby
+" Plug 'tbastos/vim-lua' " lua
+" Plug 'tfnico/vim-gradle' " gradle
 
 call plug#end()
 
