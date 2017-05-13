@@ -1,8 +1,11 @@
 {
+    "workbench.iconTheme": "vs-seti",
     "editor.tabSize": 4,
-    "editor.insertSpaces": false,
-    "editor.renderWhitespace": true,
+    "editor.insertSpaces": true,
+    "editor.renderWhitespace": "all",
+    "editor.wordWrap": "on",
     "files.associations": {
-        "*.lua.bytes": "lua"
+        "*.lua.bytes": "lua",
+        "*.lua.txt": "lua"
     }
 }

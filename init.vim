@@ -90,6 +90,8 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
+" python
+nnoremap <buffer> <F9> :exec '!python3' shellescape(@%, 1)<cr>
 " ruby
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 " defold lua
