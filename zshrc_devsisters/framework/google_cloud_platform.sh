@@ -1,5 +1,5 @@
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/kimjames/Develop/foundation/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/kimjames/Develop/foundation/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/kimjames/Develop/frameworks/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/kimjames/Develop/frameworks/google-cloud-sdk/path.zsh.inc'; fi
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/kimjames/Develop/foundation/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/kimjames/Develop/foundation/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/kimjames/Develop/frameworks/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/kimjames/Develop/frameworks/google-cloud-sdk/completion.zsh.inc'; fi
 

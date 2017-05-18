@@ -3,7 +3,7 @@
 
 # Xcode
 export PATH=$PATH:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin
-alias xcbuild="$HOME/Develop/foundation/xcbuild/build/xcbuild"
+alias xcbuild="$HOME/Develop/frameworks/xcbuild/build/xcbuild"
 
 # TexturePacker
 export PATH=$PATH:"/Applications/TexturePacker.app/Contents/MacOS"
