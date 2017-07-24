@@ -65,7 +65,9 @@ set autochdir
 
 " etc
 set scrolloff=15
-set clipboard=unnamed
+if has('mac')
+  set clipboard=unnamed
+endif
 
 " leader shortcuts
 let mapleader=","
