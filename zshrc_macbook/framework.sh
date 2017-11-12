@@ -1,6 +1,6 @@
 export PATH="/usr/libexec/java_home/bin:$PATH" # java
 export PATH="/usr/local/share/dotnet:$PATH" # dotnet
-export PATH="/usr/local/Cellar/node/5.0.0/bin/:$PATH" # node
+export PATH="/Library/Frameworks/Mono.framework/Versions/Current/bin:$PATH" # mono
 
 # android
 ANDROID_HOME="/usr/local/Cellar/android-sdk/24.4.1_1"
