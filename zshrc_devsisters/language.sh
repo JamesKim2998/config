@@ -3,6 +3,7 @@ export JAVA_HOME=`/usr/libexec/java_home`
 
 # python
 # export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/site-packages
+
 # virtualenv
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
