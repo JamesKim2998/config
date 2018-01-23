@@ -8,3 +8,5 @@
 	excludesfile = ~/.gitignore_global
 [merge]
 	ff = false
+[alias]
+	undo = reset --soft HEAD^
