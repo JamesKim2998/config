@@ -2,7 +2,7 @@
 export ZSH=~/.oh-my-zsh
 export TERM="xterm-256color"
 ZSH_THEME="mortalscumbag"
-plugins=(git)
+plugins=(vi-mode git)
 source $ZSH/oh-my-zsh.sh
 
 # export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
