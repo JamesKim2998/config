@@ -14,6 +14,10 @@ alias ze="nvim $HOME/.zshrc"
 alias zwe="nvim $HOME/.zshrc_workspace"
 alias zs="source $HOME/.zshrc"
 
+function gshowcs {
+    git show $1 -- '*.cs'
+}
+
 # cd somewhere
 alias dev="cd $HOME/Develop"
 alias dn="cd $HOME/Downloads"
