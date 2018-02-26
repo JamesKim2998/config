@@ -31,6 +31,7 @@ Plug 'ervandew/supertab'
 " Plug 'tpope/vim-rails' " ruby
 " Plug 'tbastos/vim-lua' " lua
 " Plug 'tfnico/vim-gradle' " gradle
+Plug 'martinda/Jenkinsfile-vim-syntax' " Jenkinsfile
 
 call plug#end()
 

@@ -1,9 +1,10 @@
 [user]
 	name = 김대원
-	email = eodnjs2998@gmail.com
+	email = james.kim@devsisters.com
+[credential]
+	helper = osxkeychain
 [core]
 	editor = nvim
-	autocrlf = true
 	quotepath = off
 	excludesfile = ~/.gitignore_global
 [merge]
