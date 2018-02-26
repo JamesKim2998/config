@@ -2,7 +2,7 @@ CONFIG=$HOME/Develop/config
 
 # git
 ln -s $CONFIG/git/.gitconfig ~
-ln -s $CONFIG/git/.gitglobal_ignore ~
+ln -s $CONFIG/git/.gitignore_global ~
 
 # scm_breeze
 git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
