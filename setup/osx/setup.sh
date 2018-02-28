@@ -5,6 +5,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 brew install zsh
 brew install tmux
 brew install nvim
+brew install autojump
 
 # Language related.
 brew install python2
