@@ -7,6 +7,7 @@ ln -s $CONFIG/git/.gitignore_global ~
 # scm_breeze
 git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
 ~/.scm_breeze/install.sh
+ln -s $CONFIG/.git.scmbrc ~
 
 # nvim - link config
 mkdir -p ~/.config/nvim
