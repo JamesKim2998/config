@@ -1,6 +1,6 @@
 {
-    "workbench.iconTheme": "vscode-icon-theme",
-    "window.zoomLevel": 2,
+    "workbench.iconTheme": "vs-seti",
+    "window.zoomLevel": 0,
 
     // editor
     "editor.tabSize": 4,
@@ -14,6 +14,9 @@
         "*.lua.bytes": "lua",
         "*.lua.txt": "lua"
     },
+
+    // explorer
+    "explorer.confirmDelete": false,
 
     // csharp
     // "csharpfixformat.style.braces.onSameLine": false,

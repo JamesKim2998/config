@@ -6,6 +6,7 @@ brew install zsh
 brew install tmux
 brew install nvim
 brew install autojump
+brew install rg
 
 # Language related.
 brew install python2
