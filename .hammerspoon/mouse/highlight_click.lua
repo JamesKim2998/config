@@ -71,8 +71,7 @@ function toggleRegisterMouseHighlight()
     end
 end
 
-hs.hotkey.bind({"cmd","alt","ctrl"}, "M", function()
-    hs.notify.new({title="Hammerspoon", informativeText="toggleRegisterMouseHighlight"}):send()
+hs.hotkey.bind({"cmd","alt","ctrl"}, "M", '[Mouse] Toggle Highlight', function()
     toggleRegisterMouseHighlight()
 end)
 
