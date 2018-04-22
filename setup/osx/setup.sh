@@ -11,6 +11,7 @@ brew install nvim
 brew install autojump
 brew install rg
 brew install tree
+brew install ccat
 
 # Language related.
 brew install python2
