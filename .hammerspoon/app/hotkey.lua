@@ -8,6 +8,7 @@ local app_infos = {
     {'Slack', 'S'},
     {'Unity', 'U'},
     {'Rider 2018.1.app', 'I'},
+    {'krita', 'Y'},
 }
 
 for i, app_info in ipairs(app_infos) do
