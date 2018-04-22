@@ -12,13 +12,17 @@ brew install autojump
 brew install rg
 brew install tree
 brew install ccat
+brew install wget
 
 # Language related.
+brew install lua
 brew install python2
 brew install python3
 brew cask install java
 
 # Utils.
 brew install trash
+brew install aria2
+brew install imagemagick
 brew cask install karabiner-elements
 
