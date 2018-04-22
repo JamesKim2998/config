@@ -3,6 +3,7 @@ local mash_app = {"cmd", "alt", "ctrl"}
 local app_infos = {
     {'Finder', 'P'},
     {'Stickies', 'T'},
+    {'Activity Monitor', 'A'},
     {'Google Chrome', 'C'},
     {'Slack', 'S'},
     {'Unity', 'U'},
