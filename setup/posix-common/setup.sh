@@ -4,6 +4,9 @@ CONFIG=$HOME/Develop/config
 ln -s $CONFIG/git/.gitconfig ~
 ln -s $CONFIG/git/.gitignore_global ~
 
+# tmux
+ln -s $CONFIG/.tmux.conf ~
+
 # scm_breeze
 git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
 ~/.scm_breeze/install.sh
