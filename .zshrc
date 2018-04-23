@@ -5,7 +5,7 @@ ZSH_THEME="mortalscumbag"
 plugins=(vi-mode git zsh-autosuggestions)
 source $ZSH/oh-my-zsh.sh
 
-# export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="$PATH:/usr/local/bin"
 export EDITOR=/usr/local/bin/nvim
 
 # Homebrew

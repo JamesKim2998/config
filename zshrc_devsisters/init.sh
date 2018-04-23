@@ -28,6 +28,17 @@ export JAVA_HOME=`/usr/libexec/java_home`
 
 
 
+###### Languages ######
+
+# android
+export PATH=$PATH:"$HOME/Library/Android/sdk/platform-tools"
+
+
+############
+
+
+
+
 ###### Utils ######
 
 # Xcode
