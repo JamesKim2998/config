@@ -14,3 +14,9 @@ HOMEBREW_NO_AUTO_UPDATE=1
 source "$HOME/.zshrc_workspace" # Apply workspace config.
 source "$HOME/.zshrc_alias" # Apply alias.
 source "$HOME/.zshrc_utils" # Apply utils.
+
+# TODO(daewon): cleanup please.
+bindkey -M viins '^r' history-incremental-search-backward
+bindkey -M vicmd '^r' history-incremental-search-backward
+bindkey -M viins 'jk' vi-cmd-mode
+
