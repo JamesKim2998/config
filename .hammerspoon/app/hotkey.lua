@@ -2,13 +2,6 @@ local mash_app = {"cmd", "alt", "ctrl"}
 
 local app_infos = {
     {'Finder', 'P'},
-    {'Stickies', 'T'},
-    {'Activity Monitor', 'A'},
-    {'Google Chrome', 'C'},
-    {'Slack', 'S'},
-    {'Unity', 'U'},
-    {'Rider 2018.1.app', 'I'},
-    {'krita', 'Y'},
 }
 
 for i, app_info in ipairs(app_infos) do

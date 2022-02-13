@@ -34,9 +34,3 @@ function fshow {
                 {}
 FZF-EOF"
 }
-
-# Install j.
-[ -f "/usr/local/etc/profile.d/autojump.sh" ] && . "/usr/local/etc/profile.d/autojump.sh"
-
-# Install scm_breeze.
-[ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"

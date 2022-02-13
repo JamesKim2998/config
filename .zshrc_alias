@@ -1,30 +1,7 @@
-# basic commands
-alias rm="trash"
-
 # vim
 alias v="nvim"
 alias ve="nvim $HOME/.config/nvim/init.vim"
 
-# git
-alias gdo="git diff origin/master"
-alias gup="git pull --rebase --autostash --prune"
-
-# zshrc
-alias ze="nvim $HOME/.zshrc"
-alias zwe="nvim $HOME/.zshrc_workspace"
-alias zs="source $HOME/.zshrc"
-
-function gshowcs {
-    git show $1 -- '*.cs'
-}
-
-# cd somewhere
+# cd
 alias dev="cd $HOME/Develop"
 alias dn="cd $HOME/Downloads"
-
-# ssh
-export USER_GIBUILD="gibuild@172.24.24.70"
-export USER_WORK="kimjames@172.24.0.186"
-alias ssh_work="ssh $USER_WORK"
-alias ssh_gibuild="ssh $USER_GIBUILD"
-

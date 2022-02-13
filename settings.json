@@ -1,6 +1,5 @@
 {
     "workbench.iconTheme": "vs-seti",
-    "window.zoomLevel": 0,
 
     // editor
     "editor.tabSize": 4,
@@ -9,26 +8,8 @@
     "editor.wordWrap": "on",
     "editor.minimap.enabled": false,
 
-    // files
-    "files.associations": {
-        "*.lua.bytes": "lua",
-        "*.lua.txt": "lua"
-    },
-
     // explorer
     "explorer.confirmDelete": false,
-
-    // csharp
-    // "csharpfixformat.style.braces.onSameLine": false,
-    // "csharpfixformat.style.spaces.beforeParenthesis": false,
-    // "csharpfixformat.style.spaces.beforeIndexerBracket": false,
-
-    // python
-    "python.pythonPath": "python3",
-    "python.linting.pylintArgs": [
-        "--disable=C0103",
-        "--disable=C0111"
-    ],
 
     // vim
     "vim.insertModeKeyBindings": [{

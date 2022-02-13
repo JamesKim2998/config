@@ -1,6 +1,6 @@
 [user]
 	name = 김대원
-	email = james.kim@devsisters.com
+	email = eodnjs2998@gmail.com
 [credential]
 	helper = osxkeychain
 [core]
@@ -9,5 +9,3 @@
 	excludesfile = ~/.gitignore_global
 [merge]
 	ff = false
-[alias]
-	undo = reset --soft HEAD^

@@ -8,15 +8,11 @@ source $ZSH/oh-my-zsh.sh
 export PATH="$PATH:/usr/local/bin"
 export EDITOR=/usr/local/bin/nvim
 
-# Homebrew
-HOMEBREW_NO_AUTO_UPDATE=1
-
-source "$HOME/.zshrc_workspace" # Apply workspace config.
 source "$HOME/.zshrc_alias" # Apply alias.
 source "$HOME/.zshrc_utils" # Apply utils.
 
-# TODO(daewon): cleanup please.
-bindkey -M viins '^r' history-incremental-search-backward
-bindkey -M vicmd '^r' history-incremental-search-backward
-bindkey -M viins 'jk' vi-cmd-mode
+# Install j.
+[ -f "/usr/local/etc/profile.d/autojump.sh" ] && . "/usr/local/etc/profile.d/autojump.sh"
 
+# Install scm_breeze.
+[ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"

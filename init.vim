@@ -11,7 +11,6 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'nathanaelkane/vim-indent-guides'
 
 " git
-Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'airblade/vim-gitgutter'
 
@@ -23,18 +22,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " autocomplete
 Plug 'ervandew/supertab'
-
-" flycheck
-Plug 'vim-syntastic/syntastic'
-
-" language support
-" Plug 'Valloric/YouCompleteMe'
-" Plug 'mattn/emmet-vim' " html/css
-" Plug 'vim-ruby/vim-ruby' " ruby
-" Plug 'tpope/vim-rails' " ruby
-" Plug 'tbastos/vim-lua' " lua
-" Plug 'tfnico/vim-gradle' " gradle
-Plug 'martinda/Jenkinsfile-vim-syntax' " Jenkinsfile
 
 call plug#end()
 
@@ -64,9 +51,6 @@ nnoremap E $
 nnoremap $ <nop>
 nnoremap ^ <nop>
 
-" navigation
-set autochdir
-
 " etc
 set scrolloff=5
 if has('mac')
@@ -95,20 +79,3 @@ let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-" python
-nnoremap <buffer> <F9> :exec '!python3' shellescape(@%, 1)<cr>
-" ruby
-autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
-" defold lua
-au BufNewFile,BufRead *.script setf lua
