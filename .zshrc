@@ -12,7 +12,7 @@ source "$HOME/.zshrc_alias" # Apply alias.
 source "$HOME/.zshrc_utils" # Apply utils.
 
 # Install j.
-[ -f "/usr/local/etc/profile.d/autojump.sh" ] && . "/usr/local/etc/profile.d/autojump.sh"
+[ -f "/opt/homebrew/etc/autojump.sh" ] && . "/opt/homebrew/etc/autojump.sh"
 
 # Install scm_breeze.
 [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
