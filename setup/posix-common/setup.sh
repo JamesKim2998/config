@@ -33,4 +33,3 @@ git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/z
 ln -s $CONFIG/.zshrc ~
 ln -s $CONFIG/.zshrc_alias ~
 ln -s $CONFIG/.zshrc_utils ~
-ln -s $CONFIG/zshrc_devsisters/init.sh ~/.zshrc_workspace
