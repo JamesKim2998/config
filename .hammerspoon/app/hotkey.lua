@@ -1,7 +1,8 @@
 local mash_app = {"cmd", "alt", "ctrl"}
 
 local app_infos = {
-    {'Finder', 'P'},
+    {'Finder', 'F'},
+    {'Notes', 'N'},
 }
 
 for i, app_info in ipairs(app_infos) do
