@@ -5,8 +5,8 @@ ZSH_THEME="mortalscumbag"
 plugins=(vi-mode git zsh-autosuggestions)
 source $ZSH/oh-my-zsh.sh
 
-export PATH="$PATH:/usr/local/bin"
-export EDITOR=/usr/local/bin/nvim
+export PATH="$PATH:/opt/homebrew/bin/nvim"
+export EDITOR=/opt/homebrew/bin/nvim
 
 source "$HOME/.zshrc_alias" # Apply alias.
 source "$HOME/.zshrc_utils" # Apply utils.

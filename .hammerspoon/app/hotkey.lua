@@ -1,8 +1,11 @@
 local mash_app = {"cmd", "alt", "ctrl"}
 
 local app_infos = {
+    {'Google Chrome', 'C'},
     {'Finder', 'F'},
     {'Notes', 'N'},
+    {'Rider', 'R'},
+    {'/Applications/Unity/Hub/Editor/2021.3.9f1/Unity.app', 'U'},
 }
 
 for i, app_info in ipairs(app_infos) do
