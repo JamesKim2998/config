@@ -22,6 +22,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " autocomplete
 Plug 'ervandew/supertab'
+Plug 'github/copilot.vim'
 
 call plug#end()
 
