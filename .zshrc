@@ -12,8 +12,12 @@ source "$HOME/.zshrc_alias" # Apply alias.
 source "$HOME/.zshrc_utils" # Apply utils.
 
 
-# Install j.
+# autojump
 [ -f "/opt/homebrew/etc/autojump.sh" ] && . "/opt/homebrew/etc/autojump.sh"
+
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
 # pnpm
