@@ -14,6 +14,10 @@ if [ -z "$IS_OPEN" ]; then
     open -a $UNITY_APP -n --args -projectPath "$UNITY_PROJ"
 # else focus on unity project
 else
-    osascript -e "tell application \"Unity\" to activate"
+    osascript <<EOF
+tell application "System Events"
+    set frontmost of the first process whose name contains "Unity" to true
+end tell
+EOF
 fi
 
