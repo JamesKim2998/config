@@ -31,9 +31,3 @@ esac
 # Unity
 UNITY="/Applications/Unity/Unity.app"
 export PATH="$UNITY/Contents/MacOS/Unity/PlaybackEngines/AndroidPlayer/SDK/platform-tools:$PATH"
-
-
-# Meow Tower
-MEOW_PROJ="$HOME/Develop/meow-tower"
-alias meow_uni="$UNITY -projectPath $MEOW_PROJ &"
-

@@ -58,11 +58,6 @@ if has('mac')
   set clipboard=unnamed
 endif
 
-" leader shortcuts
-let mapleader=","
-inoremap jk <esc>
-inoremap kj <esc>
-
 " nerd tree
 map <C-n> :NERDTreeFind<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif

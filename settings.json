@@ -12,16 +12,5 @@
     "explorer.confirmDelete": false,
 
     // vim
-    "vim.insertModeKeyBindings": [{
-        "before": ["j", "k"],
-        "after": ["<Esc>"]
-    }],
-    "vim.otherModesKeyBindingsNonRecursive": [{
-        "before": ["j"],
-        "after": ["g", "j"]
-    }, {
-        "before": ["k"],
-        "after": ["g", "k"]
-    }],
     "vim.disableAnnoyingNeovimMessage": true
 }
