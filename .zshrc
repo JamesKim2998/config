@@ -16,10 +16,6 @@ source "$HOME/.zshrc_utils" # Apply utils.
 [ -f "/opt/homebrew/etc/autojump.sh" ] && . "/opt/homebrew/etc/autojump.sh"
 
 
-# Install scm_breeze.
-[ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
-
-
 # pnpm
 export PNPM_HOME="/Users/jameskim/Library/pnpm"
 case ":$PATH:" in
