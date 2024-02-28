@@ -10,7 +10,9 @@ IS_OPEN=$(pgrep -f "Unity -projectpath $UNITY_PROJ")
 
 # if unity project is not open, open it
 if [ -z "$IS_OPEN" ]; then
-    open -a "$UNITY_APP" -n --args -projectpath "$UNITY_PROJ"
+    pkill CodePatcherCLI
+    pkill HotReload
+    PATH="/opt/homebrew/bin:$PATH" "$UNITY_APP" -projectpath "$UNITY_PROJ"
 # else focus on unity project
 else
     osascript -e "tell application \"Unity\" to activate"
