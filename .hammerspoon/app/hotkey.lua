@@ -19,6 +19,7 @@ for i, app_info in ipairs(app_infos) do
 end
 
 -- Execute open_unity.sh for opening Unity.
-hs.hotkey.bind(mash_app, 'U', 'Open Unity',
-    function () os.execute('bash /Users/jameskim/.hammerspoon/app/open_unity.sh') end)
+hs.hotkey.bind(mash_app, 'U', 'Open Unity', function ()
+    hs.execute('bash /Users/jameskim/.hammerspoon/app/open_unity.sh', true)
+end)
 
