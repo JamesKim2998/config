@@ -20,6 +20,6 @@ end
 
 -- Execute open_unity.sh for opening Unity.
 hs.hotkey.bind(mash_app, 'U', 'Open Unity', function ()
-    hs.execute('bash /Users/jameskim/.hammerspoon/app/open_unity.sh', true)
+    hs.execute('/Users/jameskim/Develop/meow-tower/!meow.app/Contents/MacOS/UnityLauncher', true)
 end)
 
