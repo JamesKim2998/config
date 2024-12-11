@@ -9,9 +9,10 @@ source $ZSH/oh-my-zsh.sh
 source "$HOME/.zshrc_alias" # Apply alias.
 source "$HOME/.zshrc_utils" # Apply utils.
 
+# brew
+export PATH="$PATH:/opt/homebrew/bin"
 
 # nvim
-export PATH="$PATH:/opt/homebrew/bin/nvim"
 export EDITOR=/opt/homebrew/bin/nvim
 
 # android
@@ -40,3 +41,11 @@ esac
 MEOW_REPO="$HOME/Develop/meow-tower"
 UNITY_VER=$(head -1 "$MEOW_REPO/ProjectSettings/ProjectVersion.txt" | cut -c18-)
 UNITY_ROOT="/Applications/Unity/Hub/Editor/$UNITY_VER"
+
+# pnpm
+export PNPM_HOME="/Users/jameskim/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
