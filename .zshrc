@@ -10,15 +10,12 @@ source "$HOME/.zshrc_alias" # Apply alias.
 source "$HOME/.zshrc_utils" # Apply utils.
 
 
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# autojump
-[ -f "/opt/homebrew/etc/autojump.sh" ] && . "/opt/homebrew/etc/autojump.sh"
-
 # nvim
 export PATH="$PATH:/opt/homebrew/bin/nvim"
 export EDITOR=/opt/homebrew/bin/nvim
+
+# android
+export PATH="$PATH:$HOME/Library/Android/sdk/emulator:$HOME/Library/Android/sdk/platform-tools"
 
 # dotnet
 export PATH="$HOME/.dotnet:$PATH"
@@ -33,8 +30,13 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# autojump
+[ -f "/opt/homebrew/etc/autojump.sh" ] && . "/opt/homebrew/etc/autojump.sh"
+
 # Unity
 MEOW_REPO="$HOME/Develop/meow-tower"
 UNITY_VER=$(head -1 "$MEOW_REPO/ProjectSettings/ProjectVersion.txt" | cut -c18-)
 UNITY_ROOT="/Applications/Unity/Hub/Editor/$UNITY_VER"
-export PATH="$UNITY_ROOT/PlaybackEngines/AndroidPlayer/SDK/platform-tools:$PATH"
