@@ -15,11 +15,11 @@ export PATH="$PATH:/opt/homebrew/bin"
 # nvim
 export EDITOR=/opt/homebrew/bin/nvim
 
+# dotnet
+export PATH="$PATH:$HOME/.dotnet/tools"
+
 # android
 export PATH="$PATH:$HOME/Library/Android/sdk/emulator:$HOME/Library/Android/sdk/platform-tools"
-
-# dotnet
-export PATH="$HOME/.dotnet:$PATH"
 
 # java
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"

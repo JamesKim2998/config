@@ -3,12 +3,12 @@ local mash_app = {"cmd", "alt", "ctrl"}
 local app_infos = {
     {'Finder', 'F'},
     {'Fork', 'K'},
+    {'Google Chrome', 'C'},
     {'Notes', 'T'},
     {'Notion', 'N'},
     {'Reminders', 'M'},
     {'Rider', 'R'},
-    {'Safari', 'S'},
-    {'Slack', 'L'},
+    {'Slack', 'S'},
     {'WebStorm', 'W'},
 }
 

@@ -9,10 +9,10 @@
 	excludesfile = ~/.gitignore_global
 [merge]
 	ff = false
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
 [lfs]
 	concurrenttransfers = 64
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
