@@ -1,7 +1,0 @@
-# vim
-alias v="nvim"
-alias ve="nvim $HOME/.config/nvim/init.vim"
-
-# cd
-alias dev="cd $HOME/Develop"
-alias dn="cd $HOME/Downloads"
