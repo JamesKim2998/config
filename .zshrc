@@ -28,6 +28,9 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# zoxide
+eval "$(zoxide init zsh)"
+
 # jetbrains
 rd() {
   nohup /Applications/Rider.app/Contents/MacOS/Rider "$@" > /dev/null 2>&1
@@ -40,7 +43,4 @@ wt() {
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun" # bun completions
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-
-# zoxide
-eval "$(zoxide init zsh)"
 
