@@ -1,13 +1,13 @@
 # init zsh.
 export ZSH=~/.oh-my-zsh
 export TERM="xterm-kitty"
-ZSH_THEME="mortalscumbag"
+ZSH_THEME=""
 plugins=(vi-mode git zsh-autosuggestions)
-zstyle ':omz:update' mode auto # Automatic update without confirmation prompt.
+zstyle ':omz:update' mode disabled # disable auto update
 source $ZSH/oh-my-zsh.sh
 
 # common alias
-alias dev="cd $HOME/Develop"
+alias y='yazi'
 
 # brew
 export PATH="$PATH:/opt/homebrew/bin"
@@ -43,4 +43,7 @@ wt() {
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun" # bun completions
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# starship
+eval "$(starship init zsh)"
 
