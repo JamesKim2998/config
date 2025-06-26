@@ -15,3 +15,9 @@ on = [ "<C-t>" ]
 run = "plugin close-and-restore-tab restore"
 desc = "Restore the closed tab"
 
+# https://github.com/yazi-rs/plugins/tree/main/smart-enter.yazi
+[[mgr.prepend_keymap]]
+on   = "l"
+run  = "plugin smart-enter"
+desc = "Enter the child directory, or open the file"
+
