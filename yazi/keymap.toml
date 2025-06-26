@@ -1,8 +1,20 @@
-# https://github.com/Lil-Dank/lazygit.yazi
+# Keep Space on the current row after toggling selection
 [[mgr.prepend_keymap]]
-on   = [ "g", "i" ]
-run  = "shell --block lazygit"
-desc = "run lazygit"
+on   = "<Space>"
+run  = "toggle"          # no arrow 1
+desc = "Toggle selection (no auto-move)"
+
+# https://github.com/yazi-rs/plugins/tree/main/smart-enter.yazi
+[[mgr.prepend_keymap]]
+on   = "l"
+run  = "plugin smart-enter"
+desc = "Enter the child directory, or open the file"
+
+# https://yazi-rs.github.io/docs/tips
+[[mgr.prepend_keymap]]
+on   = "t"
+run  = "plugin smart-tab"
+desc = "Create a tab and enter the hovered directory"
 
 # https://github.com/MasouShizuka/close-and-restore-tab.yazi
 [[mgr.prepend_keymap]]
@@ -15,9 +27,35 @@ on = [ "<C-t>" ]
 run = "plugin close-and-restore-tab restore"
 desc = "Restore the closed tab"
 
-# https://github.com/yazi-rs/plugins/tree/main/smart-enter.yazi
+# https://github.com/dedukun/bookmarks.yazi
+[[manager.prepend_keymap]]
+on = [ "m" ]
+run = "plugin bookmarks save"
+desc = "Save current position as a bookmark"
+
+[[manager.prepend_keymap]]
+on = [ "'" ]
+run = "plugin bookmarks jump"
+desc = "Jump to a bookmark"
+
+[[manager.prepend_keymap]]
+on = [ "b", "d" ]
+run = "plugin bookmarks delete"
+desc = "Delete a bookmark"
+
+[[manager.prepend_keymap]]
+on = [ "b", "D" ]
+run = "plugin bookmarks delete_all"
+desc = "Delete all bookmarks"
+
+# https://yazi-rs.github.io/docs/tips
 [[mgr.prepend_keymap]]
-on   = "l"
-run  = "plugin smart-enter"
-desc = "Enter the child directory, or open the file"
+on = [ "g", "r" ]
+run = 'shell -- ya emit cd "$(git rev-parse --show-toplevel)"'
+
+# https://github.com/Lil-Dank/lazygit.yazi
+[[mgr.prepend_keymap]]
+on   = [ "g", "i" ]
+run  = "shell --block lazygit"
+desc = "run lazygit"
 
