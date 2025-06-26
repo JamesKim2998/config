@@ -2,7 +2,7 @@ CONFIG=$HOME/Develop/config
 
 # brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew install nvim fzf rg fd sd 7z eza zoxide lazygit yazi imagemagick ffmpeg
+brew install nvim fzf rg bat fd sd jq yq eza lsd zoxide lazygit delta gh yazi 7-zip imagemagick ffmpeg starship
 
 # git
 ln -s $CONFIG/git/.gitconfig ~

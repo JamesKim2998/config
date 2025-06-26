@@ -1,23 +1,30 @@
 [user]
-	name = James Kim (Daewon)
-	email = eodnjs2998@gmail.com
+    name = James Kim (Daewon)
+    email = eodnjs2998@gmail.com
 [credential]
-	helper = osxkeychain
+    helper = osxkeychain
 [core]
-	editor = nvim
-	quotepath = off
-	excludesfile = ~/.gitignore_global
-	autocrlf = input
+    editor = nvim
+    quotepath = off
+    excludesfile = ~/.gitignore_global
+    autocrlf = input
+    pager = delta # https://github.com/dandavison/delta
+[interactive]
+    diffFilter = delta --color-only # https://github.com/dandavison/delta
 [pull]
-	rebase = true
+    rebase = true
 [merge]
-	ff = false
+    ff = false
+    conflictstyle = zdiff3 # https://github.com/dandavison/delta
 [rebase]
-	autoStash = true
+    autoStash = true
 [lfs]
-	concurrenttransfers = 64
+    concurrenttransfers = 64
 [filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    dark = true      # or light = true, or omit for auto-detection
