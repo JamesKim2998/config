@@ -1,3 +1,4 @@
+# https://github.com/Lil-Dank/lazygit.yazi
 [[mgr.prepend_keymap]]
 on   = [ "g", "i" ]
 run  = "shell --block lazygit"

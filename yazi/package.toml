@@ -13,5 +13,15 @@ use = "yazi-rs/plugins:full-border"
 rev = "42f64c0"
 hash = "3996fc74044bc44144b323686f887e1"
 
+[[plugin.deps]]
+use = "yazi-rs/plugins:piper"
+rev = "7c174cc"
+hash = "2143a53182dbbe935a1abd1623424aa5"
+
+[[plugin.deps]]
+use = "boydaihungst/mediainfo"
+rev = "a15cdfa"
+hash = "fd68a58b03aee95546afe78cba77b461"
+
 [flavor]
 deps = []

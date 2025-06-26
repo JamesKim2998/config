@@ -1,6 +1,7 @@
 [mgr]
 show_hidden = true
 
+# https://github.com/yazi-rs/plugins/tree/main/git.yazi
 [[plugin.prepend_fetchers]]
 id   = "git"
 name = "*"
@@ -10,4 +11,17 @@ run  = "git"
 id   = "git"
 name = "*/"
 run  = "git"
+
+# https://github.com/boydaihungst/mediainfo.yazi
+[plugin]
+  prepend_preloaders = [
+    # Replace magick, image, video with mediainfo
+    { mime = "{audio,video,image}/*", run = "mediainfo" },
+    { mime = "application/subrip", run = "mediainfo" },
+  ]
+  prepend_previewers = [
+    # Replace magick, image, video with mediainfo
+    { mime = "{audio,video,image}/*", run = "mediainfo"},
+    { mime = "application/subrip", run = "mediainfo" },
+  ]
 
