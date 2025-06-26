@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 CONFIG=$HOME/Develop/config
 
 # brew
@@ -16,5 +18,10 @@ ln -s $CONFIG/init.vim ~/.config/nvim
 ln -s $CONFIG/.zshrc ~
 
 # oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# lazygit
+LAZYGIT_DIR="$HOME/Library/Application Support/lazygit"
+rm -rf "$LAZYGIT_DIR"
+ln -s $CONFIG/lazygit "$LAZYGIT_DIR"
 
