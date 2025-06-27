@@ -54,3 +54,8 @@ on   = [ "g", "i" ]
 run  = "shell --block lazygit"
 desc = "run lazygit"
 
+# https://yazi-rs.github.io/docs/tips#macos-quick-look
+[[mgr.prepend_keymap]]
+on = "<C-p>"
+run = 'shell -- qlmanage -p "$@"'
+
