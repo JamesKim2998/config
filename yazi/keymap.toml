@@ -10,12 +10,6 @@ on   = "l"
 run  = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
-# https://yazi-rs.github.io/docs/tips
-[[mgr.prepend_keymap]]
-on   = "t"
-run  = "plugin smart-tab"
-desc = "Create a tab and enter the hovered directory"
-
 # https://github.com/MasouShizuka/close-and-restore-tab.yazi
 [[mgr.prepend_keymap]]
 on = [ "<C-w>" ]
