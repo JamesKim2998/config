@@ -15,7 +15,8 @@ require("bunny"):setup({
 		{ key = "~", path = "~", desc = "Home" },
 		{ key = "d", path = "~/Downloads", desc = "Downloads" },
 		{ key = "c", path = "~/.config", desc = "Config files" },
-		-- key and path attributes are required, desc is optional
+		{ key = "m", path = "~/Develop/meow-tower", desc = "Meow Tower" },
+		{ key = "a", path = "~/Develop/meow-assets", desc = "Meow Assets" },
 	},
 	desc_strategy = "path", -- If desc isn't present, use "path" or "filename", default is "path"
 	ephemeral = true, -- Enable ephemeral hops, default is true
