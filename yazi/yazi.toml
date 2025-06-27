@@ -1,6 +1,17 @@
 [mgr]
 show_hidden = true
 
+# https://github.com/yazi-rs/plugins/tree/main/mactag.yazi
+[[plugin.prepend_fetchers]]
+id   = "mactag"
+name = "*"
+run  = "mactag"
+
+[[plugin.prepend_fetchers]]
+id   = "mactag"
+name = "*/"
+run  = "mactag"
+
 # https://github.com/yazi-rs/plugins/tree/main/git.yazi
 [[plugin.prepend_fetchers]]
 id   = "git"

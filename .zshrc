@@ -14,6 +14,9 @@ export EDITOR=/opt/homebrew/bin/nvim
 alias v="$EDITOR"
 alias ve="$EDITOR $HOME/.config/nvim/init.vim"
 
+# rust
+export PATH="$HOME/.cargo/bin:$PATH"
+
 # dotnet
 export PATH="$PATH:$HOME/.dotnet/tools"
 export DOTNET_ROOT="$HOME/.dotnet"

@@ -27,26 +27,27 @@ on = [ "<C-t>" ]
 run = "plugin close-and-restore-tab restore"
 desc = "Restore the closed tab"
 
-# https://github.com/dedukun/bookmarks.yazi
-[[manager.prepend_keymap]]
-on = [ "m" ]
-run = "plugin bookmarks save"
-desc = "Save current position as a bookmark"
+# https://github.com/stelcodes/bunny.yazi
+[[mgr.prepend_keymap]]
+desc = "Start bunny.yazi"
+on = ";"
+run = "plugin bunny"
 
-[[manager.prepend_keymap]]
-on = [ "'" ]
-run = "plugin bookmarks jump"
-desc = "Jump to a bookmark"
+[[mgr.prepend_keymap]]
+desc = "Start bunny.yazi fuzzy search"
+on = "'"
+run = "plugin bunny fuzzy"
 
-[[manager.prepend_keymap]]
-on = [ "b", "d" ]
-run = "plugin bookmarks delete"
-desc = "Delete a bookmark"
+# https://github.com/yazi-rs/plugins/tree/main/mactag.yazi
+[[mgr.prepend_keymap]]
+on   = [ "b", "a" ]
+run  = "plugin mactag add"
+desc = "Tag selected files"
 
-[[manager.prepend_keymap]]
-on = [ "b", "D" ]
-run = "plugin bookmarks delete_all"
-desc = "Delete all bookmarks"
+[[mgr.prepend_keymap]]
+on   = [ "b", "r" ]
+run  = "plugin mactag remove"
+desc = "Untag selected files"
 
 # https://yazi-rs.github.io/docs/tips
 [[mgr.prepend_keymap]]
