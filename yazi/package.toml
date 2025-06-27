@@ -34,11 +34,6 @@ rev = "7c174cc"
 hash = "f9250493894659b3466c5a8a05f2e584"
 
 [[plugin.deps]]
-use = "h-hg/yamb"
-rev = "22af003"
-hash = "7cc42012a7c2099f80064d228feb8d44"
-
-[[plugin.deps]]
 use = "stelcodes/bunny"
 rev = "a0b4e18"
 hash = "7acba2bb504c67dd7f2da135b88aae1b"
