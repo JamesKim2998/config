@@ -23,14 +23,15 @@ id   = "git"
 name = "*/"
 run  = "git"
 
-# https://github.com/boydaihungst/mediainfo.yazi
 [plugin]
   prepend_preloaders = [
+    # https://github.com/boydaihungst/mediainfo.yazi
     # Replace magick, image, video with mediainfo
     { mime = "{audio,video,image}/*", run = "mediainfo" },
     { mime = "application/subrip", run = "mediainfo" },
   ]
   prepend_previewers = [
+    # https://github.com/boydaihungst/mediainfo.yazi
     # Replace magick, image, video with mediainfo
     { mime = "{audio,video,image}/*", run = "mediainfo"},
     { mime = "application/subrip", run = "mediainfo" },
