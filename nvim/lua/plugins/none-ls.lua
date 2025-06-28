@@ -19,8 +19,20 @@ return {
 				null_ls.builtins.formatting.stylua,
 				null_ls.builtins.diagnostics.selene, -- https://github.com/Kampfkarren/selene
 			},
-			-- https://github.com/nvimtools/none-ls.nvim/wiki/Formatting-on-save#code
+			diagnostics_format = "[#{c}] #{m} (#{s})", -- optional prettier format
 			on_attach = function(client, bufnr)
+				-- keymaps for diagnostics
+				local map = function(lhs, rhs, desc)
+					vim.keymap.set("n", lhs, rhs, { buffer = bufnr, desc = desc })
+				end
+				map("<leader>e", vim.diagnostic.open_float, "Line diagnostics")
+				map("[d", vim.diagnostic.goto_prev, "Prev diagnostic")
+				map("]d", vim.diagnostic.goto_next, "Next diagnostic")
+				map("<leader>q", function()
+					vim.diagnostic.setloclist()
+				end, "Buffer diagnostics → loclist")
+				-- format on save
+				-- https://github.com/nvimtools/none-ls.nvim/wiki/Formatting-on-save#code
 				if client.supports_method("textDocument/formatting") then
 					vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
 					vim.api.nvim_create_autocmd("BufWritePre", {
