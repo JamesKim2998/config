@@ -3,9 +3,10 @@ require("config.lazy")
 -- Appearance
 vim.cmd.colorscheme("catppuccin")
 
--- Indentation vim.o.tabstop = 4 vim.o.softtabstop = 4
-vim.o.shiftwidth = 4
-vim.o.expandtab = true
+-- Indentation
+vim.o.shiftwidth = 2 -- Number of spaces to use for each step of (auto)indent
+vim.o.tabstop = 2 -- Number of spaces a <Tab> counts for
+vim.o.softtabstop = 2 -- Number of spaces a <Tab> counts for while editing
 
 -- UI
 vim.o.number = true
@@ -15,7 +16,6 @@ vim.o.showmatch = true -- Briefly jump to matching bracket when inserting one
 vim.o.list = true -- Enable display of invisible characters (whitespace, tabs, etc.)
 vim.o.listchars = "tab:▸ ,trail:·,extends:→,precedes:←,nbsp:␣"
 vim.o.showtabline = 2 -- Always show tabline
-
 
 -- Common Key Mappings
 vim.keymap.set("n", "qq", ":q<CR>", { noremap = true, silent = true })
@@ -30,14 +30,3 @@ vim.keymap.set("v", "<D-S-Down>", ":m '>+1<CR>gv=gv", { desc = "Move selection d
 -- Etc
 vim.o.scrolloff = 8
 vim.o.clipboard = "unnamedplus" -- Use system clipboard
-
--- lua
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "lua",
-  callback = function()
-    vim.bo.shiftwidth = 2
-    vim.bo.tabstop = 2
-    vim.bo.softtabstop = 2
-    vim.bo.expandtab = true
-  end,
-})
