@@ -20,6 +20,7 @@ local magick_image_mimes = {
 	jxl = true,
 	xml = true,
 	["svg+xml"] = true,
+	["adobe.photoshop"] = true,
 }
 
 local M = {}
@@ -256,7 +257,15 @@ function M:preload(job)
 				or require("image")
 
 			local cache_img_status, image_preload_err
-			if mime == "svg+xml" and not is_valid_utf8_path then
+
+			-- Special handling for PSD so we only grab the composite of the first layer
+			if mime == "adobe.photoshop" then
+				cache_img_status, image_preload_err = Command("magick"):arg({
+					tostring(job.file.url) .. "[0]", -- first layer only
+					"-flatten",
+					string.format("PNG32:%s", cache_img_url_no_skip),
+				}):output()
+			elseif mime == "svg+xml" and not is_valid_utf8_path then
 				cache_img_status, image_preload_err = magick_plugin
 					.with_limit()
 					:arg({
