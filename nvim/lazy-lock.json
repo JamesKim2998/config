@@ -18,5 +18,5 @@
   "promise-async": { "branch": "main", "commit": "119e8961014c9bfaf1487bf3c2a393d254f337e2" },
   "snacks.nvim": { "branch": "main", "commit": "bc0630e43be5699bb94dadc302c0d21615421d93" },
   "telescope.nvim": { "branch": "master", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
-  "yazi.nvim": { "branch": "main", "commit": "8e215f4148baf85f7dd2063252401131b40995f7" }
+  "yazi.nvim": { "branch": "main", "commit": "3d640c9cac6b53c2380be7cf7a232eb2012b3a85" }
 }
