@@ -13,9 +13,12 @@ require("git"):setup()
 require("bunny"):setup({
 	hops = {
 		{ key = "~", path = "~", desc = "Home" },
-		{ key = "d", path = "~/Downloads", desc = "Downloads" },
-		{ key = "c", path = "~/.config", desc = "Config files" },
-		{ key = "m", path = "~/Develop/meow-tower", desc = "Meow Tower" },
+		{ key = "n", path = "~/Downloads", desc = "Config" },
+		{ key = "d", path = "~/Develop", desc = "Develop" },
+		{ key = "c", path = "~/Develop/config", desc = "Config" },
+		{ key = "1", path = "~/Develop/meow-tower", desc = "Meow Tower #1" },
+		{ key = "2", path = "~/Develop/meow-tower-2", desc = "Meow Tower #2" },
+		{ key = "3", path = "~/Develop/meow-tower-3", desc = "Meow Tower #3" },
 		{ key = "a", path = "~/Develop/meow-assets", desc = "Meow Assets" },
 	},
 	desc_strategy = "path", -- If desc isn't present, use "path" or "filename", default is "path"
