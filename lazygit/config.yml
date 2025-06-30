@@ -1,3 +1,5 @@
+gui:
+  filterMode: fuzzy
 git:
   paging:
     colorArg: always
