@@ -1,0 +1,9 @@
+%YAML 1.2
+---
+name: Unity YAML (asset/prefab)
+file_extensions:
+  - asset
+  - prefab
+scope: source.yaml
+contexts:
+  main: []    # inherit YAML scopes
