@@ -32,6 +32,12 @@ desc = "Start bunny.yazi fuzzy search"
 on = "'"
 run = "plugin bunny fuzzy"
 
+# https://github.com/lpnh/fr.yazi?tab=readme-ov-file#plugin-args
+[[mgr.prepend_keymap]]
+on = "<S-s>"
+run = "plugin fr rg"
+desc = "Search file by content (rg)"
+
 # https://github.com/yazi-rs/plugins/tree/main/mactag.yazi
 [[mgr.prepend_keymap]]
 on   = [ "b", "a" ]
@@ -53,9 +59,4 @@ run = 'shell -- ya emit cd "$(git rev-parse --show-toplevel)"'
 on   = [ "g", "i" ]
 run  = "shell --block lazygit"
 desc = "run lazygit"
-
-# https://yazi-rs.github.io/docs/tips#macos-quick-look
-[[mgr.prepend_keymap]]
-on = "<C-p>"
-run = 'shell -- qlmanage -p "$@"'
 

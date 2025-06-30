@@ -38,5 +38,10 @@ use = "stelcodes/bunny"
 rev = "a0b4e18"
 hash = "7acba2bb504c67dd7f2da135b88aae1b"
 
+[[plugin.deps]]
+use = "lpnh/fr"
+rev = "6d5e469"
+hash = "d8455f929580ec602b4d0bbd8e96711"
+
 [flavor]
 deps = []
