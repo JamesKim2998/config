@@ -1,0 +1,3 @@
+[submodule "preview"]
+	path = yazi/plugins/preview.yazi
+	url = https://github.com/Urie96/preview.yazi

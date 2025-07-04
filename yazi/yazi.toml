@@ -31,9 +31,6 @@ prepend_preloaders = [
 	{ mime = "application/subrip", run = "mediainfo" },
 ]
 prepend_previewers = [
-	# https://github.com/mgumz/yazi-plugin-bat
-	{ name = "*.csv", run = "bat" },
-	{ name = "*.md", run = "bat" },
 	# https://github.com/boydaihungst/mediainfo.yazi
 	# Replace magick, image, video with mediainfo
 	{ mime = "{audio,video,image}/*", run = "mediainfo"},
@@ -48,13 +45,16 @@ prepend_previewers = [
 	{ mime = "application/x-xz",            run = "ouch" },
 	{ mime = "application/xz",              run = "ouch" },
 ]
-# https://github.com/mgumz/yazi-plugin-bat
 previewers = [
+	# https://github.com/Urie96/preview.yazi
 	{ name = "*/", run = "folder", sync = true },
-	{ mime = "text/*",                 run = "bat" },
-	{ mime = "*/xml",                  run = "bat" },
-	{ mime = "*/cs",                   run = "bat" },
-	{ mime = "*/javascript",           run = "bat" },
-	{ mime = "*/x-wine-extension-ini", run = "bat" },
+	{ name = "*.md", run = "preview" },
+	{ name = "*.csv", run = "preview" },
+	{ mime = "text/*", run = "code" },
+	{ mime = "*/xml", run = "code" },
+	{ mime = "*/cs", run = "bat" },
+	{ mime = "*/javascript", run = "code" },
+	{ mime = "*/x-wine-extension-ini", run = "code" },
+	{ name = "*", run = "preview" },
 ]
 
