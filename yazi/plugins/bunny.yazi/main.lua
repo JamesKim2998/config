@@ -95,35 +95,6 @@ local function sort_hops(hops)
   return hops
 end
 
-local create_special_hops = function(config)
-  local hops = {}
-  local desc_strategy, tabs, ephemeral = config.desc_strategy, config.tabs, config.ephemeral
-  if ephemeral then
-    table.insert(hops, { key = "<Enter>", desc = "Create hop", path = "__MARK__" })
-  end
-  table.insert(hops, { key = "<Space>", desc = "Fuzzy search", path = "__FUZZY__" })
-  local tabhist = get_state("tabhist")
-  local tab = get_current_tab_idx()
-  if tabhist[tab] and tabhist[tab][2] then
-    local previous_dir = tabhist[tab][2]
-    table.insert(hops, {
-      key = "<Backspace>",
-      path = previous_dir,
-      desc = path_to_desc(previous_dir, desc_strategy)
-    })
-  end
-  if tabs then
-    for idx, tab_path in pairs(get_tabs_as_paths()) do
-      table.insert(hops, {
-        key = tostring(idx),
-        path = tab_path,
-        desc = path_to_desc(tab_path, desc_strategy)
-      })
-    end
-  end
-  return hops
-end
-
 local function validate_options(options)
   local function validate_key(key)
     local kt = type(key)
@@ -150,9 +121,9 @@ local function validate_options(options)
   if type(options) ~= "table" then
     return "Invalid config"
   end
-  local hops, desc_strategy, tabs, ephemeral, fuzzy_cmd, notify =
+  local hops, desc_strategy, tabs, notify =
       options.hops, options.desc_strategy, options.tabs,
-      options.ephemeral, options.fuzzy_cmd, options.notify
+      options.notify
   -- Validate hops
   if type(hops) == "table" then
     local used_keys = {}
@@ -184,64 +155,9 @@ local function validate_options(options)
     return 'Invalid "desc_strategy" config value'
   elseif tabs ~= nil and type(notify) ~= "boolean" then
     return 'Invalid "tabs" config value'
-  elseif ephemeral ~= nil and type(notify) ~= "boolean" then
-    return 'Invalid "ephemeral" config value'
-  elseif fuzzy_cmd ~= nil and type(fuzzy_cmd) ~= "string" then
-    return 'Invalid "fuzzy_cmd" config value'
   elseif notify ~= nil and type(notify) ~= "boolean" then
     return 'Invalid "notify" config value'
   end
-end
-
--- https://github.com/sxyazi/yazi/blob/main/yazi-plugin/preset/plugins/fzf.lua
--- https://github.com/sxyazi/yazi/blob/main/yazi-plugin/src/process/child.rs
--- Returns nil if fzf command failed or user exited with escape key
-local select_fuzzy = function(hops, config)
-  local permit = ya.hide()
-  local child, spawn_err =
-      Command(config.fuzzy_cmd):stdin(Command.PIPED):stdout(Command.PIPED):stderr(Command.INHERIT):spawn()
-  if not child then
-    fail("Command `%s` failed with code %s. Do you have it installed?", config.fuzzy_cmd, spawn_err.code)
-    return
-  end
-  local fuzzy_entries = {}
-  for _, hop in pairs(hops) do
-    local existing_desc = fuzzy_entries[hop.path]
-    if not existing_desc or existing_desc == "" then
-      local fuzzy_desc = hop.desc
-      -- Avoid repeating path in description
-      if fuzzy_desc == hop.path then
-        fuzzy_desc = ""
-      end
-      fuzzy_entries[hop.path] = fuzzy_desc
-    end
-  end
-  -- Build fzf input string
-  local input_lines = {}
-  for entry_path, entry_desc in pairs(fuzzy_entries) do
-    local line = entry_desc .. string.rep(" ", 23 - #entry_desc) .. "\t" .. entry_path
-    table.insert(input_lines, line)
-  end
-  child:write_all(table.concat(input_lines, "\n"))
-  child:flush()
-  local output, output_err = child:wait_with_output()
-  permit:drop()
-  if not output.status.success then
-    if output.status.code ~= 130 then -- user pressed escape to quit
-      fail("Command `%s` failed with code %s", config.fuzzy_cmd, output_err.code)
-    end
-    return
-  end
-  -- Parse fzf output, remove right padded spaces from desc
-  local desc, path = string.match(output.stdout, "^(.-) *\t(.-)\n$")
-  if not desc or not path or path == "" then
-    fail("Failed to parse fuzzy searcher result")
-    return
-  end
-  if desc == "" then
-    desc = path_to_desc(path, config.desc_strategy)
-  end
-  return { desc = desc, path = path }
 end
 
 local cd = function(selected_hop, config)
@@ -259,45 +175,12 @@ end
 
 local attempt_hop = function(hops, config)
   local cands = {}
-  for _, hop in pairs(create_special_hops(config)) do
-    table.insert(cands, { desc = hop.desc, on = hop.key, path = hop.path })
-  end
   for _, hop in pairs(hops) do
     table.insert(cands, { desc = hop.desc, on = hop.key, path = hop.path })
   end
   local hops_idx = ya.which { cands = cands }
   if not hops_idx then return end
   local selected_hop = cands[hops_idx]
-  -- Handle special hops
-  if selected_hop.path == "__MARK__" then
-    local mark_cands = {};
-    -- Ideally any unicode character would be supported, but yazi.which
-    -- requies a concrete list of candidates
-    local candidate_chars = {
-      'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
-      'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F',
-      'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
-      'W', 'X', 'Y', 'Z', '`', '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')',
-      '-', '_', '=', '+', '[', '{', ']', '}', '\\', '|', ';', ':', "'", '"', ',', '<',
-      '.', '>', '/', '?', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
-    }
-    for _, char in pairs(candidate_chars) do
-      table.insert(mark_cands, { on = char })
-    end
-    info("Press a key to create new hop")
-    local char_idx = ya.which { cands = mark_cands, silent = true }
-    if char_idx ~= nil then
-      local selected_char = mark_cands[char_idx].on
-      local cwd = get_cwd()
-      table.insert(hops, { key = selected_char, path = cwd, desc = path_to_desc(cwd, config.desc_strategy) })
-      set_state("hops", sort_hops(hops))
-    end
-    return
-  elseif selected_hop.path == "__FUZZY__" then
-    local fuzzy_hop = select_fuzzy(hops, config)
-    if not fuzzy_hop then return end
-    selected_hop = fuzzy_hop
-  end
   cd(selected_hop, config)
 end
 
@@ -313,9 +196,7 @@ local function init()
   local desc_strategy = options.desc_strategy or "path"
   set_state("config", {
     desc_strategy = desc_strategy,
-    fuzzy_cmd = options.fuzzy_cmd or "fzf",
     notify = options.notify or false,
-    ephemeral = options.ephemeral or true,
     tabs = options.tabs or true,
   })
   -- Set hops after ensuring they all have a description
@@ -365,13 +246,6 @@ return {
       return
     end
     local hops, config = get_state("hops"), get_state("config")
-    if job.args[1] == "fuzzy" then
-      local fuzzy_hop = select_fuzzy(hops, config)
-      if fuzzy_hop then
-        cd(fuzzy_hop, config)
-      end
-    else
-      attempt_hop(hops, config)
-    end
+    attempt_hop(hops, config)
   end,
 }
