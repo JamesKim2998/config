@@ -20,9 +20,10 @@ require("bunny"):setup({
 		{ key = "2", path = "~/Develop/meow-tower-2", desc = "Meow Tower #2" },
 		{ key = "3", path = "~/Develop/meow-tower-3", desc = "Meow Tower #3" },
 		{ key = "a", path = "~/Develop/meow-assets", desc = "Meow Assets" },
+		{ key = "t", path = "~/Develop/meow-toolbox", desc = "Meow Toolbox" },
 	},
 	desc_strategy = "path", -- If desc isn't present, use "path" or "filename", default is "path"
-	ephemeral = true, -- Enable ephemeral hops, default is true
+	ephemeral = false,
 	tabs = true, -- Enable tab hops, default is true
 	notify = false, -- Notify after hopping, default is false
 	fuzzy_cmd = "fzf", -- Fuzzy searching command, default is "fzf"

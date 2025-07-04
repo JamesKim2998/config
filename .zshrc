@@ -1,6 +1,12 @@
+# select terminal emulator
+if [[ -n $KITTY_WINDOW_ID ]]; then     # set by Kitty itself
+  export TERM="xterm-kitty"
+else
+  export TERM="xterm-256color"
+fi
+
 # init zsh.
 export ZSH=~/.oh-my-zsh
-export TERM="xterm-kitty"
 ZSH_THEME=""
 plugins=(vi-mode git zsh-autosuggestions)
 zstyle ':omz:update' mode disabled # disable auto update
@@ -25,6 +31,11 @@ export DOTNET_ROOT="$HOME/.dotnet"
 export PATH="$PATH:$HOME/Library/Android/sdk/emulator:$HOME/Library/Android/sdk/platform-tools"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
+# bun
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun" # bun completions
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
 # fzf
 source <(fzf --zsh)
 
@@ -35,6 +46,11 @@ export FZF_DEFAULT_OPTS=" \
 --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
 --color=selected-bg:#45475A \
 --color=border:#313244,label:#CDD6F4"
+
+# lsd
+alias ls='lsd --group-dirs first' # compact overview
+alias ll='lsd -alh --date relative --group-dirs first' # detailed, all-files view (sizes & ages stay human-readable)
+alias lt='lsd --tree --depth 2' # quick two-level directory tree
 
 # zoxide
 eval "$(zoxide init zsh)"
@@ -50,11 +66,6 @@ function y() {
     fi
     rm -f -- "$tmp"
 }
-
-# bun
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun" # bun completions
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 
 # starship
 eval "$(starship init zsh)"

@@ -1,1 +1,4 @@
---fixed-strings
+--hidden # Search hidden files / directories (e.g. dotfiles) by default
+--fixed-strings # Disable regular expression matching and treat the pattern as a literal string.
+--ignore-vcs
+--multiline

@@ -1,5 +1,10 @@
 --theme="Catppuccin Mocha"
 
+--map-syntax "*.csproj:XML"
+--map-syntax "*.DotSettings:XML"
+--map-syntax "*.DotSettings.user:XML"
+
 --map-syntax "*.asset:YAML"
 --map-syntax "*.prefab:YAML"
 --map-syntax "*.meta:YAML"
+

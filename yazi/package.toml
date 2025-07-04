@@ -43,5 +43,10 @@ use = "lpnh/fr"
 rev = "6d5e469"
 hash = "d8455f929580ec602b4d0bbd8e96711"
 
+[[plugin.deps]]
+use = "ndtoan96/ouch"
+rev = "1ee69a5"
+hash = "63679f3daf8551ff8755be38b5ced0f"
+
 [flavor]
 deps = []
