@@ -21,6 +21,8 @@ require("bunny"):setup({
 		{ key = "3", path = "~/Develop/meow-tower-3", desc = "Meow Tower #3" },
 		{ key = "a", path = "~/Develop/meow-assets", desc = "Meow Assets" },
 		{ key = "t", path = "~/Develop/meow-toolbox", desc = "Meow Toolbox" },
+		{ key = "l", path = "~/Develop/meow-toolbox/assets/langpack", desc = "Meow Langpack" },
+		{ key = "m", path = "~/Develop/meow-dev-media", desc = "Meow Dev Media" },
 	},
 	desc_strategy = "path", -- If desc isn't present, use "path" or "filename", default is "path"
 	notify = false, -- Notify after hopping, default is false
