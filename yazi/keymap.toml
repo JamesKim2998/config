@@ -26,16 +26,17 @@ on = [ "<C-t>" ]
 run = "plugin close-and-restore-tab restore"
 desc = "Restore the closed tab"
 
+# https://github.com/boydaihungst/restore.yazi
+[[mgr.keymap]]
+on = "u"
+run = "plugin restore"
+desc = "Restore last deleted files/folders"
+
 # https://github.com/stelcodes/bunny.yazi
 [[mgr.prepend_keymap]]
 desc = "Start bunny.yazi"
 on = ";"
 run = "plugin bunny"
-
-[[mgr.prepend_keymap]]
-desc = "Start bunny.yazi fuzzy search"
-on = "'"
-run = "plugin bunny fuzzy"
 
 # https://github.com/lpnh/fr.yazi?tab=readme-ov-file#plugin-args
 [[mgr.prepend_keymap]]
