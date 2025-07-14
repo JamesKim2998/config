@@ -32,11 +32,6 @@ desc = "Start bunny.yazi"
 on = ";"
 run = "plugin bunny"
 
-[[mgr.prepend_keymap]]
-desc = "Start bunny.yazi fuzzy search"
-on = "'"
-run = "plugin bunny fuzzy"
-
 # https://github.com/lpnh/fr.yazi?tab=readme-ov-file#plugin-args
 [[mgr.prepend_keymap]]
 on = "<S-s>"
