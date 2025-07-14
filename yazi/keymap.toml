@@ -67,3 +67,8 @@ on   = [ "g", "i" ]
 run  = "shell --block lazygit"
 desc = "run lazygit"
 
+# https://github.com/sxyazi/yazi/discussions/327
+[[mgr.prepend_keymap]]
+on = [ "<C-n>" ]
+run = '''shell 'ripdrag "$@" -x 2>/dev/null &' --confirm'''
+
