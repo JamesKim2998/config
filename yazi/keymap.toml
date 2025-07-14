@@ -27,7 +27,7 @@ run = "plugin close-and-restore-tab restore"
 desc = "Restore the closed tab"
 
 # https://github.com/boydaihungst/restore.yazi
-[[mgr.keymap]]
+[[mgr.prepend_keymap]]
 on = "u"
 run = "plugin restore"
 desc = "Restore last deleted files/folders"
