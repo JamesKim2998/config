@@ -49,3 +49,6 @@ require("mactag"):setup({
 		Purple = "#cb88f8",
 	},
 })
+
+-- https://github.com/Rolv-Apneseth/starship.yazi
+require("starship"):setup()

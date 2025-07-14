@@ -53,5 +53,10 @@ use = "macydnah/office"
 rev = "4002d36"
 hash = "9c68763dd4f2799f7cfee1e9c3e819a9"
 
+[[plugin.deps]]
+use = "Rolv-Apneseth/starship"
+rev = "a63550b"
+hash = "c2021386289a0cbb3e152a052f67c177"
+
 [flavor]
 deps = []
