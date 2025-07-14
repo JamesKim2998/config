@@ -20,6 +20,9 @@ export EDITOR=/opt/homebrew/bin/nvim
 alias v="$EDITOR"
 alias ve="$EDITOR $HOME/.config/nvim/init.vim"
 
+#python
+export PATH="$HOME/.local/bin:$PATH"
+
 # rust
 export PATH="$HOME/.cargo/bin:$PATH"
 
