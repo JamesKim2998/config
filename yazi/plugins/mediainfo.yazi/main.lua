@@ -63,7 +63,7 @@ function M:peek(job)
 	end
 	local is_video = string.find(job.mime, "^video/")
 	local is_audio = string.find(job.mime, "^audio/")
-	local is_image = string.find(job.mime, "^image/")
+	local is_image = string.find(job.mime, "^image/") or job.mime == "application/pdf"
 	local cache_img_url = (is_audio or is_image) and cache_img_url_no_skip
 
 	if is_video then
