@@ -37,6 +37,7 @@ prepend_preloaders = [
 	{ mime = "application/msword", run = "office" },
 	{ name = "*.docx", run = "office" },
 	{ name = "*.xls", run = "office" },
+	{ name = "*.xlsx", run = "office" },
 ]
 prepend_previewers = [
 	# https://github.com/mgumz/yazi-plugin-bat
@@ -64,6 +65,7 @@ prepend_previewers = [
 	{ mime = "application/msword", run = "office" },
 	{ name = "*.docx", run = "office" },
 	{ name = "*.xls", run = "office" },
+	{ name = "*.xlsx", run = "office" },
 ]
 # https://github.com/mgumz/yazi-plugin-bat
 previewers = [
