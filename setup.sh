@@ -9,12 +9,12 @@ brew install \
 	nvim fzf rg bat fd sd jq yq clipboard \
 	eza lsd zoxide \
 	lazygit delta git-lfs gh \
-	lua rust dotnet \
+	lua rust node dotnet \
 	7-zip imagemagick ffmpeg \
 	awscli \
 	yazi starship
 brew install --cask \
-	libreoffice
+	libreoffice docker
 
 # git
 ln -s $CONFIG/git/.gitconfig ~
