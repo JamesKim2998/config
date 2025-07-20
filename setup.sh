@@ -6,11 +6,11 @@ CONFIG=$HOME/Develop/config
 # brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install \
-	nvim fzf rg bat fd sd jq yq clipboard \
-	eza lsd zoxide \
+	nvim fzf rg bat fd sd jq yq \
+	eza lsd zoxide clipboard procs \
+	7-zip ouch imagemagick ffmpeg \
 	lazygit delta git-lfs gh \
-	lua rust node dotnet \
-	7-zip imagemagick ffmpeg \
+	lua rust node oven-sh/bun/bun dotnet \
 	awscli \
 	yazi starship
 brew install --cask \
@@ -34,4 +34,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 LAZYGIT_DIR="$HOME/Library/Application Support/lazygit"
 rm -rf "$LAZYGIT_DIR"
 ln -s $CONFIG/lazygit "$LAZYGIT_DIR"
+
+# cargo
+cargo install stylua selene
 
