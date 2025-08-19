@@ -18,6 +18,8 @@
     conflictstyle = zdiff3 # https://github.com/dandavison/delta
 [rebase]
     autoStash = true
+[push]
+    recurseSubmodules = on-demand
 [lfs]
     concurrenttransfers = 64
 [filter "lfs"]

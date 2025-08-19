@@ -5,6 +5,7 @@ else
   export TERM="xterm-256color"
 fi
 
+
 # init zsh.
 export ZSH=~/.oh-my-zsh
 ZSH_THEME=""
@@ -12,29 +13,45 @@ plugins=(vi-mode git zsh-autosuggestions)
 zstyle ':omz:update' mode disabled # disable auto update
 source $ZSH/oh-my-zsh.sh
 
+
 # brew
 export PATH="$PATH:/opt/homebrew/bin"
+
 
 # nvim
 export EDITOR=/opt/homebrew/bin/nvim
 alias v="$EDITOR"
 alias ve="$EDITOR $HOME/.config/nvim/init.vim"
 
+
 # rust
 export PATH="$HOME/.cargo/bin:$PATH"
+
 
 # dotnet
 export PATH="$PATH:$HOME/.dotnet/tools"
 export DOTNET_ROOT="$HOME/.dotnet"
 
+
 # android & java
 export PATH="$PATH:$HOME/Library/Android/sdk/emulator:$HOME/Library/Android/sdk/platform-tools"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+
 
 # bun
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun" # bun completions
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+
+# pnpm
+export PNPM_HOME="/Users/jameskim/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
 
 # fzf
 source <(fzf --zsh)
@@ -47,13 +64,16 @@ export FZF_DEFAULT_OPTS=" \
 --color=selected-bg:#45475A \
 --color=border:#313244,label:#CDD6F4"
 
+
 # lsd
 alias ls='lsd --group-dirs first' # compact overview
 alias ll='lsd -alh --date relative --group-dirs first' # detailed, all-files view (sizes & ages stay human-readable)
 alias lt='lsd --tree --depth 2' # quick two-level directory tree
 
+
 # zoxide
 eval "$(zoxide init zsh)"
+
 
 # yazi
 # automatically cd to the last used directory when running yazi
@@ -63,10 +83,20 @@ function y() {
     yazi "$@" --cwd-file="$tmp"
     if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
         builtin cd -- "$cwd"
+				ls
     fi
     rm -f -- "$tmp"
 }
 
+
 # starship
 eval "$(starship init zsh)"
+
+
+# ls on cd
+cd ()
+{
+  builtin cd $1
+  ls
+}
 

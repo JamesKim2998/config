@@ -7,11 +7,11 @@ CONFIG=$HOME/Develop/config
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install \
 	nvim fzf rg bat fd sd jq yq \
-	eza lsd zoxide clipboard procs \
+	eza lsd zoxide clipboard procs httpie \
 	7-zip ouch imagemagick ffmpeg \
 	lazygit delta git-lfs gh \
 	lua rust node oven-sh/bun/bun dotnet \
-	awscli \
+	gemini-cli awscli \
 	yazi starship
 brew install --cask \
 	libreoffice docker
