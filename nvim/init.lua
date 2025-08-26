@@ -4,9 +4,11 @@ require("config.lazy")
 vim.cmd.colorscheme("catppuccin")
 
 -- Indentation
+vim.o.expandtab = true -- Use spaces instead of tabs
 vim.o.shiftwidth = 2 -- Number of spaces to use for each step of (auto)indent
 vim.o.tabstop = 2 -- Number of spaces a <Tab> counts for
 vim.o.softtabstop = 2 -- Number of spaces a <Tab> counts for while editing
+vim.o.smarttab = true -- recognizes some C syntax to increase/reduce the indent where appropriate.
 
 -- UI
 vim.o.number = true
