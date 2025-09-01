@@ -1,11 +1,11 @@
 local mash_app = { "cmd", "alt", "ctrl" }
 
 local app_infos = {
+	{ "Android Studio", "A" },
 	{ "Finder", "F" },
 	{ "Fork", "K" },
 	{ "Google Chrome", "C" },
 	{ "Notes", "T" },
-	{ "Notion", "N" },
 	{ "Reminders", "M" },
 	{ "Rider", "R" },
 	{ "Slack", "S" },
