@@ -72,12 +72,6 @@ on   = [ "c", "m" ]
 run  = "plugin chmod"
 desc = "Chmod on selected files"
 
-# https://github.com/uhs-robert/recycle-bin.yazi?tab=readme-ov-file#%EF%B8%8F-recommended-preset
-[[mgr.prepend_keymap]]
-on = ["R","b"]
-run = "plugin recycle-bin"
-desc = "Open Recycle Bin menu"
-
 # https://github.com/ndtoan96/ouch.yazi?tab=readme-ov-file#compression
 [[mgr.prepend_keymap]]
 on = ["C"]
