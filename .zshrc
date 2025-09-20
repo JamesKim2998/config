@@ -94,6 +94,11 @@ function y() {
 eval "$(starship init zsh)"
 
 
+# trash-cli
+# https://github.com/andreafrancia/trash-cli
+export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
+
+
 # ls on cd
 cd ()
 {

@@ -50,5 +50,8 @@ require("mactag"):setup({
 	},
 })
 
+-- https://github.com/uhs-robert/recycle-bin.yazi?tab=readme-ov-file#-installation
+require("recycle-bin"):setup()
+
 -- https://github.com/Rolv-Apneseth/starship.yazi
 require("starship"):setup()

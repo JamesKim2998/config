@@ -5,13 +5,14 @@ local app_infos = {
 	{ "Finder", "F" },
 	{ "Fork", "K" },
 	{ "Google Chrome", "C" },
-	{ "Notes", "T" },
+	{ "Notes", "N" },
 	{ "Reminders", "M" },
 	{ "Rider", "R" },
 	{ "Slack", "S" },
 	{ "WebStorm", "W" },
 	{ "Xcode", "X" },
 	{ "kitty", "Y" },
+	{ "TexturePacker", "T" },
 }
 
 for i, app_info in ipairs(app_infos) do
