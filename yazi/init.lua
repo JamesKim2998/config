@@ -17,8 +17,6 @@ require("bunny"):setup({
 		{ key = "d", path = "~/Develop", desc = "Develop" },
 		{ key = "c", path = "~/Develop/config", desc = "Config" },
 		{ key = "1", path = "~/Develop/meow-tower", desc = "Meow Tower #1" },
-		{ key = "2", path = "~/Develop/meow-tower-2", desc = "Meow Tower #2" },
-		{ key = "3", path = "~/Develop/meow-tower-3", desc = "Meow Tower #3" },
 		{ key = "a", path = "~/Develop/meow-assets", desc = "Meow Assets" },
 		{ key = "t", path = "~/Develop/meow-toolbox", desc = "Meow Toolbox" },
 		{ key = "l", path = "~/Develop/meow-toolbox/assets/langpack", desc = "Meow Langpack" },

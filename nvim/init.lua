@@ -56,6 +56,13 @@ vim.keymap.set("n", "<leader>sw", function()
 	vim.cmd(":%s/" .. word .. "//g<Left><Left>")
 end, { desc = "Substitute Word under cursor" })
 
+-- Filetype associations
+vim.filetype.add({
+	extension = {
+		command = "sh",
+	},
+})
+
 -- Etc
 vim.o.scrolloff = 8
 vim.o.clipboard = "unnamedplus" -- Use system clipboard
