@@ -14,8 +14,8 @@ zstyle ':omz:update' mode disabled # disable auto update
 source $ZSH/oh-my-zsh.sh
 
 
-# brew
-export PATH="$PATH:/opt/homebrew/bin"
+# base PATH
+export PATH="$HOME/.local/bin:$PATH:/opt/homebrew/bin"
 
 
 # nvim
@@ -100,9 +100,11 @@ export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
 
 
 # ls on cd
-cd ()
-{
-  builtin cd $1
+_ls_on_cd() {
   ls
 }
+
+autoload -U add-zsh-hook # Load the zsh hook management functions
+add-zsh-hook chpwd _ls_on_cd # Add your function to the 'chpwd' hook (change working directory)
+
 
