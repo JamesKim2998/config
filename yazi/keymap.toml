@@ -21,15 +21,15 @@ on = [ "<C-w>" ]
 run = "plugin close-and-restore-tab close_to_right"
 desc = "Close the current tab and turn to right tab, or quit if it is last tab"
 
-# https://github.com/orhnk/system-clipboard.yazi?tab=readme-ov-file#configuration
-[[mgr.prepend_keymap]]
-on = "<C-y>"
-run = ["plugin system-clipboard"]
-
 [[mgr.prepend_keymap]]
 on = [ "<C-t>" ]
 run = "plugin close-and-restore-tab restore"
 desc = "Restore the closed tab"
+
+# https://github.com/orhnk/system-clipboard.yazi?tab=readme-ov-file#configuration
+[[mgr.prepend_keymap]]
+on = "<C-y>"
+run = ["plugin system-clipboard"]
 
 # https://github.com/stelcodes/bunny.yazi
 [[mgr.prepend_keymap]]

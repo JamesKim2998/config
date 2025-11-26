@@ -13,8 +13,9 @@ plugins=(vi-mode git zsh-autosuggestions)
 zstyle ':omz:update' mode disabled # disable auto update
 source $ZSH/oh-my-zsh.sh
 
-
-# base PATH
+ 
+# brew
+export HOMEBREW_NO_UPDATE_REPORT_NEW=1
 export PATH="$HOME/.local/bin:$PATH:/opt/homebrew/bin"
 
 
