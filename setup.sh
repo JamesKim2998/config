@@ -9,12 +9,15 @@ brew install \
 	nvim fzf rg bat fd sd jq yq \
 	eza lsd zoxide clipboard procs httpie \
 	7-zip ouch imagemagick ffmpeg \
-	lazygit delta git-lfs gh \
-	lua rust node oven-sh/bun/bun dotnet \
+	lazygit delta git-lfs gh copilot \
+	lua rust go node oven-sh/bun/bun dotnet \
 	gemini-cli awscli \
 	yazi starship
 brew install --cask \
 	libreoffice docker
+
+# zshrc
+ln -s $CONFIG/.zshrc ~
 
 # git
 ln -s $CONFIG/git/.gitconfig ~
@@ -24,11 +27,12 @@ ln -s $CONFIG/git/.gitignore_global ~
 mkdir -p ~/.config/nvim
 ln -s $CONFIG/init.vim ~/.config/nvim
 
-# zshrc
-ln -s $CONFIG/.zshrc ~
-
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# bat
+rm -rf $HOME/.config/bat
+ln -s $CONFIG/bat $HOME/.config/bat
 
 # lazygit
 LAZYGIT_DIR="$HOME/Library/Application Support/lazygit"

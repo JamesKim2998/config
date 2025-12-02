@@ -107,5 +107,3 @@ _ls_on_cd() {
 
 autoload -U add-zsh-hook # Load the zsh hook management functions
 add-zsh-hook chpwd _ls_on_cd # Add your function to the 'chpwd' hook (change working directory)
-
-
