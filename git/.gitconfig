@@ -14,7 +14,6 @@
 [pull]
 	rebase = false
 [merge]
-    ff = false
     conflictstyle = zdiff3 # https://github.com/dandavison/delta
 [rebase]
     autoStash = true
