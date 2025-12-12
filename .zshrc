@@ -99,10 +99,9 @@ eval "$(starship init zsh)"
 export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
 
 
-# ls on cd
-_ls_on_cd() {
-  ls
-}
-
-autoload -U add-zsh-hook # Load the zsh hook management functions
-add-zsh-hook chpwd _ls_on_cd # Add your function to the 'chpwd' hook (change working directory)
+# auto ls
+autoload -U add-zsh-hook
+_ls() { ls }
+_ls_once() { ls; add-zsh-hook -d precmd _ls_once }
+add-zsh-hook chpwd _ls      # on cd
+add-zsh-hook precmd _ls_once # on new shell (once)
