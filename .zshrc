@@ -34,6 +34,10 @@ export PATH="$PATH:$HOME/.dotnet/tools"
 export DOTNET_ROOT="$HOME/.dotnet"
 
 
+# haxe
+export HAXE_STD_PATH="/opt/homebrew/lib/haxe/std"
+
+
 # android & java
 export PATH="$PATH:$HOME/Library/Android/sdk/emulator:$HOME/Library/Android/sdk/platform-tools"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
@@ -105,3 +109,4 @@ _ls() { ls }
 _ls_once() { ls; add-zsh-hook -d precmd _ls_once }
 add-zsh-hook chpwd _ls      # on cd
 add-zsh-hook precmd _ls_once # on new shell (once)
+
