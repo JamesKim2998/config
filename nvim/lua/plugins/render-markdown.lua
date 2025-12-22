@@ -8,6 +8,7 @@ return {
 	ft = { "markdown" },
 	opts = {
 		heading = {
+			sign = false,
 			icons = { "󰎤 ", "󰎧 ", "󰎪 ", "󰎭 ", "󰎱 ", "󰎳 " },
 		},
 		bullet = {
