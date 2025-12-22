@@ -12,7 +12,6 @@ macOS dotfiles and development environment configuration.
 | `yazi/` | Terminal file manager with plugins and keybindings |
 | `lazygit/` | Git TUI configuration |
 | `bat/` | Syntax-highlighted cat replacement |
-| `lsd/` | Modern ls replacement with icons |
 | `.hammerspoon/` | macOS window management and app launcher hotkeys |
 | `intellij/` | IntelliJ IDE and Copilot settings |
 | `gemini/` | Gemini CLI configuration |
@@ -34,16 +33,17 @@ macOS dotfiles and development environment configuration.
 |----------|----------|
 | Editor | nvim |
 | Search & find | fzf, rg, fd |
-| File viewing & data processing | bat, jq, yq, sd |
-| File navigation & listing | eza, lsd, zoxide, yazi |
-| System utilities | clipboard, procs, httpie |
+| File viewing & data processing | bat, jq, yq, sd, glow, miller |
+| File navigation & listing | eza, zoxide, yazi, tree |
+| Yazi previews | ffmpegthumbnailer, poppler, exiftool, mediainfo, pandoc |
+| System utilities | clipboard, procs, httpie, wget |
 | Compression & archives | 7-zip, ouch |
 | Media processing | imagemagick, ffmpeg |
 | Git tools | lazygit, delta, git-lfs, gh, copilot |
 | Languages & runtimes | lua, rust, go, node, bun, dotnet |
 | Cloud & CLI tools | gemini-cli, awscli |
-| Task runner & shell | just, starship |
-| Casks | libreoffice, docker |
+| Shell tools | just, starship, shellcheck, gnu-sed |
+| Casks | libreoffice, docker, font-hack-nerd-font |
 
 ## Cargo Packages
 
@@ -65,7 +65,6 @@ macOS dotfiles and development environment configuration.
 | `kitty/` | `~/.config/kitty` |
 | `yazi/` | `~/.config/yazi` |
 | `bat/` | `~/.config/bat` |
-| `lsd/` | `~/.config/lsd` |
 | `lazygit/` | `~/Library/Application Support/lazygit` |
 | `karabiner.json` | `~/.config/karabiner/karabiner.json` |
 | `.hammerspoon/` | `~/.hammerspoon` |

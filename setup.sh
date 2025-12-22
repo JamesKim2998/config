@@ -15,13 +15,16 @@ brew install nvim
 brew install fzf rg fd
 
 # file viewing & data processing
-brew install bat jq yq sd
+brew install bat jq yq sd glow miller
 
 # file navigation & listing
-brew install eza lsd zoxide yazi
+brew install eza zoxide yazi tree
+
+# yazi previews (pandoc for docx/odt/epub)
+brew install ffmpegthumbnailer poppler exiftool mediainfo pandoc
 
 # system utilities
-brew install clipboard procs httpie
+brew install clipboard procs httpie wget
 
 # compression & archives
 brew install 7-zip ouch
@@ -38,11 +41,11 @@ brew install lua rust go node oven-sh/bun/bun dotnet
 # cloud & cli tools
 brew install gemini-cli awscli
 
-# task runner & shell
-brew install just starship
+# shell tools
+brew install just starship shellcheck gnu-sed
 
 # casks
-brew install --cask libreoffice docker
+brew install --cask libreoffice docker font-hack-nerd-font
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -71,10 +74,6 @@ ln -s "$CONFIG/yazi" "$XDG_CONFIG/yazi"
 # bat
 rm -rf "$XDG_CONFIG/bat"
 ln -s "$CONFIG/bat" "$XDG_CONFIG/bat"
-
-# lsd
-rm -rf "$XDG_CONFIG/lsd"
-ln -s "$CONFIG/lsd" "$XDG_CONFIG/lsd"
 
 # lazygit
 rm -rf "$APP_SUPPORT/lazygit"

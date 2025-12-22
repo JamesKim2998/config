@@ -70,10 +70,11 @@ export FZF_DEFAULT_OPTS=" \
   --color=border:#313244,label:#CDD6F4"
 
 
-# lsd
-alias ls='lsd --group-dirs first' # compact overview
-alias ll='lsd -alh --date relative --group-dirs first' # detailed, all-files view (sizes & ages stay human-readable)
-alias lt='lsd --tree --depth 2' # quick two-level directory tree
+# eza (modern ls replacement with icons and git integration)
+alias ls='eza --group-directories-first --icons'
+alias ll='eza -l --group-directories-first --icons --git --header'
+alias la='eza -la --group-directories-first --icons --git --header'
+alias lt='eza --tree --level 2 --icons'
 
 
 # zoxide
