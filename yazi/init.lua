@@ -12,11 +12,9 @@ require("git"):setup()
 -- https://github.com/stelcodes/bunny.yazi
 require("bunny"):setup({
 	hops = {
-		{ key = "~", path = "~", desc = "Home" },
-		{ key = "n", path = "~/Downloads", desc = "Config" },
 		{ key = "d", path = "~/Develop", desc = "Develop" },
 		{ key = "c", path = "~/Develop/config", desc = "Config" },
-		{ key = "1", path = "~/Develop/meow-tower", desc = "Meow Tower #1" },
+		{ key = "1", path = "~/Develop/meow-tower", desc = "Meow Tower" },
 		{ key = "a", path = "~/Develop/meow-assets", desc = "Meow Assets" },
 		{ key = "t", path = "~/Develop/meow-toolbox", desc = "Meow Toolbox" },
 		{ key = "l", path = "~/Develop/meow-toolbox/assets/langpack", desc = "Meow Langpack" },

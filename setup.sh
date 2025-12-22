@@ -19,6 +19,9 @@ brew install --cask \
 # zshrc
 ln -s $CONFIG/.zshrc ~
 
+# oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 # git
 ln -s $CONFIG/git/.gitconfig ~
 ln -s $CONFIG/git/.gitignore_global ~
@@ -26,9 +29,6 @@ ln -s $CONFIG/git/.gitignore_global ~
 # nvim
 mkdir -p ~/.config/nvim
 ln -s $CONFIG/init.vim ~/.config/nvim
-
-# oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # bat
 rm -rf $HOME/.config/bat
@@ -41,4 +41,9 @@ ln -s $CONFIG/lazygit "$LAZYGIT_DIR"
 
 # cargo
 cargo install stylua selene
+
+# vscode
+VSCODE_USER_DIR="$HOME/Library/Application Support/Code/User"
+mkdir -p "$VSCODE_USER_DIR"
+ln -sf $CONFIG/.vscode/settings.json "$VSCODE_USER_DIR/settings.json"
 

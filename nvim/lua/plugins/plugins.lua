@@ -9,4 +9,7 @@ return {
 
 	-- autocomplete
 	{ "github/copilot.vim", lazy = false },
+
+	-- navigation between kitty and nvim splits
+	{ "knubie/vim-kitty-navigator" },
 }
