@@ -8,20 +8,15 @@ return {
   keys = {
     { "<C-n>", "<Cmd>NvimTreeToggle<CR>", desc = "Toggle NvimTree" },
   },
-  opts = function(_, opts)
-    opts.on_attach = function(bufnr)
-      local api = require("nvim-tree.api")
-      api.config.mappings.default_on_attach(bufnr)
-    end
-  end,
   -- runs **before** the plugin is loaded
   init = function()
     -- disable netrw early
     vim.g.loaded_netrw       = 1
     vim.g.loaded_netrwPlugin = 1
   end,
-  config = function()
-    require("nvim-tree").setup {}
+  opts = {},
+  config = function(_, opts)
+    require("nvim-tree").setup(opts)
 
 
     -- auto-open on startup
