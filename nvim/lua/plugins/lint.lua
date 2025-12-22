@@ -11,9 +11,6 @@ return {
 			lua = { "selene" },
 		}
 
-		-- Treat .command files as sh for linting
-		vim.filetype.add({ extension = { command = "sh" } })
-
 		-- Force bash dialect so shellcheck accepts .command files
 		table.insert(lint.linters.shellcheck.args, 1, "--shell=bash")
 
