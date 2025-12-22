@@ -7,6 +7,8 @@ return {
 		ensure_installed = {
 			"bash",
 			"lua",
+			"markdown",
+			"markdown_inline",
 			"regex",
 			"vim",
 			"vimdoc",
