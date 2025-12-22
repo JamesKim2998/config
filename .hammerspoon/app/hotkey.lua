@@ -13,6 +13,7 @@ local app_infos = {
 	{ "Xcode", "X" },
 	{ "kitty", "Y" },
 	{ "TexturePacker", "T" },
+	{ "Visual Studio Code", "V" },
 }
 
 for i, app_info in ipairs(app_infos) do
