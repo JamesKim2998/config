@@ -4,23 +4,28 @@
 
 | Plugin | Purpose | File |
 |--------|---------|------|
+| **UI** |||
 | catppuccin/nvim | Colorscheme | plugins.lua |
-| snacks.nvim | Indent guides | snacks.lua |
 | lualine.nvim | Statusline | plugins.lua |
-| gitsigns.nvim | Git diff signs | plugins.lua |
-| copilot.vim | AI completion | plugins.lua |
-| vim-kitty-navigator | Kitty/nvim navigation | plugins.lua |
-| blink.cmp | Completion engine | blink-cmp.lua |
-| fzf-lua | Fuzzy finder | fzf-lua.lua |
-| mason.nvim + lspconfig | LSP support | lsp.lua |
-| nvim-tree.lua | File explorer | nvim-tree.lua |
 | bufferline.nvim | Buffer tabs | bufferline.lua |
+| noice.nvim | Messages/cmdline UI | noice.lua |
+| snacks.nvim | Indent guides | snacks.lua |
+| **Code Intelligence** |||
 | nvim-treesitter | Syntax highlighting | nvim-treesitter.lua |
+| mason.nvim + lspconfig | LSP support | lsp.lua |
+| blink.cmp | Completion engine | blink-cmp.lua |
+| copilot.vim | AI completion | plugins.lua |
 | conform.nvim | Formatting | conform.lua |
 | nvim-lint | Linting | lint.lua |
 | nvim-ufo | Code folding | ufo.lua |
-| nvim-spectre | Search & replace | spectre.lua |
+| **Navigation** |||
+| fzf-lua | Fuzzy finder | fzf-lua.lua |
+| nvim-tree.lua | File explorer | nvim-tree.lua |
 | yazi.nvim | File manager | yazi.lua |
+| nvim-spectre | Search & replace | spectre.lua |
+| vim-kitty-navigator | Kitty/nvim navigation | plugins.lua |
+| **Git** |||
+| gitsigns.nvim | Git diff signs | plugins.lua |
 | lazygit.nvim | Git TUI | lazygit.lua |
 
 ---
@@ -103,7 +108,7 @@
 
 ---
 
-## File Structure
+## File Structure (alphabetically sorted)
 
 ```
 nvim/
@@ -111,18 +116,19 @@ nvim/
 └── lua/
     ├── config/lazy.lua
     └── plugins/
+        ├── blink-cmp.lua
+        ├── bufferline.lua
+        ├── conform.lua
+        ├── fzf-lua.lua
+        ├── lazygit.lua
+        ├── lint.lua
+        ├── lsp.lua
+        ├── noice.lua
+        ├── nvim-tree.lua
+        ├── nvim-treesitter.lua
         ├── plugins.lua
         ├── snacks.lua
-        ├── blink-cmp.lua
-        ├── fzf-lua.lua
-        ├── lsp.lua
-        ├── nvim-tree.lua
-        ├── bufferline.lua
-        ├── nvim-treesitter.lua
-        ├── conform.lua
-        ├── lint.lua
-        ├── ufo.lua
         ├── spectre.lua
-        ├── yazi.lua
-        └── lazygit.lua
+        ├── ufo.lua
+        └── yazi.lua
 ```

@@ -11,6 +11,7 @@ vim.o.softtabstop = 2 -- Number of spaces a <Tab> counts for while editing
 vim.o.smarttab = true -- recognizes some C syntax to increase/reduce the indent where appropriate.
 
 -- UI
+vim.o.cmdheight = 0 -- Hide command line when not in use
 vim.o.number = true
 vim.o.showcmd = true -- Show command in the last line as it's being typed
 vim.o.cursorline = true -- Highlight the current line
