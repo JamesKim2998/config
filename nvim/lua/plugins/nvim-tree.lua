@@ -26,6 +26,11 @@ return {
 
     -- auto-open on startup
     local function open_nvim_tree(data)
+      -- skip for claude-prompt temp files
+      if data.file:match("claude%-prompt%-.-%.md$") then
+        return
+      end
+
       -- open for an empty buffer or a real file
       local real_file = vim.fn.filereadable(data.file) == 1
       local no_name   = data.file == "" and vim.bo[data.buf].buftype == ""
