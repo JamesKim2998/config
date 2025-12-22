@@ -9,6 +9,12 @@ return {
 		opts = {
 			options = {
 				disabled_filetypes = { statusline = { "NvimTree" } },
+				section_separators = "",
+				component_separators = "",
+			},
+			sections = {
+				lualine_c = {},
+				lualine_x = {},
 			},
 		},
 	},

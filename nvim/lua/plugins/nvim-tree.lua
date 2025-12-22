@@ -16,8 +16,25 @@ return {
   end,
   opts = {},
   config = function(_, opts)
+    -- Responsive width: 20% of editor, min 8, max 20
+    local function get_width()
+      local width = math.floor(vim.o.columns * 0.2)
+      return math.max(8, math.min(width, 20))
+    end
+
+    opts.view = { width = get_width() }
     require("nvim-tree").setup(opts)
 
+    -- Update width on window resize
+    vim.api.nvim_create_autocmd("VimResized", {
+      callback = function()
+        local view = require("nvim-tree.view")
+        if view.is_visible() then
+          view.View.width = get_width()
+          view.resize()
+        end
+      end,
+    })
 
     -- auto-open on startup
     local function open_nvim_tree(data)
