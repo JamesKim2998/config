@@ -11,6 +11,9 @@ return {
 			lua = { "selene" },
 		}
 
+		-- Treat .command files as sh for linting
+		vim.filetype.add({ extension = { command = "sh" } })
+
 		-- Run linting automatically on events
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
