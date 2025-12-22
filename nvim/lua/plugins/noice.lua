@@ -6,15 +6,18 @@ return {
 		"MunifTanjim/nui.nvim",
 	},
 	opts = {
-		cmdline = { view = "cmdline" }, -- bottom cmdline (use "cmdline_popup" for centered)
-		messages = { view = "mini" }, -- minimal floating messages
-		popupmenu = { enabled = false }, -- use default cmp/blink popupmenu
 		lsp = {
-			progress = { enabled = false }, -- disable if using fidget.nvim or similar
 			override = {
 				["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 				["vim.lsp.util.stylize_markdown"] = true,
 			},
+		},
+		presets = {
+			bottom_search = true,
+			command_palette = true,
+			long_message_to_split = true,
+			inc_rename = false,
+			lsp_doc_border = false,
 		},
 	},
 }

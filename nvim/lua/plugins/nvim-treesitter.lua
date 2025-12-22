@@ -3,7 +3,18 @@ return {
 	branch = "master",
 	lazy = false,
 	build = ":TSUpdate",
-	config = function()
+	opts = {
+		ensure_installed = {
+			"bash",
+			"lua",
+			"regex",
+			"vim",
+			"vimdoc",
+		},
+	},
+	config = function(_, opts)
+		require("nvim-treesitter.configs").setup(opts)
+
 		-- Custom filetype mappings
 		vim.filetype.add({
 			extension = {
