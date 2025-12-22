@@ -2,6 +2,8 @@
 set -e
 
 CONFIG=$HOME/Develop/config
+XDG_CONFIG=$HOME/.config
+APP_SUPPORT="$HOME/Library/Application Support"
 
 # brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -47,7 +49,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 # shell
 ln -sf $CONFIG/.zshrc ~/.zshrc
-ln -sf $CONFIG/starship.toml ~/.config/starship.toml
+ln -sf $CONFIG/starship.toml $XDG_CONFIG/starship.toml
 ln -sf $CONFIG/.ripgreprc ~/.ripgreprc
 
 # git
@@ -55,32 +57,32 @@ ln -sf $CONFIG/git/.gitconfig ~/.gitconfig
 ln -sf $CONFIG/git/.gitignore_global ~/.gitignore_global
 
 # nvim
-rm -rf ~/.config/nvim
-ln -s $CONFIG/nvim ~/.config/nvim
+rm -rf $XDG_CONFIG/nvim
+ln -s $CONFIG/nvim $XDG_CONFIG/nvim
 
 # kitty
-rm -rf ~/.config/kitty
-ln -s $CONFIG/kitty ~/.config/kitty
+rm -rf $XDG_CONFIG/kitty
+ln -s $CONFIG/kitty $XDG_CONFIG/kitty
 
 # yazi
-rm -rf ~/.config/yazi
-ln -s $CONFIG/yazi ~/.config/yazi
+rm -rf $XDG_CONFIG/yazi
+ln -s $CONFIG/yazi $XDG_CONFIG/yazi
 
 # bat
-rm -rf ~/.config/bat
-ln -s $CONFIG/bat ~/.config/bat
+rm -rf $XDG_CONFIG/bat
+ln -s $CONFIG/bat $XDG_CONFIG/bat
 
 # lsd
-rm -rf ~/.config/lsd
-ln -s $CONFIG/lsd ~/.config/lsd
+rm -rf $XDG_CONFIG/lsd
+ln -s $CONFIG/lsd $XDG_CONFIG/lsd
 
 # lazygit
-rm -rf "$HOME/Library/Application Support/lazygit"
-ln -s $CONFIG/lazygit "$HOME/Library/Application Support/lazygit"
+rm -rf "$APP_SUPPORT/lazygit"
+ln -s $CONFIG/lazygit "$APP_SUPPORT/lazygit"
 
 # karabiner
-mkdir -p ~/.config/karabiner
-ln -sf $CONFIG/karabiner.json ~/.config/karabiner/karabiner.json
+mkdir -p $XDG_CONFIG/karabiner
+ln -sf $CONFIG/karabiner.json $XDG_CONFIG/karabiner/karabiner.json
 
 # hammerspoon
 rm -rf ~/.hammerspoon
@@ -91,8 +93,8 @@ rm -rf ~/.gemini
 ln -s $CONFIG/gemini ~/.gemini
 
 # vscode
-mkdir -p "$HOME/Library/Application Support/Code/User"
-ln -sf $CONFIG/.vscode/settings.json "$HOME/Library/Application Support/Code/User/settings.json"
+mkdir -p "$APP_SUPPORT/Code/User"
+ln -sf $CONFIG/.vscode/settings.json "$APP_SUPPORT/Code/User/settings.json"
 
 # cargo tools
 cargo install stylua selene
