@@ -14,6 +14,9 @@ return {
 		-- Treat .command files as sh for linting
 		vim.filetype.add({ extension = { command = "sh" } })
 
+		-- Force bash dialect so shellcheck accepts .command files
+		table.insert(lint.linters.shellcheck.args, 1, "--shell=bash")
+
 		-- Run linting automatically on events
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
