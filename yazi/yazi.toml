@@ -44,6 +44,7 @@ prepend_previewers = [
 	{ name = "*.csv", run = "bat" },
 	{ name = "*.md", run = "bat" },
 	{ name = "*.json", run = "bat" },
+	{ mime = "application/json", run = "bat" },
 	# https://github.com/boydaihungst/mediainfo.yazi
 	# Replace magick, image, video with mediainfo
 	{ mime = "{audio,video,image}/*", run = "mediainfo"},

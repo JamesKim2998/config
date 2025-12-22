@@ -8,3 +8,8 @@
 --map-syntax "*.prefab:YAML"
 --map-syntax "*.meta:YAML"
 
+--map-syntax ".prettierrc:JSON"
+--map-syntax ".eslintrc:JSON"
+--map-syntax ".babelrc:JSON"
+--map-syntax ".swcrc:JSON"
+

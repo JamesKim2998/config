@@ -56,14 +56,30 @@ return {
     vim.api.nvim_create_autocmd("VimEnter", { callback = open_nvim_tree })
 
 
-    -- Auto-close Neovim if NvimTree is the last window
-    vim.api.nvim_create_autocmd("BufEnter", {
+    -- Auto-close NvimTree when quitting the last real buffer
+    vim.api.nvim_create_autocmd("QuitPre", {
       group = vim.api.nvim_create_augroup("AutoCloseNvimTree", { clear = true }),
       callback = function()
-        local api = require("nvim-tree.api")
-        local view = require("nvim-tree.view")
-        if #vim.api.nvim_list_tabpages() == 1 and #vim.api.nvim_list_wins() == 1 and view.is_visible() then
-          vim.cmd("quit")
+        local wins = vim.api.nvim_list_wins()
+        local tree_wins = {}
+        local floating_wins = {}
+
+        for _, w in ipairs(wins) do
+          local buf = vim.api.nvim_win_get_buf(w)
+          local ft = vim.bo[buf].filetype
+          if ft == "NvimTree" then
+            table.insert(tree_wins, w)
+          end
+          if vim.api.nvim_win_get_config(w).relative ~= "" then
+            table.insert(floating_wins, w)
+          end
+        end
+
+        -- If this is the last real window, close nvim-tree first
+        if #wins - #floating_wins - #tree_wins == 1 then
+          for _, w in ipairs(tree_wins) do
+            vim.api.nvim_win_close(w, true)
+          end
         end
       end,
     })
