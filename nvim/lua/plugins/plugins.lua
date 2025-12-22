@@ -3,9 +3,11 @@ return {
 	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 
+	-- statusline
+	{ "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" }, opts = {} },
+
 	-- git
-	{ "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
-	{ "lewis6991/gitsigns.nvim" },
+	{ "lewis6991/gitsigns.nvim", opts = {} },
 
 	-- autocomplete
 	{ "github/copilot.vim", lazy = false },
