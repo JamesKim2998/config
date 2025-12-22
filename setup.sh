@@ -5,45 +5,95 @@ CONFIG=$HOME/Develop/config
 
 # brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew install \
-	nvim fzf rg bat fd sd jq yq \
-	eza lsd zoxide clipboard procs httpie \
-	7-zip ouch imagemagick ffmpeg \
-	lazygit delta git-lfs gh copilot \
-	lua rust go node oven-sh/bun/bun dotnet \
-	gemini-cli awscli \
-	yazi starship
-brew install --cask \
-	libreoffice docker
 
-# zshrc
-ln -s $CONFIG/.zshrc ~
+# editor
+brew install nvim
+
+# search & find
+brew install fzf rg fd
+
+# file viewing & data processing
+brew install bat jq yq sd
+
+# file navigation & listing
+brew install eza lsd zoxide yazi
+
+# system utilities
+brew install clipboard procs httpie
+
+# compression & archives
+brew install 7-zip ouch
+
+# media processing
+brew install imagemagick ffmpeg
+
+# git tools
+brew install lazygit delta git-lfs gh copilot
+
+# languages & runtimes
+brew install lua rust go node oven-sh/bun/bun dotnet
+
+# cloud & cli tools
+brew install gemini-cli awscli
+
+# task runner & shell
+brew install just starship
+
+# casks
+brew install --cask libreoffice docker
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+# shell
+ln -sf $CONFIG/.zshrc ~/.zshrc
+ln -sf $CONFIG/starship.toml ~/.config/starship.toml
+ln -sf $CONFIG/.ripgreprc ~/.ripgreprc
+
 # git
-ln -s $CONFIG/git/.gitconfig ~
-ln -s $CONFIG/git/.gitignore_global ~
+ln -sf $CONFIG/git/.gitconfig ~/.gitconfig
+ln -sf $CONFIG/git/.gitignore_global ~/.gitignore_global
 
 # nvim
-mkdir -p ~/.config/nvim
-ln -s $CONFIG/init.vim ~/.config/nvim
+rm -rf ~/.config/nvim
+ln -s $CONFIG/nvim ~/.config/nvim
+
+# kitty
+rm -rf ~/.config/kitty
+ln -s $CONFIG/kitty ~/.config/kitty
+
+# yazi
+rm -rf ~/.config/yazi
+ln -s $CONFIG/yazi ~/.config/yazi
 
 # bat
-rm -rf $HOME/.config/bat
-ln -s $CONFIG/bat $HOME/.config/bat
+rm -rf ~/.config/bat
+ln -s $CONFIG/bat ~/.config/bat
+
+# lsd
+rm -rf ~/.config/lsd
+ln -s $CONFIG/lsd ~/.config/lsd
 
 # lazygit
-LAZYGIT_DIR="$HOME/Library/Application Support/lazygit"
-rm -rf "$LAZYGIT_DIR"
-ln -s $CONFIG/lazygit "$LAZYGIT_DIR"
+rm -rf "$HOME/Library/Application Support/lazygit"
+ln -s $CONFIG/lazygit "$HOME/Library/Application Support/lazygit"
 
-# cargo
-cargo install stylua selene
+# karabiner
+mkdir -p ~/.config/karabiner
+ln -sf $CONFIG/karabiner.json ~/.config/karabiner/karabiner.json
+
+# hammerspoon
+rm -rf ~/.hammerspoon
+ln -s $CONFIG/.hammerspoon ~/.hammerspoon
+
+# gemini
+rm -rf ~/.gemini
+ln -s $CONFIG/gemini ~/.gemini
 
 # vscode
-VSCODE_USER_DIR="$HOME/Library/Application Support/Code/User"
-mkdir -p "$VSCODE_USER_DIR"
-ln -sf $CONFIG/.vscode/settings.json "$VSCODE_USER_DIR/settings.json"
+mkdir -p "$HOME/Library/Application Support/Code/User"
+ln -sf $CONFIG/.vscode/settings.json "$HOME/Library/Application Support/Code/User/settings.json"
+
+# cargo tools
+cargo install stylua selene
 
