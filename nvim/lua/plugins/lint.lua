@@ -1,4 +1,6 @@
--- lua/plugins/lint.lua
+-- https://github.com/mfussenegger/nvim-lint
+-- Linters: sh→shellcheck, lua→selene
+-- Triggers on BufEnter and BufWritePost (not InsertLeave to avoid lag)
 return {
 	"mfussenegger/nvim-lint",
 	event = { "BufReadPre", "BufNewFile" },

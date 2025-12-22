@@ -1,4 +1,6 @@
--- https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md#lazy-loading-with-lazynvim
+-- https://github.com/stevearc/conform.nvim
+-- Formatters: sh→shfmt, lua→stylua, python→isort+black, js→prettierd
+-- Format on save enabled, falls back to LSP if no formatter configured
 return {
 	"stevearc/conform.nvim",
 	event = { "BufWritePre" },
