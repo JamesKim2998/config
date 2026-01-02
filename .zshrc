@@ -78,7 +78,7 @@ alias lt='eza --tree --level 2 --icons'
 
 
 # zoxide
-export _ZO_FZF_OPTS='+e --height=40% --layout=reverse --border'
+export _ZO_FZF_OPTS='+e --height=40% --layout=reverse --border --no-sort'
 eval "$(zoxide init zsh)"
 
 

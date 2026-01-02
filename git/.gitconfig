@@ -18,7 +18,7 @@
 [rebase]
     autoStash = true
 [push]
-    recurseSubmodules = on-demand
+	recurseSubmodules = on-demand
 [lfs]
     concurrenttransfers = 64
 [filter "lfs"]
