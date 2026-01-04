@@ -13,6 +13,24 @@ return {
 				component_separators = "",
 			},
 			sections = {
+				lualine_a = {
+					{
+						"mode",
+						fmt = function(s)
+							local icons = {
+								NORMAL = "󰆾",
+								INSERT = "󰏫",
+								VISUAL = "󰒉",
+								["V-LINE"] = "󰒉",
+								["V-BLOCK"] = "󰒉",
+								REPLACE = "󰛔",
+								COMMAND = "󰘳",
+								TERMINAL = "󰆍",
+							}
+							return icons[s] or s
+						end,
+					},
+				},
 				lualine_c = {},
 				lualine_x = {},
 			},
