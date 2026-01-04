@@ -13,6 +13,8 @@ vim.o.smarttab = true -- recognizes some C syntax to increase/reduce the indent 
 -- UI
 vim.o.cmdheight = 0 -- Hide command line when not in use
 vim.o.number = true
+vim.o.numberwidth = 1 -- Minimum width for number column
+vim.o.signcolumn = "number" -- Show signs in number column
 vim.o.showcmd = true -- Show command in the last line as it's being typed
 vim.o.cursorline = true -- Highlight the current line
 vim.o.showmatch = true -- Briefly jump to matching bracket when inserting one
