@@ -1,3 +1,9 @@
+# Use / for filter instead of find
+[[mgr.prepend_keymap]]
+on = "/"
+run = "filter --smart"
+desc = "Filter files"
+
 # https://yazi-rs.github.io/docs/tips/#confirm-quit
 [[mgr.prepend_keymap]]
 on  = "q"
@@ -77,4 +83,16 @@ desc = "Chmod on selected files"
 on = ["C"]
 run = "plugin ouch"
 desc = "Compress with ouch"
+
+# https://github.com/yazi-rs/plugins/tree/main/jump-to-char.yazi
+[[mgr.prepend_keymap]]
+on = "f"
+run = "plugin jump-to-char"
+desc = "Jump to char"
+
+# https://github.com/yazi-rs/plugins/tree/main/toggle-pane.yazi
+[[mgr.prepend_keymap]]
+on = "T"
+run = "plugin toggle-pane min-preview"
+desc = "Toggle preview pane"
 

@@ -73,5 +73,15 @@ use = "uhs-robert/recycle-bin"
 rev = "03f6c4a"
 hash = "f14a951bf376d7fe73033c4a48aa5fa4"
 
+[[plugin.deps]]
+use = "yazi-rs/plugins:toggle-pane"
+rev = "03cdd4b"
+hash = "8a7c58225816a163a6e8730c0adafbc8"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:jump-to-char"
+rev = "03cdd4b"
+hash = "ce67445ebb1bf3d97b8e44f50904b2c5"
+
 [flavor]
 deps = []
