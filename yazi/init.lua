@@ -43,7 +43,23 @@ require("mactag"):setup({
 	},
 })
 
+-- Custom tab bar on left side of header (hide default tabs)
+function Tabs.height() return 0 end
 
--- Hide status bar
--- https://github.com/yazi-rs/plugins/tree/main/no-status.yazi
-require("no-status"):setup()
+Header:children_add(function()
+	local nums = { "󰎤", "󰎧", "󰎪", "󰎭", "󰎱", "󰎳", "󰎶", "󰎹", "󰎼" }
+	local spans = {}
+	for i = 1, #cx.tabs do
+		local n = nums[i] or tostring(i)
+		local name = tostring(cx.tabs[i].current.cwd):match("([^/]+)/?$") or ""
+		local span = ui.Span(" " .. n .. " " .. name .. " ")
+		if i == cx.tabs.idx then
+			span = span:reverse()
+		end
+		spans[#spans + 1] = span
+	end
+	return ui.Line(spans)
+end, 100, Header.LEFT)
+
+-- Remove default header cwd
+Header:children_remove(1, Header.LEFT)
