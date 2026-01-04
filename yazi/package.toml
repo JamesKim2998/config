@@ -83,5 +83,10 @@ use = "yazi-rs/plugins:jump-to-char"
 rev = "03cdd4b"
 hash = "ce67445ebb1bf3d97b8e44f50904b2c5"
 
+[[plugin.deps]]
+use = "yazi-rs/plugins:no-status"
+rev = "03cdd4b"
+hash = "3e023d31f29201efdac2a6ae35fedb78"
+
 [flavor]
 deps = []
