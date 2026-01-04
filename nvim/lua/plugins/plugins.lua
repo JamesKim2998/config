@@ -43,6 +43,9 @@ return {
 	-- autocomplete
 	{ "github/copilot.vim", lazy = false },
 
+	-- bullet lists
+	{ "bullets-vim/bullets.vim" },
+
 	-- navigation between kitty and nvim splits
 	{ "knubie/vim-kitty-navigator" },
 }
