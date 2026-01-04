@@ -1,7 +1,7 @@
 # https://starship.rs/config/
 "$schema" = 'https://starship.rs/config-schema.json'
 
-palette = "catppuccin_mocha"
+palette = "tokyonight"
 scan_timeout = 10
 command_timeout = 500
 add_newline = false
@@ -18,38 +18,38 @@ $character"""
 [character]
 success_symbol = "[❯](bold green)"
 error_symbol = "[❯](bold red)"
-vimcmd_symbol = "[❮](bold mauve)"
+vimcmd_symbol = "[❮](bold purple)"
 
 [directory]
 truncation_length = 3
 truncate_to_repo = true
 format = "[$path ]($style)"
-style = "bold sapphire bg:mantle"
+style = "bold blue bg:bg_dark"
 read_only = " 󰌾"
-read_only_style = "red bg:mantle"
+read_only_style = "red bg:bg_dark"
 
 [git_branch]
 symbol = " "
 format = "[$symbol$branch ]($style)"
-style = "bold mauve bg:mantle"
+style = "bold purple bg:bg_dark"
 truncation_length = 20
 
 [git_status]
 format = '([$modified$behind ]($style))'
-style = "bg:mantle"
-modified = "[●](yellow bg:mantle)"
-behind = "[⇣](red bg:mantle)"
+style = "bg:bg_dark"
+modified = "[●](yellow bg:bg_dark)"
+behind = "[⇣](red bg:bg_dark)"
 staged = ""
 deleted = ""
 untracked = ""
 stashed = ""
 ahead = ""
-diverged = "[⇣](red)"
+diverged = "[⇣](red bg:bg_dark)"
 
 # Full-width background
 [fill]
 symbol = " "
-style = "bg:mantle"
+style = "bg:bg_dark"
 
 # Language modules: icon only (based on your stack)
 [bun]
@@ -75,11 +75,12 @@ disabled = true
 [package]
 disabled = true
 
-# Catppuccin Mocha
-[palettes.catppuccin_mocha]
-mauve = "#cba6f7"
-red = "#f38ba8"
-yellow = "#f9e2af"
-green = "#a6e3a1"
-sapphire = "#74c7ec"
-mantle = "#181825"
+# Tokyo Night
+[palettes.tokyonight]
+blue = "#7aa2f7"
+purple = "#bb9af7"
+red = "#f7768e"
+yellow = "#e0af68"
+green = "#9ece6a"
+cyan = "#7dcfff"
+bg_dark = "#16161e"

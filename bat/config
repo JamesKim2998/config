@@ -1,4 +1,4 @@
---theme="Catppuccin Mocha"
+--theme="tokyonight"
 
 --map-syntax "*.csproj:XML"
 --map-syntax "*.DotSettings:XML"
