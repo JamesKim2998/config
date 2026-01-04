@@ -43,8 +43,6 @@ require("mactag"):setup({
 	},
 })
 
--- https://github.com/Rolv-Apneseth/starship.yazi
-require("starship"):setup()
 
 -- Hide status bar
 -- https://github.com/yazi-rs/plugins/tree/main/no-status.yazi
