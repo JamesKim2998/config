@@ -8,7 +8,7 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
 			options = {
-				disabled_filetypes = { statusline = { "NvimTree" } },
+				disabled_filetypes = { statusline = { "neo-tree" } },
 				section_separators = "",
 				component_separators = "",
 			},

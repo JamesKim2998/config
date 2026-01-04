@@ -11,7 +11,6 @@ return {
   keys = {
     { "<C-n>", "<Cmd>Neotree toggle<CR>", desc = "Toggle Neo-tree" },
     { "<leader>e", "<Cmd>Neotree focus<CR>", desc = "Focus Neo-tree" },
-    { "<leader>ge", "<Cmd>Neotree git_status<CR>", desc = "Git status in Neo-tree" },
   },
   -- Disable netrw before plugins load
   init = function()
@@ -35,15 +34,11 @@ return {
       -- Enable diagnostics icons
       enable_diagnostics = true,
 
-      -- Sources available: filesystem, git_status
-      sources = { "filesystem", "git_status" },
+      -- Sources available: filesystem only
+      sources = { "filesystem" },
       source_selector = {
-        winbar = true,
+        winbar = false,
         statusline = false,
-        sources = {
-          { source = "filesystem", display_name = " Files" },
-          { source = "git_status", display_name = " Git" },
-        },
       },
 
       -- Default component configs (shared across sources)
@@ -81,13 +76,6 @@ return {
         position = "left",
         width = get_width(),
         mappings = {
-          -- Source switching
-          ["e"] = function()
-            vim.cmd("Neotree focus filesystem left")
-          end,
-          ["g"] = function()
-            vim.cmd("Neotree focus git_status left")
-          end,
           -- Basic operations
           ["<space>"] = "toggle_node",
           ["<cr>"] = "open",
@@ -125,13 +113,6 @@ return {
         group_empty_dirs = true, -- Collapse empty directories
         hijack_netrw_behavior = "open_current",
         use_libuv_file_watcher = true, -- Auto-refresh on file changes
-      },
-
-      -- Git status source configuration
-      git_status = {
-        window = {
-          position = "float",
-        },
       },
 
       -- Event handlers for better UX
