@@ -3,6 +3,9 @@ require("zoxide"):setup({
 	update_db = true, -- auto-remember every dir you visit
 })
 
+-- Hide preview pane by default (toggle with T)
+require("toggle-pane"):entry("min-preview")
+
 -- https://github.com/yazi-rs/plugins/tree/main/git.yazi
 require("git"):setup()
 
