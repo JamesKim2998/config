@@ -1,6 +1,12 @@
 [mgr]
 show_hidden = true
 
+[open]
+prepend_rules = [
+	{ name = "*.xls", use = "open" },
+	{ name = "*.xlsx", use = "open" },
+]
+
 # https://github.com/yazi-rs/plugins/tree/main/mactag.yazi
 [[plugin.prepend_fetchers]]
 id   = "mactag"
@@ -70,8 +76,8 @@ prepend_previewers = [
 	{ name = "*.xlsx", run = "office" },
 ]
 # https://github.com/mgumz/yazi-plugin-bat
-previewers = [
-	{ name = "*/", run = "folder", sync = true },
+# Use append_previewers to keep defaults (image, video, etc.) and add bat for text
+append_previewers = [
 	{ mime = "text/*",                 run = "bat" },
 	{ mime = "*/xml",                  run = "bat" },
 	{ mime = "*/cs",                   run = "bat" },
