@@ -43,6 +43,9 @@ ln -sf "$CONFIG/.ripgreprc" ~/.ripgreprc
 ln -sf "$CONFIG/git/.gitconfig" ~/.gitconfig
 ln -sf "$CONFIG/git/.gitignore_global" ~/.gitignore_global
 
+# ssh
+ln -sf "$CONFIG/.ssh/config" ~/.ssh/config
+
 # nvim
 rm -rf "$XDG_CONFIG/nvim"
 ln -s "$CONFIG/nvim" "$XDG_CONFIG/nvim"
