@@ -49,6 +49,16 @@ require("mactag"):setup({
 -- Custom tab bar on left side of header (hide default tabs)
 function Tabs.height() return 0 end
 
+-- Header bar: tabs on left, dimmed bg (#16161e)
+local old_header_redraw = Header.redraw
+Header.redraw = function(self)
+	local elements = old_header_redraw(self)
+	local bg_fill = ui.Span(string.rep(" ", self._area.w)):bg("#16161e")
+	table.insert(elements, 1, ui.Clear(self._area))
+	table.insert(elements, 2, ui.Line(bg_fill):area(self._area))
+	return elements
+end
+
 Header:children_add(function()
 	local nums = { "󰎤", "󰎧", "󰎪", "󰎭", "󰎱", "󰎳", "󰎶", "󰎹", "󰎼" }
 	local spans = {}
@@ -66,6 +76,16 @@ end, 100, Header.LEFT)
 
 -- Remove default header cwd
 Header:children_remove(1, Header.LEFT)
+
+-- Remove outer padding only (keep inner padding for dividers)
+function Tab:build()
+	self._children = {
+		Parent:new(self._chunks[1]:pad(ui.Pad.right(1)), self._tab),
+		Current:new(self._chunks[2], self._tab),
+		Preview:new(self._chunks[3]:pad(ui.Pad.left(1)), self._tab),
+		Rail:new(self._chunks, self._tab),
+	}
+end
 
 -- Status bar: file path only, right-aligned
 -- bg: #16161e (darker than main), fg: #565f89 (dimmed)
