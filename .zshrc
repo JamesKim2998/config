@@ -7,6 +7,14 @@ setopt AUTO_CD              # cd into directories by typing the path
 bindkey -v
 KEYTIMEOUT=1  # 10ms escape delay for instant mode switching
 
+# vi mode cursor: block for normal, beam for insert
+zle-keymap-select() {
+  [[ $KEYMAP == vicmd ]] && echo -ne '\e[2 q' || echo -ne '\e[6 q'
+}
+zle-line-init() { echo -ne '\e[6 q' }
+zle -N zle-keymap-select
+zle -N zle-line-init
+
 # zsh completions (rebuild cache daily)
 autoload -Uz compinit
 [[ -n ~/.zcompdump(#qN.mh+24) ]] && compinit || compinit -C
