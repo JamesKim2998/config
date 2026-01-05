@@ -20,7 +20,7 @@ packages=(
   lazygit delta git-lfs gh copilot # git tools
   lua rust go node oven-sh/bun/bun dotnet # languages & runtimes
   awscli                 # cloud & cli tools
-  just starship shellcheck mosh # shell tools
+  just starship shellcheck mosh atuin # shell tools
 )
 brew install "${packages[@]}"
 
@@ -30,9 +30,6 @@ casks=(
   font-hack-nerd-font
 )
 brew install --cask "${casks[@]}"
-
-# oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # shell
 ln -sf "$CONFIG/.zshrc" ~/.zshrc

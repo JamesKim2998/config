@@ -6,16 +6,18 @@ else
 fi
 
 
-# init zsh.
-export ZSH=~/.oh-my-zsh
-ZSH_THEME=""
-plugins=(vi-mode git zsh-autosuggestions)
-zstyle ':omz:update' mode disabled # disable auto update
-source $ZSH/oh-my-zsh.sh
+# vi mode
+bindkey -v
+
+# atuin (shell history & suggestions)
+_atuin=~/.cache/atuin.zsh
+[[ -f $_atuin && $_atuin -nt /opt/homebrew/bin/atuin ]] || atuin init zsh > $_atuin
+source $_atuin
 
  
 # brew
 export HOMEBREW_NO_UPDATE_REPORT_NEW=1
+export HOMEBREW_NO_ENV_HINTS=1
 export PATH="$HOME/.local/bin:$PATH:/opt/homebrew/bin"
 
 
@@ -58,8 +60,10 @@ esac
 # pnpm end
 
 
-# fzf
-source <(fzf --zsh)
+# fzf (cached)
+_fzf=~/.cache/fzf.zsh
+[[ -f $_fzf && $_fzf -nt /opt/homebrew/bin/fzf ]] || fzf --zsh > $_fzf
+source $_fzf
 
 # https://github.com/catppuccin/fzf/blob/main/themes/catppuccin-fzf-mocha.sh
 export FZF_DEFAULT_OPTS=" \
@@ -77,9 +81,11 @@ alias la='eza -la --group-directories-first --icons --git --header'
 alias lt='eza --tree --level 2 --icons'
 
 
-# zoxide
+# zoxide (cached)
 export _ZO_FZF_OPTS='+e --height=40% --layout=reverse --border --no-sort'
-eval "$(zoxide init zsh)"
+_zoxide=~/.cache/zoxide.zsh
+[[ -f $_zoxide && $_zoxide -nt /opt/homebrew/bin/zoxide ]] || zoxide init zsh > $_zoxide
+source $_zoxide
 
 
 # yazi
@@ -95,8 +101,10 @@ function y() {
 }
 
 
-# starship
-eval "$(starship init zsh)"
+# starship (cached)
+_starship=~/.cache/starship.zsh
+[[ -f $_starship && $_starship -nt /opt/homebrew/bin/starship ]] || starship init zsh > $_starship
+source $_starship
 
 
 # trash-cli

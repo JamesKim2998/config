@@ -7,7 +7,7 @@ macOS dotfiles and development environment configuration.
 | Directory | Purpose |
 |-----------|---------|
 | `nvim/` | Neovim IDE configuration with Lazy.nvim plugin manager |
-| `kitty/` | Kitty terminal emulator settings and Catppuccin theme |
+| `kitty/` | Kitty terminal emulator settings and Tokyo Night theme |
 | `git/` | Git configuration with delta diff viewer |
 | `yazi/` | Terminal file manager with plugins and keybindings |
 | `lazygit/` | Git TUI configuration |
@@ -23,7 +23,7 @@ macOS dotfiles and development environment configuration.
 |------|---------|
 | `.zshrc` | Shell config with PATH, aliases, and tool initialization |
 | `setup.sh` | Installation script for Homebrew, CLI tools, and symlinks |
-| `starship.toml` | Starship prompt configuration |
+| `starship.toml` | Starship prompt configuration (Tokyo Night) |
 | `.ripgreprc` | Ripgrep search settings |
 | `karabiner.json` | Keyboard remapping (Caps Lock to Escape, etc.) |
 
@@ -42,7 +42,7 @@ macOS dotfiles and development environment configuration.
 | Git tools | lazygit, delta, git-lfs, gh, copilot |
 | Languages & runtimes | lua, rust, go, node, bun, dotnet |
 | Cloud & CLI tools | gemini-cli, awscli |
-| Shell tools | just, starship, shellcheck, gnu-sed |
+| Shell tools | just, starship, shellcheck, mosh, atuin |
 | Casks | libreoffice, docker, font-hack-nerd-font |
 
 ## Cargo Packages
