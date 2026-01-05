@@ -133,6 +133,10 @@ sv() {
 
   # Restore on disconnect
   kitten @ set-colors --match "id:$KITTY_WINDOW_ID" --reset
+
+  # cd to same directory locally (query tmux session for current path)
+  local remote_dir=$(ssh -i ~/.ssh/james-macmini jameskim@192.168.219.122 "tmux display -p -t main '#{pane_current_path}'" 2>/dev/null)
+  [[ -n "$remote_dir" && -d "$remote_dir" ]] && cd "$remote_dir"
 }
 
 
