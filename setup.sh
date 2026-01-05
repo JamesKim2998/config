@@ -32,6 +32,7 @@ casks=(
 brew install --cask "${casks[@]}"
 
 # shell
+touch ~/.hushlogin
 ln -sf "$CONFIG/.zshrc" ~/.zshrc
 ln -sf "$CONFIG/starship.toml" "$XDG_CONFIG/starship.toml"
 ln -sf "$CONFIG/.ripgreprc" ~/.ripgreprc
