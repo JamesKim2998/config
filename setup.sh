@@ -10,9 +10,7 @@ command -v brew &>/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubuser
 
 brew_install() {
   local flag=$1; shift
-  local missing=()
-  for pkg; do brew list $flag "$pkg" &>/dev/null || missing+=("$pkg"); done
-  [[ ${#missing[@]} -gt 0 ]] && brew install $flag "${missing[@]}"
+  brew install $flag "$@" 2>&1 | grep -Ev "(already installed|To reinstall)"
 }
 
 brew_install "" \
