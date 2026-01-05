@@ -37,11 +37,36 @@ desc = "Restore the closed tab"
 on = "<C-y>"
 run = ["plugin system-clipboard"]
 
-# https://github.com/stelcodes/bunny.yazi
+# Quick jump shortcuts (g prefix)
 [[mgr.prepend_keymap]]
-desc = "Start bunny.yazi"
-on = ";"
-run = "plugin bunny"
+on   = [ "g", "n" ]
+run  = "cd ~/Downloads"
+desc = "Downloads"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "d" ]
+run  = "cd ~/Develop"
+desc = "Develop"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "c" ]
+run  = "cd ~/Develop/config"
+desc = "Config"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "1" ]
+run  = "cd ~/Develop/meow-tower"
+desc = "Meow Tower"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "2" ]
+run  = "cd ~/Develop/meow-toolbox"
+desc = "Meow Toolbox"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "3" ]
+run  = "cd ~/Develop/meow-assets"
+desc = "Meow Assets"
 
 # https://github.com/lpnh/fr.yazi?tab=readme-ov-file#plugin-args
 [[mgr.prepend_keymap]]

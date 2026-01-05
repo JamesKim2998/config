@@ -9,19 +9,6 @@ require("toggle-pane"):entry("min-preview")
 -- https://github.com/yazi-rs/plugins/tree/main/git.yazi
 require("git"):setup()
 
--- https://github.com/stelcodes/bunny.yazi
-require("bunny"):setup({
-	hops = {
-		{ key = "d", path = "~/Develop", desc = "Develop" },
-		{ key = "c", path = "~/Develop/config", desc = "Config" },
-		{ key = "1", path = "~/Develop/meow-tower", desc = "Meow Tower" },
-		{ key = "a", path = "~/Develop/meow-assets", desc = "Meow Assets" },
-		{ key = "t", path = "~/Develop/meow-toolbox", desc = "Meow Toolbox" },
-	},
-	desc_strategy = "path", -- If desc isn't present, use "path" or "filename", default is "path"
-	notify = false, -- Notify after hopping, default is false
-})
-
 -- https://github.com/yazi-rs/plugins/tree/main/mactag.yazi
 require("mactag"):setup({
 	-- Keys used to add or remove tags
