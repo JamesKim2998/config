@@ -1,7 +1,7 @@
 # https://starship.rs/config/
 "$schema" = 'https://starship.rs/config-schema.json'
 
-palette = "tokyonight"
+palette = "kanagawa"
 scan_timeout = 10
 command_timeout = 500
 add_newline = false
@@ -83,12 +83,12 @@ disabled = true
 [package]
 disabled = true
 
-# Tokyo Night
-[palettes.tokyonight]
-blue = "#7aa2f7"
-purple = "#bb9af7"
-red = "#f7768e"
-yellow = "#e0af68"
-green = "#9ece6a"
-cyan = "#7dcfff"
-bg_dark = "#16161e"
+# Kanagawa
+[palettes.kanagawa]
+blue = "#7e9cd8"
+purple = "#957fb8"
+red = "#c34043"
+yellow = "#c0a36e"
+green = "#76946a"
+cyan = "#6a9589"
+bg_dark = "#16161d"

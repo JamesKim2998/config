@@ -7,7 +7,7 @@ macOS dotfiles and development environment configuration.
 | Directory | Purpose |
 |-----------|---------|
 | `nvim/` | Neovim IDE configuration with Lazy.nvim plugin manager |
-| `kitty/` | Kitty terminal emulator settings and Tokyo Night theme |
+| `kitty/` | Kitty terminal emulator settings and Kanagawa theme |
 | `git/` | Git configuration with delta diff viewer |
 | `yazi/` | Terminal file manager with plugins and keybindings |
 | `lazygit/` | Git TUI configuration |

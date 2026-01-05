@@ -1,7 +1,7 @@
 require("config.lazy")
 
 -- Appearance
-vim.cmd.colorscheme("tokyonight-night")
+vim.cmd.colorscheme("kanagawa-wave")
 
 -- Indentation
 vim.o.expandtab = true -- Use spaces instead of tabs

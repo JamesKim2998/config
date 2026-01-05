@@ -62,13 +62,13 @@ _fzf=~/.cache/fzf.zsh
 [[ -f $_fzf && $_fzf -nt /opt/homebrew/bin/fzf ]] || fzf --zsh > $_fzf
 source $_fzf
 
-# https://github.com/catppuccin/fzf/blob/main/themes/catppuccin-fzf-mocha.sh
+# Kanagawa fzf colors (manually mapped from palette by Claude)
 export FZF_DEFAULT_OPTS=" \
-  --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
-  --color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
-  --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
-  --color=selected-bg:#45475A \
-  --color=border:#313244,label:#CDD6F4"
+  --color=bg+:#2d4f67,bg:#1f1f28,spinner:#c8c093,hl:#c34043 \
+  --color=fg:#dcd7ba,header:#c34043,info:#957fb8,pointer:#c8c093 \
+  --color=marker:#7e9cd8,fg+:#dcd7ba,prompt:#957fb8,hl+:#e82424 \
+  --color=selected-bg:#2d4f67 \
+  --color=border:#727169,label:#dcd7ba"
 
 
 # eza (modern ls replacement with icons and git integration)
