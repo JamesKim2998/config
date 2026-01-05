@@ -1,10 +1,5 @@
-# select terminal emulator
-if [[ -n $KITTY_WINDOW_ID ]]; then     # set by Kitty itself
-  export TERM="xterm-kitty"
-else
-  export TERM="xterm-256color"
-fi
-
+# zsh options
+setopt AUTO_CD              # cd into directories by typing the path
 
 # vi mode
 bindkey -v
@@ -18,13 +13,13 @@ source $_atuin
 # brew
 export HOMEBREW_NO_UPDATE_REPORT_NEW=1
 export HOMEBREW_NO_ENV_HINTS=1
-export PATH="$HOME/.local/bin:$PATH:/opt/homebrew/bin"
+export PATH="/opt/homebrew/bin:$HOME/.local/bin:$PATH"
 
 
 # nvim
 export EDITOR=/opt/homebrew/bin/nvim
 alias v="$EDITOR"
-alias ve="$EDITOR $HOME/.config/nvim/init.vim"
+alias ve="$EDITOR $HOME/.config/nvim/init.lua"
 
 
 # rust
@@ -45,14 +40,16 @@ export PATH="$PATH:$HOME/Library/Android/sdk/emulator:$HOME/Library/Android/sdk/
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
 
-# bun
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun" # bun completions
+# bun (cached completions)
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+_bun=~/.cache/bun.zsh
+[[ -f $_bun && $_bun -nt $BUN_INSTALL/_bun ]] || cat "$BUN_INSTALL/_bun" > $_bun 2>/dev/null
+[[ -f $_bun ]] && source $_bun
 
 
 # pnpm
-export PNPM_HOME="/Users/jameskim/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
