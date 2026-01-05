@@ -1,23 +1,31 @@
+BREW=/opt/homebrew
+
 # zsh options
 setopt AUTO_CD              # cd into directories by typing the path
 
 # vi mode
 bindkey -v
+KEYTIMEOUT=1  # 10ms escape delay for instant mode switching
 
-# atuin (shell history & suggestions)
-_atuin=~/.cache/atuin.zsh
-[[ -f $_atuin && $_atuin -nt /opt/homebrew/bin/atuin ]] || atuin init zsh > $_atuin
-source $_atuin
+# zsh completions (rebuild cache daily)
+autoload -Uz compinit
+[[ -n ~/.zcompdump(#qN.mh+24) ]] && compinit || compinit -C
+
+# zsh-autosuggestions (ghost suggestions)
+ZSH_AUTOSUGGEST_USE_ASYNC=1
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=512
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+source $BREW/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
  
 # brew
 export HOMEBREW_NO_UPDATE_REPORT_NEW=1
 export HOMEBREW_NO_ENV_HINTS=1
-export PATH="/opt/homebrew/bin:$HOME/.local/bin:$PATH"
+export PATH="$BREW/bin:$HOME/.local/bin:$PATH"
 
 
 # nvim
-export EDITOR=/opt/homebrew/bin/nvim
+export EDITOR=$BREW/bin/nvim
 alias v="$EDITOR"
 alias ve="$EDITOR $HOME/.config/nvim/init.lua"
 
@@ -32,12 +40,12 @@ export DOTNET_ROOT="$HOME/.dotnet"
 
 
 # haxe
-export HAXE_STD_PATH="/opt/homebrew/lib/haxe/std"
+export HAXE_STD_PATH="$BREW/lib/haxe/std"
 
 
 # android & java
 export PATH="$PATH:$HOME/Library/Android/sdk/emulator:$HOME/Library/Android/sdk/platform-tools"
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export PATH="$BREW/opt/openjdk/bin:$PATH"
 
 
 # bun (cached completions)
@@ -59,7 +67,7 @@ esac
 
 # fzf (cached)
 _fzf=~/.cache/fzf.zsh
-[[ -f $_fzf && $_fzf -nt /opt/homebrew/bin/fzf ]] || fzf --zsh > $_fzf
+[[ -f $_fzf && $_fzf -nt $BREW/bin/fzf ]] || fzf --zsh > $_fzf
 source $_fzf
 
 # Kanagawa fzf colors (manually mapped from palette by Claude)
@@ -81,7 +89,7 @@ alias lt='eza --tree --level 2 --icons'
 # zoxide (cached)
 export _ZO_FZF_OPTS='+e --height=40% --layout=reverse --border --no-sort'
 _zoxide=~/.cache/zoxide.zsh
-[[ -f $_zoxide && $_zoxide -nt /opt/homebrew/bin/zoxide ]] || zoxide init zsh > $_zoxide
+[[ -f $_zoxide && $_zoxide -nt $BREW/bin/zoxide ]] || zoxide init zsh > $_zoxide
 source $_zoxide
 
 
@@ -100,25 +108,25 @@ function y() {
 
 # starship (cached)
 _starship=~/.cache/starship.zsh
-[[ -f $_starship && $_starship -nt /opt/homebrew/bin/starship ]] || starship init zsh > $_starship
+[[ -f $_starship && $_starship -nt $BREW/bin/starship ]] || starship init zsh > $_starship
 source $_starship
 
 
 # trash-cli
 # https://github.com/andreafrancia/trash-cli
-export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
+export PATH="$BREW/opt/trash-cli/bin:$PATH"
 
 
 # kitty ssh (auto-reconnect in new windows/panes)
 alias ssh="kitten ssh"
 
-# server mosh (low-latency SSH)
+# server mosh (low-latency SSH with tmux for mouse scrolling)
 sv() {
   # Change window colors to Tokyo Night (keeps border unchanged)
   kitten @ set-colors --match "id:$KITTY_WINDOW_ID" ~/.config/kitty/themes/tokyonight-window.conf
 
-  # cd to same directory on server (folder structure matches local)
-  mosh --ssh="ssh -i ~/.ssh/james-macmini" jameskim@192.168.219.122 -- sh -c "cd '$PWD' 2>/dev/null; exec \"\$SHELL\" -l"
+  # cd to same directory on server, attach or create tmux session
+  mosh --ssh="ssh -i ~/.ssh/james-macmini" jameskim@192.168.219.122 -- sh -c "cd '$PWD' 2>/dev/null; tmux new -A -s main"
 
   # Restore on disconnect
   kitten @ set-colors --match "id:$KITTY_WINDOW_ID" --reset

@@ -8,32 +8,34 @@ APP_SUPPORT="$HOME/Library/Application Support"
 # brew
 command -v brew &>/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-packages=(
-  nvim                   # editor
-  fzf rg fd              # search & find
-  bat jq yq sd glow miller # file viewing & data processing
-  eza zoxide yazi        # file navigation & listing
-  mediainfo            # yazi previews
-  clipboard procs httpie wget # system utilities
-  7-zip ouch             # compression & archives
-  imagemagick ffmpeg     # media processing
-  lazygit delta git-lfs gh copilot # git tools
-  lua rust go node oven-sh/bun/bun dotnet # languages & runtimes
-  awscli                 # cloud & cli tools
-  just starship shellcheck mosh atuin # shell tools
-)
-brew install "${packages[@]}"
+brew_install() {
+  local flag=$1; shift
+  local missing=()
+  for pkg; do brew list $flag "$pkg" &>/dev/null || missing+=("$pkg"); done
+  [[ ${#missing[@]} -gt 0 ]] && brew install $flag "${missing[@]}"
+}
 
-casks=(
-  libreoffice
-  docker
-  font-hack-nerd-font
-)
-brew install --cask "${casks[@]}"
+brew_install "" \
+  nvim `# editor` \
+  fzf rg fd `# search & find` \
+  bat jq yq sd glow miller `# file viewing & data processing` \
+  eza zoxide yazi `# file navigation & listing` \
+  mediainfo `# yazi previews` \
+  clipboard procs httpie wget `# system utilities` \
+  7-zip ouch `# compression & archives` \
+  imagemagick ffmpeg `# media processing` \
+  lazygit delta git-lfs gh copilot `# git tools` \
+  lua rust go node oven-sh/bun/bun dotnet `# languages & runtimes` \
+  awscli `# cloud & cli tools` \
+  just starship shellcheck mosh tmux zsh-autosuggestions `# shell tools`
+
+brew_install --cask \
+  libreoffice docker font-hack-nerd-font
 
 # shell
 touch ~/.hushlogin
 ln -sf "$CONFIG/.zshrc" ~/.zshrc
+ln -sf "$CONFIG/.tmux.conf" ~/.tmux.conf
 ln -sf "$CONFIG/starship.toml" "$XDG_CONFIG/starship.toml"
 ln -sf "$CONFIG/.ripgreprc" ~/.ripgreprc
 

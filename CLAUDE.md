@@ -43,7 +43,7 @@ macOS dotfiles and development environment configuration.
 | Git tools | lazygit, delta, git-lfs, gh, copilot |
 | Languages & runtimes | lua, rust, go, node, bun, dotnet |
 | Cloud & CLI tools | gemini-cli, awscli |
-| Shell tools | just, starship, shellcheck, mosh, atuin |
+| Shell tools | just, starship, shellcheck, mosh, tmux, zsh-autosuggestions |
 | Casks | libreoffice, docker, font-hack-nerd-font |
 
 ## Cargo Packages
