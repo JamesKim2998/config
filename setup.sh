@@ -10,7 +10,7 @@ command -v brew &>/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubuser
 
 brew_install() {
   local flag=$1; shift
-  brew install $flag "$@" 2>&1 | grep -Ev "(already installed|To reinstall)"
+  brew install $flag "$@" 2>&1 | grep -Ev "(already installed|To reinstall)" || true
 }
 
 brew_install "" \
