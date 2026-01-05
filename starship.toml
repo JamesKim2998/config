@@ -67,6 +67,14 @@ format = "[$symbol]($style)"
 [rust]
 format = "[$symbol]($style)"
 
+[hostname]
+ssh_only = true
+format = "[🌐 ]($style)"
+style = "bg:bg_dark"
+
+[username]
+disabled = true
+
 # Disabled: cloud CLIs clutter prompt, package version redundant with lang icons
 [gcloud]
 disabled = true
