@@ -117,7 +117,8 @@ sv() {
   # Change window colors to Tokyo Night (keeps border unchanged)
   kitten @ set-colors --match "id:$KITTY_WINDOW_ID" ~/.config/kitty/themes/tokyonight-window.conf
 
-  mosh --ssh="ssh -i ~/.ssh/james-macmini" jameskim@192.168.219.122 "$@"
+  # cd to same directory on server (folder structure matches local)
+  mosh --ssh="ssh -i ~/.ssh/james-macmini" jameskim@192.168.219.122 -- sh -c "cd '$PWD' 2>/dev/null; exec \"\$SHELL\" -l"
 
   # Restore on disconnect
   kitten @ set-colors --match "id:$KITTY_WINDOW_ID" --reset
