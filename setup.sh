@@ -20,7 +20,7 @@ packages=(
   lazygit delta git-lfs gh copilot # git tools
   lua rust go node oven-sh/bun/bun dotnet # languages & runtimes
   awscli                 # cloud & cli tools
-  just starship shellcheck # shell tools
+  just starship shellcheck mosh # shell tools
 )
 brew install "${packages[@]}"
 

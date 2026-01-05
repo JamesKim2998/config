@@ -104,8 +104,11 @@ eval "$(starship init zsh)"
 export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
 
 
-# server ssh
-sv() { ssh -i ~/.ssh/james-macmini jameskim@192.168.219.122 "$@" }
+# kitty ssh (auto-reconnect in new windows/panes)
+alias ssh="kitten ssh"
+
+# server mosh (low-latency SSH)
+sv() { mosh --ssh="ssh -i ~/.ssh/james-macmini" jameskim@192.168.219.122 "$@" }
 
 
 # auto ls
