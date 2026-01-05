@@ -8,44 +8,28 @@ APP_SUPPORT="$HOME/Library/Application Support"
 # brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# editor
-brew install nvim
+packages=(
+  nvim                   # editor
+  fzf rg fd              # search & find
+  bat jq yq sd glow miller # file viewing & data processing
+  eza zoxide yazi        # file navigation & listing
+  mediainfo            # yazi previews
+  clipboard procs httpie wget # system utilities
+  7-zip ouch             # compression & archives
+  imagemagick ffmpeg     # media processing
+  lazygit delta git-lfs gh copilot # git tools
+  lua rust go node oven-sh/bun/bun dotnet # languages & runtimes
+  awscli                 # cloud & cli tools
+  just starship shellcheck # shell tools
+)
+brew install "${packages[@]}"
 
-# search & find
-brew install fzf rg fd
-
-# file viewing & data processing
-brew install bat jq yq sd glow miller
-
-# file navigation & listing
-brew install eza zoxide yazi tree
-
-# yazi previews (pandoc for docx/odt/epub)
-brew install ffmpegthumbnailer poppler exiftool mediainfo pandoc
-
-# system utilities
-brew install clipboard procs httpie wget
-
-# compression & archives
-brew install 7-zip ouch
-
-# media processing
-brew install imagemagick ffmpeg
-
-# git tools
-brew install lazygit delta git-lfs gh copilot
-
-# languages & runtimes
-brew install lua rust go node oven-sh/bun/bun dotnet
-
-# cloud & cli tools
-brew install gemini-cli awscli
-
-# shell tools
-brew install just starship shellcheck gnu-sed
-
-# casks
-brew install --cask libreoffice docker font-hack-nerd-font
+casks=(
+  libreoffice
+  docker
+  font-hack-nerd-font
+)
+brew install --cask "${casks[@]}"
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -86,10 +70,6 @@ ln -sf "$CONFIG/karabiner.json" "$XDG_CONFIG/karabiner/karabiner.json"
 # hammerspoon
 rm -rf ~/.hammerspoon
 ln -s "$CONFIG/.hammerspoon" ~/.hammerspoon
-
-# gemini
-rm -rf ~/.gemini
-ln -s "$CONFIG/gemini" ~/.gemini
 
 # vscode
 mkdir -p "$APP_SUPPORT/Code/User"
