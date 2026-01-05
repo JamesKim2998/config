@@ -55,10 +55,12 @@ ln -s "$CONFIG/kitty" "$XDG_CONFIG/kitty"
 # yazi
 rm -rf "$XDG_CONFIG/yazi"
 ln -s "$CONFIG/yazi" "$XDG_CONFIG/yazi"
+ln -sf theme-kanagawa.toml "$CONFIG/yazi/theme.toml"
 
 # bat
 rm -rf "$XDG_CONFIG/bat"
 ln -s "$CONFIG/bat" "$XDG_CONFIG/bat"
+bat cache --build
 
 # lazygit
 rm -rf "$APP_SUPPORT/lazygit"

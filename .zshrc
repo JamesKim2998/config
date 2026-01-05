@@ -113,7 +113,15 @@ export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
 alias ssh="kitten ssh"
 
 # server mosh (low-latency SSH)
-sv() { mosh --ssh="ssh -i ~/.ssh/james-macmini" jameskim@192.168.219.122 "$@" }
+sv() {
+  # Change window colors to Tokyo Night (keeps border unchanged)
+  kitten @ set-colors --match "id:$KITTY_WINDOW_ID" ~/.config/kitty/themes/tokyonight-window.conf
+
+  mosh --ssh="ssh -i ~/.ssh/james-macmini" jameskim@192.168.219.122 "$@"
+
+  # Restore on disconnect
+  kitten @ set-colors --match "id:$KITTY_WINDOW_ID" --reset
+}
 
 
 # auto ls
@@ -121,5 +129,5 @@ autoload -U add-zsh-hook
 _ls() { ls }
 _ls_once() { ls; add-zsh-hook -d precmd _ls_once }
 add-zsh-hook chpwd _ls      # on cd
-add-zsh-hook precmd _ls_once # on new shell (once)
+add-zsh-hook precmd _ls_once                             # on new shell (once)
 

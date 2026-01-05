@@ -23,7 +23,8 @@ macOS dotfiles and development environment configuration.
 |------|---------|
 | `.zshrc` | Shell config with PATH, aliases, and tool initialization |
 | `setup.sh` | Installation script for Homebrew, CLI tools, and symlinks |
-| `starship.toml` | Starship prompt configuration (Tokyo Night) |
+| `setup-server.sh` | Server-specific setup (Tokyo Night theme) |
+| `starship.toml` | Starship prompt configuration |
 | `.ripgreprc` | Ripgrep search settings |
 | `karabiner.json` | Keyboard remapping (Caps Lock to Escape, etc.) |
 
@@ -73,7 +74,21 @@ macOS dotfiles and development environment configuration.
 
 ## Theme
 
-Catppuccin Mocha is used consistently across nvim, kitty, bat, and fzf.
+| Environment | Theme | Control |
+|-------------|-------|---------|
+| Local | Kanagawa | Default |
+| Server | Tokyo Night | `setup-server.sh` |
+| SSH window | Tokyo Night | `sv` function in `.zshrc` |
+
+### Server Setup
+
+Run after `setup.sh`:
+
+```sh
+./setup-server.sh
+```
+
+This converts yazi symlink to real directory, applies Tokyo Night theme, and sets env vars (`THEME_NVIM`, `STARSHIP_CONFIG`, `BAT_THEME`).
 
 ## Setup
 

@@ -1,7 +1,7 @@
 require("config.lazy")
 
--- Appearance
-vim.cmd.colorscheme("kanagawa-wave")
+-- Appearance: use THEME_NVIM env var, fallback to kanagawa
+vim.cmd.colorscheme(vim.env.THEME_NVIM or "kanagawa-wave")
 
 -- Indentation
 vim.o.expandtab = true -- Use spaces instead of tabs

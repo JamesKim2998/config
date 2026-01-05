@@ -1,6 +1,7 @@
 return {
 	-- appearance
 	{ "rebelot/kanagawa.nvim", priority = 1000 },
+	{ "folke/tokyonight.nvim", priority = 1000 },
 
 	-- git
 	{ "lewis6991/gitsigns.nvim", opts = {} },

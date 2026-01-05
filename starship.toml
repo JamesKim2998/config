@@ -92,3 +92,13 @@ yellow = "#c0a36e"
 green = "#76946a"
 cyan = "#6a9589"
 bg_dark = "#16161d"
+
+# Tokyo Night (for server)
+[palettes.tokyonight]
+blue = "#7aa2f7"
+purple = "#bb9af7"
+red = "#f7768e"
+yellow = "#e0af68"
+green = "#9ece6a"
+cyan = "#7dcfff"
+bg_dark = "#16161e"
