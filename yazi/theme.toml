@@ -22,6 +22,10 @@ count_selected = { fg = "#16161e", bg = "#7aa2f7" }
 border_symbol = "│"
 border_style  = { fg = "#27a1b9" }
 
+# Filled rectangle hover (use "█" for filled, " " for none)
+[indicator]
+padding = { open = "█", close = "█" }
+
 [tabs]
 active   = { fg = "#15161e", bg = "#7aa2f7" }
 inactive = { fg = "#7aa2f7", bg = "#3b4261" }

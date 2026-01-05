@@ -67,10 +67,15 @@ end, 100, Header.LEFT)
 -- Remove default header cwd
 Header:children_remove(1, Header.LEFT)
 
--- Status bar: file path only (right-aligned, dimmed)
+-- Status bar: file path only, right-aligned
+-- bg: #16161e (darker than main), fg: #565f89 (dimmed)
 function Status:redraw()
 	local path = cx.active.current.hovered and tostring(cx.active.current.hovered.url) or ""
+	local bg_fill = ui.Span(string.rep(" ", self._area.w)):bg("#16161e")
+	local path_span = ui.Span(" " .. path .. " "):fg("#565f89")
 	return {
-		ui.Line(ui.Span(" " .. path .. " "):fg("#565f89")):area(self._area):align(ui.Align.RIGHT),
+		ui.Clear(self._area),
+		ui.Line(bg_fill):area(self._area),
+		ui.Line(path_span):area(self._area):align(ui.Align.RIGHT),
 	}
 end
