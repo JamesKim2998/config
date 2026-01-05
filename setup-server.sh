@@ -16,7 +16,7 @@ append_if_missing 'STARSHIP_CONFIG' "export STARSHIP_CONFIG=$CONFIG_DIR/starship
 append_if_missing 'BAT_THEME' 'export BAT_THEME="tokyonight"'
 
 # Generate Tokyo Night starship config
-sd 'palette = "kanagawa"' 'palette = "tokyonight"' "$CONFIG_DIR/starship.toml" > "$CONFIG_DIR/starship-server.toml"
+sd 'palette = "kanagawa"' 'palette = "tokyonight"' < "$CONFIG_DIR/starship.toml" > "$CONFIG_DIR/starship-server.toml"
 echo "Created starship-server.toml"
 
 # Switch yazi theme to Tokyo Night
