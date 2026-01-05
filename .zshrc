@@ -140,3 +140,7 @@ _ls_once() { ls; add-zsh-hook -d precmd _ls_once }
 add-zsh-hook chpwd _ls      # on cd
 add-zsh-hook precmd _ls_once                             # on new shell (once)
 
+
+# aliases
+alias g="lazygit"
+

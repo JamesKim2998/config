@@ -40,6 +40,7 @@ ln -sf "$CONFIG/.ripgreprc" ~/.ripgreprc
 # git
 ln -sf "$CONFIG/git/.gitconfig" ~/.gitconfig
 ln -sf "$CONFIG/git/.gitignore_global" ~/.gitignore_global
+git config --file ~/.gitconfig.local delta.syntax-theme kanagawa
 
 # ssh
 ln -sf "$CONFIG/.ssh/config" ~/.ssh/config
