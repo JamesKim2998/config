@@ -7,7 +7,13 @@ return {
 	{ "lewis6991/gitsigns.nvim", opts = {} },
 
 	-- autocomplete
-	{ "github/copilot.vim", lazy = false },
+	{
+		"github/copilot.vim",
+		lazy = false,
+		init = function()
+			vim.g.copilot_node_command = "/opt/homebrew/bin/node"
+		end,
+	},
 
 	-- bullet lists
 	{ "bullets-vim/bullets.vim" },
