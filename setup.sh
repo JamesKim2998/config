@@ -6,7 +6,7 @@ XDG_CONFIG=$HOME/.config
 APP_SUPPORT="$HOME/Library/Application Support"
 
 # brew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+command -v brew &>/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 packages=(
   nvim                   # editor
