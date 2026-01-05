@@ -44,6 +44,7 @@ Header.redraw = function(self)
 	return elements
 end
 
+-- Custom tabs using theme colors (th.tabs.active / th.tabs.inactive)
 Header:children_add(function()
 	local nums = { "󰎤", "󰎧", "󰎪", "󰎭", "󰎱", "󰎳", "󰎶", "󰎹", "󰎼" }
 	local spans = {}
@@ -52,7 +53,9 @@ Header:children_add(function()
 		local name = tostring(cx.tabs[i].current.cwd):match("([^/]+)/?$") or ""
 		local span = ui.Span(" " .. n .. " " .. name .. " ")
 		if i == cx.tabs.idx then
-			span = span:reverse()
+			span = span:style(th.tabs.active)
+		else
+			span = span:style(th.tabs.inactive)
 		end
 		spans[#spans + 1] = span
 	end
