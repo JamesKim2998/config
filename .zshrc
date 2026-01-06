@@ -33,7 +33,15 @@ export PATH="$BREW/bin:$HOME/.local/bin:$PATH"
 
 # claude code
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
-alias cc='claude --model opus --dangerously-skip-permissions'
+# run from nearest parent with CLAUDE.md
+cc() {
+  local dir="$PWD"
+  while [[ "$dir" != "/" ]]; do
+    [[ -f "$dir/CLAUDE.md" ]] && { (cd "$dir" && claude --model opus --dangerously-skip-permissions "$@"); return; }
+    dir="$(dirname "$dir")"
+  done
+  claude --model opus --dangerously-skip-permissions "$@"
+}
 
 
 # nvim
@@ -134,17 +142,19 @@ alias ssh="kitten ssh"
 
 # server mosh (low-latency SSH with tmux for mouse scrolling)
 sv() {
+  [[ -z "$MACMINI_SSH_KEY" ]] && { echo "MACMINI_SSH_KEY not defined" >&2; return 1; }
+
   # Change window colors to Tokyo Night (keeps border unchanged)
   kitten @ set-colors --match "id:$KITTY_WINDOW_ID" ~/.config/kitty/themes/tokyonight-window.conf
 
   # cd to same directory on server, attach or create tmux session
-  mosh --ssh="ssh -i ~/.ssh/james-macmini" jameskim@192.168.219.122 -- sh -c "cd '$PWD' 2>/dev/null; tmux new -A -s main"
+  mosh --ssh="ssh -i $MACMINI_SSH_KEY" $MACMINI_DEST -- sh -c "cd '$PWD' 2>/dev/null; tmux new -A -s main"
 
   # Restore on disconnect
   kitten @ set-colors --match "id:$KITTY_WINDOW_ID" --reset
 
   # cd to same directory locally (read saved path from server)
-  local remote_dir=$(ssh -i ~/.ssh/james-macmini jameskim@192.168.219.122 "cat ~/.sv_last_dir 2>/dev/null")
+  local remote_dir=$(ssh -i $MACMINI_SSH_KEY $MACMINI_DEST "cat ~/.sv_last_dir 2>/dev/null")
   [[ -n "$remote_dir" && -d "$remote_dir" ]] && cd "$remote_dir"
 }
 

@@ -5,26 +5,7 @@ Chain: Kitty (local) → mosh → tmux → zsh (server)
 Each layer can block cursor escape sequences.
 """
 
-import subprocess
-import os
-import sys
-
-HOST = os.environ.get("SSH_HOST", "jameskim@192.168.219.122")
-KEY = os.path.expanduser(os.environ.get("SSH_KEY", "~/.ssh/james-macmini"))
-
-def ssh(cmd, timeout=10):
-    try:
-        r = subprocess.run(["/usr/bin/ssh", "-i", KEY, HOST, cmd],
-                          capture_output=True, timeout=timeout, text=True)
-        return r.stdout + r.stderr
-    except Exception as e:
-        return str(e)
-
-def check(name, ok, note=""):
-    status = "✓" if ok else "✗"
-    suffix = f" — {note}" if note else ""
-    print(f"  {status} {name}{suffix}")
-    return ok
+from config import ssh, ssh_grep, check, MACMINI_DEST, MACMINI_SSH_KEY
 
 print("=" * 60)
 print("Cursor Shape Diagnostic")
@@ -34,18 +15,17 @@ print("=" * 60)
 # --- Config checks ---
 print("\n[1] Config Files\n")
 
-out1 = ssh("grep -q 'zle-keymap-select' ~/.zshrc && echo OK")
-check("zle-keymap-select in .zshrc", "OK" in out1)
+_, ok = ssh_grep("zle-keymap-select", "~/.zshrc", quiet=True)
+check("zle-keymap-select in .zshrc", ok)
 
-out2 = ssh("grep -q 'zle-line-init' ~/.zshrc && echo OK")
-check("zle-line-init in .zshrc", "OK" in out2)
+_, ok = ssh_grep("zle-line-init", "~/.zshrc", quiet=True)
+check("zle-line-init in .zshrc", ok)
 
-out3 = ssh("grep 'allow-passthrough' ~/.tmux.conf 2>/dev/null")
-check("tmux allow-passthrough on", "allow-passthrough on" in out3)
+out, ok = ssh_grep("allow-passthrough", "~/.tmux.conf")
+check("tmux allow-passthrough on", "allow-passthrough on" in out)
 
-# Check cursor escape format in zshrc
-out4 = ssh(r"grep -o '\\\\e\[.*q' ~/.zshrc | head -1")
-check("zsh cursor escape format", r"\e[" in out4, out4.strip() or "not found")
+out, _ = ssh(r"grep -o '\\e\[.*q' ~/.zshrc | head -1")
+check("zsh cursor escape format", r"\e[" in out, out.strip() or "not found")
 
 # --- Escape sequence tests ---
 print("\n[2] Escape Sequence Output (run FROM SERVER, view in Kitty)\n")
@@ -63,13 +43,11 @@ print("  printf '\\ePtmux;\\e\\e[6 q\\e\\\\' && echo ' ← should be BEAM'")
 # --- Known issues ---
 print("\n[3] Known Issues\n")
 
-# Check mosh version (older versions have issues)
-mosh_ver = ssh("mosh-server --version 2>&1 | head -1")
-check("mosh-server version", "mosh" in mosh_ver.lower(), mosh_ver.strip())
+out, _ = ssh("mosh-server --version 2>&1 | head -1")
+check("mosh-server version", "mosh" in out.lower(), out.strip())
 
-# Check tmux version
-tmux_ver = ssh("tmux -V")
-check("tmux version", "tmux" in tmux_ver.lower(), tmux_ver.strip())
+out, _ = ssh("tmux -V")
+check("tmux version", "tmux" in out.lower(), out.strip())
 
 print("\n[4] Diagnosis\n")
 
@@ -87,9 +65,9 @@ print("""  KNOWN LIMITATION: Mosh 1.4.0 does NOT support cursor shape (DECSCUSR)
 
 print("[5] Quick Test Commands\n")
 print("  # Test via direct SSH (bypassing mosh):")
-print(f"  ssh -i {KEY} {HOST}")
+print(f"  ssh -i {MACMINI_SSH_KEY} {MACMINI_DEST}")
 print("  printf '\\e[2 q'  # Should change to block")
 print("")
 print("  # Test via SSH + tmux (bypassing mosh):")
-print(f"  ssh -i {KEY} {HOST} -t 'tmux new -A -s test'")
+print(f"  ssh -i {MACMINI_SSH_KEY} {MACMINI_DEST} -t 'tmux new -A -s test'")
 print("  printf '\\e[2 q'  # Should change to block")
