@@ -113,3 +113,21 @@ Tailscale domains:
 |--------|-------|
 | `macmini.studioboxcat.com` | SSH via `sv` function |
 | `lfs.studioboxcat.com` | Git LFS server |
+
+### GitHub Mirror
+
+Local mirror on Mac Mini for fast git fetch (~60ms vs ~900ms from GitHub).
+Works as transparent proxy - repos use mirror as `origin`.
+
+| Component | Location |
+|-----------|----------|
+| Mirror repos | `macmini:~/Develop/github-mirror/*.git` |
+| Config files | `config/github-mirror/` |
+| LaunchAgent | `~/Library/LaunchAgents/com.boxcat.github-mirror.plist` |
+| Sync interval | 30 seconds (GitHub → Mirror) |
+
+Remotes:
+- `origin`: Mac Mini mirror (fast fetch/push)
+- `github`: Direct GitHub (fallback)
+
+Post-receive hook auto-pushes to GitHub when you push to mirror.
