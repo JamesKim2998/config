@@ -35,9 +35,14 @@ export PATH="$BREW/bin:$HOME/.local/bin:$PATH"
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 # run from nearest parent with CLAUDE.md
 cc() {
-  local dir="$PWD"
+  local orig="$PWD" dir="$PWD"
   while [[ "$dir" != "/" ]]; do
-    [[ -f "$dir/CLAUDE.md" ]] && { (cd "$dir" && claude --model opus --dangerously-skip-permissions "$@"); return; }
+    if [[ -f "$dir/CLAUDE.md" ]]; then
+      [[ "$dir" != "$orig" ]] && builtin cd "$dir"
+      claude --model opus --dangerously-skip-permissions "$@"
+      [[ "$dir" != "$orig" ]] && builtin cd "$orig" >/dev/null
+      return
+    fi
     dir="$(dirname "$dir")"
   done
   claude --model opus --dangerously-skip-permissions "$@"
