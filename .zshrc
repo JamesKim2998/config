@@ -145,6 +145,12 @@ export PATH="$BREW/opt/trash-cli/bin:$PATH"
 # kitty ssh (auto-reconnect in new windows/panes)
 alias ssh="kitten ssh"
 
+# macmini
+MACMINI_HOST=macmini.studioboxcat.com
+MACMINI_USER=jameskim
+MACMINI_SSH_KEY=~/.ssh/james-macmini
+MACMINI_DEST=$MACMINI_USER@$MACMINI_HOST
+
 # server mosh (low-latency SSH with tmux for mouse scrolling)
 sv() {
   [[ -z "$MACMINI_SSH_KEY" ]] && { echo "MACMINI_SSH_KEY not defined" >&2; return 1; }
