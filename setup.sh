@@ -28,7 +28,8 @@ brew_install "" \
   just starship shellcheck mosh tmux zsh-autosuggestions `# shell tools`
 
 brew_install --cask \
-  libreoffice docker font-hack-nerd-font
+  libreoffice docker font-hack-nerd-font \
+  tailscale `# mesh VPN for stable Mac Mini access`
 
 # shell
 touch ~/.hushlogin
