@@ -1,3 +1,6 @@
+-- Disable node provider (using Bun's wrapper, Copilot has its own node path)
+vim.g.loaded_node_provider = 0
+
 require("config.lazy")
 
 -- Appearance: use THEME_NVIM env var, fallback to kanagawa
