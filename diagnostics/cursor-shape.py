@@ -1,50 +1,95 @@
 #!/usr/bin/env python3
-"""Cursor shape escape sequence diagnostic for SSH/mosh + tmux setups."""
+"""Cursor shape escape sequence diagnostic for SSH/mosh + tmux setups.
+
+Chain: Kitty (local) → mosh → tmux → zsh (server)
+Each layer can block cursor escape sequences.
+"""
 
 import subprocess
 import os
+import sys
 
 HOST = os.environ.get("SSH_HOST", "jameskim@192.168.219.122")
 KEY = os.path.expanduser(os.environ.get("SSH_KEY", "~/.ssh/james-macmini"))
 
 def ssh(cmd, timeout=10):
     try:
-        r = subprocess.run(["/usr/bin/ssh", "-i", KEY, HOST, cmd], capture_output=True, timeout=timeout)
-        return (r.stdout + r.stderr).decode()
-    except:
-        return ""
+        r = subprocess.run(["/usr/bin/ssh", "-i", KEY, HOST, cmd],
+                          capture_output=True, timeout=timeout, text=True)
+        return r.stdout + r.stderr
+    except Exception as e:
+        return str(e)
 
 def check(name, ok, note=""):
-    status = "OK" if ok else "FAIL"
-    suffix = f" ({note})" if note else ""
-    print(f"{name}: {status}{suffix}")
+    status = "✓" if ok else "✗"
+    suffix = f" — {note}" if note else ""
+    print(f"  {status} {name}{suffix}")
     return ok
 
-print("Cursor Shape Diagnostic (SSH + tmux)\n")
+print("=" * 60)
+print("Cursor Shape Diagnostic")
+print("Chain: Kitty → mosh → tmux → zsh")
+print("=" * 60)
 
-# Test 1: zle cursor functions exist
+# --- Config checks ---
+print("\n[1] Config Files\n")
+
 out1 = ssh("grep -q 'zle-keymap-select' ~/.zshrc && echo OK")
 check("zle-keymap-select in .zshrc", "OK" in out1)
 
-# Test 2: zle-line-init exists
 out2 = ssh("grep -q 'zle-line-init' ~/.zshrc && echo OK")
 check("zle-line-init in .zshrc", "OK" in out2)
 
-# Test 3: tmux allow-passthrough (required for cursor escapes through tmux)
 out3 = ssh("grep 'allow-passthrough' ~/.tmux.conf 2>/dev/null")
-check("tmux allow-passthrough", "allow-passthrough on" in out3,
-      "REQUIRED for cursor escapes through tmux")
+check("tmux allow-passthrough on", "allow-passthrough on" in out3)
 
-# Test 4: TERM set correctly
-out4 = ssh("tmux show -gv default-terminal 2>/dev/null || echo not-set")
-check("tmux default-terminal", "256color" in out4, out4.strip())
+# Check cursor escape format in zshrc
+out4 = ssh(r"grep -o '\\\\e\[.*q' ~/.zshrc | head -1")
+check("zsh cursor escape format", r"\e[" in out4, out4.strip() or "not found")
 
-# Test 5: escape-time is 0 (for responsive mode switching)
-out5 = ssh("grep 'escape-time 0' ~/.tmux.conf 2>/dev/null")
-check("tmux escape-time 0", "escape-time 0" in out5)
+# --- Escape sequence tests ---
+print("\n[2] Escape Sequence Output (run FROM SERVER, view in Kitty)\n")
 
-print("\n--- Escape sequence test ---")
-print("Run these inside tmux on the server:")
-print("  Block:  printf '\\e[2 q'")
-print("  Beam:   printf '\\e[6 q'")
-print("If cursor doesn't change, allow-passthrough is the issue.")
+print("  Test these commands inside your sv() session:\n")
+
+print("  # Direct (no wrapping):")
+print("  printf '\\e[2 q' && echo ' ← should be BLOCK'")
+print("  printf '\\e[6 q' && echo ' ← should be BEAM'")
+
+print("\n  # With tmux passthrough wrapper:")
+print("  printf '\\ePtmux;\\e\\e[2 q\\e\\\\' && echo ' ← should be BLOCK'")
+print("  printf '\\ePtmux;\\e\\e[6 q\\e\\\\' && echo ' ← should be BEAM'")
+
+# --- Known issues ---
+print("\n[3] Known Issues\n")
+
+# Check mosh version (older versions have issues)
+mosh_ver = ssh("mosh-server --version 2>&1 | head -1")
+check("mosh-server version", "mosh" in mosh_ver.lower(), mosh_ver.strip())
+
+# Check tmux version
+tmux_ver = ssh("tmux -V")
+check("tmux version", "tmux" in tmux_ver.lower(), tmux_ver.strip())
+
+print("\n[4] Diagnosis\n")
+
+print("""  KNOWN LIMITATION: Mosh 1.4.0 does NOT support cursor shape (DECSCUSR).
+  See: https://github.com/mobile-shell/mosh/pull/1355
+
+  Workarounds:
+    1. Use SSH instead of mosh (cursor works, but no roaming)
+    2. Build mosh from PR #1355 (adds cursor support)
+    3. Live without cursor switching through mosh
+
+  To verify mosh is the blocker:
+    → Test via SSH (bypassing mosh) - if cursor works, mosh is the issue
+""")
+
+print("[5] Quick Test Commands\n")
+print("  # Test via direct SSH (bypassing mosh):")
+print(f"  ssh -i {KEY} {HOST}")
+print("  printf '\\e[2 q'  # Should change to block")
+print("")
+print("  # Test via SSH + tmux (bypassing mosh):")
+print(f"  ssh -i {KEY} {HOST} -t 'tmux new -A -s test'")
+print("  printf '\\e[2 q'  # Should change to block")
