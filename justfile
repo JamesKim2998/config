@@ -1,7 +1,3 @@
-# Launch Claude Code
-cc:
-    claude --model opus --dangerously-skip-permissions
-
 # Deploy: push and pull on server
 deploy:
     git push

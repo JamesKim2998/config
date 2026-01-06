@@ -33,6 +33,7 @@ export PATH="$BREW/bin:$HOME/.local/bin:$PATH"
 
 # claude code
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
+alias cc='claude --model opus --dangerously-skip-permissions'
 
 
 # nvim
