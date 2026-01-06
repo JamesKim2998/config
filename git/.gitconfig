@@ -13,6 +13,7 @@
     diffFilter = delta --color-only # https://github.com/dandavison/delta
 [pull]
 	rebase = false
+	ff = true
 [merge]
     conflictstyle = zdiff3 # https://github.com/dandavison/delta
 [rebase]
