@@ -7,6 +7,7 @@ APP_SUPPORT="$HOME/Library/Application Support"
 
 # brew
 command -v brew &>/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+export HOMEBREW_NO_AUTO_UPDATE=1
 
 brew_install() {
   local flag=$1; shift
@@ -28,6 +29,8 @@ brew_install "" \
   just starship shellcheck mosh tmux zsh-autosuggestions `# shell tools`
 
 brew_install --cask \
+  kitty `# terminal emulator` \
+  hammerspoon `# macOS automation` \
   libreoffice docker font-hack-nerd-font \
   tailscale `# mesh VPN for stable Mac Mini access`
 

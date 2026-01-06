@@ -44,7 +44,7 @@ macOS dotfiles and development environment configuration.
 | Languages & runtimes | lua, rust, go, node, bun, dotnet |
 | Cloud & CLI tools | gemini-cli, awscli |
 | Shell tools | just, starship, shellcheck, mosh, tmux, zsh-autosuggestions |
-| Casks | libreoffice, docker, font-hack-nerd-font, tailscale |
+| Casks | kitty, hammerspoon, libreoffice, docker, font-hack-nerd-font, tailscale |
 
 ## Cargo Packages
 
@@ -96,15 +96,20 @@ Run after `setup.sh`. Applies Tokyo Night theme and sets env vars.
 ./setup-server.sh
 ```
 
-### Tailscale
+### Mac Mini
 
-Mesh VPN for stable Mac Mini access. Install on both machines and log in with same account.
+Env vars defined in `.zshrc`:
 
-```sh
-brew install --cask tailscale
-```
+| Variable | Value |
+|----------|-------|
+| `MACMINI_HOST` | `macmini.studioboxcat.com` |
+| `MACMINI_USER` | `jameskim` |
+| `MACMINI_SSH_KEY` | `~/.ssh/james-macmini` |
+| `MACMINI_DEST` | `$MACMINI_USER@$MACMINI_HOST` |
+
+Tailscale domains:
 
 | Domain | Usage |
 |--------|-------|
-| `macmini.studioboxcat.com` | SSH, MACMINI_HOST env var |
-| `lfs.studioboxcat.com` | Git LFS |
+| `macmini.studioboxcat.com` | SSH via `sv` function |
+| `lfs.studioboxcat.com` | Git LFS server |
