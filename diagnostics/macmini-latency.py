@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""WiFi latency diagnostic for Mac Mini server.
+"""Mac Mini network latency diagnostic.
 
 Checks power management settings and network latency that affect SSH performance.
 """
@@ -9,7 +9,7 @@ import statistics
 from config import ssh, check, MACMINI_DEST
 
 print("=" * 60)
-print("WiFi Latency Diagnostic")
+print("Mac Mini Latency Diagnostic")
 print(f"Target: {MACMINI_DEST}")
 print("=" * 60)
 
@@ -73,12 +73,10 @@ for line in out.splitlines():
 sleep_val = settings.get("sleep", "?")
 womp_val = settings.get("womp", "?")
 tty_val = settings.get("ttyskeepawake", "?")
-powernap_val = settings.get("powernap", "?")
 
 check("sleep = 0 (disabled)", sleep_val == "0", f"sleep = {sleep_val}")
 check("womp = 1 (Wake on LAN)", womp_val == "1", f"womp = {womp_val}")
 check("ttyskeepawake = 1", tty_val == "1", f"ttyskeepawake = {tty_val}")
-check("powernap = 0 (disabled)", powernap_val == "0", f"powernap = {powernap_val}")
 
 # --- SSH config check ---
 print("\n[4] SSH ControlMaster (local)\n")
@@ -106,10 +104,8 @@ if womp_val != "1":
     recommendations.append("sudo pmset -a womp 1   # Enable Wake on LAN")
 if tty_val != "1":
     recommendations.append("sudo pmset -a ttyskeepawake 1")
-if powernap_val == "1":
-    recommendations.append("sudo pmset -a powernap 0  # Disable Power Nap")
 
-if "Ethernet" not in out:
+if "Ethernet" not in iface_type:
     recommendations.append("# Consider using Ethernet instead of WiFi")
 
 if recommendations:
