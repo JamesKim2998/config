@@ -1,30 +1,32 @@
 #!/usr/bin/env python3
-"""Diagnostic for sv() cd-on-exit functionality."""
+"""sv() cd-on-exit diagnostic for SSH setups."""
 
 import os
-from config import ssh, ssh_grep, check
+from config import ssh, check
 
 print("sv() cd-on-exit Diagnostic\n")
 
 # Test 1: SSH connection
-out, code = ssh("echo OK")
-check("SSH connection", code == 0 and "OK" in out)
+out, ok = ssh("echo OK")
+check("SSH connection", "OK" in out)
 
-# Test 2: tmux client-detached hook in config
-out, _ = ssh_grep("client-detached", "~/.tmux.conf")
-check("tmux client-detached hook", "sv_last_dir" in out)
+# Test 2: trap in sv() function (local .zshrc)
+import subprocess
+result = subprocess.run(["grep", "-q", "trap.*sv_last_dir", f"{os.path.expanduser('~')}/.zshrc"], capture_output=True)
+check("EXIT trap in sv()", result.returncode == 0)
 
-# Test 3: ~/.sv_last_dir exists
+# Test 3: ~/.sv_last_dir file exists and has content
 out, _ = ssh("cat ~/.sv_last_dir 2>/dev/null")
-saved_path = out.strip()
-check("~/.sv_last_dir file", bool(saved_path), f"path={saved_path or '(empty - detach once to create)'}")
+path = out.strip()
+check("~/.sv_last_dir file", bool(path), f"path={path}" if path else "empty/missing")
 
 # Test 4: Local path exists
-if saved_path:
-    exists = os.path.isdir(saved_path)
-    check("Local path exists", exists, saved_path)
+if path:
+    import os
+    exists = os.path.isdir(path)
+    check("Local path exists", exists, path)
 
 print("\n--- How it works ---")
-print("1. tmux saves pane path to ~/.sv_last_dir on detach (Ctrl+a d)")
-print("2. sv() reads this file after disconnect and cd's locally")
-print("Note: Only works with detach, not exit")
+print("1. sv() runs: trap 'pwd > ~/.sv_last_dir' EXIT")
+print("2. On shell exit, current directory is saved")
+print("3. After disconnect, sv() reads ~/.sv_last_dir and cd's locally")

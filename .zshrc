@@ -145,26 +145,29 @@ export PATH="$BREW/opt/trash-cli/bin:$PATH"
 # kitty ssh (auto-reconnect in new windows/panes)
 alias ssh="kitten ssh"
 
+# clipboard over SSH (use OSC 52 to reach local clipboard)
+[[ -n "$SSH_TTY" ]] && alias pbcopy='~/.local/bin/osc52-copy'
+
 # macmini
 MACMINI_HOST=macmini.studioboxcat.com
 MACMINI_USER=jameskim
 MACMINI_SSH_KEY=~/.ssh/james-macmini
 MACMINI_DEST=$MACMINI_USER@$MACMINI_HOST
 
-# server mosh (low-latency SSH with tmux for mouse scrolling)
+# server SSH (with Tokyo Night colors)
 sv() {
   [[ -z "$MACMINI_SSH_KEY" ]] && { echo "MACMINI_SSH_KEY not defined" >&2; return 1; }
 
-  # Change window colors to Tokyo Night (keeps border unchanged)
+  # Change window colors to Tokyo Night
   kitten @ set-colors --match "id:$KITTY_WINDOW_ID" ~/.config/kitty/themes/tokyonight-window.conf
 
-  # cd to same directory on server, attach or create tmux session
-  mosh --ssh="ssh -i $MACMINI_SSH_KEY" $MACMINI_DEST -- sh -c "cd '$PWD' 2>/dev/null; tmux new -A -s main"
+  # SSH to server: cd to same directory, save path on exit
+  ssh -i $MACMINI_SSH_KEY $MACMINI_DEST -t "cd '$PWD' 2>/dev/null; trap 'pwd > ~/.sv_last_dir' EXIT; exec zsh"
 
-  # Restore on disconnect
+  # Restore colors on disconnect
   kitten @ set-colors --match "id:$KITTY_WINDOW_ID" --reset
 
-  # cd to same directory locally (read saved path from server)
+  # cd to same directory locally
   local remote_dir=$(ssh -i $MACMINI_SSH_KEY $MACMINI_DEST "cat ~/.sv_last_dir 2>/dev/null")
   [[ -n "$remote_dir" && -d "$remote_dir" ]] && cd "$remote_dir"
 }

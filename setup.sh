@@ -26,7 +26,7 @@ brew_install "" \
   lazygit delta git-lfs gh copilot `# git tools` \
   lua rust go node oven-sh/bun/bun dotnet `# languages & runtimes` \
   awscli `# cloud & cli tools` \
-  just starship shellcheck mosh tmux zsh-autosuggestions `# shell tools`
+  just starship shellcheck zsh-autosuggestions `# shell tools`
 
 brew_install --cask \
   kitty `# terminal emulator` \
@@ -37,7 +37,6 @@ brew_install --cask \
 # shell
 touch ~/.hushlogin
 ln -sf "$CONFIG/.zshrc" ~/.zshrc
-ln -sf "$CONFIG/.tmux.conf" ~/.tmux.conf
 ln -sf "$CONFIG/starship.toml" "$XDG_CONFIG/starship.toml"
 ln -sf "$CONFIG/.ripgreprc" ~/.ripgreprc
 
