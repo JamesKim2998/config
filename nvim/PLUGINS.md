@@ -5,7 +5,6 @@
 | Plugin | Purpose | File |
 |--------|---------|------|
 | **UI** |||
-| catppuccin/nvim | Colorscheme | plugins.lua |
 | lualine.nvim | Statusline | plugins.lua |
 | bufferline.nvim | Buffer tabs | bufferline.lua |
 | noice.nvim | Messages/cmdline UI | noice.lua |
