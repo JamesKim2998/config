@@ -1,0 +1,14 @@
+{
+  "name": "diagnostics",
+  "type": "module",
+  "scripts": {
+    "sv": "bun sv-cd-on-exit.ts",
+    "clipboard": "bun osc52-clipboard.ts",
+    "cursor": "bun cursor-shape.ts",
+    "latency": "bun macmini-latency.ts",
+    "all": "bun sv && bun clipboard && bun cursor && bun latency"
+  },
+  "dependencies": {
+    "consola": "^3"
+  }
+}

@@ -16,6 +16,7 @@ macOS dotfiles and development environment configuration.
 | `intellij/` | IntelliJ IDE and Copilot settings |
 | `gemini/` | Gemini CLI configuration |
 | `.vscode/` | VS Code settings |
+| `diagnostics/` | Bun scripts for SSH/clipboard/latency diagnostics |
 
 ## Root Configuration Files
 
