@@ -145,8 +145,11 @@ export PATH="$BREW/opt/trash-cli/bin:$PATH"
 # kitty ssh (auto-reconnect in new windows/panes)
 alias ssh="kitten ssh"
 
-# clipboard over SSH (use OSC 52 to reach local clipboard)
-[[ -n "$SSH_TTY" ]] && alias pbcopy='~/.local/bin/osc52-copy'
+# SSH session setup
+if [[ -n "$SSH_TTY" ]]; then
+  alias pbcopy='~/.local/bin/osc52-copy'  # OSC 52: copy to local clipboard via terminal
+  zshexit() { pwd > ~/.sv_last_dir }      # save cwd for sv() cd-on-exit
+fi
 
 # macmini
 MACMINI_HOST=macmini.studioboxcat.com
@@ -161,8 +164,8 @@ sv() {
   # Change window colors to Tokyo Night
   kitten @ set-colors --match "id:$KITTY_WINDOW_ID" ~/.config/kitty/themes/tokyonight-window.conf
 
-  # SSH to server: cd to same directory, save path on exit
-  ssh -i $MACMINI_SSH_KEY $MACMINI_DEST -t "cd '$PWD' 2>/dev/null; trap 'pwd > ~/.sv_last_dir' EXIT; exec zsh"
+  # SSH to server, cd to same directory
+  ssh -i $MACMINI_SSH_KEY $MACMINI_DEST -t "cd '$PWD' 2>/dev/null; exec zsh"
 
   # Restore colors on disconnect
   kitten @ set-colors --match "id:$KITTY_WINDOW_ID" --reset
