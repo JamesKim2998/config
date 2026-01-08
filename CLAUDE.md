@@ -2,32 +2,24 @@
 
 macOS dotfiles and development environment configuration.
 
-## Directory Structure
+## Structure
 
-| Directory | Purpose |
-|-----------|---------|
-| `nvim/` | Neovim IDE configuration with Lazy.nvim plugin manager |
-| `kitty/` | Kitty terminal emulator settings and Kanagawa theme |
-| `git/` | Git configuration with delta diff viewer |
-| `yazi/` | Terminal file manager with plugins and keybindings |
-| `lazygit/` | Git TUI configuration |
-| `bat/` | Syntax-highlighted cat replacement |
-| `.hammerspoon/` | macOS window management and app launcher hotkeys |
-| `intellij/` | IntelliJ IDE and Copilot settings |
-| `gemini/` | Gemini CLI configuration |
-| `.vscode/` | VS Code settings |
-| `diagnostics/` | Bun scripts for SSH/clipboard/latency diagnostics |
-
-## Root Configuration Files
-
-| File | Purpose |
-|------|---------|
-| `.zshrc` | Shell config with PATH, aliases, and tool initialization |
-| `setup.sh` | Installation script for Homebrew, CLI tools, and symlinks |
-| `setup-server.sh` | Server-specific setup (Tokyo Night theme) |
-| `starship.toml` | Starship prompt configuration |
-| `.ripgreprc` | Ripgrep search settings |
-| `karabiner.json` | Keyboard remapping (Caps Lock to Escape, etc.) |
+| Tool | Config | Desc |
+|------|--------|------|
+| Neovim | `nvim/` | IDE with Lazy.nvim plugin manager |
+| Kitty | `kitty/` | Terminal emulator, Kanagawa theme |
+| Git | `git/` | Config with delta diff viewer |
+| Yazi | `yazi/` | File manager with plugins |
+| Lazygit | `lazygit/` | Git TUI |
+| Bat | `bat/` | Syntax-highlighted cat |
+| Hammerspoon | `.hammerspoon/` | Window management, app launcher hotkeys |
+| IntelliJ | `intellij/` | IDE and Copilot settings |
+| Gemini | `gemini/` | Gemini CLI |
+| VS Code | `.vscode/` | Editor settings |
+| Zsh | `.zshrc` | Shell config, PATH, aliases |
+| Starship | `starship.toml` | Prompt |
+| Ripgrep | `.ripgreprc` | Search settings |
+| Karabiner | `karabiner.json` | Keyboard remapping |
 
 ## Brew Packages
 
@@ -54,25 +46,6 @@ macOS dotfiles and development environment configuration.
 | stylua | Lua code formatter |
 | selene | Lua linter |
 
-## Symlink Targets
-
-| Source | Target |
-|--------|--------|
-| `.zshrc` | `~/.zshrc` |
-| `starship.toml` | `~/.config/starship.toml` |
-| `.ripgreprc` | `~/.ripgreprc` |
-| `git/.gitconfig` | `~/.gitconfig` |
-| `git/.gitignore_global` | `~/.gitignore_global` |
-| `nvim/` | `~/.config/nvim` |
-| `kitty/` | `~/.config/kitty` |
-| `yazi/` | `~/.config/yazi` |
-| `bat/` | `~/.config/bat` |
-| `lazygit/` | `~/Library/Application Support/lazygit` |
-| `karabiner.json` | `~/.config/karabiner/karabiner.json` |
-| `.hammerspoon/` | `~/.hammerspoon` |
-| `gemini/` | `~/.gemini` |
-| `.vscode/settings.json` | `~/Library/Application Support/Code/User/settings.json` |
-
 ## Theme
 
 | Environment | Theme | Control |
@@ -83,52 +56,16 @@ macOS dotfiles and development environment configuration.
 
 ## Setup
 
-### Local
-
-```sh
-./setup.sh
-```
-
-### Server (Mac Mini)
-
-Run after `setup.sh`. Applies Tokyo Night theme and sets env vars.
-
-```sh
-./setup-server.sh
-```
+| Script | Desc |
+|--------|------|
+| `setup.sh` | Homebrew, CLI tools, symlinks |
+| `setup-server.sh` | Server-specific setup (Tokyo Night) |
+| `diagnostics/` | SSH/clipboard/latency diagnostics |
 
 ### Mac Mini
-
-Env vars defined in `.zshrc`:
-
-| Variable | Value |
-|----------|-------|
-| `MACMINI_HOST` | `macmini.studioboxcat.com` |
-| `MACMINI_USER` | `jameskim` |
-| `MACMINI_SSH_KEY` | `~/.ssh/james-macmini` |
-| `MACMINI_DEST` | `$MACMINI_USER@$MACMINI_HOST` |
-
-Tailscale domains:
 
 | Domain | Usage |
 |--------|-------|
 | `macmini.studioboxcat.com` | SSH via `sv` function |
+| `git.studioboxcat.com` | Git mirror |
 | `lfs.studioboxcat.com` | Git LFS server |
-
-### GitHub Mirror
-
-Local mirror on Mac Mini for fast git fetch (~60ms vs ~900ms from GitHub).
-Works as transparent proxy - repos use mirror as `origin`.
-
-| Component | Location |
-|-----------|----------|
-| Mirror repos | `macmini:~/Develop/github-mirror/*.git` |
-| Config files | `config/github-mirror/` |
-| LaunchAgent | `~/Library/LaunchAgents/com.boxcat.github-mirror.plist` |
-| Sync interval | 30 seconds (GitHub → Mirror) |
-
-Remotes:
-- `origin`: Mac Mini mirror (fast fetch/push)
-- `github`: Direct GitHub (fallback)
-
-Post-receive hook auto-pushes to GitHub when you push to mirror.

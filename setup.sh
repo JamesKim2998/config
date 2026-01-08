@@ -34,6 +34,10 @@ brew_install --cask \
   libreoffice docker font-hack-nerd-font \
   tailscale `# mesh VPN for stable Mac Mini access`
 
+# claude code
+mkdir -p ~/.claude
+ln -sf "$CONFIG/.claude/CLAUDE.md" ~/.claude/CLAUDE.md
+
 # shell
 touch ~/.hushlogin
 ln -sf "$CONFIG/.zshrc" ~/.zshrc

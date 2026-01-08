@@ -7,14 +7,6 @@ setopt AUTO_CD              # cd into directories by typing the path
 bindkey -v
 KEYTIMEOUT=1  # 10ms escape delay for instant mode switching
 
-# vi mode cursor: block for normal, beam for insert
-zle-keymap-select() {
-  [[ $KEYMAP == vicmd ]] && echo -ne '\e[2 q' || echo -ne '\e[6 q'
-}
-zle-line-init() { echo -ne '\e[6 q' }
-zle -N zle-keymap-select
-zle -N zle-line-init
-
 # zsh completions (rebuild cache daily)
 autoload -Uz compinit
 [[ -n ~/.zcompdump(#qN.mh+24) ]] && compinit || compinit -C
@@ -25,7 +17,7 @@ ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=512
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 source $BREW/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
- 
+
 # brew
 export HOMEBREW_NO_UPDATE_REPORT_NEW=1
 export HOMEBREW_NO_ENV_HINTS=1
