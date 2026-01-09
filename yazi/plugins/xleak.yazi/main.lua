@@ -1,9 +1,9 @@
 local M = {}
 
--- Preview text through bat with CSV syntax highlighting
-local function preview_with_bat(job, text, lang)
-	local child = Command("bat")
-		:arg({ "--style", "plain", "--color", "always", "-l", lang or "csv" })
+-- Preview CSV through miller with pretty-print and colors
+local function preview_with_miller(job, csv)
+	local child = Command("mlr")
+		:arg({ "--icsv", "--opprint", "--barred", "-C", "cat" })
 		:stdin(Command.PIPED)
 		:stdout(Command.PIPED)
 		:stderr(Command.PIPED)
@@ -11,7 +11,7 @@ local function preview_with_bat(job, text, lang)
 
 	if not child then return end
 
-	child:write_all(text)
+	child:write_all(csv)
 	child:flush()
 
 	local max_lines = job.area.h
@@ -82,8 +82,8 @@ function M:peek(job)
 		return preview_file_with_bat(job)
 	end
 
-	-- Pipe CSV through bat for syntax highlighting
-	preview_with_bat(job, csv, "csv")
+	-- Pipe CSV through miller for pretty-print display
+	preview_with_miller(job, csv)
 end
 
 function M:seek(job)
