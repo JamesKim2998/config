@@ -82,6 +82,34 @@ YAZI_LOG=debug yazi
 ~/.local/state/yazi/yazi.log
 ```
 
+### Fork and Submodule Workflow
+
+To fix a third-party plugin and contribute upstream:
+
+```bash
+# 1. Fork the plugin repo
+gh repo fork mgumz/yazi-plugin-bat --clone=false
+
+# 2. Remove current directory and add as submodule
+rm -rf yazi/plugins/bat.yazi
+git add yazi/plugins/bat.yazi
+git submodule add git@github.com:JamesKim2998/yazi-plugin-bat.git yazi/plugins/bat.yazi
+
+# 3. Apply fixes in the submodule
+cd yazi/plugins/bat.yazi
+# ... edit files ...
+git add . && git commit -m "fix: update deprecated APIs"
+git push origin main
+
+# 4. Create PR to upstream
+gh pr create --repo mgumz/yazi-plugin-bat --title "fix: ..." --body "..."
+
+# 5. Commit submodule change in parent repo
+cd ../../..
+git add yazi/plugins/bat.yazi .gitmodules
+git commit -m "yazi: add bat.yazi as submodule with fixes"
+```
+
 ### MIME Detection Issues
 
 MIME detection is often wrong (e.g., xlsx detected as `application/octet-stream`).
