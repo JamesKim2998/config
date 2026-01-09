@@ -36,7 +36,7 @@ desc = "Restore the closed tab"
 # https://github.com/orhnk/system-clipboard.yazi?tab=readme-ov-file#configuration
 [[mgr.prepend_keymap]]
 on = "<C-y>"
-run = ["plugin system-clipboard"]
+run = "plugin system-clipboard"
 
 # Quick jump shortcuts (g prefix)
 [[mgr.prepend_keymap]]
