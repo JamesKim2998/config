@@ -1,42 +1,43 @@
-[user]
-    name = JK
-    email = eodnjs2998@gmail.com
-[credential]
-    helper = osxkeychain
 [core]
-    editor = nvim
-    quotepath = off
-    excludesfile = ~/.gitignore_global
-    autocrlf = input
-    pager = delta # https://github.com/dandavison/delta
-[interactive]
-    diffFilter = delta --color-only # https://github.com/dandavison/delta
+	editor = nvim
+	quotepath = off
+	excludesfile = ~/.gitignore_global
+	autocrlf = input
+	pager = delta
+
 [pull]
 	rebase = false
 	ff = true
-[merge]
-    conflictstyle = zdiff3 # https://github.com/dandavison/delta
-[rebase]
-    autoStash = true
 [push]
 	recurseSubmodules = on-demand
-[lfs]
-    concurrenttransfers = 64
-[filter "lfs"]
-    process = git-lfs filter-process
-    required = true
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-[delta]
-    tabs = 2
-    navigate = true  # use n and N to move between diff sections
-    dark = true      # or light = true, or omit for auto-detection
+[merge]
+	conflictstyle = zdiff3
+[rebase]
+	autoStash = true
 
-[include]
-    path = ~/.gitconfig.local
+[delta]
+	tabs = 2
+	navigate = true
+	dark = true
+[interactive]
+	diffFilter = delta --color-only
+
+[lfs]
+	concurrenttransfers = 64
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+
+[credential]
+	helper = osxkeychain
 [credential "https://github.com"]
-	helper = 
+	helper =  # clear default helper chain
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
+	helper =  # clear default helper chain
 	helper = !/opt/homebrew/bin/gh auth git-credential
+
+[include]
+	path = ~/.gitconfig.local
