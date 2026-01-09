@@ -36,15 +36,16 @@ prepend_previewers = [
 	{ url = "*.xlsx", run = "xleak" },
 	# https://github.com/macydnah/office.yazi
 	{ url = "*.docx", run = "office" },
-	{ mime = "application/openxmlformats-officedocument.*", run = "office" },
-	{ mime = "application/oasis.opendocument.*", run = "office" },
-	{ mime = "application/ms-*", run = "office" },
-	{ mime = "application/msword", run = "office" },
 	# https://github.com/mgumz/yazi-plugin-bat
 	{ url = "*.csv", run = "bat" },
 	{ url = "*.md", run = "bat" },
 	{ url = "*.json", run = "bat" },
 	{ mime = "application/json", run = "bat" },
+	# office MIME rules
+	{ mime = "application/openxmlformats-officedocument.*", run = "office" },
+	{ mime = "application/oasis.opendocument.*", run = "office" },
+	{ mime = "application/ms-*", run = "office" },
+	{ mime = "application/msword", run = "office" },
 	# https://github.com/boydaihungst/mediainfo.yazi
 	# Replace magick, image, video with mediainfo
 	{ mime = "{audio,video,image}/*", run = "mediainfo"},

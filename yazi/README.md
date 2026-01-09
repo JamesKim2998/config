@@ -82,6 +82,15 @@ YAZI_LOG=debug yazi
 ~/.local/state/yazi/yazi.log
 ```
 
+### Justfile Recipes
+
+| Recipe | Description |
+|--------|-------------|
+| `test <file>` | Capture yazi preview via tmux |
+| `test-csv` | Test with sample CSV |
+| `test-debug <file>` | With YAZI_LOG=debug |
+| `debug-csv` | Full cycle: clear → inject debug → test → show log → cleanup |
+
 ### Fork and Submodule Workflow
 
 To fix a third-party plugin and contribute upstream:

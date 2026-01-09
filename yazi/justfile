@@ -1,0 +1,77 @@
+# Yazi plugin debugging helpers
+# Usage: Run from config/yazi directory
+# Requires: tmux, sd (for add-bat-debug)
+
+# Common settings
+session := "yt"
+test_csv := "/Users/jameskim/Develop/tax/25_1기_부가가치세/0_인앱_앱스토어/financial_report_02.csv"
+
+# === Preview Testing ===
+
+# Test file preview - captures yazi screen via tmux
+# Output shows yazi UI with preview pane (ANSI colors preserved)
+test file:
+    #!/bin/bash
+    set -e
+    tmux kill-server 2>/dev/null || true
+    sleep 0.2
+    tmux new-session -d -s {{session}} -x 120 -y 40 "yazi '{{file}}'"
+    sleep 2
+    tmux send-keys -t {{session}} T  # toggle preview pane (hidden by default)
+    sleep 1
+    tmux capture-pane -t {{session}} -p -e  # -e preserves ANSI colors
+    tmux send-keys -t {{session}} C-c
+    sleep 0.2
+    tmux kill-session -t {{session}} 2>/dev/null || true
+
+# Quick CSV test with sample file
+test-csv:
+    just test "{{test_csv}}"
+
+# Test with yazi's internal debug logging
+# Shows yazi.log after capture (filters noise from emulator/adapter messages)
+test-debug file:
+    #!/bin/bash
+    set -e
+    tmux kill-server 2>/dev/null || true
+    sleep 0.2
+    tmux new-session -d -s {{session}} -x 120 -y 40 "YAZI_LOG=debug yazi '{{file}}'"
+    sleep 1
+    tmux send-keys -t {{session}} T
+    sleep 0.5
+    tmux capture-pane -t {{session}} -p -e
+    tmux send-keys -t {{session}} C-c
+    sleep 0.2
+    tmux kill-session -t {{session}} 2>/dev/null || true
+    echo ""
+    echo "=== YAZI LOG (last 20 lines) ==="
+    cat ~/.local/state/yazi/yazi.log 2>/dev/null | grep -v "emulator\|adapter" | tail -20
+
+# === Plugin Debugging (bat.yazi) ===
+
+# Check plugin debug log (bat.yazi writes here when debugging enabled)
+check-plugin-log:
+    @cat /tmp/bat_debug.log 2>/dev/null || echo "No plugin debug log at /tmp/bat_debug.log"
+
+# Clear all debug logs
+clear-logs:
+    rm -f /tmp/bat_debug.log ~/.local/state/yazi/yazi.log
+    @echo "Cleared debug logs"
+
+# Inject debug logging into bat.yazi's peek()
+# Writes to /tmp/bat_debug.log when peek() is called
+add-bat-debug:
+    #!/bin/bash
+    cd plugins/bat.yazi
+    sd 'function M:peek\(job\)' 'function M:peek(job)\n    local f = io.open("/tmp/bat_debug.log", "a")\n    if f then f:write(os.date() .. " peek called\\n"); f:close() end' main.lua
+    echo "Debug logging added to bat.yazi (writes to /tmp/bat_debug.log)"
+
+# Restore bat.yazi to clean state
+remove-bat-debug:
+    cd plugins/bat.yazi && git checkout main.lua
+    @echo "bat.yazi restored"
+
+# === Full Debug Workflows ===
+
+# Full debug cycle: clear logs → inject debug → test CSV → show log → cleanup
+debug-csv: clear-logs add-bat-debug test-csv check-plugin-log remove-bat-debug
