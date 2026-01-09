@@ -75,15 +75,25 @@ function Tab:build()
 	}
 end
 
--- Status bar: file path only, right-aligned
+-- Status bar: filter on left, file path on right
 -- bg: #16161e (darker than main), fg: #565f89 (dimmed)
+-- https://github.com/sxyazi/yazi/blob/main/yazi-plugin/preset/components/
 function Status:redraw()
 	local path = cx.active.current.hovered and tostring(cx.active.current.hovered.url) or ""
 	local bg_fill = ui.Span(string.rep(" ", self._area.w)):bg("#16161e")
 	local path_span = ui.Span(" " .. path .. " "):fg("#565f89")
+
+	-- Filter indicator on the left (filter is in files.filter)
+	local filter = cx.active.current.files.filter
+	local filter_span = ui.Span("")
+	if filter then
+		filter_span = ui.Span(" 󰈲 " .. tostring(filter) .. " "):fg("#7aa2f7")
+	end
+
 	return {
 		ui.Clear(self._area),
 		ui.Line(bg_fill):area(self._area),
+		ui.Line(filter_span):area(self._area):align(ui.Align.LEFT),
 		ui.Line(path_span):area(self._area):align(ui.Align.RIGHT),
 	}
 end

@@ -4,10 +4,11 @@ on = "/"
 run = "filter --smart"
 desc = "Filter files"
 
-# https://yazi-rs.github.io/docs/tips/#confirm-quit
+# q acts as escape (don't quit)
 [[mgr.prepend_keymap]]
 on  = "q"
-run = "plugin confirm-quit"
+run = "escape"
+desc = "Clear selection / cancel"
 
 # Keep Space on the current row after toggling selection
 [[mgr.prepend_keymap]]
