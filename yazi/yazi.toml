@@ -7,54 +7,47 @@ prepend_rules = [
 	{ name = "*.xlsx", use = "open" },
 ]
 
-# https://github.com/yazi-rs/plugins/tree/main/mactag.yazi
-[[plugin.prepend_fetchers]]
-id   = "mactag"
-name = "*"
-run  = "mactag"
-
-[[plugin.prepend_fetchers]]
-id   = "mactag"
-name = "*/"
-run  = "mactag"
-
-# https://github.com/yazi-rs/plugins/tree/main/git.yazi
-[[plugin.prepend_fetchers]]
-id   = "git"
-name = "*"
-run  = "git"
-
-[[plugin.prepend_fetchers]]
-id   = "git"
-name = "*/"
-run  = "git"
+# URL-based rules (*.ext) before MIME rules - MIME detection is often wrong
 
 [plugin]
+prepend_fetchers = [
+	# https://github.com/yazi-rs/plugins/tree/main/mactag.yazi
+	{ id = "mactag", url = "*", run = "mactag" },
+	{ id = "mactag", url = "*/", run = "mactag" },
+	# https://github.com/yazi-rs/plugins/tree/main/git.yazi
+	{ id = "git", url = "*", run = "git" },
+	{ id = "git", url = "*/", run = "git" },
+]
 prepend_preloaders = [
-	# https://github.com/boydaihungst/mediainfo.yazi
-	# Replace magick, image, video with mediainfo
-	{ mime = "{audio,video,image}/*", run = "mediainfo" },
-	{ mime = "application/subrip", run = "mediainfo" },
 	# https://github.com/macydnah/office.yazi
-	# Office Documents
+	{ url = "*.docx", run = "office" },
 	{ mime = "application/openxmlformats-officedocument.*", run = "office" },
 	{ mime = "application/oasis.opendocument.*", run = "office" },
 	{ mime = "application/ms-*", run = "office" },
 	{ mime = "application/msword", run = "office" },
-	{ name = "*.docx", run = "office" },
-	{ name = "*.xls", run = "office" },
-	{ name = "*.xlsx", run = "office" },
+	# https://github.com/boydaihungst/mediainfo.yazi
+	# Replace magick, image, video with mediainfo
+	{ mime = "{audio,video,image}/*", run = "mediainfo" },
+	{ mime = "application/subrip", run = "mediainfo" },
 ]
 prepend_previewers = [
+	# xleak for fast Excel preview
+	{ url = "*.xls", run = "xleak" },
+	{ url = "*.xlsx", run = "xleak" },
+	# https://github.com/macydnah/office.yazi
+	{ url = "*.docx", run = "office" },
+	{ mime = "application/openxmlformats-officedocument.*", run = "office" },
+	{ mime = "application/oasis.opendocument.*", run = "office" },
+	{ mime = "application/ms-*", run = "office" },
+	{ mime = "application/msword", run = "office" },
 	# https://github.com/mgumz/yazi-plugin-bat
-	{ name = "*.csv", run = "bat" },
-	{ name = "*.md", run = "bat" },
-	{ name = "*.json", run = "bat" },
+	{ url = "*.csv", run = "bat" },
+	{ url = "*.md", run = "bat" },
+	{ url = "*.json", run = "bat" },
 	{ mime = "application/json", run = "bat" },
 	# https://github.com/boydaihungst/mediainfo.yazi
 	# Replace magick, image, video with mediainfo
 	{ mime = "{audio,video,image}/*", run = "mediainfo"},
-	{ mime = "application/pdf", run = "mediainfo" },
 	{ mime = "application/subrip", run = "mediainfo" },
 	# https://github.com/ndtoan96/ouch.yazi
 	# Archive previewer
@@ -65,15 +58,6 @@ prepend_previewers = [
 	{ mime = "application/x-rar",           run = "ouch" },
 	{ mime = "application/x-xz",            run = "ouch" },
 	{ mime = "application/xz",              run = "ouch" },
-	# https://github.com/macydnah/office.yazi
-	# Office Documents
-	{ mime = "application/openxmlformats-officedocument.*", run = "office" },
-	{ mime = "application/oasis.opendocument.*", run = "office" },
-	{ mime = "application/ms-*", run = "office" },
-	{ mime = "application/msword", run = "office" },
-	{ name = "*.docx", run = "office" },
-	{ name = "*.xls", run = "office" },
-	{ name = "*.xlsx", run = "office" },
 ]
 # https://github.com/mgumz/yazi-plugin-bat
 # Use append_previewers to keep defaults (image, video, etc.) and add bat for text
@@ -84,4 +68,3 @@ append_previewers = [
 	{ mime = "*/javascript",           run = "bat" },
 	{ mime = "*/x-wine-extension-ini", run = "bat" },
 ]
-

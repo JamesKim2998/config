@@ -47,7 +47,7 @@ function M:peek(job)
 
     -- Handle pagination and upper bounds
     if job.skip > 0 and #collected_lines == 0 then
-        ya.manager_emit("peek", { math.max(0, job.skip - max_lines), only_if = job.file.url, upper_bound = false })
+        ya.emit("peek", { math.max(0, job.skip - max_lines), only_if = job.file.url, upper_bound = false })
         return
     end
 
@@ -55,15 +55,13 @@ function M:peek(job)
     local processed_text = collected_lines:gsub("\t", string.rep(" ", (rt and rt.preview or PREVIEW).tab_size))
 
     -- Create text widget with proper wrapping
-    ya.preview_widgets(job, {
-        ui.Text.parse(processed_text):area(job.area):wrap(is_wrap and ui.Text.WRAP or ui.Text.WRAP_NO),
-    })
+    ya.preview_widget(job, ui.Text.parse(processed_text):area(job.area))
 end
 
 function M:seek(job)
     local h = cx.active.current.hovered
     if h and h.url == job.file.url then
-        ya.manager_emit("peek", {
+        ya.emit("peek", {
             math.max(0, cx.active.preview.skip + job.units),
             only_if = job.file.url,
         })
