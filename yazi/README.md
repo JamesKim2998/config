@@ -6,6 +6,7 @@
 |--------|---------|
 | bat.yazi | Syntax-highlighted text preview |
 | xleak.yazi | Fast Excel preview (uses xleak) |
+| langpack.yazi | meow-tower langpack binary preview |
 | office.yazi | Office document preview (LibreOffice) |
 | ouch.yazi | Archive preview/compression |
 | mediainfo.yazi | Media file info/preview |
@@ -63,6 +64,19 @@ Yazi 25.x/26.x deprecated several Lua APIs:
 | `ya.preview_widgets()` | `ya.preview_widget()` |
 | `ya.render()` | `ui.render()` |
 | `position` (in ya.input) | `pos` |
+
+### Lua Sandbox Limitations
+
+Yazi runs plugins in a sandboxed Lua environment. These standard Lua features are **NOT available**:
+
+| Unavailable | Workaround |
+|-------------|------------|
+| `debug` library | Use `ya.dbg()` for logging |
+| `io.open()` | Use `Command` to spawn shell/python |
+| `os.execute()` | Use `Command` API |
+| `require()` for external modules | Inline code or use `Command` |
+
+For custom binary parsing, use inline Python scripts via `Command("python3"):arg({"-c", script})`.
 
 ### Plugin Debugging
 

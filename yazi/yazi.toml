@@ -31,6 +31,8 @@ prepend_preloaders = [
 	{ mime = "application/subrip", run = "mediainfo" },
 ]
 prepend_previewers = [
+	# meow-tower langpack binary format (matches files in langpack/{lang}/ dirs)
+	{ url = "**/langpack/{KO,EN,JA,ZH_CN,ZH_TW,DE,ES,FR,ID,IT,PT_BR,RU,TR,K,S}/*", run = "langpack" },
 	# xleak for fast Excel preview
 	{ url = "*.xls", run = "xleak" },
 	{ url = "*.xlsx", run = "xleak" },
