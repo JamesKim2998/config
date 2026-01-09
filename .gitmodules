@@ -4,3 +4,6 @@
 [submodule "yazi/plugins/ouch.yazi"]
 	path = yazi/plugins/ouch.yazi
 	url = https://github.com/JamesKim2998/ouch.yazi
+[submodule "yazi/plugins/mediainfo.yazi"]
+	path = yazi/plugins/mediainfo.yazi
+	url = https://github.com/JamesKim2998/mediainfo.yazi
