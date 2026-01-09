@@ -1,38 +1,5 @@
 local M = {}
 
--- Preview CSV through miller with pretty-print and colors
-local function preview_with_miller(job, csv)
-	local child = Command("mlr")
-		:arg({ "--icsv", "--opprint", "--barred", "-C", "cat" })
-		:stdin(Command.PIPED)
-		:stdout(Command.PIPED)
-		:stderr(Command.PIPED)
-		:spawn()
-
-	if not child then return end
-
-	child:write_all(csv)
-	child:flush()
-
-	local max_lines = job.area.h
-	local collected_lines = ""
-	local i = 0
-	local last_line = 0
-
-	repeat
-		local next, event = child:read_line()
-		if event ~= 0 then break end
-		i = i + 1
-		if i > job.skip then
-			collected_lines = collected_lines .. next
-			last_line = last_line + 1
-		end
-	until last_line >= max_lines
-
-	child:start_kill()
-	ya.preview_widget(job, ui.Text.parse(collected_lines):area(job.area))
-end
-
 -- Fallback: preview file directly with bat
 local function preview_file_with_bat(job)
 	local child = Command("bat")
@@ -65,25 +32,40 @@ end
 function M:peek(job)
 	if not job.file then return end
 
-	-- Try xleak first
-	local output = Command("xleak")
-		:arg({ "--export", "csv", tostring(job.file.url) })
+	-- Use shell to pipe xleak CSV through bat
+	local child = Command("sh")
+		:arg({ "-c", "xleak --export csv " .. ya.quote(tostring(job.file.url)) .. " | bat --style=plain --color=always -l csv" })
 		:stdout(Command.PIPED)
 		:stderr(Command.PIPED)
-		:output()
+		:spawn()
 
-	-- If xleak fails (e.g., HTML file), fall back to bat on raw file
-	if not output or not output.status.success then
+	if not child then
 		return preview_file_with_bat(job)
 	end
 
-	local csv = output.stdout
-	if #csv == 0 then
+	local max_lines = job.area.h
+	local collected_lines = ""
+	local i = 0
+	local last_line = 0
+
+	repeat
+		local next, event = child:read_line()
+		if event ~= 0 then break end
+		i = i + 1
+		if i > job.skip then
+			collected_lines = collected_lines .. next
+			last_line = last_line + 1
+		end
+	until last_line >= max_lines
+
+	child:start_kill()
+
+	-- If no output, fall back to bat
+	if #collected_lines == 0 then
 		return preview_file_with_bat(job)
 	end
 
-	-- Pipe CSV through miller for pretty-print display
-	preview_with_miller(job, csv)
+	ya.preview_widget(job, ui.Text.parse(collected_lines):area(job.area))
 end
 
 function M:seek(job)
