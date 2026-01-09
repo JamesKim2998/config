@@ -4,7 +4,7 @@
 
 # Common settings
 session := "yt"
-test_csv := "/Users/jameskim/Develop/tax/25_1기_부가가치세/0_인앱_앱스토어/financial_report_02.csv"
+test_csv := "~/Downloads/sample.csv"
 
 # === Preview Testing ===
 
