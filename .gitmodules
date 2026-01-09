@@ -1,3 +1,6 @@
 [submodule "yazi/plugins/system-clipboard.yazi"]
 	path = yazi/plugins/system-clipboard.yazi
 	url = https://github.com/JamesKim2998/system-clipboard.yazi
+[submodule "yazi/plugins/ouch.yazi"]
+	path = yazi/plugins/ouch.yazi
+	url = https://github.com/JamesKim2998/ouch.yazi
