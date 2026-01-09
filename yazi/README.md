@@ -12,6 +12,16 @@
 | git.yazi | Git status in file list |
 | mactag.yazi | macOS Finder tags |
 
+### xleak.yazi
+
+Fast Excel preview using [xleak](https://github.com/bgreenwell/xleak) (Rust-based).
+Falls back to bat for HTML files disguised as .xls (common in Korean bank exports).
+
+Install xleak:
+```bash
+cargo install xleak
+```
+
 ## Dependencies
 
 | Tool | Purpose | Install |
@@ -86,13 +96,3 @@ prepend_previewers = [
 ]
 ```
 
-## Custom Plugins
-
-### xleak.yazi
-
-Fast Excel preview using [xleak](https://github.com/bgreenwell/xleak) (Rust-based).
-
-Install xleak:
-```bash
-cargo install xleak
-```

@@ -4,7 +4,7 @@ local update = ya.sync(function(st, tags)
 	for path, tag in pairs(tags) do
 		st.tags[path] = #tag > 0 and tag or nil
 	end
-	ya.render()
+	ui.render()
 end)
 
 local selected_or_hovered = ya.sync(function()
