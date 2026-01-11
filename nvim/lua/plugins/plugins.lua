@@ -4,7 +4,7 @@ return {
 	{ "folke/tokyonight.nvim", priority = 1000 },
 
 	-- git
-	{ "lewis6991/gitsigns.nvim", opts = {} },
+	{ "lewis6991/gitsigns.nvim", event = "BufReadPost", opts = {} },
 
 	-- autocomplete
 	{

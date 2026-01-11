@@ -13,6 +13,19 @@ vim.o.tabstop = 2 -- Number of spaces a <Tab> counts for
 vim.o.softtabstop = 2 -- Number of spaces a <Tab> counts for while editing
 vim.o.smarttab = true -- recognizes some C syntax to increase/reduce the indent where appropriate.
 
+-- Statusline (native, replaces lualine)
+local mode_icons = {
+	n = "󰆾", i = "󰏫", v = "󰒉", V = "󰒉", [""] = "󰒉",
+	R = "󰛔", c = "󰘳", t = "󰆍", s = "󰒉", S = "󰒉",
+}
+function _G.statusline()
+	if vim.bo.filetype == "neo-tree" then return "%#NeoTreeNormal#" end
+	local mode = mode_icons[vim.fn.mode()] or vim.fn.mode()
+	local branch = vim.b.gitsigns_head and ("   " .. vim.b.gitsigns_head) or ""
+	return " " .. mode .. branch .. "%=%p%%  %l:%c "
+end
+vim.o.statusline = "%{%v:lua.statusline()%}"
+
 -- UI
 vim.o.cmdheight = 0 -- Hide command line when not in use
 vim.o.number = true
@@ -66,7 +79,15 @@ end, { desc = "Substitute Word under cursor" })
 vim.filetype.add({
 	extension = {
 		command = "sh",
+		plist = "xml",
 	},
+})
+
+-- Enable treesitter highlighting (built-in, no plugin needed)
+vim.api.nvim_create_autocmd("FileType", {
+	callback = function()
+		pcall(vim.treesitter.start)
+	end,
 })
 
 -- Etc

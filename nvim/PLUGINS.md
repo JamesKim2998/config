@@ -5,12 +5,12 @@
 | Plugin | Purpose | File |
 |--------|---------|------|
 | **UI** |||
-| lualine.nvim | Statusline | plugins.lua |
+| (native statusline) | Statusline | init.lua |
 | bufferline.nvim | Buffer tabs | bufferline.lua |
 | noice.nvim | Messages/cmdline UI | noice.lua |
-| snacks.nvim | Indent guides | snacks.lua |
+| snacks.nvim | Indent guides, file explorer | snacks.lua |
 | **Code Intelligence** |||
-| nvim-treesitter | Syntax highlighting | nvim-treesitter.lua |
+| (native treesitter) | Syntax highlighting | init.lua |
 | mason.nvim + lspconfig | LSP support | lsp.lua |
 | blink.cmp | Completion engine | blink-cmp.lua |
 | copilot.vim | AI completion | plugins.lua |
@@ -19,12 +19,12 @@
 | nvim-ufo | Code folding | ufo.lua |
 | **Navigation** |||
 | fzf-lua | Fuzzy finder | fzf-lua.lua |
-| nvim-tree.lua | File explorer | nvim-tree.lua |
+| snacks.explorer | File explorer | snacks.lua |
 | yazi.nvim | File manager | yazi.lua |
-| nvim-spectre | Search & replace | spectre.lua |
+| nvim-spectre | Search & replace (lazy) | spectre.lua |
 | vim-kitty-navigator | Kitty/nvim navigation | plugins.lua |
 | **Git** |||
-| gitsigns.nvim | Git diff signs | plugins.lua |
+| gitsigns.nvim | Git diff signs (lazy) | plugins.lua |
 | lazygit.nvim | Git TUI | lazygit.lua |
 
 ---
@@ -55,8 +55,9 @@
 | `<leader><leader>` | Buffers (quick) | fzf-lua |
 | `<Tab>` / `<S-Tab>` | Next/prev buffer | bufferline |
 | `<leader>1-9` | Go to buffer N | bufferline |
-| `<C-n>` | Toggle file tree | nvim-tree |
-| `<leader>-` | Open file manager | yazi |
+| `<C-n>` | Toggle file explorer | snacks.explorer |
+| `<leader>e` | Focus file explorer | snacks.explorer |
+| `<leader>-` | Open yazi file manager | yazi |
 | `<leader>cw` | Open yazi at cwd | yazi |
 | `<C-Up>` | Resume yazi session | yazi |
 | `gd` | Go to definition | lsp |
@@ -107,11 +108,11 @@
 
 ---
 
-## File Structure (alphabetically sorted)
+## File Structure
 
 ```
 nvim/
-├── init.lua
+├── init.lua              # Native statusline, treesitter, keymaps
 └── lua/
     ├── config/lazy.lua
     └── plugins/
@@ -123,11 +124,11 @@ nvim/
         ├── lint.lua
         ├── lsp.lua
         ├── noice.lua
-        ├── nvim-tree.lua
-        ├── nvim-treesitter.lua
-        ├── plugins.lua
-        ├── snacks.lua
-        ├── spectre.lua
+        ├── plugins.lua   # kanagawa, tokyonight, gitsigns, copilot, bullets, vim-kitty-navigator
+        ├── render-markdown.lua
+        ├── satellite.lua
+        ├── snacks.lua    # indent, explorer
+        ├── spectre.lua   # lazy-loaded on keys
         ├── ufo.lua
         └── yazi.lua
 ```
