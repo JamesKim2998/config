@@ -61,11 +61,3 @@ macOS dotfiles and development environment configuration.
 | `setup.sh` | Homebrew, CLI tools, symlinks |
 | `setup-server.sh` | Server-specific setup (Tokyo Night) |
 | `diagnostics/` | SSH/clipboard/latency diagnostics |
-
-### Mac Mini
-
-| Domain | Usage |
-|--------|-------|
-| `macmini.studioboxcat.com` | SSH via `sv` function |
-| `git.studioboxcat.com` | Git mirror |
-| `lfs.studioboxcat.com` | Git LFS server |
