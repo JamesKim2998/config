@@ -43,6 +43,7 @@ prepend_previewers = [
 	{ url = "*.md", run = "bat" },
 	{ url = "*.json", run = "bat" },
 	{ mime = "application/json", run = "bat" },
+	{ url = "**/bun.lock", run = "bat" },
 	# office MIME rules
 	{ mime = "application/openxmlformats-officedocument.*", run = "office" },
 	{ mime = "application/oasis.opendocument.*", run = "office" },

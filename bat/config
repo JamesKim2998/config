@@ -13,4 +13,5 @@
 --map-syntax ".eslintrc:JSON"
 --map-syntax ".babelrc:JSON"
 --map-syntax ".swcrc:JSON"
+--map-syntax "bun.lock:JSON"
 
