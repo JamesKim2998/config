@@ -6,6 +6,7 @@ local app_infos = {
 	{ "Fork", "K" },
 	{ "Google Chrome", "C" },
 	{ "Notes", "N" },
+	{ "Obsidian", "O" },
 	{ "Reminders", "M" },
 	{ "Rider", "R" },
 	{ "Slack", "S" },

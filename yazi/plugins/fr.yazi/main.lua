@@ -97,7 +97,7 @@ local function setup(self, opts)
 end
 
 local function entry(_, job)
-	local _permit = ya.hide()
+	local _permit = ui.hide()
 	local custom_opts = get_custom_opts()
 	local args = fzf_from(job.args[1], custom_opts)
 	local cwd = tostring(get_cwd())
