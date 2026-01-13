@@ -47,6 +47,7 @@ system_profiler SPBluetoothDataType | grep -E "Minor Type|Vendor ID|Product ID"
 - Caps Lock -> Escape
 - Escape -> Fn (for Fn+HJKL arrows)
 - Right Command -> F16 (input source switching)
+- See [barocco_md770.pdf](barocco_md770.pdf) for DIP switch settings
 
 ## Complex Modifications
 
