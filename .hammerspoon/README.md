@@ -36,6 +36,8 @@ All app hotkeys use `Cmd+Opt+Ctrl` (mash_app) prefix.
 
 Source: [tweekmonster/hammerspoon-vimouse](https://github.com/tweekmonster/hammerspoon-vimouse) (modified)
 
+An orange border appears around the screen while active.
+
 Right-hand friendly controls:
 
 | Key | Action |
@@ -50,6 +52,8 @@ Right-hand friendly controls:
 | Space | Left click (hold = drag) |
 | Ctrl + Space | Right click |
 | i or ESC | Exit mode |
+
+Unhandled keys pass through to the system.
 
 ## Files
 

@@ -25,6 +25,7 @@ return function(tmod, tkey)
   local log = hs.logger.new('vimouse', 'debug')
   local tap = nil
   local orig_coords = nil
+  local indicator = nil
   local dragging = false
   local scrolling = 0
   local mousedown_time = 0
@@ -136,11 +137,13 @@ return function(tmod, tkey)
           postEvent(eventTypes.leftMouseUp, coords, flags, 0)
         end
         dragging = false
-        -- overlay:delete()
-        -- overlay = nil
-        hs.alert('Vi Mouse Off')
+        if indicator then
+          for _, canvas in ipairs(indicator) do
+            canvas:delete()
+          end
+          indicator = nil
+        end
         tap:stop()
-        -- hs.mouse.setAbsolutePosition(orig_coords)  -- disabled: keep mouse where it is
         return true
       elseif code == keycodes['b'] or code == keycodes['f'] then
         if repeating ~= 0 then
@@ -179,9 +182,10 @@ return function(tmod, tkey)
 
       if scroll_y_delta ~= 0 then
         hs.eventtap.event.newScrollEvent({0, scroll_y_delta}, flags, 'line'):post()
+        return true
       end
 
-      if x_delta or y_delta then
+      if x_delta ~= 0 or y_delta ~= 0 then
         coords.x = coords.x + x_delta
         coords.y = coords.y + y_delta
 
@@ -190,22 +194,35 @@ return function(tmod, tkey)
         else
           hs.mouse.setAbsolutePosition(coords)
         end
+        return true
       end
+
+      -- Unhandled key, pass through to system
+      return false
     end
     return true
   end)
 
   hs.hotkey.bind(tmod, tkey, nil, function(event)
-    local screen = hs.mouse.getCurrentScreen()
-    local frame = screen:fullFrame()
+    -- Show screen border indicator on all screens
+    local borderWidth = 4
+    indicator = {}
 
-    -- overlay = hs.drawing.rectangle(frame)
-    -- overlay:setFillColor({['red']=0, ['blue']=0, ['green']=0, ['alpha']=0.2})
-    -- overlay:setFill(true)
-    -- overlay:setLevel(hs.drawing.windowLevels['assistiveTechHigh'])
-    -- overlay:show()
+    for _, screen in ipairs(hs.screen.allScreens()) do
+      local frame = screen:fullFrame()
+      local canvas = hs.canvas.new(frame)
+      canvas:appendElements({
+        type = "rectangle",
+        action = "stroke",
+        strokeColor = { red = 1, green = 0.4, blue = 0, alpha = 0.9 },
+        strokeWidth = borderWidth,
+        frame = { x = borderWidth/2, y = borderWidth/2, w = frame.w - borderWidth, h = frame.h - borderWidth },
+      })
+      canvas:level(hs.canvas.windowLevels.overlay)
+      canvas:show()
+      table.insert(indicator, canvas)
+    end
 
-    hs.alert('Vi Mouse On')
     orig_coords = hs.mouse.getAbsolutePosition()
     tap:start()
   end)
