@@ -56,3 +56,20 @@ system_profiler SPBluetoothDataType | grep -E "Minor Type|Vendor ID|Product ID"
 - Fn + J -> Down
 - Fn + K -> Up
 - Fn + L -> Right
+
+### Fn + UIOP -> Mouse Movement
+- Fn + U -> Mouse left
+- Fn + I -> Mouse up
+- Fn + O -> Mouse down
+- Fn + P -> Mouse right
+
+### Fn + [] -> Scroll
+- Fn + [ -> Scroll up
+- Fn + ] -> Scroll down
+
+### Fn + Space -> Click
+- Fn + Space -> Left click
+- Fn + Ctrl + Space -> Right click
+
+### Fn + Y -> Warp Mouse
+- Fn + Y -> Warp mouse to center of focused window (via Hammerspoon)

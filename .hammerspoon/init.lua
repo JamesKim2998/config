@@ -1,5 +1,5 @@
--- Enable CLI and AppleScript control (for hs command and automation)
+-- Enable CLI control (required for Karabiner's Fn+Y warp-to-window feature)
+-- Karabiner calls: hs -c 'hs.window.focusedWindow()...'
 require("hs.ipc")
-hs.allowAppleScript(true)
 
 require 'hotkey'
