@@ -67,6 +67,10 @@ system_profiler SPBluetoothDataType | grep -E "Minor Type|Vendor ID|Product ID"
 - Fn + [ -> Scroll up
 - Fn + ] -> Scroll down
 
+### Fn + ;' -> Page Up/Down
+- Fn + ; -> Page up
+- Fn + ' -> Page down
+
 ### Fn + Space -> Click
 - Fn + Space -> Left click
 - Fn + Ctrl + Space -> Right click
