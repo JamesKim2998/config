@@ -8,6 +8,7 @@
 | (native statusline) | Statusline | init.lua |
 | bufferline.nvim | Buffer tabs | bufferline.lua |
 | noice.nvim | Messages/cmdline UI | noice.lua |
+| nvim-scrollbar | Scrollbar with git/search/diagnostics | scrollbar.lua |
 | snacks.nvim | Indent guides, file explorer | snacks.lua |
 | **Code Intelligence** |||
 | (native treesitter) | Syntax highlighting | init.lua |
@@ -17,12 +18,14 @@
 | conform.nvim | Formatting | conform.lua |
 | nvim-lint | Linting | lint.lua |
 | nvim-ufo | Code folding | ufo.lua |
+| render-markdown.nvim | Markdown rendering | render-markdown.lua |
 | **Navigation** |||
 | fzf-lua | Fuzzy finder | fzf-lua.lua |
 | snacks.explorer | File explorer | snacks.lua |
 | yazi.nvim | File manager | yazi.lua |
 | nvim-spectre | Search & replace (lazy) | spectre.lua |
 | vim-kitty-navigator | Kitty/nvim navigation | plugins.lua |
+| kitty-scrollback.nvim | Vim-style scrollback in kitty | kitty-scrollback.lua |
 | **Git** |||
 | gitsigns.nvim | Git diff signs (lazy) | plugins.lua |
 | lazygit.nvim | Git TUI | lazygit.lua |
@@ -124,9 +127,10 @@ nvim/
         ├── lint.lua
         ├── lsp.lua
         ├── noice.lua
+        ├── kitty-scrollback.lua
         ├── plugins.lua   # kanagawa, tokyonight, gitsigns, copilot, bullets, vim-kitty-navigator
         ├── render-markdown.lua
-        ├── satellite.lua
+        ├── scrollbar.lua
         ├── snacks.lua    # indent, explorer
         ├── spectre.lua   # lazy-loaded on keys
         ├── ufo.lua
