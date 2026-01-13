@@ -76,9 +76,9 @@ ln -s "$CONFIG/lazygit" "$APP_SUPPORT/lazygit"
 
 # karabiner - manual sync required
 # Karabiner-Elements replaces symlinks with regular files when saving.
-# Copy manually: cp ~/Develop/config/karabiner.json ~/.config/karabiner/karabiner.json
+# Use: cd karabiner && just export (or just import)
 # mkdir -p "$XDG_CONFIG/karabiner"
-# ln -sf "$CONFIG/karabiner.json" "$XDG_CONFIG/karabiner/karabiner.json"
+# ln -sf "$CONFIG/karabiner/karabiner.json" "$XDG_CONFIG/karabiner/karabiner.json"
 
 # hammerspoon
 rm -rf ~/.hammerspoon

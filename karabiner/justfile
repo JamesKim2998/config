@@ -1,0 +1,27 @@
+# Karabiner-Elements config sync
+# Karabiner overwrites symlinks, so manual sync is required
+
+config_dir := "~/.config/karabiner"
+repo_file := "karabiner.json"
+local_file := config_dir / "karabiner.json"
+
+# Import from local Karabiner config to repo
+import:
+    cp {{local_file}} {{repo_file}}
+    @echo "Imported from {{local_file}}"
+
+# Export from repo to local Karabiner config
+export:
+    cp {{repo_file}} {{local_file}}
+    @echo "Exported to {{local_file}}"
+
+# Show diff between repo and local
+diff:
+    @diff {{repo_file}} {{local_file}} || true
+
+# Show current config status
+status:
+    @echo "Repo:  $(stat -f '%Sm' {{repo_file}})"
+    @echo "Local: $(stat -f '%Sm' {{local_file}})"
+    @echo ""
+    @just diff

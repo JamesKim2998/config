@@ -19,7 +19,7 @@ macOS dotfiles and development environment configuration.
 | Zsh | `.zshrc` | Shell config, PATH, aliases |
 | Starship | `starship.toml` | Prompt |
 | Ripgrep | `.ripgreprc` | Search settings |
-| Karabiner | `karabiner.json` | Keyboard remapping |
+| Karabiner | [`karabiner/`](karabiner/README.md) | Keyboard remapping (manual sync via justfile) |
 
 ## Brew Packages
 
