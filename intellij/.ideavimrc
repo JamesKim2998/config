@@ -1,0 +1,8 @@
+" IdeaVim configuration for JetBrains IDEs (Rider, WebStorm, etc.)
+
+let mapleader = " "
+set clipboard=unnamedplus
+
+" Tab navigation
+nmap <Tab> <Action>(NextTab)
+nmap <S-Tab> <Action>(PreviousTab)

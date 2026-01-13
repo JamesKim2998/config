@@ -13,7 +13,7 @@ macOS dotfiles and development environment configuration.
 | Lazygit | `lazygit/` | Git TUI |
 | Bat | `bat/` | Syntax-highlighted cat |
 | Hammerspoon | [`.hammerspoon/`](.hammerspoon/README.md) | Window management, app launcher hotkeys |
-| IntelliJ | `intellij/` | IDE and Copilot settings |
+| IntelliJ | `intellij/` | IdeaVim (.ideavimrc), Copilot settings |
 | Gemini | `gemini/` | Gemini CLI |
 | VS Code | `.vscode/` | Editor settings |
 | Zsh | `.zshrc` | Shell config, PATH, aliases |

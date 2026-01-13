@@ -88,6 +88,9 @@ ln -s "$CONFIG/.hammerspoon" ~/.hammerspoon
 mkdir -p "$APP_SUPPORT/Code/User"
 ln -sf "$CONFIG/.vscode/settings.json" "$APP_SUPPORT/Code/User/settings.json"
 
+# jetbrains ideavim
+ln -sf "$CONFIG/intellij/.ideavimrc" ~/.ideavimrc
+
 # cargo tools
 cargo install stylua selene
 
