@@ -74,9 +74,11 @@ bat cache --build
 rm -rf "$APP_SUPPORT/lazygit"
 ln -s "$CONFIG/lazygit" "$APP_SUPPORT/lazygit"
 
-# karabiner
-mkdir -p "$XDG_CONFIG/karabiner"
-ln -sf "$CONFIG/karabiner.json" "$XDG_CONFIG/karabiner/karabiner.json"
+# karabiner - manual sync required
+# Karabiner-Elements replaces symlinks with regular files when saving.
+# Copy manually: cp ~/Develop/config/karabiner.json ~/.config/karabiner/karabiner.json
+# mkdir -p "$XDG_CONFIG/karabiner"
+# ln -sf "$CONFIG/karabiner.json" "$XDG_CONFIG/karabiner/karabiner.json"
 
 # hammerspoon
 rm -rf ~/.hammerspoon
