@@ -12,7 +12,7 @@ macOS dotfiles and development environment configuration.
 | Yazi | `yazi/` | File manager with plugins |
 | Lazygit | `lazygit/` | Git TUI |
 | Bat | `bat/` | Syntax-highlighted cat |
-| Hammerspoon | `.hammerspoon/` | Window management, app launcher hotkeys |
+| Hammerspoon | [`.hammerspoon/`](.hammerspoon/README.md) | Window management, app launcher hotkeys |
 | IntelliJ | `intellij/` | IDE and Copilot settings |
 | Gemini | `gemini/` | Gemini CLI |
 | VS Code | `.vscode/` | Editor settings |

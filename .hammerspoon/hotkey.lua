@@ -7,7 +7,6 @@ local app_infos = {
 	{ "Google Chrome", "C" },
 	{ "Notes", "N" },
 	{ "Obsidian", "O" },
-	{ "Reminders", "M" },
 	{ "Rider", "R" },
 	{ "Slack", "S" },
 	{ "WebStorm", "W" },
@@ -29,3 +28,16 @@ end
 hs.hotkey.bind(mash_app, "U", "Open Unity", function()
 	hs.execute("/Users/jameskim/Develop/meow-tower/!meow.app/Contents/MacOS/UnityLauncher", true)
 end)
+
+-- Warp mouse to center of focused window (no mode required)
+hs.hotkey.bind(mash_app, "P", function()
+	local win = hs.window.focusedWindow()
+	if win then
+		local f = win:frame()
+		hs.mouse.absolutePosition({ x = f.x + f.w / 2, y = f.y + f.h / 2 })
+	end
+end)
+
+-- Vimouse: Cmd+Opt+Ctrl+; to toggle mouse mode
+local vimouse = require("vimouse")
+vimouse(mash_app, ";")
