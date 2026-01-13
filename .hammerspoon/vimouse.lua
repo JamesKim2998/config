@@ -64,6 +64,11 @@ return function(tmod, tkey)
       return false
     end
 
+    if flags.cmd and flags.alt and flags.ctrl then
+      -- Pass through mash_app shortcuts (Cmd+Opt+Ctrl)
+      return false
+    end
+
     if code == keycodes.space then
       -- Mouse clicking
       if repeating ~= 0 then
@@ -126,7 +131,7 @@ return function(tmod, tkey)
         mul = 1
       end
 
-      if is_tapkey or code == keycodes['escape'] or code == keycodes[';'] then
+      if is_tapkey or code == keycodes['escape'] or code == keycodes['i'] then
         if dragging then
           postEvent(eventTypes.leftMouseUp, coords, flags, 0)
         end
@@ -137,7 +142,7 @@ return function(tmod, tkey)
         tap:stop()
         -- hs.mouse.setAbsolutePosition(orig_coords)  -- disabled: keep mouse where it is
         return true
-      elseif code == keycodes['u'] or code == keycodes['i'] then
+      elseif code == keycodes['b'] or code == keycodes['f'] then
         if repeating ~= 0 then
           scrolling = scrolling + 1
         else
@@ -146,7 +151,7 @@ return function(tmod, tkey)
 
         local scroll_base = flags.alt and 1 or 3
         local scroll_mul = (scroll_base + math.log(scrolling) * 2) * mul
-        if code == keycodes['u'] then
+        if code == keycodes['b'] then
           scroll_y_delta = math.ceil(1 * scroll_mul)
         else
           scroll_y_delta = math.floor(-1 * scroll_mul)
@@ -160,6 +165,16 @@ return function(tmod, tkey)
         y_delta = step * mul
       elseif code == keycodes['k'] then
         y_delta = step * mul * -1
+      elseif code == keycodes['p'] then
+        -- Warp to center of focused window
+        local win = hs.window.focusedWindow()
+        if win then
+          local f = win:frame()
+          coords.x = f.x + f.w / 2
+          coords.y = f.y + f.h / 2
+          hs.mouse.absolutePosition(coords)
+        end
+        return true
       end
 
       if scroll_y_delta ~= 0 then

@@ -43,12 +43,13 @@ Right-hand friendly controls:
 | h/j/k/l | Move 20px |
 | Shift + h/j/k/l | Move 100px (fast) |
 | Alt + h/j/k/l | Move 5px (slow) |
-| u/i | Scroll up/down |
-| Shift + u/i | Scroll fast |
-| Alt + u/i | Scroll slow |
+| b/f | Scroll up/down (vim-style) |
+| Shift + b/f | Scroll fast |
+| Alt + b/f | Scroll slow |
+| p | Warp to focused window |
 | Space | Left click (hold = drag) |
 | Ctrl + Space | Right click |
-| ; or ESC | Exit mode |
+| i or ESC | Exit mode |
 
 ## Files
 
