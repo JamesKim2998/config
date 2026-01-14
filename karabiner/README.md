@@ -2,12 +2,14 @@
 
 ## Manual Sync Required
 
-Karabiner-Elements replaces symlinks with regular files when saving. Use `just` commands to sync.
+Karabiner-Elements replaces symlinks with regular files when saving.
 
-```bash
-just import  # ~/.config/karabiner/karabiner.json -> repo
-just export  # repo -> ~/.config/karabiner/karabiner.json
-```
+| Recipe | Description |
+|--------|-------------|
+| `just import` | Local -> repo |
+| `just export` | Repo -> local |
+| `just diff` | Show diff |
+| `just status` | Show timestamps and diff |
 
 ## Devices
 
@@ -57,11 +59,11 @@ system_profiler SPBluetoothDataType | grep -E "Minor Type|Vendor ID|Product ID"
 - Fn + K -> Up
 - Fn + L -> Right
 
-### Fn + UIOP -> Mouse Movement
-- Fn + U -> Mouse left
+### Fn + YUIO -> Mouse Movement
+- Fn + Y -> Mouse left
+- Fn + U -> Mouse down
 - Fn + I -> Mouse up
-- Fn + O -> Mouse down
-- Fn + P -> Mouse right
+- Fn + O -> Mouse right
 
 ### Fn + [] -> Scroll
 - Fn + [ -> Scroll up
@@ -75,5 +77,5 @@ system_profiler SPBluetoothDataType | grep -E "Minor Type|Vendor ID|Product ID"
 - Fn + Space -> Left click
 - Fn + Ctrl + Space -> Right click
 
-### Fn + Y -> Warp Mouse
-- Fn + Y -> Warp mouse to center of focused window (via Hammerspoon)
+### Fn + P -> Warp Mouse
+- Fn + P -> Warp mouse to center of focused window (via Hammerspoon)

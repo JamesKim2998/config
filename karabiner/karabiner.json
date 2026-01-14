@@ -162,11 +162,16 @@
                         ]
                     },
                     {
-                        "description": "Fn + UIOP to Mouse Movement",
+                        "description": "Fn + YUIO to Mouse Movement",
                         "manipulators": [
                             {
-                                "from": { "key_code": "u", "modifiers": { "mandatory": ["fn"] } },
+                                "from": { "key_code": "y", "modifiers": { "mandatory": ["fn"] } },
                                 "to": [{ "mouse_key": { "x": -1536 } }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": { "key_code": "u", "modifiers": { "mandatory": ["fn"] } },
+                                "to": [{ "mouse_key": { "y": 1536 } }],
                                 "type": "basic"
                             },
                             {
@@ -176,11 +181,6 @@
                             },
                             {
                                 "from": { "key_code": "o", "modifiers": { "mandatory": ["fn"] } },
-                                "to": [{ "mouse_key": { "y": 1536 } }],
-                                "type": "basic"
-                            },
-                            {
-                                "from": { "key_code": "p", "modifiers": { "mandatory": ["fn"] } },
                                 "to": [{ "mouse_key": { "x": 1536 } }],
                                 "type": "basic"
                             }
@@ -232,10 +232,10 @@
                         ]
                     },
                     {
-                        "description": "Fn + Y to Warp Mouse to Focused Window",
+                        "description": "Fn + P to Warp Mouse to Focused Window",
                         "manipulators": [
                             {
-                                "from": { "key_code": "y", "modifiers": { "mandatory": ["fn"] } },
+                                "from": { "key_code": "p", "modifiers": { "mandatory": ["fn"] } },
                                 "to": [{ "shell_command": "/Applications/Hammerspoon.app/Contents/Frameworks/hs/hs -c 'local w=hs.window.focusedWindow() if w then local f=w:frame() hs.mouse.absolutePosition({x=f.x+f.w/2,y=f.y+f.h/2}) end'" }],
                                 "type": "basic"
                             }
