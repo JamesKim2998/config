@@ -202,16 +202,16 @@
                         ]
                     },
                     {
-                        "description": "Fn + ;' to Page Up/Down",
+                        "description": "Fn + ;' to Scroll",
                         "manipulators": [
                             {
                                 "from": { "key_code": "semicolon", "modifiers": { "mandatory": ["fn"] } },
-                                "to": [{ "key_code": "page_up" }],
+                                "to": [{ "mouse_key": { "vertical_wheel": 128 } }],
                                 "type": "basic"
                             },
                             {
                                 "from": { "key_code": "quote", "modifiers": { "mandatory": ["fn"] } },
-                                "to": [{ "key_code": "page_down" }],
+                                "to": [{ "mouse_key": { "vertical_wheel": -128 } }],
                                 "type": "basic"
                             }
                         ]

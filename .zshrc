@@ -1,4 +1,5 @@
-BREW=/opt/homebrew
+# .zprofile - login shell (once per session): PATH, env vars
+# .zshrc - interactive shell (every terminal): aliases, functions, completions, prompt
 
 # zsh options
 setopt AUTO_CD              # cd into directories by typing the path
@@ -7,25 +8,17 @@ setopt AUTO_CD              # cd into directories by typing the path
 bindkey -v
 KEYTIMEOUT=1  # 10ms escape delay for instant mode switching
 
-# zsh completions (rebuild cache daily)
-autoload -Uz compinit
-[[ -n ~/.zcompdump(#qN.mh+24) ]] && compinit || compinit -C
+# zsh completions (skip audit, always use cache)
+autoload -Uz compinit && compinit -C -u
 
 # zsh-autosuggestions (ghost suggestions)
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=512
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-source $BREW/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
-# brew
-export HOMEBREW_NO_UPDATE_REPORT_NEW=1
-export HOMEBREW_NO_ENV_HINTS=1
-export PATH="$BREW/bin:$HOME/.local/bin:$PATH"
-
-# claude code
-export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
-# run from nearest parent with CLAUDE.md
+# claude code - run from nearest parent with CLAUDE.md
 cc() {
   local orig="$PWD" dir="$PWD"
   while [[ "$dir" != "/" ]]; do
@@ -42,58 +35,20 @@ cc() {
 
 
 # nvim
-export EDITOR=$BREW/bin/nvim
 alias v="$EDITOR"
 alias ve="$EDITOR $HOME/.config/nvim/init.lua"
 
 
-# rust
-export PATH="$HOME/.cargo/bin:$PATH"
-
-
-# dotnet
-export PATH="$PATH:$HOME/.dotnet/tools"
-export DOTNET_ROOT="$HOME/.dotnet"
-
-
-# haxe
-export HAXE_STD_PATH="$BREW/lib/haxe/std"
-
-
-# android & java
-export PATH="$PATH:$HOME/Library/Android/sdk/emulator:$HOME/Library/Android/sdk/platform-tools"
-export PATH="$BREW/opt/openjdk/bin:$PATH"
-
-
 # bun (cached completions)
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 _bun=~/.cache/bun.zsh
 [[ -f $_bun && $_bun -nt $BUN_INSTALL/_bun ]] || cat "$BUN_INSTALL/_bun" > $_bun 2>/dev/null
 [[ -f $_bun ]] && source $_bun
 
 
-# pnpm
-export PNPM_HOME="$HOME/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-
 # fzf (cached)
 _fzf=~/.cache/fzf.zsh
-[[ -f $_fzf && $_fzf -nt $BREW/bin/fzf ]] || fzf --zsh > $_fzf
+[[ -f $_fzf && $_fzf -nt $HOMEBREW_PREFIX/bin/fzf ]] || fzf --zsh > $_fzf
 source $_fzf
-
-# Kanagawa fzf colors (manually mapped from palette by Claude)
-export FZF_DEFAULT_OPTS=" \
-  --color=bg+:#2d4f67,bg:#1f1f28,spinner:#c8c093,hl:#c34043 \
-  --color=fg:#dcd7ba,header:#c34043,info:#957fb8,pointer:#c8c093 \
-  --color=marker:#7e9cd8,fg+:#dcd7ba,prompt:#957fb8,hl+:#e82424 \
-  --color=selected-bg:#2d4f67 \
-  --color=border:#727169,label:#dcd7ba"
 
 
 # eza (modern ls replacement with icons and git integration)
@@ -104,9 +59,8 @@ alias lt='eza --tree --level 2 --icons'
 
 
 # zoxide (cached)
-export _ZO_FZF_OPTS='+e --height=40% --layout=reverse --border --no-sort'
 _zoxide=~/.cache/zoxide.zsh
-[[ -f $_zoxide && $_zoxide -nt $BREW/bin/zoxide ]] || zoxide init zsh > $_zoxide
+[[ -f $_zoxide && $_zoxide -nt $HOMEBREW_PREFIX/bin/zoxide ]] || zoxide init zsh > $_zoxide
 source $_zoxide
 
 
@@ -125,13 +79,8 @@ function y() {
 
 # starship (cached)
 _starship=~/.cache/starship.zsh
-[[ -f $_starship && $_starship -nt $BREW/bin/starship ]] || starship init zsh > $_starship
+[[ -f $_starship && $_starship -nt $HOMEBREW_PREFIX/bin/starship ]] || starship init zsh > $_starship
 source $_starship
-
-
-# trash-cli
-# https://github.com/andreafrancia/trash-cli
-export PATH="$BREW/opt/trash-cli/bin:$PATH"
 
 
 # kitty ssh (auto-reconnect in new windows/panes)

@@ -16,10 +16,17 @@ macOS dotfiles and development environment configuration.
 | IntelliJ | `intellij/` | IdeaVim (.ideavimrc), Copilot settings |
 | Gemini | `gemini/` | Gemini CLI |
 | VS Code | `.vscode/` | Editor settings |
-| Zsh | `.zshrc` | Shell config, PATH, aliases |
+| Zsh | `.zprofile`, `.zshrc` | Shell config |
 | Starship | `starship.toml` | Prompt |
 | Ripgrep | `.ripgreprc` | Search settings |
 | Karabiner | [`karabiner/`](karabiner/README.md) | Keyboard remapping (manual sync via justfile) |
+
+## Shell Config
+
+| File | When | Contents |
+|------|------|----------|
+| `.zprofile` | Login shell (once) | PATH, env vars, brew shellenv |
+| `.zshrc` | Interactive shell (every terminal) | Aliases, functions, completions, prompt |
 
 ## Brew Packages
 
@@ -37,14 +44,7 @@ macOS dotfiles and development environment configuration.
 | Languages & runtimes | lua, rust, go, node, bun, dotnet |
 | Cloud & CLI tools | gemini-cli, awscli |
 | Shell tools | just, starship, shellcheck, zsh-autosuggestions |
-| Casks | kitty, hammerspoon, libreoffice, docker, font-hack-nerd-font, tailscale |
-
-## Cargo Packages
-
-| Package | Purpose |
-|---------|---------|
-| stylua | Lua code formatter |
-| selene | Lua linter |
+| Casks | kitty, hammerspoon, libreoffice, docker, font-hack-nerd-font, tailscale, gureumkim |
 
 ## Theme
 

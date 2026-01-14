@@ -41,6 +41,7 @@ ln -sf "$CONFIG/.claude/CLAUDE.md" ~/.claude/CLAUDE.md
 
 # shell
 touch ~/.hushlogin
+ln -sf "$CONFIG/.zprofile" ~/.zprofile
 ln -sf "$CONFIG/.zshrc" ~/.zshrc
 ln -sf "$CONFIG/starship.toml" "$XDG_CONFIG/starship.toml"
 ln -sf "$CONFIG/.ripgreprc" ~/.ripgreprc
@@ -92,6 +93,6 @@ ln -sf "$CONFIG/.vscode/settings.json" "$APP_SUPPORT/Code/User/settings.json"
 # jetbrains ideavim
 ln -sf "$CONFIG/intellij/.ideavimrc" ~/.ideavimrc
 
-# cargo tools
+# cargo tools (stylua: lua formatter, selene: lua linter)
 cargo install stylua selene
 
