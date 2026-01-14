@@ -191,12 +191,12 @@
                         "manipulators": [
                             {
                                 "from": { "key_code": "open_bracket", "modifiers": { "mandatory": ["fn"] } },
-                                "to": [{ "mouse_key": { "vertical_wheel": -128 } }],
+                                "to": [{ "mouse_key": { "vertical_wheel": 128 } }],
                                 "type": "basic"
                             },
                             {
                                 "from": { "key_code": "close_bracket", "modifiers": { "mandatory": ["fn"] } },
-                                "to": [{ "mouse_key": { "vertical_wheel": 128 } }],
+                                "to": [{ "mouse_key": { "vertical_wheel": -128 } }],
                                 "type": "basic"
                             }
                         ]

@@ -32,7 +32,8 @@ brew_install --cask \
   kitty `# terminal emulator` \
   hammerspoon `# macOS automation` \
   libreoffice docker font-hack-nerd-font \
-  tailscale `# mesh VPN for stable Mac Mini access`
+  tailscale `# mesh VPN for stable Mac Mini access` \
+  gureumkim `# Korean input method`
 
 # claude code
 mkdir -p ~/.claude
