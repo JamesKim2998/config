@@ -107,7 +107,7 @@ MACMINI_DEST=$MACMINI_USER@$MACMINI_HOST
 # server SSH (Tokyo Night colors, cd sync)
 sv() {
   kitten @ set-colors --match "id:$KITTY_WINDOW_ID" ~/.config/kitty/themes/tokyonight-window.conf
-  ssh -i $MACMINI_SSH_KEY $MACMINI_DEST -t "cd '$PWD' 2>/dev/null; exec zsh"
+  ssh -i $MACMINI_SSH_KEY $MACMINI_DEST -t "cd '$PWD' 2>/dev/null; exec zsh -l"
   kitten @ set-colors --match "id:$KITTY_WINDOW_ID" --reset
   local d=$(/usr/bin/ssh -i $MACMINI_SSH_KEY $MACMINI_DEST cat ~/.sv_last_dir 2>/dev/null)
   [[ -d "$d" ]] && cd "$d"
