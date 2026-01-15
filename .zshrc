@@ -8,8 +8,9 @@ setopt AUTO_CD              # cd into directories by typing the path
 bindkey -v
 KEYTIMEOUT=1  # 10ms escape delay for instant mode switching
 
-# zsh completions (skip audit, always use cache)
+# zsh completions (skip audit, use compiled cache)
 autoload -Uz compinit && compinit -C -u
+[[ ~/.zcompdump.zwc -ot ~/.zcompdump ]] && zcompile ~/.zcompdump &!
 
 # zsh-autosuggestions (ghost suggestions)
 ZSH_AUTOSUGGEST_USE_ASYNC=1
@@ -78,8 +79,12 @@ function y() {
 
 
 # starship (cached)
+# PROMPT2 = continuation prompt for multi-line commands (unclosed quotes, loops, etc.)
+# Patched to static '∙' to avoid 7ms sync `starship prompt --continuation` call on init
 _starship=~/.cache/starship.zsh
-[[ -f $_starship && $_starship -nt $HOMEBREW_PREFIX/bin/starship ]] || starship init zsh > $_starship
+if [[ ! -f $_starship || $HOMEBREW_PREFIX/bin/starship -nt $_starship ]]; then
+  starship init zsh | sed "s|^PROMPT2=.*|PROMPT2='%F{240}∙%f '|" > $_starship
+fi
 source $_starship
 
 

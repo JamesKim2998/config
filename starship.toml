@@ -7,6 +7,7 @@ command_timeout = 500
 add_newline = false
 
 format = """
+$hostname\
 $directory\
 $git_branch\
 $git_status\
@@ -81,6 +82,12 @@ disabled = true
 [aws]
 disabled = true
 [package]
+disabled = true
+
+# Disabled: requires zsh/datetime & zsh/mathfunc modules, minimal benefit
+[cmd_duration]
+disabled = true
+[jobs]
 disabled = true
 
 # Kanagawa
