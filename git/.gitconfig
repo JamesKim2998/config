@@ -9,12 +9,16 @@
 	rebase = false
 	ff = true
 [push]
-	recurseSubmodules = on-demand
+	# "check" catches amended submodule commits; "on-demand" misses them
+	recurseSubmodules = check
 [merge]
 	conflictstyle = zdiff3
 [rebase]
 	autoStash = true
 
+[diff]
+	# show full submodule diffs instead of just commit pointer (lazygit ignores this)
+	submodule = diff
 [delta]
 	tabs = 2
 	navigate = true
