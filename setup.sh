@@ -41,6 +41,7 @@ ln -sf "$CONFIG/.claude/CLAUDE.md" ~/.claude/CLAUDE.md
 
 # shell
 touch ~/.hushlogin
+ln -sf "$CONFIG/.zshenv" ~/.zshenv
 ln -sf "$CONFIG/.zprofile" ~/.zprofile
 ln -sf "$CONFIG/.zshrc" ~/.zshrc
 ln -sf "$CONFIG/starship.toml" "$XDG_CONFIG/starship.toml"

@@ -1,5 +1,6 @@
-# .zprofile - login shell (once per session): PATH, env vars
-# .zshrc - interactive shell (every terminal): aliases, functions, completions, prompt
+# .zshenv - all shells (keep minimal, runs before path_helper)
+# .zprofile - login shells (PATH, env vars - inherited by subshells)
+# .zshrc - interactive shells (aliases, functions, prompt - not inherited)
 
 # zsh options
 setopt AUTO_CD              # cd into directories by typing the path
