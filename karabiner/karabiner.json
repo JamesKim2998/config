@@ -107,6 +107,14 @@
                             "to": [{ "key_code": "fn" }]
                         },
                         {
+                            "from": { "key_code": "left_command" },
+                            "to": [{ "key_code": "left_option" }]
+                        },
+                        {
+                            "from": { "key_code": "left_option" },
+                            "to": [{ "key_code": "left_command" }]
+                        },
+                        {
                             "from": { "key_code": "right_command" },
                             "to": [{ "key_code": "f16" }]
                         }
@@ -126,6 +134,14 @@
                         {
                             "from": { "key_code": "escape" },
                             "to": [{ "key_code": "fn" }]
+                        },
+                        {
+                            "from": { "key_code": "left_command" },
+                            "to": [{ "key_code": "left_option" }]
+                        },
+                        {
+                            "from": { "key_code": "left_option" },
+                            "to": [{ "key_code": "left_command" }]
                         },
                         {
                             "from": { "key_code": "right_command" },

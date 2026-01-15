@@ -48,7 +48,9 @@ system_profiler SPBluetoothDataType | grep -E "Minor Type|Vendor ID|Product ID"
 ### Mistel MD770 (Bluetooth & USB)
 - Caps Lock -> Escape
 - Escape -> Fn (for Fn+HJKL arrows)
+- Left Command <-> Left Option (swap for Mac layout)
 - Right Command -> F16 (input source switching)
+- DIP Switch 1 OFF (Windows mode for standard F-keys)
 - See [barocco_md770.pdf](barocco_md770.pdf) for DIP switch settings
 
 ## Complex Modifications
