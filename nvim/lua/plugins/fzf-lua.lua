@@ -33,8 +33,8 @@ return {
 					vim.fn.setreg("+", selected[1])
 					vim.notify("Copied: " .. selected[1])
 				end,
-				["alt-i"] = { require("fzf-lua").actions.toggle_ignore },
-				["alt-h"] = { require("fzf-lua").actions.toggle_hidden },
+				["alt-i"] = function(...) require("fzf-lua").actions.toggle_ignore(...) end,
+				["alt-h"] = function(...) require("fzf-lua").actions.toggle_hidden(...) end,
 			},
 		},
 		grep = {
@@ -44,8 +44,8 @@ return {
 					vim.fn.setreg("+", path)
 					vim.notify("Copied: " .. path)
 				end,
-				["alt-i"] = { require("fzf-lua").actions.toggle_ignore },
-				["alt-h"] = { require("fzf-lua").actions.toggle_hidden },
+				["alt-i"] = function(...) require("fzf-lua").actions.toggle_ignore(...) end,
+				["alt-h"] = function(...) require("fzf-lua").actions.toggle_hidden(...) end,
 			},
 		},
 	},
