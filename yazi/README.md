@@ -1,5 +1,16 @@
 # Yazi Configuration
 
+## Custom Keymaps
+
+| Key | Action |
+|-----|--------|
+| `q` | Close tab (quit if last) |
+| `Tab` | Next tab |
+| `S-Tab` | Previous tab |
+| `i` | File info (spot) |
+| `/` | Filter files |
+| `Space` | Toggle selection (no auto-move) |
+
 ## Plugins
 
 | Plugin | Purpose |

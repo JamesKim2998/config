@@ -1,4 +1,7 @@
 promptToReturnFromSubprocess: false
+os:
+  # Opens files in existing nvim instance (when running lazygit inside nvim terminal)
+  editPreset: nvim-remote
 gui:
   filterMode: fuzzy
 git:

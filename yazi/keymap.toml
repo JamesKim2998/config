@@ -4,11 +4,27 @@ on = "/"
 run = "filter --smart"
 desc = "Filter files"
 
-# q acts as escape (don't quit)
+# Tab navigation (Tab/S-Tab), move original info to 'i'
+[[mgr.prepend_keymap]]
+on = "<Tab>"
+run = "tab_switch 1 --relative"
+desc = "Next tab"
+
+[[mgr.prepend_keymap]]
+on = "<S-Tab>"
+run = "tab_switch -1 --relative"
+desc = "Previous tab"
+
+[[mgr.prepend_keymap]]
+on = "i"
+run = "spot"
+desc = "File info (spot)"
+
+# q closes tab (like Ctrl+C)
 [[mgr.prepend_keymap]]
 on  = "q"
-run = "escape"
-desc = "Clear selection / cancel"
+run = "plugin close-and-restore-tab close_to_right"
+desc = "Close tab, or quit if last tab"
 
 # Keep Space on the current row after toggling selection
 [[mgr.prepend_keymap]]
