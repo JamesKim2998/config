@@ -21,6 +21,16 @@ IDE setup with Lazy.nvim plugin manager.
 | `<leader>-` | Open yazi | yazi |
 | `<leader>S` | Search & replace | spectre |
 
+### fzf-lua (inside picker)
+
+| Key | Action |
+|-----|--------|
+| `ctrl-y` | Copy file path to clipboard |
+| `ctrl-q` | Send all to quickfix |
+| `alt-i` | Toggle ignore (.gitignore) |
+| `alt-h` | Toggle hidden files |
+| `ctrl-u/d` | Half page up/down |
+
 ### Motion & Navigation
 
 | Key | Action | Source |
