@@ -39,6 +39,7 @@ vim.o.listchars = "tab:▸ ,trail:·,extends:→,precedes:←,nbsp:␣"
 vim.o.showtabline = 2 -- Always show tabline
 
 -- Common Key Mappings
+vim.keymap.set("n", "<Esc>", "<cmd>noh<CR>", { desc = "Clear search highlight" })
 vim.keymap.set("n", "qq", "<cmd>bd<CR>", { desc = "Close buffer" })
 vim.keymap.set("n", "Q", "<cmd>qa<CR>", { desc = "Quit nvim" })
 vim.keymap.set("n", "<leader>w", "<cmd>w<CR>", { desc = "Save file" })

@@ -30,7 +30,7 @@ return {
 				-- gd, gr, gI, gy mapped in trouble.nvim
 				map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
 				map("n", "K", vim.lsp.buf.hover, "Hover documentation")
-				map("n", "<leader>rn", vim.lsp.buf.rename, "Rename symbol")
+				-- <leader>rn mapped in inc-rename.nvim
 				map("n", "<leader>ca", vim.lsp.buf.code_action, "Code action")
 				map("n", "[d", vim.diagnostic.goto_prev, "Previous diagnostic")
 				map("n", "]d", vim.diagnostic.goto_next, "Next diagnostic")
