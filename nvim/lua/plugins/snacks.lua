@@ -10,7 +10,14 @@ return {
 	opts = {
 		indent = { enabled = true },
 		explorer = { enabled = true },
-		picker = { sources = { explorer = { win = { list = { keys = { ["<C-n>"] = "close" } } } } } },
+		picker = {
+			sources = {
+				explorer = {
+					formatters = { idx = false }, -- hide item numbers
+					win = { list = { keys = { ["<C-n>"] = "close" } } },
+				},
+			},
+		},
 	},
 	config = function(_, opts)
 		require("snacks").setup(opts)

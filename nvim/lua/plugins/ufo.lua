@@ -57,8 +57,11 @@ return {
 
 		require("ufo").setup({
 			provider_selector = function(_, _)
-				return { "treesitter", "indent" }
+				return { "lsp", "indent" } -- LSP needed for 'imports' kind
 			end,
+			close_fold_kinds_for_ft = {
+				default = { "imports" },
+			},
 			fold_virt_text_handler = handler,
 		})
 	end,
