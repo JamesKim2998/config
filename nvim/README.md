@@ -87,7 +87,10 @@ IDE setup with Lazy.nvim plugin manager.
 | Key | Action | Source |
 |-----|--------|--------|
 | `<leader>w` | Save | init.lua |
-| `qq` | Quit | init.lua |
+| `qq` | Close buffer | init.lua |
+| `Q` | Quit nvim | init.lua |
+| `<leader>y` | Copy relative path | init.lua |
+| `<leader>Y` | Copy absolute path | init.lua |
 | `<leader>lg` | Open LazyGit | lazygit |
 | `<leader>fh` | Help tags | fzf-lua |
 | `<leader>fc` | Commands | fzf-lua |

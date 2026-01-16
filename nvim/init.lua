@@ -42,6 +42,8 @@ vim.o.showtabline = 2 -- Always show tabline
 vim.keymap.set("n", "qq", "<cmd>bd<CR>", { desc = "Close buffer" })
 vim.keymap.set("n", "Q", "<cmd>qa<CR>", { desc = "Quit nvim" })
 vim.keymap.set("n", "<leader>w", "<cmd>w<CR>", { desc = "Save file" })
+vim.keymap.set("n", "<leader>y", function() vim.fn.setreg("+", vim.fn.expand("%")) end, { desc = "Copy relative path" })
+vim.keymap.set("n", "<leader>Y", function() vim.fn.setreg("+", vim.fn.expand("%:p")) end, { desc = "Copy absolute path" })
 
 -- Navigation
 vim.keymap.set("n", "j", "gj", { noremap = true })
