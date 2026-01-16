@@ -8,7 +8,7 @@ return {
 		local lint = require("lint")
 		lint.linters_by_ft = {
 			sh = { "shellcheck" },
-			lua = { "selene" },
+			-- lua: disabled selene (lua_ls provides diagnostics)
 		}
 
 		-- Force bash dialect so shellcheck accepts .command files

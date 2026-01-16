@@ -6,7 +6,7 @@ macOS dotfiles and development environment configuration.
 
 | Tool | Config | Desc |
 |------|--------|------|
-| Neovim | `nvim/` | IDE with Lazy.nvim plugin manager |
+| Neovim | [`nvim/`](nvim/README.md) | IDE with Lazy.nvim plugin manager |
 | Kitty | `kitty/` | Terminal emulator, Kanagawa theme |
 | Git | `git/` | Config with delta diff viewer |
 | Yazi | `yazi/` | File manager with plugins |

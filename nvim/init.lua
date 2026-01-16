@@ -90,9 +90,14 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- Search
+vim.o.ignorecase = true -- Case insensitive search
+vim.o.smartcase = true -- Unless uppercase typed
+
 -- Etc
 vim.o.scrolloff = 8
 vim.o.clipboard = "unnamedplus"
+vim.o.undofile = true -- Persistent undo history
 
 -- Use OSC 52 for clipboard over SSH (yank reaches local clipboard)
 if vim.env.SSH_TTY then

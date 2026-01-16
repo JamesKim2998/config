@@ -1,7 +1,6 @@
 -- https://github.com/mason-org/mason-lspconfig.nvim
 -- LSP support: mason (installer) + lspconfig (configuration)
--- Run :Mason to install language servers (e.g., pyright, ts_ls, gopls)
--- Auto-installed: lua_ls
+-- Run :Mason to install language servers
 return {
 	"mason-org/mason-lspconfig.nvim",
 	event = { "BufReadPre", "BufNewFile" },
@@ -10,15 +9,14 @@ return {
 		"neovim/nvim-lspconfig",
 	},
 	opts = {
-		-- Servers to auto-install
-		ensure_installed = {
-			"lua_ls",
-		},
+		ensure_installed = { "lua_ls", "ts_ls" },
+		automatic_installation = true,
+		-- automatic_enable = true (default) - auto-enables installed servers
 	},
 	config = function(_, opts)
 		require("mason-lspconfig").setup(opts)
 
-		-- LSP keybindings (set when LSP attaches to buffer)
+		-- Keymaps on LSP attach
 		vim.api.nvim_create_autocmd("LspAttach", {
 			callback = function(args)
 				local bufnr = args.buf
@@ -26,16 +24,19 @@ return {
 					vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
 				end
 
-				map("n", "gd", vim.lsp.buf.definition, "Go to definition")
-				map("n", "gr", vim.lsp.buf.references, "Go to references")
+				-- Enable inlay hints by default
+				vim.lsp.inlay_hint.enable(true)
+
+				-- gd, gr, gI, gy mapped in trouble.nvim
 				map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
-				map("n", "gI", vim.lsp.buf.implementation, "Go to implementation")
-				map("n", "gy", vim.lsp.buf.type_definition, "Go to type definition")
 				map("n", "K", vim.lsp.buf.hover, "Hover documentation")
 				map("n", "<leader>rn", vim.lsp.buf.rename, "Rename symbol")
 				map("n", "<leader>ca", vim.lsp.buf.code_action, "Code action")
 				map("n", "[d", vim.diagnostic.goto_prev, "Previous diagnostic")
 				map("n", "]d", vim.diagnostic.goto_next, "Next diagnostic")
+				map("n", "<leader>th", function()
+					vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+				end, "Toggle inlay hints")
 			end,
 		})
 	end,

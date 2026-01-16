@@ -10,8 +10,7 @@ return {
 		{ "<leader>fh", "<cmd>FzfLua help_tags<cr>", desc = "Help tags" },
 		{ "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent files" },
 		{ "<leader>fw", "<cmd>FzfLua grep_cword<cr>", desc = "Grep word under cursor" },
-		{ "<leader>fd", "<cmd>FzfLua diagnostics_document<cr>", desc = "Document diagnostics" },
-		{ "<leader>fs", "<cmd>FzfLua lsp_document_symbols<cr>", desc = "Document symbols" },
+		-- diagnostics/symbols moved to trouble.nvim
 		{ "<leader>fc", "<cmd>FzfLua commands<cr>", desc = "Commands" },
 		{ "<leader>fk", "<cmd>FzfLua keymaps<cr>", desc = "Keymaps" },
 		{ "<leader><leader>", "<cmd>FzfLua buffers<cr>", desc = "Buffers" },
