@@ -10,3 +10,6 @@
 [submodule "yazi/plugins/bat.yazi"]
 	path = yazi/plugins/bat.yazi
 	url = https://github.com/JamesKim2998/yazi-plugin-bat.git
+[submodule "yazi/plugins/close-and-restore-tab.yazi"]
+	path = yazi/plugins/close-and-restore-tab.yazi
+	url = https://github.com/studio-boxcat/close-and-restore-tab.yazi.git
