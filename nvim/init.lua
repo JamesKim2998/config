@@ -40,11 +40,24 @@ vim.o.showtabline = 2 -- Always show tabline
 
 -- Common Key Mappings
 vim.keymap.set("n", "<Esc>", "<cmd>noh<CR>", { desc = "Clear search highlight" })
-vim.keymap.set("n", "qq", "<cmd>bd<CR>", { desc = "Close buffer" })
+vim.keymap.set("n", "qq", function()
+	local bufs = vim.tbl_filter(function(b)
+		return vim.bo[b].buflisted and vim.api.nvim_buf_is_loaded(b)
+	end, vim.api.nvim_list_bufs())
+	if #bufs <= 1 then
+		vim.cmd("qa")
+	else
+		vim.cmd("bd")
+	end
+end, { desc = "Close buffer (quit if last)" })
 vim.keymap.set("n", "Q", "<cmd>qa<CR>", { desc = "Quit nvim" })
 vim.keymap.set("n", "<leader>w", "<cmd>w<CR>", { desc = "Save file" })
 vim.keymap.set("n", "<leader>y", function() vim.fn.setreg("+", vim.fn.expand("%")) end, { desc = "Copy relative path" })
 vim.keymap.set("n", "<leader>Y", function() vim.fn.setreg("+", vim.fn.expand("%:p")) end, { desc = "Copy absolute path" })
+
+-- Add newline without entering insert mode
+vim.keymap.set("n", "]<Space>", "o<Esc>", { desc = "Add line below" })
+vim.keymap.set("n", "[<Space>", "O<Esc>", { desc = "Add line above" })
 
 -- Navigation
 vim.keymap.set("n", "j", "gj", { noremap = true })
