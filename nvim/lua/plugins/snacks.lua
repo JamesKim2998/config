@@ -13,11 +13,12 @@ return {
 		picker = {
 			sources = {
 				explorer = {
-					matcher = { fuzzy = true }, -- default: false (exact match)
-					auto_close = true, -- close on file select
+					matcher = { fuzzy = true, filename = true }, -- match filename only
+					auto_close = false,
 					layout = { auto_hide = { "input" } }, -- show search box only on /
 					formatters = { idx = false }, -- hide item numbers
 					win = { list = { keys = { ["<C-n>"] = "close" } } }, -- match toggle key
+					exclude = { "*.png" },
 				},
 			},
 		},
