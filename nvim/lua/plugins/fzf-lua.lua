@@ -13,10 +13,13 @@ return {
 		{ "<leader>fc", "<cmd>FzfLua commands<cr>", desc = "Commands" },
 		{ "<leader>fk", "<cmd>FzfLua keymaps<cr>", desc = "Keymaps" },
 		{ "<leader><leader>", "<cmd>FzfLua buffers<cr>", desc = "Buffers" },
+		{ "<leader>ss", "<cmd>FzfLua lsp_document_symbols<cr>", desc = "Document symbols" },
+		{ "<leader>sS", "<cmd>FzfLua lsp_live_workspace_symbols<cr>", desc = "Workspace symbols" },
 	},
 	opts = function()
 		local actions = require("fzf-lua").actions
 		return {
+			fzf_colors = true, -- inherit colors from nvim colorscheme
 			defaults = { git_icons = true, file_icons = true },
 			keymap = {
 				fzf = {
