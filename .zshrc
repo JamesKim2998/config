@@ -124,4 +124,5 @@ add-zsh-hook precmd _ls_once                             # on new shell (once)
 
 # aliases
 alias g="lazygit"
+alias todo="$EDITOR $MEOW_ROOT/todo/todo.md"
 
