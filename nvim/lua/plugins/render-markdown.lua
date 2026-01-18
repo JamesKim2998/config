@@ -1,4 +1,4 @@
--- render-markdown.nvim (visual markdown rendering with icons)
+-- render-markdown.nvim: visual rendering (headings, bullets, checkboxes, code blocks)
 return {
 	"MeanderingProgrammer/render-markdown.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },

@@ -24,7 +24,7 @@ return {
 						includeInlayParameterNameHints = "all",
 						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
 						includeInlayFunctionParameterTypeHints = true,
-						includeInlayVariableTypeHints = true,
+						includeInlayVariableTypeHints = false, -- redundant with explicit annotations
 						includeInlayVariableTypeHintsWhenTypeMatchesName = false,
 						includeInlayPropertyDeclarationTypeHints = true,
 						includeInlayFunctionLikeReturnTypeHints = true,
@@ -36,7 +36,7 @@ return {
 						includeInlayParameterNameHints = "all",
 						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
 						includeInlayFunctionParameterTypeHints = true,
-						includeInlayVariableTypeHints = true,
+						includeInlayVariableTypeHints = false, -- redundant with explicit annotations
 						includeInlayVariableTypeHintsWhenTypeMatchesName = false,
 						includeInlayPropertyDeclarationTypeHints = true,
 						includeInlayFunctionLikeReturnTypeHints = true,

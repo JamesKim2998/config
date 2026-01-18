@@ -13,8 +13,11 @@ return {
 		picker = {
 			sources = {
 				explorer = {
+					matcher = { fuzzy = true }, -- default: false (exact match)
+					auto_close = true, -- close on file select
+					layout = { auto_hide = { "input" } }, -- show search box only on /
 					formatters = { idx = false }, -- hide item numbers
-					win = { list = { keys = { ["<C-n>"] = "close" } } },
+					win = { list = { keys = { ["<C-n>"] = "close" } } }, -- match toggle key
 				},
 			},
 		},

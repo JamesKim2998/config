@@ -21,6 +21,21 @@ IDE setup with Lazy.nvim plugin manager.
 | `<leader>-` | Open yazi | yazi |
 | `<leader>S` | Search & replace | spectre |
 
+### snacks explorer (inside explorer)
+
+| Key | Action |
+|-----|--------|
+| `/` | Fuzzy search files |
+| `l` | Open file/expand dir |
+| `h` | Collapse dir |
+| `a` | Add file/dir |
+| `d` | Delete |
+| `r` | Rename |
+| `c` | Copy |
+| `<BS>` | Go up directory |
+
+Config: fuzzy search enabled, auto-close on select, search input hidden until `/`.
+
 ### fzf-lua (inside picker)
 
 | Key | Action |
@@ -85,6 +100,14 @@ IDE setup with Lazy.nvim plugin manager.
 | `<C-e>` | Hide menu | blink.cmp |
 | `<C-n>` / `<C-p>` | Navigate items | blink.cmp |
 
+### Markdown
+
+| Key | Action | Source |
+|-----|--------|--------|
+| `<leader>tt` | Toggle checkbox `[ ]` ↔ `[x]` | markdown-lists |
+| `gN` | Renumber list | bullets.vim |
+
+
 ### Session
 
 | Key | Action | Source |
@@ -129,6 +152,8 @@ IDE setup with Lazy.nvim plugin manager.
 | nvim-lint | Linting | lint.lua |
 | nvim-ufo | Code folding | ufo.lua |
 | render-markdown.nvim | Markdown rendering | render-markdown.lua |
+| bullets.vim | List continuation | bullets.lua |
+| markdown-lists (local) | Checkbox toggle, strikethrough, blockquote | markdown-lists.lua |
 | **Editing** |||
 | nvim-surround | Surround pairs | surround.lua |
 | nvim-autopairs | Auto-close brackets | autopairs.lua |

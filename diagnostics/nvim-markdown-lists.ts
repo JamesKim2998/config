@@ -163,20 +163,24 @@ async function testOonMultiSymbols(nvim: NeovimClient): Promise<boolean> {
   return check("'o' on □●✔ line", ok, `line 4: "${line.trim()}"`);
 }
 
+// Note: o/O only handles checkboxes and blockquotes, not regular bullets
+// For regular bullet continuation, use <CR> in insert mode
 async function testOonBullet(nvim: NeovimClient): Promise<boolean> {
   await reloadFile(nvim);
   const lines = await testKey(nvim, 4, "o", "new bullet");
   const line = lines[4] || "";
-  const ok = line.trim() === "- new bullet";
-  return check("'o' on bullet creates bullet", ok, `line 5: "${line.trim()}"`);
+  // Just inserts plain line (bullets.vim disabled for o/O)
+  const ok = line.trim() === "new bullet";
+  return check("'o' on bullet creates line", ok, `line 5: "${line.trim()}"`);
 }
 
 async function testOonNumbered(nvim: NeovimClient): Promise<boolean> {
   await reloadFile(nvim);
   const lines = await testKey(nvim, 5, "o", "second item");
   const line = lines[5] || "";
-  const ok = line.trim() === "2. second item";
-  return check("'o' on numbered continues", ok, `line 6: "${line.trim()}"`);
+  // Just inserts plain line (bullets.vim disabled for o/O)
+  const ok = line.trim() === "second item";
+  return check("'o' on numbered creates line", ok, `line 6: "${line.trim()}"`);
 }
 
 async function testOonBlockquote(nvim: NeovimClient): Promise<boolean> {
@@ -233,6 +237,12 @@ function isUncheckedState(line: string): boolean {
 // Test <leader>tt toggle
 async function testToggleRaw(nvim: NeovimClient): Promise<boolean> {
   await reloadFile(nvim);
+  // Force checkmate to process the buffer
+  try {
+    await nvim.call("luaeval", ["require('checkmate')._start()"]);
+    await nvim.call("luaeval", ["require('checkmate.api').process_buffer(0, 'full', 'test')"]);
+  } catch {}
+  await Bun.sleep(300);
   const lines = await testKey(nvim, 3, "<Space>tt");
   const line = lines[2] || "";
   return check("<leader>tt toggles checkbox", isCheckedState(line), `line 3: "${line.trim()}"`);
@@ -304,6 +314,221 @@ async function testCRonRendered(nvim: NeovimClient): Promise<boolean> {
   return check("<CR> on rendered checkbox", ok, `line 4: "${line.trim()}"`);
 }
 
+// Test gitsigns modified status on checkmate-rendered lines
+async function testGitsignsModified(nvim: NeovimClient): Promise<boolean> {
+  // Create file, save it, then check if gitsigns shows modified
+  const content = `# Test\n\n- [ ] todo item\n`;
+  await Bun.write(TEST_FILE, content);
+  await nvim.command("e!");
+  await Bun.sleep(300);
+
+  // Get buffer content
+  const lines = await getLines(nvim);
+  const line = lines[2] || "";
+
+  // Check if buffer reports as modified
+  const modified = await nvim.eval("&modified");
+
+  // Get the actual raw text vs visual
+  const rawLine = await nvim.call("getline", [3]) as string;
+
+  // Check if checkmate replaced the content
+  const wasReplaced = rawLine.includes("□") && !rawLine.includes("[ ]");
+
+  const note = `raw="${rawLine}", modified=${modified}, replaced=${wasReplaced}`;
+
+  // The bug: if checkmate replaces [ ] with □ in the buffer, it makes &modified true
+  // This is wrong - rendering should use concealment/extmarks, not buffer modification
+  const ok = !wasReplaced || modified === 0;
+  return check("Checkmate render preserves buffer", ok, note);
+}
+
+// Test that checkbox text is not truncated after rendering
+async function testTextNotTruncated(nvim: NeovimClient): Promise<boolean> {
+  // Specifically test the case where "google" was being truncated to "gle"
+  await reloadFile(nvim, `# Test\n\n- [ ] google play pass email reply\n`);
+
+  // Force checkmate processing
+  try {
+    await nvim.call("luaeval", ["require('checkmate')._start()"]);
+    await nvim.call("luaeval", ["require('checkmate.api').process_buffer(0, 'full', 'test')"]);
+  } catch {}
+  await Bun.sleep(500);
+
+  // Get the actual buffer content (not visual)
+  const rawLine = await nvim.call("getline", [3]) as string;
+
+  // Buffer should still have the full text
+  const hasFullText = rawLine.includes("google play pass email reply");
+  const hasCheckbox = rawLine.includes("[ ]");
+
+  // Check if any text appears truncated
+  const isTruncated = rawLine.includes("gle play") && !rawLine.includes("google");
+
+  const note = `raw="${rawLine}", hasFullText=${hasFullText}, isTruncated=${isTruncated}`;
+
+  // Success: buffer has full text and checkbox, no truncation
+  const ok = hasFullText && hasCheckbox && !isTruncated;
+  return check("Checkbox text not truncated", ok, note);
+}
+
+// Test concealment extmarks are positioned correctly
+async function testConcealmentPosition(nvim: NeovimClient): Promise<boolean> {
+  await reloadFile(nvim, `# Test\n\n- [ ] google play pass email reply\n`);
+
+  // Force checkmate processing
+  try {
+    await nvim.call("luaeval", ["require('checkmate')._start()"]);
+    await nvim.call("luaeval", ["require('checkmate.api').process_buffer(0, 'full', 'test')"]);
+  } catch {}
+  await Bun.sleep(500);
+
+  // Get concealment extmarks
+  const extmarks = await nvim.call("luaeval", [
+    "vim.api.nvim_buf_get_extmarks(0, require('checkmate.config').ns_conceal, 0, -1, {details=true})"
+  ]) as any[];
+
+  if (!extmarks || extmarks.length === 0) {
+    return check("Concealment extmarks exist", false, "No concealment extmarks found");
+  }
+
+  // Check the first extmark (should be on line 3, at position of '[')
+  const ext = extmarks[0];
+  const row = ext[1];
+  const col = ext[2];
+  const details = ext[3];
+  const endCol = details?.end_col;
+  const concealChar = details?.conceal;
+
+  // Line is "- [ ] google..." - checkbox starts at col 2 (0-indexed)
+  // [ ] is 3 chars, so end_col should be 5
+  const expectedCol = 2;
+  const expectedEndCol = 5;
+
+  const posCorrect = col === expectedCol && endCol === expectedEndCol;
+  const note = `row=${row}, col=${col}, end_col=${endCol}, conceal="${concealChar}", expected col=${expectedCol}-${expectedEndCol}`;
+
+  return check("Concealment position correct", posCorrect, note);
+}
+
+// Test with user's actual todo.md file
+async function testUserTodoFile(nvim: NeovimClient): Promise<boolean> {
+  const todoFile = "/Users/jameskim/Develop/todo/todo.md";
+
+  // Check if file exists
+  if (!await Bun.file(todoFile).exists()) {
+    return check("User todo.md exists", false, "File not found");
+  }
+
+  // Open the file
+  await nvim.command(`e ${todoFile}`);
+  await Bun.sleep(300);
+
+  // Force checkmate processing
+  try {
+    await nvim.call("luaeval", ["require('checkmate')._start()"]);
+    await nvim.call("luaeval", ["require('checkmate.api').process_buffer(0, 'full', 'test')"]);
+  } catch {}
+  await Bun.sleep(500);
+
+  // Find the "google play" line (should be around line 13)
+  const lines = await getLines(nvim);
+  const googleLineIdx = lines.findIndex(l => l.includes("google") || l.includes("gle"));
+
+  if (googleLineIdx === -1) {
+    return check("Find google line", false, "Line with 'google' not found");
+  }
+
+  const googleLine = lines[googleLineIdx];
+  const hasFullText = googleLine.includes("google play pass email reply");
+  const isTruncated = googleLine.includes("gle play") && !googleLine.includes("google");
+
+  // Get concealment extmarks for this line
+  const extmarks = await nvim.call("luaeval", [
+    `vim.api.nvim_buf_get_extmarks(0, require('checkmate.config').ns_conceal, {${googleLineIdx}, 0}, {${googleLineIdx}, -1}, {details=true})`
+  ]) as any[];
+
+  let extmarkInfo = "no extmarks";
+  if (extmarks && extmarks.length > 0) {
+    const ext = extmarks[0];
+    extmarkInfo = `col=${ext[2]}, end_col=${ext[3]?.end_col}`;
+  }
+
+  const note = `line ${googleLineIdx + 1}: "${googleLine.substring(0, 50)}...", extmarks: ${extmarkInfo}`;
+  const ok = hasFullText && !isTruncated;
+  return check("User todo.md not truncated", ok, note);
+}
+
+// Test gitsigns with actual git repo - verifies checkmate conversion behavior
+async function testGitsignsInRepo(nvim: NeovimClient): Promise<boolean> {
+  const testDir = "/tmp/nvim-gitsigns-test";
+  const testFile = `${testDir}/test.md`;
+  const content = `# Test\n\n- [ ] run the nonogram translation dry -> real\n`;
+
+  // Setup git repo with [ ] checkbox
+  await Bun.$`rm -rf ${testDir}`.nothrow();
+  await Bun.$`mkdir -p ${testDir}`.nothrow();
+  await Bun.write(testFile, content);
+  await Bun.$`cd ${testDir} && git init && git add . && git commit -m "init"`.quiet();
+
+  // Open file in nvim
+  await nvim.command(`e ${testFile}`);
+  await Bun.sleep(200);
+
+  // Force checkmate processing
+  try {
+    await nvim.command("Lazy load checkmate.nvim");
+    await nvim.command("set filetype=markdown");
+    await nvim.command("doautocmd FileType markdown");
+    // Force checkmate to start and convert
+    await nvim.call("luaeval", ["require('checkmate')._start()"]);
+    await nvim.call("luaeval", ["require('checkmate.api').process_buffer(0, 'full', 'test')"]);
+  } catch (e) {
+    console.log("  checkmate init error:", String(e).substring(0, 100));
+  }
+  await Bun.sleep(500); // Wait for checkmate debounce
+
+  // Get buffer content immediately
+  const rawLineAfterLoad = await nvim.call("getline", [3]) as string;
+
+  // Wait more and check again
+  await Bun.sleep(500);
+  const rawLineAfterDelay = await nvim.call("getline", [3]) as string;
+
+  // Check &modified
+  const bufModified = await nvim.eval("&modified");
+
+  // Force gitsigns attach
+  try {
+    await nvim.command("Gitsigns attach");
+  } catch {}
+  await Bun.sleep(300);
+
+  // Get gitsigns hunks
+  let gitsignsHunks = "";
+  try {
+    const hunks = await nvim.call("luaeval", ["require('gitsigns').get_hunks()"]);
+    gitsignsHunks = JSON.stringify(hunks);
+  } catch (e) {
+    gitsignsHunks = `error: ${e}`;
+  }
+
+  // Cleanup
+  await Bun.$`rm -rf ${testDir}`.nothrow();
+
+  // With concealment fix: buffer should still have [ ] (not converted to □)
+  const bufferHasMarkdown = rawLineAfterDelay.includes("[ ]");
+  const hasHunks = gitsignsHunks !== "[]" && gitsignsHunks !== "null" && !gitsignsHunks.includes("error");
+
+  const note = `bufContent="${bufferHasMarkdown ? "[ ]" : "□"}", modified=${bufModified}, gitsignsHunks=${hasHunks}`;
+
+  // After concealment fix:
+  // - Buffer should contain [ ] (markdown, not unicode)
+  // - Gitsigns should show NO hunks (buffer matches git)
+  const fixWorking = bufferHasMarkdown && !hasHunks;
+  return check("Concealment fix: buffer=markdown, gitsigns=clean", fixWorking, note);
+}
+
 // Test ]<Space> and [<Space>
 async function testBracketSpaceBelow(nvim: NeovimClient): Promise<boolean> {
   await reloadFile(nvim);
@@ -361,6 +586,12 @@ async function main() {
       // bracket tests
       ["]<Space> on todo", () => testBracketSpaceBelow(client)],
       ["[<Space> on todo", () => testBracketSpaceAbove(client)],
+      // gitsigns/modified status
+      ["Checkmate buffer preservation", () => testGitsignsModified(client)],
+      ["Checkbox text not truncated", () => testTextNotTruncated(client)],
+      ["Concealment position correct", () => testConcealmentPosition(client)],
+      ["User todo.md not truncated", () => testUserTodoFile(client)],
+      ["Gitsigns in git repo", () => testGitsignsInRepo(client)],
     ];
 
     let passed = 0;
