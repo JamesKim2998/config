@@ -152,6 +152,7 @@ Config: fuzzy search enabled, auto-close on select, search input hidden until `/
 | nvim-lint | Linting | lint.lua |
 | nvim-ufo | Code folding | ufo.lua |
 | render-markdown.nvim | Markdown rendering | render-markdown.lua |
+| vim-markdown | Indent (indentexpr for `==`) | vim-markdown.lua |
 | bullets.vim | List continuation | bullets.lua |
 | markdown-lists (local) | Checkbox toggle, strikethrough, blockquote | markdown-lists.lua |
 | **Editing** |||
