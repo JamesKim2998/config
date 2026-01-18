@@ -6,7 +6,7 @@ macOS dotfiles and development environment configuration.
 
 | Tool | Config | Desc |
 |------|--------|------|
-| Neovim | [`nvim/`](nvim/README.md) | IDE with Lazy.nvim plugin manager |
+| Neovim | [`nvim/`](docs/nvim.md) | IDE with Lazy.nvim plugin manager |
 | Kitty | `kitty/` | Terminal emulator, Kanagawa theme |
 | Git | `git/` | Config with delta diff viewer |
 | Yazi | `yazi/` | File manager with plugins |
@@ -62,4 +62,4 @@ macOS dotfiles and development environment configuration.
 |--------|------|
 | `setup.sh` | Homebrew, CLI tools, symlinks |
 | `setup-server.sh` | Server-specific setup (Tokyo Night) |
-| `diagnostics/` | SSH/clipboard/latency diagnostics |
+| `diagnostics/` | SSH, clipboard, nvim plugin diagnostics |

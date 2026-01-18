@@ -6,9 +6,12 @@
     "clipboard": "bun osc52-clipboard.ts",
     "cursor": "bun cursor-shape.ts",
     "latency": "bun macmini-latency.ts",
+    "nvim": "bun nvim-markdown-lists.ts",
     "all": "bun sv && bun clipboard && bun cursor && bun latency"
   },
   "dependencies": {
-    "consola": "^3"
+    "@types/bun": "^1.3.6",
+    "consola": "^3",
+    "neovim": "^5.4.0"
   }
 }

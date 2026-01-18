@@ -1,7 +1,9 @@
--- https://github.com/bngarren/checkmate.nvim
--- Interactive markdown todo management with metadata annotations
+-- checkmate.nvim: checkbox rendering ([ ] → □, [x] → ✔)
+-- List continuation handled by markdown-lists.lua
 return {
 	"bngarren/checkmate.nvim",
 	ft = "markdown",
-	opts = {},
+	opts = {
+		list_continuation = { enabled = false },
+	},
 }

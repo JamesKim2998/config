@@ -65,6 +65,8 @@ IDE setup with Lazy.nvim plugin manager.
 
 | Key | Action | Source |
 |-----|--------|--------|
+| `<D-S-Up>` / `<D-S-Down>` | Move line/selection up/down | init.lua |
+| `<D-x>` | Cut line/selection | init.lua |
 | `<leader>rn` | Rename symbol | lsp |
 | `<leader>ca` | Code action | lsp |
 | `<leader>f` | Format buffer | conform |

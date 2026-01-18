@@ -55,19 +55,19 @@ vim.keymap.set("n", "<leader>w", "<cmd>w<CR>", { desc = "Save file" })
 vim.keymap.set("n", "<leader>y", function() vim.fn.setreg("+", vim.fn.expand("%")) end, { desc = "Copy relative path" })
 vim.keymap.set("n", "<leader>Y", function() vim.fn.setreg("+", vim.fn.expand("%:p")) end, { desc = "Copy absolute path" })
 
--- Add newline without entering insert mode
-vim.keymap.set("n", "]<Space>", "o<Esc>", { desc = "Add line below" })
-vim.keymap.set("n", "[<Space>", "O<Esc>", { desc = "Add line above" })
+-- Add newline without entering insert mode (remap=true to trigger buffer-local o/O)
+vim.keymap.set("n", "]<Space>", "o<Esc>", { desc = "Add line below", remap = true })
+vim.keymap.set("n", "[<Space>", "O<Esc>", { desc = "Add line above", remap = true })
 
 -- Navigation
 vim.keymap.set("n", "j", "gj", { noremap = true })
 vim.keymap.set("n", "k", "gk", { noremap = true })
 
 -- Move lines up and down with Cmd+Shift+Up/Down
-vim.keymap.set("n", "<D-S-Up>", ":m .-2<CR>==", { desc = "Move line up" })
-vim.keymap.set("n", "<D-S-Down>", ":m .+1<CR>==", { desc = "Move line down" })
-vim.keymap.set("v", "<D-S-Up>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
-vim.keymap.set("v", "<D-S-Down>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
+vim.keymap.set("n", "<D-S-Up>", "<cmd>m .-2<CR>==", { desc = "Move line up" })
+vim.keymap.set("n", "<D-S-Down>", "<cmd>m .+1<CR>==", { desc = "Move line down" })
+vim.keymap.set("v", "<D-S-Up>", "<cmd>m '<-2<CR>gv=gv", { desc = "Move selection up" })
+vim.keymap.set("v", "<D-S-Down>", "<cmd>m '>+1<CR>gv=gv", { desc = "Move selection down" })
 
 -- Map Cmd+X to cut the current line or visual selection
 vim.keymap.set("n", "<D-x>", "dd", { desc = "Cut line" })
