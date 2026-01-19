@@ -1,9 +1,10 @@
--- Markdown extras (complements bullets.vim and render-markdown.nvim)
+-- Markdown list continuation and checkbox handling
 -- Keymaps:
+--   o/O         list continuation (checkbox, bullet, numbered, blockquote)
+--   <CR>        list continuation in insert mode
 --   <leader>tt  toggle checkbox [ ] <-> [x]
---   o/O         blockquote continuation (> prefix)
---   <CR>        blockquote continuation in insert mode
 -- Features:
+--   Auto-renumber: numbered lists renumber automatically on insert
 --   Strikethrough on checked [x] items (text only, not checkbox)
 return {
 	name = "markdown-lists",
@@ -51,17 +52,101 @@ return {
 			return true
 		end
 
+		-- Get continuation prefix for different line types
+		-- Returns: prefix string or nil, and whether it's a list type
+
+		-- Checkbox: "- [ ] item" -> "- [ ] "
+		local function get_checkbox_prefix(line)
+			local prefix = line:match("^(%s*[-*+]%s*)%[.%]")
+			if prefix then return prefix .. "[ ] " end
+			prefix = line:match("^(%s*%d+[.)]%s*)%[.%]")
+			if prefix then return prefix .. "[ ] " end
+			return nil
+		end
+
+		-- Bullet: "- item" -> "- "
+		local function get_bullet_prefix(line)
+			-- Don't match if it's a checkbox
+			if line:match("^%s*[-*+]%s*%[.%]") then return nil end
+			local prefix = line:match("^(%s*[-*+]%s*)")
+			return prefix
+		end
+
+		-- Numbered: "1. item" -> "2. " (increment) or "0. " (decrement)
+		local function get_numbered_prefix(line, increment)
+			-- Don't match if it's a checkbox
+			if line:match("^%s*%d+[.)]%s*%[.%]") then return nil end
+			local indent, num, sep = line:match("^(%s*)(%d+)([.)])%s")
+			if not num then return nil end
+			local new_num = tonumber(num) + increment
+			if new_num < 1 then new_num = 1 end
+			return indent .. new_num .. sep .. " "
+		end
+
+		-- Check if line is a numbered list item (returns indent, sep or nil)
+		local function is_numbered_line(line)
+			if line:match("^%s*%d+[.)]%s*%[.%]") then return nil end -- checkbox
+			local indent, sep = line:match("^(%s*)%d+([.)])%s")
+			return indent, sep
+		end
+
+		-- Renumber consecutive numbered list items starting from row (0-indexed)
+		-- starting_num is the number to assign to the first line
+		local function renumber_below(row, starting_num, expected_indent, expected_sep)
+			local lines = vim.api.nvim_buf_get_lines(0, row, -1, false)
+			local changes = {}
+			for i, line in ipairs(lines) do
+				local indent, sep = is_numbered_line(line)
+				if not indent or indent ~= expected_indent or sep ~= expected_sep then
+					break
+				end
+				local expected_num = starting_num + i - 1
+				local new_line = line:gsub("^(%s*)%d+([.)])(%s)", "%1" .. expected_num .. "%2%3", 1)
+				if new_line ~= line then
+					table.insert(changes, { row + i - 1, new_line }) -- 0-indexed
+				end
+			end
+			-- Apply changes
+			for _, change in ipairs(changes) do
+				vim.api.nvim_buf_set_lines(0, change[1], change[1] + 1, false, { change[2] })
+			end
+		end
+
 		local function handle_cr()
-			local prefix = vim.api.nvim_get_current_line():match("^(%s*>+%s*)")
+			local line = vim.api.nvim_get_current_line()
+			-- Blockquote continuation
+			local prefix = line:match("^(%s*>+%s*)")
+			local indent, sep, inserted_num = nil, nil, nil
+			if not prefix then
+				-- List continuation (checkbox > bullet > numbered)
+				prefix = get_checkbox_prefix(line)
+				if not prefix then
+					prefix = get_bullet_prefix(line)
+				end
+				if not prefix then
+					-- For numbered lists, get the new number
+					local ind, num, s = line:match("^(%s*)(%d+)([.)])%s")
+					if num and not line:match("^%s*%d+[.)]%s*%[.%]") then
+						local new_num = tonumber(num) + 1
+						prefix = ind .. new_num .. s .. " "
+						indent, sep, inserted_num = ind, s, new_num
+					end
+				end
+			end
 			if prefix then
 				local row = vim.api.nvim_win_get_cursor(0)[1]
 				vim.schedule(function()
 					vim.api.nvim_buf_set_lines(0, row, row, false, { prefix })
 					vim.api.nvim_win_set_cursor(0, { row + 1, #prefix })
+					-- Renumber if this is a numbered list
+					if indent and sep and inserted_num then
+						renumber_below(row + 1, inserted_num + 1, indent, sep)
+					end
 				end)
 				return ""
 			end
-			return vim.api.nvim_replace_termcodes("<Plug>(bullets-newline)", true, false, true)
+			-- Default: normal enter
+			return vim.api.nvim_replace_termcodes("<CR>", true, false, true)
 		end
 
 		vim.api.nvim_create_autocmd("FileType", {
@@ -69,8 +154,61 @@ return {
 			callback = function(ev)
 				local o = { buffer = true }
 				vim.keymap.set("n", "<leader>tt", toggle_checkbox, o)
-				vim.keymap.set("n", "o", function() if not blockquote_newline(true) then vim.cmd("normal! o") end end, o)
-				vim.keymap.set("n", "O", function() if not blockquote_newline(false) then vim.cmd("normal! O") end end, o)
+
+				-- Insert new line with prefix (for list continuation)
+				-- inserted_num is the number in the inserted prefix (for renumbering)
+				local function insert_with_prefix(prefix, below, indent, sep, inserted_num)
+					local row = vim.api.nvim_win_get_cursor(0)[1]
+					local target = below and row or row - 1
+					vim.api.nvim_buf_set_lines(0, target, target, false, { prefix })
+					vim.api.nvim_win_set_cursor(0, { below and row + 1 or row, #prefix })
+					-- Renumber if this is a numbered list
+					if indent and sep and inserted_num then
+						renumber_below(target + 1, inserted_num + 1, indent, sep)
+					end
+					vim.cmd("startinsert!")
+				end
+
+				-- Get prefix and numbered info for line continuation
+				-- Returns: prefix, indent, sep, inserted_num (last 3 only for numbered lists)
+				-- For 'o' (below): increment number
+				-- For 'O' (above): use same number, renumber current and below
+				local function get_list_prefix_and_info(line, below)
+					local prefix = get_checkbox_prefix(line)
+					if prefix then return prefix, nil, nil, nil end
+					prefix = get_bullet_prefix(line)
+					if prefix then return prefix, nil, nil, nil end
+					-- For numbered lists, extract the number from the prefix
+					local indent, num, sep = line:match("^(%s*)(%d+)([.)])%s")
+					if num and not line:match("^%s*%d+[.)]%s*%[.%]") then
+						local cur_num = tonumber(num)
+						local new_num = below and (cur_num + 1) or cur_num
+						return indent .. new_num .. sep .. " ", indent, sep, new_num
+					end
+					return nil, nil, nil, nil
+				end
+
+				-- o/O: list continuation (blockquote, checkbox, bullet, numbered)
+				vim.keymap.set("n", "o", function()
+					if blockquote_newline(true) then return end
+					local prefix, indent, sep, num = get_list_prefix_and_info(vim.api.nvim_get_current_line(), true)
+					if prefix then
+						insert_with_prefix(prefix, true, indent, sep, num)
+					else
+						vim.cmd("normal! o")
+						vim.cmd("startinsert")
+					end
+				end, o)
+				vim.keymap.set("n", "O", function()
+					if blockquote_newline(false) then return end
+					local prefix, indent, sep, num = get_list_prefix_and_info(vim.api.nvim_get_current_line(), false)
+					if prefix then
+						insert_with_prefix(prefix, false, indent, sep, num)
+					else
+						vim.cmd("normal! O")
+						vim.cmd("startinsert")
+					end
+				end, o)
 				vim.keymap.set("i", "<CR>", handle_cr, { buffer = true, expr = true })
 				apply_strikethrough(ev.buf)
 				vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {

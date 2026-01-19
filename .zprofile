@@ -20,7 +20,7 @@ export EDITOR=$BREW/bin/nvim
 # path
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.dotnet/tools:$PATH"
+export PATH="$HOME/.dotnet:$HOME/.dotnet/tools:$PATH"
 export PATH="$BREW/opt/openjdk/bin:$PATH"
 export PATH="$BREW/opt/trash-cli/bin:$PATH"
 export PATH="$HOME/Library/Android/sdk/emulator:$HOME/Library/Android/sdk/platform-tools:$PATH"

@@ -108,8 +108,9 @@ Config: fuzzy filename matching, search input hidden until `/`.
 
 | Key | Action | Source |
 |-----|--------|--------|
+| `o` / `O` | List continuation (checkbox, bullet, numbered, blockquote) | markdown-lists |
+| `<CR>` | List continuation in insert mode | markdown-lists |
 | `<leader>tt` | Toggle checkbox `[ ]` ↔ `[x]` | markdown-lists |
-| `gN` | Renumber list | bullets.vim |
 
 
 ### Session
@@ -157,8 +158,7 @@ Config: fuzzy filename matching, search input hidden until `/`.
 | nvim-ufo | Code folding | ufo.lua |
 | render-markdown.nvim | Markdown rendering | render-markdown.lua |
 | vim-markdown | Indent (indentexpr for `==`) | vim-markdown.lua |
-| bullets.vim | List continuation | bullets.lua |
-| markdown-lists (local) | Checkbox toggle, strikethrough, blockquote | markdown-lists.lua |
+| markdown-lists (local) | List continuation, checkbox toggle, auto-renumber, strikethrough | markdown-lists.lua |
 | **Editing** |||
 | nvim-surround | Surround pairs | surround.lua |
 | nvim-autopairs | Auto-close brackets | autopairs.lua |
@@ -188,3 +188,17 @@ Config: fuzzy filename matching, search input hidden until `/`.
 | Completion | blink.cmp | InsertEnter |
 
 Built-in parsers: `lua`, `vim`, `markdown`, `c`, `vimdoc`, `query`
+
+## LSP Servers
+
+| Language | Server | Notes |
+|----------|--------|-------|
+| Lua | lua_ls | Auto-enabled |
+| TypeScript/JS | ts_ls | Inlay hints configured |
+| C# | csharp_ls | Faster than OmniSharp, finds .sln upward |
+
+Run `:Mason` to manage language servers. Servers in `ensure_installed` auto-install.
+
+### E2E Tests
+
+See [Plugin Testing](nvim-plugin-testing.md) for running and writing plugin tests.

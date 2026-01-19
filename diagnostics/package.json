@@ -6,7 +6,10 @@
     "clipboard": "bun osc52-clipboard.ts",
     "cursor": "bun cursor-shape.ts",
     "latency": "bun macmini-latency.ts",
-    "nvim": "bun nvim-markdown-lists.ts",
+    "nvim:md": "bun test nvim-markdown-lists.test.ts",
+    "nvim:csharp": "bun test nvim-csharp-lsp.test.ts",
+    "nvim": "bun test nvim-*.test.ts",
+    "test": "bun test",
     "all": "bun sv && bun clipboard && bun cursor && bun latency"
   },
   "dependencies": {

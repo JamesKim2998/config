@@ -9,12 +9,26 @@ return {
 		"neovim/nvim-lspconfig",
 	},
 	opts = {
-		ensure_installed = { "lua_ls", "ts_ls" },
+		ensure_installed = { "lua_ls", "ts_ls", "csharp_ls" },
 		automatic_installation = true,
 		-- automatic_enable = true (default) - auto-enables installed servers
 	},
 	config = function(_, opts)
-		require("mason-lspconfig").setup(opts)
+		-- Configure LSP servers BEFORE mason-lspconfig.setup() for automatic_enable to work
+
+		-- csharp_ls for C#/.NET/Unity projects - find .sln file
+		vim.lsp.config("csharp_ls", {
+			root_dir = function(bufnr, on_dir)
+				local fname = vim.api.nvim_buf_get_name(bufnr)
+				-- Find .sln file by traversing up
+				local sln = vim.fs.find(function(name)
+					return name:match("%.sln$")
+				end, { path = fname, upward = true, type = "file" })[1]
+				if sln then
+					on_dir(vim.fs.dirname(sln))
+				end
+			end,
+		})
 
 		-- TypeScript inlay hints (parameter names, return types, etc.)
 		vim.lsp.config("ts_ls", {
@@ -45,6 +59,9 @@ return {
 				},
 			},
 		})
+
+		-- Enable mason-lspconfig after configuring servers
+		require("mason-lspconfig").setup(opts)
 
 		-- Keymaps on LSP attach
 		vim.api.nvim_create_autocmd("LspAttach", {
