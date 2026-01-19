@@ -1,13 +1,12 @@
 import { $ } from "bun";
 import { consola } from "consola";
 
-export const MACMINI_DEST = process.env.MACMINI_DEST!;
-export const MACMINI_SSH_KEY = process.env.MACMINI_SSH_KEY!.replace("~", process.env.HOME!);
-export const MACMINI_HOST = MACMINI_DEST.split("@")[1];
+export const macmini = "macmini";
+export const macminiHost = "macmini.studioboxcat.com";
 
 /** Run command on remote via SSH */
 export async function ssh(cmd: string): Promise<string> {
-  const result = await $`/usr/bin/ssh -i ${MACMINI_SSH_KEY} ${MACMINI_DEST} ${cmd}`.quiet().nothrow();
+  const result = await $`ssh ${macmini} ${cmd}`.quiet().nothrow();
   return result.text();
 }
 

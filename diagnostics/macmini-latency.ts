@@ -1,13 +1,12 @@
 import { $ } from "bun";
-import { consola } from "consola";
-import { ssh, check, header, section, MACMINI_DEST, MACMINI_HOST } from "./lib";
+import { ssh, check, header, section, macmini, macminiHost } from "./lib";
 
-header(`Mac Mini Latency Diagnostic\nTarget: ${MACMINI_DEST}`);
+header(`Mac Mini Latency Diagnostic\nTarget: ${macmini}`);
 
 // --- Ping ---
 section(1, "Network Latency");
 
-const ping = await $`ping -c 10 ${MACMINI_HOST}`.quiet().nothrow().text();
+const ping = await $`ping -c 10 ${macminiHost}`.quiet().nothrow().text();
 const times = [...ping.matchAll(/time=(\d+\.?\d*)/g)].map(m => parseFloat(m[1]));
 
 if (times.length) {
