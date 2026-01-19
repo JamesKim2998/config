@@ -10,6 +10,7 @@ return {
 	opts = {
 		indent = { enabled = true },
 		explorer = { enabled = true },
+		scratch = { enabled = true },
 		picker = {
 			sources = {
 				explorer = {
@@ -31,5 +32,17 @@ return {
 		end
 		vim.keymap.set("n", "<C-n>", toggle_explorer, { desc = "Toggle Explorer" })
 		vim.keymap.set("n", "<leader>e", function() Snacks.explorer() end, { desc = "Focus Explorer" })
+		vim.keymap.set("n", "<leader>.", function()
+			local scratch_dir = vim.fn.stdpath("data") .. "/scratch"
+			vim.fn.mkdir(scratch_dir, "p")
+			local ext = vim.fn.expand("%:e")
+			if ext == "" then ext = "txt" end
+			local file = scratch_dir .. "/scratch_" .. os.date("%Y%m%d_%H%M%S") .. "." .. ext
+			vim.cmd("e " .. file)
+		end, { desc = "New Scratch" })
+		vim.keymap.set("n", "<leader>S", function()
+			local scratch_dir = vim.fn.stdpath("data") .. "/scratch"
+			Snacks.picker.files({ cwd = scratch_dir })
+		end, { desc = "Select Scratch" })
 	end,
 }

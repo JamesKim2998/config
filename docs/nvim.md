@@ -19,7 +19,9 @@ IDE setup with Lazy.nvim plugin manager.
 | `<C-n>` | Toggle file explorer | snacks |
 | `<leader>e` | Focus file explorer | snacks |
 | `<leader>-` | Open yazi | yazi |
-| `<leader>S` | Search & replace | spectre |
+| `<leader>.` | New scratch buffer | snacks |
+| `<leader>S` | Select scratch buffer | snacks |
+| `<leader>sr` | Structural search/replace | ssr |
 
 ### snacks explorer (inside explorer)
 
@@ -34,7 +36,7 @@ IDE setup with Lazy.nvim plugin manager.
 | `c` | Copy |
 | `<BS>` | Go up directory |
 
-Config: fuzzy search enabled, auto-close on select, search input hidden until `/`.
+Config: fuzzy filename matching, search input hidden until `/`.
 
 ### fzf-lua (inside picker)
 
@@ -68,6 +70,8 @@ Config: fuzzy search enabled, auto-close on select, search input hidden until `/
 | `<leader>xX` | Buffer diagnostics | trouble |
 | `<leader>xt` | TODOs | trouble |
 | `<leader>cs` | Symbols (outline) | trouble |
+| `<leader>ss` | Document symbols | fzf-lua |
+| `<leader>sS` | Workspace symbols | fzf-lua |
 | `<leader>cl` | LSP panel (right) | trouble |
 | `<leader>xL` | Location list | trouble |
 | `<leader>xQ` | Quickfix list | trouble |
@@ -142,7 +146,7 @@ Config: fuzzy search enabled, auto-close on select, search input hidden until `/
 | bufferline.nvim | Buffer tabs | bufferline.lua |
 | noice.nvim | Messages/cmdline UI | noice.lua |
 | nvim-scrollbar | Scrollbar | scrollbar.lua |
-| snacks.nvim | Indent guides, explorer | snacks.lua |
+| snacks.nvim | Indent guides, explorer, scratch | snacks.lua |
 | which-key.nvim | Keymap hints | which-key.lua |
 | **Code** |||
 | mason.nvim + lspconfig | LSP support | lsp.lua |
@@ -164,7 +168,7 @@ Config: fuzzy search enabled, auto-close on select, search input hidden until `/
 | trouble.nvim | Diagnostics, refs, quickfix | trouble.lua |
 | todo-comments.nvim | TODO highlighting | todo-comments.lua |
 | yazi.nvim | File manager | yazi.lua |
-| nvim-spectre | Search & replace | spectre.lua |
+| ssr.nvim | Structural search/replace | ssr.lua |
 | vim-kitty-navigator | Kitty/nvim panes | plugins.lua |
 | kitty-scrollback.nvim | Scrollback in kitty | kitty-scrollback.lua |
 | **Git** |||

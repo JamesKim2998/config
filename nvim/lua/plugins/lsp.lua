@@ -21,7 +21,7 @@ return {
 			settings = {
 				typescript = {
 					inlayHints = {
-						includeInlayParameterNameHints = "all",
+						includeInlayParameterNameHints = "literals", -- only show hints for literal args, not variables
 						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
 						includeInlayFunctionParameterTypeHints = true,
 						includeInlayVariableTypeHints = false, -- redundant with explicit annotations
@@ -33,7 +33,7 @@ return {
 				},
 				javascript = {
 					inlayHints = {
-						includeInlayParameterNameHints = "all",
+						includeInlayParameterNameHints = "literals", -- only show hints for literal args, not variables
 						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
 						includeInlayFunctionParameterTypeHints = true,
 						includeInlayVariableTypeHints = false, -- redundant with explicit annotations
