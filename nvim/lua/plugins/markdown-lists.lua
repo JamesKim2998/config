@@ -6,6 +6,7 @@
 -- Features:
 --   Auto-renumber: numbered lists renumber automatically on insert
 --   Strikethrough on checked [x] items (text only, not checkbox)
+--   Empty item <CR>: decreases indent (or removes prefix if no indent)
 return {
 	name = "markdown-lists",
 	dir = ".",
@@ -112,8 +113,55 @@ return {
 			end
 		end
 
+		-- Check if line is an empty list item and return indent + rest of prefix
+		-- Returns: indent (spaces), prefix_without_indent, or nil if not empty
+		local function get_empty_item_parts(line)
+			-- Checkbox: "    - [ ] " -> "    ", "- [ ] "
+			local ind, rest = line:match("^(%s*)([-*+]%s*%[.%]%s*)$")
+			if ind then return ind, rest end
+			ind, rest = line:match("^(%s*)(%d+[.)]%s*%[.%]%s*)$")
+			if ind then return ind, rest end
+			-- Bullet: "    - " -> "    ", "- "
+			ind, rest = line:match("^(%s*)([-*+]%s*)$")
+			if ind then return ind, rest end
+			-- Numbered: "    1. " -> "    ", "1. "
+			ind, rest = line:match("^(%s*)(%d+[.)]%s*)$")
+			if ind then return ind, rest end
+			-- Blockquote: "    > " -> "    ", "> "
+			ind, rest = line:match("^(%s*)(>+%s*)$")
+			if ind then return ind, rest end
+			return nil, nil
+		end
+
 		local function handle_cr()
 			local line = vim.api.nvim_get_current_line()
+			local col = vim.api.nvim_win_get_cursor(0)[2]
+			local row = vim.api.nvim_win_get_cursor(0)[1]
+
+			-- Check for empty list item first (at end of line)
+			if col >= #line then
+				local ind, rest = get_empty_item_parts(line)
+				if ind ~= nil then
+					local new_line
+					if #ind >= 4 then
+						-- Decrease indent by 4 spaces (or 1 tab)
+						local new_indent = ind:match("^\t") and ind:sub(2) or ind:sub(5)
+						new_line = new_indent .. rest
+					elseif #ind > 0 then
+						-- Less than 4 spaces of indent, remove all indent
+						new_line = rest
+					else
+						-- No indent, replace with empty line
+						new_line = ""
+					end
+					vim.schedule(function()
+						vim.api.nvim_buf_set_lines(0, row - 1, row, false, { new_line })
+						vim.api.nvim_win_set_cursor(0, { row, #new_line })
+					end)
+					return ""
+				end
+			end
+
 			-- Blockquote continuation
 			local prefix = line:match("^(%s*>+%s*)")
 			local indent, sep, inserted_num = nil, nil, nil
@@ -134,7 +182,23 @@ return {
 				end
 			end
 			if prefix then
-				local row = vim.api.nvim_win_get_cursor(0)[1]
+				-- Mid-line: split and prepend prefix to remainder
+				if col < #line then
+					local before = line:sub(1, col)
+					local after = line:sub(col + 1)
+					vim.schedule(function()
+						-- Single set_lines call replaces one line with two = one undo entry
+						vim.api.nvim_buf_set_lines(0, row - 1, row, false, { before, prefix .. after })
+						vim.api.nvim_win_set_cursor(0, { row + 1, #prefix })
+						-- Renumber if this is a numbered list
+						if indent and sep and inserted_num then
+							vim.cmd("undojoin")
+							renumber_below(row + 1, inserted_num + 1, indent, sep)
+						end
+					end)
+					return ""
+				end
+				-- End of line: insert new line with prefix
 				vim.schedule(function()
 					vim.api.nvim_buf_set_lines(0, row, row, false, { prefix })
 					vim.api.nvim_win_set_cursor(0, { row + 1, #prefix })

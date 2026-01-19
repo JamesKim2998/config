@@ -108,11 +108,137 @@ describe("<leader>tt toggle", () => {
 });
 
 describe("<CR> continues list", () => {
-  it("continues todo item", async () => {
+  it("continues todo item at end of line", async () => {
     await reload("# Test\n\n- [ ] todo\n");
     await client.command("3");
     await typeKeys("A", "<CR>", "new", "<Esc>");
     expect(await getLine(3)).toMatch(/^- \[ \] new$/);
+  });
+
+  it("mid-line splits and prepends prefix", async () => {
+    await reload("# Test\n\n- [ ] hello world\n");
+    await client.command("3");
+    // Position cursor on 'w' of world (col 12, 0-indexed)
+    await client.command("normal! 0");
+    await client.command("normal! 12l");
+    await typeKeys("i", "<CR>", "<Esc>");
+    expect(await getLine(2)).toBe("- [ ] hello ");
+    expect(await getLine(3)).toBe("- [ ] world");
+  });
+
+  it("mid-line split supports undo", async () => {
+    await reload("# Test\n\n- [ ] hello world\n");
+    await client.command("3");
+    await client.command("normal! 0");
+    await client.command("normal! 12l");
+    await typeKeys("i", "<CR>", "<Esc>");
+    // Undo should restore original line
+    await typeKeys("u");
+    expect(await getLine(2)).toBe("- [ ] hello world");
+    const lines = await nvim.getLines();
+    expect(lines.length).toBe(3); // header, empty, original line
+  });
+
+  it("mid-line split works for bullet lists", async () => {
+    await reload("# Test\n\n- hello world\n");
+    await client.command("3");
+    await client.command("normal! 0");
+    await client.command("normal! 8l"); // On 'w' of world
+    await typeKeys("i", "<CR>", "<Esc>");
+    expect(await getLine(2)).toBe("- hello ");
+    expect(await getLine(3)).toBe("- world");
+  });
+
+  it("mid-line split works for numbered lists", async () => {
+    await reload("# Test\n\n1. hello world\n");
+    await client.command("3");
+    await client.command("normal! 0");
+    await client.command("normal! 9l"); // On 'w' of world
+    await typeKeys("i", "<CR>", "<Esc>");
+    expect(await getLine(2)).toBe("1. hello ");
+    expect(await getLine(3)).toBe("2. world");
+  });
+});
+
+describe("<CR> on empty item decreases indent", () => {
+  it("indented checkbox -> decreased indent", async () => {
+    await reload("# Test\n\n    - [ ] \n");
+    await client.command("3");
+    await typeKeys("A", "<CR>", "<Esc>");
+    expect(await getLine(2)).toBe("- [ ] ");
+    const lines = await nvim.getLines();
+    expect(lines.length).toBe(3); // replaced, not added
+  });
+
+  it("non-indented checkbox -> empty line", async () => {
+    await reload("# Test\n\n- [ ] \n");
+    await client.command("3");
+    await typeKeys("A", "<CR>", "<Esc>");
+    expect(await getLine(2)).toBe("");
+    const lines = await nvim.getLines();
+    expect(lines.length).toBe(3);
+  });
+
+  it("indented bullet -> decreased indent", async () => {
+    await reload("# Test\n\n    - \n");
+    await client.command("3");
+    await typeKeys("A", "<CR>", "<Esc>");
+    expect(await getLine(2)).toBe("- ");
+  });
+
+  it("non-indented bullet -> empty line", async () => {
+    await reload("# Test\n\n- \n");
+    await client.command("3");
+    await typeKeys("A", "<CR>", "<Esc>");
+    expect(await getLine(2)).toBe("");
+  });
+
+  it("indented numbered -> decreased indent", async () => {
+    await reload("# Test\n\n    1. \n");
+    await client.command("3");
+    await typeKeys("A", "<CR>", "<Esc>");
+    expect(await getLine(2)).toBe("1. ");
+  });
+
+  it("non-indented numbered -> empty line", async () => {
+    await reload("# Test\n\n1. \n");
+    await client.command("3");
+    await typeKeys("A", "<CR>", "<Esc>");
+    expect(await getLine(2)).toBe("");
+  });
+
+  it("indented blockquote -> decreased indent", async () => {
+    await reload("# Test\n\n    > \n");
+    await client.command("3");
+    await typeKeys("A", "<CR>", "<Esc>");
+    expect(await getLine(2)).toBe("> ");
+  });
+
+  it("non-indented blockquote -> empty line", async () => {
+    await reload("# Test\n\n> \n");
+    await client.command("3");
+    await typeKeys("A", "<CR>", "<Esc>");
+    expect(await getLine(2)).toBe("");
+  });
+
+  it("supports undo", async () => {
+    await reload("# Test\n\n    - [ ] \n");
+    await client.command("3");
+    await typeKeys("A", "<CR>", "<Esc>");
+    expect(await getLine(2)).toBe("- [ ] ");
+    await typeKeys("u");
+    expect(await getLine(2)).toBe("    - [ ] ");
+  });
+
+  it("double indent -> single indent -> no indent -> empty", async () => {
+    await reload("# Test\n\n        - \n");
+    await client.command("3");
+    await typeKeys("A", "<CR>", "<Esc>");
+    expect(await getLine(2)).toBe("    - ");
+    await typeKeys("A", "<CR>", "<Esc>");
+    expect(await getLine(2)).toBe("- ");
+    await typeKeys("A", "<CR>", "<Esc>");
+    expect(await getLine(2)).toBe("");
   });
 });
 
