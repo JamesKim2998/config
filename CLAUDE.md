@@ -25,9 +25,9 @@ macOS dotfiles and development environment configuration.
 
 | File | When | Contents |
 |------|------|----------|
-| `.zshenv` | All shells | Minimal, sources `.zshenv.local` |
-| `.zshenv.local` | All shells (not tracked) | SSH agent, machine-specific paths |
-| `.zprofile` | Login shells | PATH, env vars, FZF colors (inherited by subshells) |
+| `.zshenv` | All shells | `MEOW_ROOT`, homebrew, all PATH exports (bun, cargo, etc.) |
+| `.zshenv.local` | All shells (not tracked) | SSH agent, machine-specific overrides |
+| `.zprofile` | Login shells | `fpath`, `EDITOR`, FZF colors, zoxide opts |
 | `.zshrc` | Interactive shells | Aliases, functions, completions, prompt |
 
 ## Brew Packages
