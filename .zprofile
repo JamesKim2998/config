@@ -45,7 +45,8 @@ export FZF_DEFAULT_OPTS=" \
   --color=fg:#dcd7ba,header:#c34043,info:#957fb8,pointer:#c8c093 \
   --color=marker:#7e9cd8,fg+:#dcd7ba,prompt:#957fb8,hl+:#e82424 \
   --color=selected-bg:#2d4f67 \
-  --color=border:#727169,label:#dcd7ba"
+  --color=border:#727169,label:#dcd7ba \
+  --bind 'ctrl-y:execute-silent(printf %s {} | pbcopy)'"
 
 # zoxide
 export _ZO_FZF_OPTS='+e --height=40% --layout=reverse --border --no-sort'
