@@ -4,6 +4,7 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	ft = { "markdown" },
 	opts = {
+		pipe_table = { enabled = false },
 		heading = {
 			sign = false,
 			icons = { "󰎤 ", "󰎧 ", "󰎪 ", "󰎭 ", "󰎱 ", "󰎳 " },

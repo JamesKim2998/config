@@ -52,6 +52,12 @@ _fzf=~/.cache/fzf.zsh
 [[ -f $_fzf && $_fzf -nt $HOMEBREW_PREFIX/bin/fzf ]] || fzf --zsh > $_fzf
 source $_fzf
 
+# fuzzy edit
+fe() {
+  local file
+  file=$(fzf --preview 'bat --color=always {}') && $EDITOR "$file"
+}
+
 
 # eza (modern ls replacement with icons and git integration)
 alias ls='eza --group-directories-first --icons'
@@ -64,6 +70,7 @@ alias lt='eza --tree --level 2 --icons'
 _zoxide=~/.cache/zoxide.zsh
 [[ -f $_zoxide && $_zoxide -nt $HOMEBREW_PREFIX/bin/zoxide ]] || zoxide init zsh > $_zoxide
 source $_zoxide
+zi() { __zoxide_zi "$PWD" }  # scope to cwd
 
 
 # yazi
