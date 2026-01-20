@@ -53,6 +53,9 @@ export class NvimRunner {
 
   async start(socketPath: string, file: string, cwd?: string): Promise<NeovimClient> {
     this.socketPath = socketPath;
+
+    // Kill any zombie nvim using this socket
+    await $`pkill -9 -f "nvim.*${socketPath}"`.nothrow().quiet();
     await $`rm -f ${socketPath}`.nothrow();
 
     this.process = spawn("nvim", ["--headless", "--listen", socketPath, "-n", file], {
@@ -122,7 +125,7 @@ export class NvimRunner {
       this.client = null;
     }
     if (this.process) {
-      this.process.kill();
+      this.process.kill("SIGKILL"); // Force kill, SIGTERM often ignored
       this.process = null;
     }
   }

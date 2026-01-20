@@ -1,6 +1,6 @@
 ---
 name: nvim-plugin-integration
-description: Add or debug neovim plugins with lazy.nvim, including e2e testing via remote API
+description: Add or debug neovim plugins with lazy.nvim
 ---
 
 # Nvim Plugin Integration

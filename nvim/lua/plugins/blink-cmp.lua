@@ -5,6 +5,9 @@ return {
 	version = "1.*",
 	event = "InsertEnter",
 	opts = {
+		enabled = function()
+			return vim.bo.filetype ~= "markdown"
+		end,
 		keymap = { preset = "default" },
 		appearance = {
 			nerd_font_variant = "mono",

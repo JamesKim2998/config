@@ -8,6 +8,7 @@
     "latency": "bun macmini-latency.ts",
     "nvim:md": "bun test nvim-markdown-lists.test.ts",
     "nvim:csharp": "bun test nvim-csharp-lsp.test.ts",
+    "nvim:startup": "bun nvim-startup.ts",
     "nvim": "bun test nvim-*.test.ts",
     "test": "bun test",
     "all": "bun sv && bun clipboard && bun cursor && bun latency"

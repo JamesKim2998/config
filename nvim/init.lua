@@ -63,12 +63,6 @@ vim.keymap.set("n", "[<Space>", "O<Esc>", { desc = "Add line above", remap = tru
 vim.keymap.set("n", "j", "gj", { noremap = true })
 vim.keymap.set("n", "k", "gk", { noremap = true })
 
--- Move lines up and down with Cmd+Shift+Up/Down
-vim.keymap.set("n", "<D-S-Up>", "<cmd>m .-2<CR>==", { desc = "Move line up" })
-vim.keymap.set("n", "<D-S-Down>", "<cmd>m .+1<CR>==", { desc = "Move line down" })
-vim.keymap.set("v", "<D-S-Up>", "<cmd>m '<-2<CR>gv=gv", { desc = "Move selection up" })
-vim.keymap.set("v", "<D-S-Down>", "<cmd>m '>+1<CR>gv=gv", { desc = "Move selection down" })
-
 -- Map Cmd+X to cut the current line or visual selection
 vim.keymap.set("n", "<D-x>", "dd", { desc = "Cut line" })
 vim.keymap.set("v", "<D-x>", "d", { desc = "Cut selection" })

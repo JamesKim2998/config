@@ -1,6 +1,6 @@
 ---
 name: yazi-plugin-migration
-description: Migrate an existing yazi plugin (non-submodule) to a git submodule by forking to studio-boxcat org
+description: Migrate an existing yazi plugin (non-submodule) to a git submodule by forking
 ---
 
 # Yazi Plugin Migration

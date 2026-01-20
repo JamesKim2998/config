@@ -84,7 +84,7 @@ Config: fuzzy filename matching, search input hidden until `/`.
 
 | Key | Action | Source |
 |-----|--------|--------|
-| `<D-S-Up>` / `<D-S-Down>` | Move line/selection up/down | init.lua |
+| `<M-j>` / `<M-k>` | Move line/block up/down | move.nvim |
 | `<D-x>` | Cut line/selection | init.lua |
 | `<leader>rn` | Rename symbol | lsp |
 | `<leader>ca` | Code action | lsp |
@@ -144,6 +144,7 @@ Config: fuzzy filename matching, search input hidden until `/`.
 | Plugin | Purpose | File |
 |--------|---------|------|
 | **UI** |||
+| treesitter-context | Sticky header (func/class) | plugins.lua |
 | bufferline.nvim | Buffer tabs | bufferline.lua |
 | noice.nvim | Messages/cmdline UI | noice.lua |
 | nvim-scrollbar | Scrollbar | scrollbar.lua |
@@ -160,6 +161,7 @@ Config: fuzzy filename matching, search input hidden until `/`.
 | vim-markdown | Indent (indentexpr for `==`) | vim-markdown.lua |
 | markdown-lists (local) | List continuation, checkbox toggle, auto-renumber, strikethrough | markdown-lists.lua |
 | **Editing** |||
+| move.nvim | Move lines/blocks with Alt+j/k | move.lua |
 | nvim-surround | Surround pairs | surround.lua |
 | nvim-autopairs | Auto-close brackets | autopairs.lua |
 | **Navigation** |||
