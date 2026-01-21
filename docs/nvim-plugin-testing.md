@@ -46,6 +46,25 @@ afterAll(async () => {
 | `kill()` | Kill nvim process |
 | `cleanup(...paths)` | Kill and remove temp files |
 
+## Fixtures
+
+Test fixtures live in `diagnostics/fixtures/`. Use fixtures when tests need persistent files (e.g., file explorer tests) rather than temp files that get cleaned up.
+
+## Testing Key Sequences
+
+```typescript
+// Go to line, press key, type text
+await client.command("3");
+await client.input("o");
+await Bun.sleep(300);
+await client.input("typed text");
+await client.input("<Esc>");
+
+// Check result
+const lines = await nvim.getLines();
+expect(lines[3]).toMatch(/^- typed text$/);
+```
+
 ## LSP Test Assertions
 
 ```typescript
@@ -70,19 +89,4 @@ it("hover works", async () => {
 it("gd mapped", async () => {
   await assertMappingExists(client, "gd", /lsp|definition/);
 });
-```
-
-## Testing Key Sequences
-
-```typescript
-// Go to line, press key, type text
-await client.command("3");
-await client.input("o");
-await Bun.sleep(300);
-await client.input("typed text");
-await client.input("<Esc>");
-
-// Check result
-const lines = await nvim.getLines();
-expect(lines[3]).toMatch(/^- typed text$/);
 ```
