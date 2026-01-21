@@ -31,8 +31,9 @@ return {
 			files = {
 				actions = {
 					["ctrl-y"] = function(selected)
-						vim.fn.setreg("+", selected[1])
-						vim.notify("Copied: " .. selected[1])
+						local path = require("fzf-lua.path").entry_to_file(selected[1]).path -- strip file icon
+						vim.fn.setreg("+", path)
+						vim.notify("Copied: " .. path)
 					end,
 					["alt-i"] = { actions.toggle_ignore },
 					["alt-h"] = { actions.toggle_hidden },

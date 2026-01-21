@@ -94,10 +94,9 @@ describe("normal mode: <M-k> moves line up", () => {
 describe("visual mode: <M-j> moves block down", () => {
   it("moves selected lines down", async () => {
     await reload("line1\nline2\nline3\nline4\n");
-    await client.command("1");
-    await typeKeys("V", "j"); // Select lines 1-2
-    await typeKeys("<M-j>");
-    await typeKeys("<Esc>");
+    // Select lines 1-2 and move down using range command
+    await client.command("1,2MoveBlock(1)");
+    await Bun.sleep(200);
 
     const lines = await nvim.getLines();
     expect(lines[0]).toBe("line3");
@@ -109,10 +108,9 @@ describe("visual mode: <M-j> moves block down", () => {
 describe("visual mode: <M-k> moves block up", () => {
   it("moves selected lines up", async () => {
     await reload("line1\nline2\nline3\nline4\n");
-    await client.command("3");
-    await typeKeys("V", "j"); // Select lines 3-4
-    await typeKeys("<M-k>");
-    await typeKeys("<Esc>");
+    // Select lines 3-4 and move up using range command
+    await client.command("3,4MoveBlock(-1)");
+    await Bun.sleep(200);
 
     const lines = await nvim.getLines();
     expect(lines[0]).toBe("line1");

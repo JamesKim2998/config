@@ -18,8 +18,29 @@ return {
 					auto_close = false,
 					layout = { auto_hide = { "input" } }, -- show search box only on /
 					formatters = { idx = false }, -- hide item numbers
-					win = { list = { keys = { ["<C-n>"] = "close" } } }, -- match toggle key
+					win = {
+						list = {
+							keys = {
+								["<C-n>"] = "close", -- match toggle key
+								["y"] = "copy_rel_path",
+								["Y"] = "copy_abs_path",
+							},
+						},
+					},
 					exclude = { "*.png" },
+					actions = {
+						copy_rel_path = function(_, item)
+							if not item then return end
+							local path = vim.fn.fnamemodify(item.file, ":.")
+							vim.fn.setreg("+", path)
+							Snacks.notify.info("Copied: " .. path)
+						end,
+						copy_abs_path = function(_, item)
+							if not item then return end
+							vim.fn.setreg("+", item.file)
+							Snacks.notify.info("Copied: " .. item.file)
+						end,
+					},
 				},
 			},
 		},

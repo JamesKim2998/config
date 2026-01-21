@@ -184,6 +184,25 @@ export async function assertDiagnosticsWork(client: NeovimClient, invalidCode: s
   if (!diagnostics?.length) throw new Error("No diagnostics reported for invalid code");
 }
 
+// --- Common test helpers ---
+
+export async function typeKeys(client: NeovimClient, ...keys: string[]) {
+  for (const k of keys) {
+    await client.input(k);
+    await Bun.sleep(150);
+  }
+}
+
+export async function getLines(client: NeovimClient): Promise<string[]> {
+  const buf = await client.buffer;
+  return buf.getLines({ start: 0, end: -1, strictIndexing: false });
+}
+
+export async function getLine(client: NeovimClient, n: number): Promise<string> {
+  const lines = await getLines(client);
+  return lines[n] ?? "";
+}
+
 // --- Utility ---
 
 export async function withTimeout<T>(promise: Promise<T>, ms: number, name: string): Promise<T> {
