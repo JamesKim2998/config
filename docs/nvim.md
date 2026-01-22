@@ -16,27 +16,54 @@ IDE setup with Lazy.nvim plugin manager.
 | `<leader><leader>` | Buffers (quick) | fzf-lua |
 | `<Tab>` / `<S-Tab>` | Next/prev buffer | bufferline |
 | `<leader>1-9` | Go to buffer N | bufferline |
-| `<C-n>` | Toggle file explorer | snacks |
-| `<leader>e` | Focus file explorer | snacks |
+| `<C-n>` | Toggle file explorer | neo-tree |
+| `<leader>e` | Focus file explorer | neo-tree |
+| `<leader>gs` | Git status (neo-tree) | neo-tree |
 | `<leader>-` | Open yazi | yazi |
 | `<leader>.` | New scratch buffer | snacks |
 | `<leader>S` | Select scratch buffer | snacks |
 | `<leader>sr` | Structural search/replace | ssr |
 
-### snacks explorer (inside explorer)
+### neo-tree (inside explorer)
 
 | Key | Action |
 |-----|--------|
+| `<` / `>` | Switch tabs (Files ↔ Git) |
 | `/` | Fuzzy search files |
-| `l` | Open file/expand dir |
-| `h` | Collapse dir |
-| `a` | Add file/dir |
+| `<CR>` | Open file/expand dir |
+| `<space>` | Toggle node |
+| `a` | Add file |
+| `A` | Add directory |
 | `d` | Delete |
 | `r` | Rename |
-| `c` | Copy |
-| `<BS>` | Go up directory |
+| `y` | Copy file |
+| `x` | Cut file |
+| `p` | Paste |
+| `Y` | Copy absolute path |
+| `<BS>` | Navigate up |
+| `?` | Show help |
 
-Config: fuzzy filename matching, search input hidden until `/`.
+### neo-tree Git tab
+
+| Key | Action |
+|-----|--------|
+| `ga` | Stage file |
+| `gu` | Unstage file |
+| `gr` | Revert file |
+| `gc` | Commit |
+| `gp` | Push |
+
+### diffview (inside diff view)
+
+| Key | Action |
+|-----|--------|
+| `g<C-x>` | Cycle layouts |
+| `<leader>b` | Toggle file panel |
+| `<tab>` / `<S-tab>` | Next/prev file |
+| `s` | Stage entry |
+| `-` | Toggle stage |
+| `X` | Discard changes |
+| `q` | Close diffview |
 
 ### fzf-lua (inside picker)
 
@@ -133,7 +160,17 @@ Config: fuzzy filename matching, search input hidden until `/`.
 | `[<Space>` | Add line above | init.lua |
 | `<leader>y` | Copy relative path | init.lua |
 | `<leader>Y` | Copy absolute path | init.lua |
-| `<leader>lg` | Open LazyGit | lazygit |
+| `<leader>gd` | Toggle diff view | diffview |
+| `<leader>gh` | File history | diffview |
+| `<leader>gH` | Repo history | diffview |
+| `]h` / `[h` | Next/prev hunk | gitsigns |
+| `<leader>hs` | Stage hunk | gitsigns |
+| `<leader>hr` | Reset hunk | gitsigns |
+| `<leader>hu` | Undo stage hunk | gitsigns |
+| `<leader>hS` | Stage buffer | gitsigns |
+| `<leader>hR` | Reset buffer | gitsigns |
+| `<leader>hp` | Preview hunk | gitsigns |
+| `<leader>hb` | Blame line | gitsigns |
 | `<leader>fh` | Help tags | fzf-lua |
 | `<leader>fc` | Commands | fzf-lua |
 | `<leader>fk` | Keymaps | fzf-lua |
@@ -148,7 +185,8 @@ Config: fuzzy filename matching, search input hidden until `/`.
 | bufferline.nvim | Buffer tabs | bufferline.lua |
 | noice.nvim | Messages/cmdline UI | noice.lua |
 | nvim-scrollbar | Scrollbar | scrollbar.lua |
-| snacks.nvim | Indent guides, explorer, scratch | snacks.lua |
+| snacks.nvim | Indent guides, scratch | snacks.lua |
+| neo-tree.nvim | File explorer with git tab | neo-tree.lua |
 | which-key.nvim | Keymap hints | which-key.lua |
 | **Code** |||
 | mason.nvim + lspconfig | LSP support | lsp.lua |
@@ -174,8 +212,8 @@ Config: fuzzy filename matching, search input hidden until `/`.
 | vim-kitty-navigator | Kitty/nvim panes | plugins.lua |
 | kitty-scrollback.nvim | Scrollback in kitty | kitty-scrollback.lua |
 | **Git** |||
-| gitsigns.nvim | Git diff signs | plugins.lua |
-| lazygit.nvim | Git TUI | lazygit.lua |
+| gitsigns.nvim | Inline signs, hunk staging | gitsigns.lua |
+| diffview.nvim | Side-by-side diff, file history | diffview.lua |
 | **Session** |||
 | persistence.nvim | Session restore | persistence.lua |
 

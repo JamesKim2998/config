@@ -41,13 +41,16 @@ vim.o.showtabline = 2 -- Always show tabline
 -- Common Key Mappings
 vim.keymap.set("n", "<Esc>", "<cmd>noh<CR>", { desc = "Clear search highlight" })
 vim.keymap.set("n", "qq", function()
+	local current = vim.api.nvim_get_current_buf()
 	local bufs = vim.tbl_filter(function(b)
-		return vim.bo[b].buflisted and vim.api.nvim_buf_is_loaded(b)
+		return vim.bo[b].buflisted and vim.api.nvim_buf_is_loaded(b) and b ~= current
 	end, vim.api.nvim_list_bufs())
-	if #bufs <= 1 then
+	if #bufs == 0 then
 		vim.cmd("qa")
 	else
-		vim.cmd("bd")
+		-- Switch to another listed buffer first, then delete current
+		vim.api.nvim_set_current_buf(bufs[1])
+		vim.cmd("bdelete " .. current)
 	end
 end, { desc = "Close buffer (quit if last)" })
 vim.keymap.set("n", "Q", "<cmd>qa<CR>", { desc = "Quit nvim" })

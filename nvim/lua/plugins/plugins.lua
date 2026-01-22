@@ -13,9 +13,6 @@ return {
 		},
 	},
 
-	-- git
-	{ "lewis6991/gitsigns.nvim", event = "BufReadPost", opts = {} },
-
 	-- navigation between kitty and nvim splits
 	{ "knubie/vim-kitty-navigator" },
 }
