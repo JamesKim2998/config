@@ -65,6 +65,11 @@ end, 100, Header.LEFT)
 -- Remove default header cwd
 Header:children_remove(1, Header.LEFT)
 
+-- https://github.com/lpnh/fr.yazi - ripgrep search
+require("fr"):setup({
+	rg = "-i", -- Force case-insensitive search (override --smart-case)
+})
+
 -- Remove outer padding only (keep inner padding for dividers)
 function Tab:build()
 	self._children = {

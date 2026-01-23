@@ -128,9 +128,14 @@ local function entry(_, job)
 	local target = output.stdout:gsub("\n$", "")
 	if target ~= "" then
 		local colon_pos = string.find(target, ":")
-		local file_url = colon_pos and string.sub(target, 1, colon_pos - 1) or target
+		local file_path = colon_pos and string.sub(target, 1, colon_pos - 1) or target
 
-		ya.manager_emit("reveal", { file_url })
+		-- Convert to Url and ensure absolute path for reveal to work correctly
+		local url = Url(file_path)
+		if not url.is_absolute then
+			url = Url(cwd):join(url)
+		end
+		ya.emit("reveal", { url })
 	end
 end
 
