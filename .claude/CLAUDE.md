@@ -1,3 +1,10 @@
+# Guidelines
+
+## Git
+- Do NOT auto-commit or stage changes unless explicitly requested by the user.
+
+---
+
 # Development Environment
 
 ## Major Repositories
