@@ -5,17 +5,18 @@ set -e
 
 CONFIG=$HOME/Develop/config
 XDG_CONFIG=$HOME/.config
-ZSHENV=$HOME/.zshenv
+ZSHENV_LOCAL=$HOME/.zshenv.local
 LAUNCH_AGENTS=$HOME/Library/LaunchAgents
 
-# Ensure .zshenv exists
-touch "$ZSHENV"
+# Ensure .zshenv.local exists
+touch "$ZSHENV_LOCAL"
 
-# Add env vars to .zshenv
+# Add env vars to .zshenv.local
 append_if_missing() {
-  grep -q "$1" "$ZSHENV" || { echo "$2" >> "$ZSHENV"; echo "Added $1 to $ZSHENV"; }
+  grep -q "$1" "$ZSHENV_LOCAL" || { echo "$2" >> "$ZSHENV_LOCAL"; echo "Added $1 to .zshenv.local"; }
 }
 
+append_if_missing 'AM_I_SERVER' 'export AM_I_SERVER=1'
 append_if_missing 'THEME_NVIM' 'export THEME_NVIM="tokyonight-night"'
 append_if_missing 'STARSHIP_CONFIG' "export STARSHIP_CONFIG=$XDG_CONFIG/starship-server.toml"
 append_if_missing 'BAT_THEME' 'export BAT_THEME="tokyonight"'

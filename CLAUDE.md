@@ -16,7 +16,7 @@ macOS dotfiles and development environment configuration.
 | IntelliJ | `intellij/` | IdeaVim (.ideavimrc), Copilot settings |
 | Gemini | `gemini/` | Gemini CLI |
 | VS Code | `.vscode/` | Editor settings |
-| Zsh | `.zshenv`, `.zprofile`, `.zshrc` | Shell config |
+| Zsh | `.zshenv`, `.zshrc` | Shell config |
 | Starship | `starship.toml` | Prompt |
 | Ripgrep | `.ripgreprc` | Search settings |
 | Karabiner | [`karabiner/`](karabiner/README.md) | Keyboard remapping (manual sync via justfile) |
@@ -27,10 +27,11 @@ macOS dotfiles and development environment configuration.
 |------|--------------|----------|
 | `.zshenv` | ALL shells (login, interactive, scripts, subshells) | PATH, env vars, sources `.zshenv.local` |
 | `.zshenv.local` | All shells (not tracked) | SSH agent, machine-specific overrides |
-| `.zprofile` | Login shells only | Empty (kept for compatibility) |
 | `.zshrc` | Interactive shells only | Aliases, functions, completions, prompt |
 
 Note: PATH must be in `.zshenv` for subshell compatibility (e.g., `$(...)`, pipes, xargs).
+
+See [`diagnostics/shell-path.test.ts`](diagnostics/shell-path.test.ts) for PATH validation and zsh gotchas.
 
 ## Brew Packages
 

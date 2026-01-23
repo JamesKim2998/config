@@ -1,5 +1,4 @@
 # .zshenv - ALL shells (login, interactive, scripts, subshells)
-# .zprofile - login shells only (macOS terminal sessions)
 # .zshrc - interactive shells only (aliases, functions, prompt)
 
 # zsh options
