@@ -1,6 +1,6 @@
-# .zshenv - all shells (keep minimal, runs before path_helper)
-# .zprofile - login shells (PATH, env vars - inherited by subshells)
-# .zshrc - interactive shells (aliases, functions, prompt - not inherited)
+# .zshenv - ALL shells (login, interactive, scripts, subshells)
+# .zprofile - login shells only (macOS terminal sessions)
+# .zshrc - interactive shells only (aliases, functions, prompt)
 
 # zsh options
 setopt AUTO_CD              # cd into directories by typing the path

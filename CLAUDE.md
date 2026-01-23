@@ -23,12 +23,14 @@ macOS dotfiles and development environment configuration.
 
 ## Shell Config
 
-| File | When | Contents |
-|------|------|----------|
-| `.zshenv` | All shells | Minimal, sources `.zshenv.local` |
-| `.zshenv.local` | All shells (not tracked) | SSH agent, machine-specific paths |
-| `.zprofile` | Login shells | PATH, env vars, FZF colors (inherited by subshells) |
-| `.zshrc` | Interactive shells | Aliases, functions, completions, prompt |
+| File | When Sourced | Contents |
+|------|--------------|----------|
+| `.zshenv` | ALL shells (login, interactive, scripts, subshells) | PATH, env vars, sources `.zshenv.local` |
+| `.zshenv.local` | All shells (not tracked) | SSH agent, machine-specific overrides |
+| `.zprofile` | Login shells only | Empty (kept for compatibility) |
+| `.zshrc` | Interactive shells only | Aliases, functions, completions, prompt |
+
+Note: PATH must be in `.zshenv` for subshell compatibility (e.g., `$(...)`, pipes, xargs).
 
 ## Brew Packages
 
