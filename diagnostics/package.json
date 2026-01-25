@@ -9,6 +9,7 @@
     "nvim:md": "bun test nvim-markdown-lists.test.ts",
     "nvim:csharp": "bun test nvim-csharp-lsp.test.ts",
     "nvim:startup": "bun nvim-startup.ts",
+    "nvim:diffview": "bun test nvim-diffview.test.ts",
     "nvim": "bun test nvim-*.test.ts",
     "yazi": "bun test yazi-*.test.ts",
     "test": "bun test",
