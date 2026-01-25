@@ -59,6 +59,8 @@ See [`diagnostics/shell-path.test.ts`](diagnostics/shell-path.test.ts) for PATH 
 | Server | Tokyo Night | `setup-server.sh` |
 | SSH window | Tokyo Night | `sv` function in `.zshrc` |
 
+Themed: nvim, kitty, lazygit, bat, yazi, starship, delta
+
 ## Setup
 
 | Script | Desc |

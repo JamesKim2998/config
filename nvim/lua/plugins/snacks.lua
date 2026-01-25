@@ -8,7 +8,7 @@ return {
 		scratch = { enabled = true },
 		notifier = { enabled = true },
 		words = { enabled = true },
-		lazygit = {}, -- auto-configures colorscheme + nvim-remote editing
+		lazygit = { configure = false }, -- theme in lazygit/config.yml
 	},
 	config = function(_, opts)
 		require("snacks").setup(opts)

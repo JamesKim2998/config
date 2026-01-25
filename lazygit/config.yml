@@ -4,6 +4,29 @@ os:
   editPreset: nvim-remote
 gui:
   filterMode: fuzzy
+  nerdFontsVersion: "3"
+  # Kanagawa theme (from snacks.nvim generation)
+  theme:
+    activeBorderColor:
+      - "#ff9e3b"
+      - bold
+    inactiveBorderColor:
+      - "#54546d"
+    searchingActiveBorderColor:
+      - "#ff9e3b"
+      - bold
+    optionsTextColor:
+      - "#7e9cd8"
+    selectedLineBgColor:
+      - "#223249"
+    cherryPickedCommitFgColor:
+      - "#7e9cd8"
+    cherryPickedCommitBgColor:
+      - "#e6c384"
+    unstagedChangesColor:
+      - "#e82424"
+    defaultFgColor:
+      - "#dcd7ba"
 git:
   paging:
     colorArg: always
