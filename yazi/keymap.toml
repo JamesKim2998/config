@@ -23,7 +23,7 @@ desc = "File info (spot)"
 # q closes tab (like Ctrl+C)
 [[mgr.prepend_keymap]]
 on  = "q"
-run = "plugin close-and-restore-tab close_to_right"
+run = "close"
 desc = "Close tab, or quit if last tab"
 
 # Keep Space on the current row after toggling selection
@@ -37,17 +37,6 @@ desc = "Toggle selection (no auto-move)"
 on   = "l"
 run  = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
-
-# https://github.com/MasouShizuka/close-and-restore-tab.yazi
-[[mgr.prepend_keymap]]
-on = [ "<C-w>" ]
-run = "plugin close-and-restore-tab close_to_right"
-desc = "Close the current tab and turn to right tab, or quit if it is last tab"
-
-[[mgr.prepend_keymap]]
-on = [ "<C-t>" ]
-run = "plugin close-and-restore-tab restore"
-desc = "Restore the closed tab"
 
 # https://github.com/orhnk/system-clipboard.yazi?tab=readme-ov-file#configuration
 [[mgr.prepend_keymap]]

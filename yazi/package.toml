@@ -1,9 +1,4 @@
 [[plugin.deps]]
-use = "MasouShizuka/close-and-restore-tab"
-rev = "5047217"
-hash = "bb24648b1f96f1cef8c1543742189aad"
-
-[[plugin.deps]]
 use = "yazi-rs/plugins:git"
 rev = "42f64c0"
 hash = "e01006bfb38951ea89031bd918b20dbb"
