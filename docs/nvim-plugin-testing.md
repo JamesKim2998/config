@@ -8,6 +8,10 @@ E2E testing for neovim plugins using headless nvim and Bun's test framework.
 cd diagnostics
 bun test nvim-markdown-lists.test.ts  # Markdown list continuation
 bun test nvim-csharp-lsp.test.ts      # C# LSP (csharp_ls)
+bun test nvim-diffview.test.ts        # Diffview keymaps
+bun test nvim-neo-tree.test.ts        # Neo-tree keymaps
+bun test nvim-flash.test.ts           # Flash.nvim mappings
+bun test yazi-fr.test.ts              # Yazi fr.yazi ripgrep search
 bun test                               # All tests
 ```
 

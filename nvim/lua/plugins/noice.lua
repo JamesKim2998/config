@@ -1,4 +1,5 @@
 -- https://github.com/folke/noice.nvim
+-- Handles cmdline, messages, popupmenu (notifications handled by snacks.notifier)
 return {
 	"folke/noice.nvim",
 	event = "VeryLazy",
@@ -11,6 +12,10 @@ return {
 				["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 				["vim.lsp.util.stylize_markdown"] = true,
 			},
+		},
+		-- Route notifications to vim.notify (handled by snacks.notifier)
+		routes = {
+			{ filter = { event = "notify" }, view = "notify" },
 		},
 		presets = {
 			bottom_search = true,

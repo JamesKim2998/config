@@ -9,12 +9,16 @@
 | `S-Tab` | Previous tab |
 | `i` | File info (spot) |
 | `/` | Filter files |
+| `S` | Ripgrep search (case-insensitive) |
 | `Space` | Toggle selection (no auto-move) |
+| `gi` | Open lazygit |
+| `Y` | Copy absolute path |
 
 ## Plugins
 
 | Plugin | Purpose |
 |--------|---------|
+| fr.yazi | Ripgrep search with fzf |
 | bat.yazi | Syntax-highlighted text preview |
 | xleak.yazi | Fast Excel preview (uses xleak) |
 | langpack.yazi | meow-tower langpack binary preview |

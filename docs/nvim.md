@@ -63,7 +63,8 @@ IDE setup with Lazy.nvim plugin manager.
 | `s` | Stage entry |
 | `-` | Toggle stage |
 | `X` | Discard changes |
-| `q` | Close diffview |
+| `Y` | Copy absolute path |
+| `q` | Close and go to viewed file |
 
 ### fzf-lua (inside picker)
 
@@ -82,6 +83,7 @@ IDE setup with Lazy.nvim plugin manager.
 | `s` | Flash jump | flash |
 | `r` | Remote flash (operator mode) | flash |
 | `<c-s>` | Toggle flash in search | flash |
+| `]]` / `[[` | Next/prev LSP reference | snacks.words |
 | `gd` | Go to definition | trouble |
 | `gr` | Go to references | trouble |
 | `gI` | Go to implementation | trouble |
@@ -160,6 +162,8 @@ IDE setup with Lazy.nvim plugin manager.
 | `[<Space>` | Add line above | init.lua |
 | `<leader>y` | Copy relative path | init.lua |
 | `<leader>Y` | Copy absolute path | init.lua |
+| `<leader>gg` | Lazygit | snacks |
+| `<leader>gl` | Lazygit file log | snacks |
 | `<leader>gd` | Toggle diff view | diffview |
 | `<leader>gh` | File history | diffview |
 | `<leader>gH` | Repo history | diffview |
@@ -185,7 +189,7 @@ IDE setup with Lazy.nvim plugin manager.
 | bufferline.nvim | Buffer tabs | bufferline.lua |
 | noice.nvim | Messages/cmdline UI | noice.lua |
 | nvim-scrollbar | Scrollbar | scrollbar.lua |
-| snacks.nvim | Indent guides, scratch | snacks.lua |
+| snacks.nvim | Indent guides, scratch, notifier, LSP words, lazygit | snacks.lua |
 | neo-tree.nvim | File explorer with git tab | neo-tree.lua |
 | which-key.nvim | Keymap hints | which-key.lua |
 | **Code** |||
