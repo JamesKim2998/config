@@ -203,6 +203,45 @@ export async function getLine(client: NeovimClient, n: number): Promise<string> 
   return lines[n] ?? "";
 }
 
+// --- Managed tmux session for TUI testing (yazi, etc.) ---
+
+export class TmuxRunner {
+  constructor(
+    public session: string,
+    public testDir: string,
+  ) {}
+
+  async sendRaw(keys: string, delay = 100) {
+    await $`tmux send-keys -t ${this.session} -- ${keys}`.quiet();
+    await Bun.sleep(delay);
+  }
+
+  async sendLiteral(keys: string, delay = 100) {
+    await $`tmux send-keys -t ${this.session} -l -- ${keys}`.quiet();
+    await Bun.sleep(delay);
+  }
+
+  async capture(): Promise<string> {
+    const result = await $`tmux capture-pane -t ${this.session} -p`.quiet();
+    return result.text();
+  }
+
+  async startYazi(startupDelay = 1500) {
+    await this.kill();
+    await $`tmux new-session -d -s ${this.session} -c ${this.testDir} yazi`.quiet();
+    await Bun.sleep(startupDelay);
+  }
+
+  async kill() {
+    await $`tmux kill-session -t ${this.session}`.nothrow().quiet();
+  }
+
+  async cleanup() {
+    await this.kill();
+    await $`rm -rf ${this.testDir}`.nothrow();
+  }
+}
+
 // --- Utility ---
 
 export async function withTimeout<T>(promise: Promise<T>, ms: number, name: string): Promise<T> {

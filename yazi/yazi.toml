@@ -3,8 +3,9 @@ show_hidden = true
 
 [open]
 prepend_rules = [
-	{ name = "*.xls", use = "open" },
-	{ name = "*.xlsx", use = "open" },
+	{ url = "*.tps", use = ["edit", "open"] },
+	{ url = "*.xls", use = "open" },
+	{ url = "*.xlsx", use = "open" },
 ]
 
 # URL-based rules (*.ext) before MIME rules - MIME detection is often wrong
