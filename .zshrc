@@ -19,19 +19,16 @@ ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
-# claude code - run from nearest parent with CLAUDE.md
-cc() {
-  local orig="$PWD" dir="$PWD"
-  while [[ "$dir" != "/" ]]; do
-    if [[ -f "$dir/CLAUDE.md" ]]; then
-      [[ "$dir" != "$orig" ]] && builtin cd "$dir"
-      claude --model opus --dangerously-skip-permissions "$@"
-      [[ "$dir" != "$orig" ]] && builtin cd "$orig" >/dev/null
-      return
-    fi
+# claude code (cd to CLAUDE.md root if found)
+cl() {
+  local dir="$PWD"
+  while [[ "$dir" != "/" && ! -f "$dir/CLAUDE.md" ]]; do
     dir="$(dirname "$dir")"
   done
-  claude --model opus --dangerously-skip-permissions "$@"
+  (
+    [[ "$dir" != "$PWD" ]] && builtin cd "$dir" >/dev/null
+    claude --model opus --dangerously-skip-permissions "$@"
+  )
 }
 
 

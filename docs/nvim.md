@@ -185,6 +185,7 @@ IDE setup with Lazy.nvim plugin manager.
 | Plugin | Purpose | File |
 |--------|---------|------|
 | **UI** |||
+| nvim-treesitter | Syntax parsing | plugins.lua |
 | treesitter-context | Sticky header (func/class) | plugins.lua |
 | bufferline.nvim | Buffer tabs | bufferline.lua |
 | noice.nvim | Messages/cmdline UI | noice.lua |
@@ -225,13 +226,14 @@ IDE setup with Lazy.nvim plugin manager.
 
 | Stage | Plugin | Trigger |
 |-------|--------|---------|
-| Syntax | Built-in treesitter | FileType |
+| Syntax | nvim-treesitter | VeryLazy |
+| Context | treesitter-context | BufReadPost |
 | LSP | mason + lspconfig | BufReadPre |
 | Lint | nvim-lint | BufEnter, BufWritePost |
 | Format | conform.nvim | BufWritePre, `<leader>f` |
 | Completion | blink.cmp | InsertEnter |
 
-Built-in parsers: `lua`, `vim`, `markdown`, `c`, `vimdoc`, `query`
+Treesitter parsers: `:TSInstall <lang>`
 
 ## LSP Servers
 

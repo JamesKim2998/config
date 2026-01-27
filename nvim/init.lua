@@ -97,10 +97,11 @@ vim.filetype.add({
 	},
 })
 
--- Enable treesitter highlighting (built-in, no plugin needed)
+-- Enable treesitter highlighting with regex syntax kept on
 vim.api.nvim_create_autocmd("FileType", {
-	callback = function()
-		pcall(vim.treesitter.start)
+	callback = function(args)
+		pcall(vim.treesitter.start, args.buf)
+		vim.bo[args.buf].syntax = "ON" -- keep regex syntax alongside treesitter
 	end,
 })
 
