@@ -8,6 +8,10 @@ setopt AUTO_CD              # cd into directories by typing the path
 bindkey -v
 KEYTIMEOUT=1  # 10ms escape delay for instant mode switching
 
+# Restore readline shortcuts in vi mode
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
+
 # zsh completions (skip audit, use compiled cache)
 autoload -Uz compinit && compinit -C -u
 [[ ~/.zcompdump.zwc -ot ~/.zcompdump ]] && zcompile ~/.zcompdump &!
