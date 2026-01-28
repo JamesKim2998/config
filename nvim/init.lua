@@ -66,6 +66,10 @@ vim.keymap.set("n", "[<Space>", "O<Esc>", { desc = "Add line above", remap = tru
 vim.keymap.set("n", "j", "gj", { noremap = true })
 vim.keymap.set("n", "k", "gk", { noremap = true })
 
+-- Readline-style line navigation (insert/command mode)
+vim.keymap.set({ "i", "c" }, "<C-a>", "<Home>", { desc = "Go to line start" })
+vim.keymap.set({ "i", "c" }, "<C-e>", "<End>", { desc = "Go to line end" })
+
 -- Map Cmd+X to cut the current line or visual selection
 vim.keymap.set("n", "<D-x>", "dd", { desc = "Cut line" })
 vim.keymap.set("v", "<D-x>", "d", { desc = "Cut selection" })
