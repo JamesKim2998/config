@@ -23,6 +23,7 @@
 	tabs = 2
 	navigate = true
 	dark = true
+	syntax-theme = kanagawa
 [interactive]
 	diffFilter = delta --color-only
 
