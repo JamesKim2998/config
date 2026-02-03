@@ -49,7 +49,7 @@ See [`diagnostics/shell-path.test.ts`](diagnostics/shell-path.test.ts) for PATH 
 | Languages & runtimes | lua, rust, go, node, bun, dotnet |
 | Cloud & CLI tools | gemini-cli, awscli |
 | Shell tools | just, starship, shellcheck, zsh-autosuggestions |
-| Casks | kitty, hammerspoon, libreoffice, docker, font-hack-nerd-font, tailscale, gureumkim |
+| Casks | kitty, hammerspoon, libreoffice, font-hack-nerd-font, tailscale, gureumkim |
 
 ## Theme
 
