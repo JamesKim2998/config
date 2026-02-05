@@ -21,5 +21,9 @@
 
 | Command | Description |
 |---------|-------------|
-| `ffmpeg` | Audio/video processing |
+| `fd` | Fast file finder (find alternative) |
+| `sd` | Fast find & replace (sed alternative) |
+| `jq` | JSON processor |
+| `mlr` | Miller - CSV/TSV/JSON record processing |
 | `magick` | Image manipulation (ImageMagick 7) |
+| `ffmpeg` | Audio/video processing |
