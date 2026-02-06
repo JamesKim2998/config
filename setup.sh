@@ -37,7 +37,7 @@ brew_install --cask \
 
 # claude code
 mkdir -p ~/.claude
-ln -sf "$CONFIG/.claude/CLAUDE.md" ~/.claude/CLAUDE.md
+ln -sf "$CONFIG/.claude/CLAUDE.global.md" ~/.claude/CLAUDE.md
 
 # shell
 touch ~/.hushlogin
