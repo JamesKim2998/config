@@ -6,6 +6,7 @@ return {
 	-- treesitter (syntax parsing)
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
 		event = "VeryLazy",
 		build = ":TSUpdate",
 		config = function()
@@ -22,7 +23,4 @@ return {
 			multiline_threshold = 1,
 		},
 	},
-
-	-- navigation between kitty and nvim splits
-	{ "knubie/vim-kitty-navigator" },
 }

@@ -1,3 +1,6 @@
+# Machine-specific secrets (API keys, tokens)
+.zshenv.local
+
 # Plugin lockfile, auto-generated
 nvim/lazy-lock.json
 

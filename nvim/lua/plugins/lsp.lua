@@ -9,7 +9,7 @@ return {
 		"neovim/nvim-lspconfig",
 	},
 	opts = {
-		ensure_installed = { "lua_ls", "ts_ls", "csharp_ls" },
+		ensure_installed = { "bashls", "lua_ls", "ts_ls", "csharp_ls" },
 		automatic_installation = true,
 		-- automatic_enable = true (default) - auto-enables installed servers
 	},

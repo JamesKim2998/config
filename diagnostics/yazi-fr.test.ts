@@ -16,8 +16,8 @@ const TEST_DIR = "/tmp/yazi-fr-test";
 const tmux = new TmuxRunner("yazi-fr-test", TEST_DIR);
 
 const FZF_OPEN_DELAY = 1000;
-const SEARCH_DELAY = 800;
-const REVEAL_DELAY = 1000;
+const SEARCH_DELAY = 1000;
+const REVEAL_DELAY = 1500;
 
 beforeAll(async () => {
   await Bun.write(`${TEST_DIR}/lowercase.txt`, "this file has hello world in lowercase\n");

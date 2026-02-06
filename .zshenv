@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # .zshenv - ALL shells (login, interactive, scripts, subshells)
 # .zshrc - interactive shells only (aliases, functions, prompt)
 
