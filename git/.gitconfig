@@ -5,18 +5,21 @@
 	autocrlf = input
 	pager = delta
 
+[fetch]
+	prune = true
 [pull]
 	rebase = false
 	ff = true
 [push]
-	# "check" catches amended submodule commits; "on-demand" misses them
-	recurseSubmodules = check
+  autoSetupRemote = true
+	recurseSubmodules = on-demand
 [merge]
 	conflictstyle = zdiff3
 [rebase]
 	autoStash = true
 
 [diff]
+  algorithm = histogram
 	# show full submodule diffs instead of just commit pointer (lazygit ignores this)
 	submodule = diff
 [delta]
