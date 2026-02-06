@@ -34,6 +34,7 @@ cl() {
     claude --model opus --dangerously-skip-permissions "$@"
   )
 }
+alias clu="claude update"
 
 
 # nvim
