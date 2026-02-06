@@ -254,3 +254,55 @@ describe("cmdline mode with float: C-hjkl dispatches kitty", () => {
     expect(cmdline).toBe("ab");
   });
 });
+
+// ---------------------------------------------------------------------------
+// 5. Insert mode with float: C-hjkl dispatches kitty
+// ---------------------------------------------------------------------------
+describe("insert mode with float: C-hjkl dispatches kitty", () => {
+  for (const [key, dir] of [
+    ["<C-h>", "left"],
+    ["<C-j>", "bottom"],
+    ["<C-k>", "top"],
+    ["<C-l>", "right"],
+  ] as const) {
+    it(`${key} dispatches kitty neighbor:${dir}`, async () => {
+      await client.call("luaeval", ['vim.notify("test", vim.log.levels.INFO)']);
+      await Bun.sleep(500);
+
+      await client.input("i");
+      await Bun.sleep(100);
+      await installSystemSpy();
+
+      await client.input(key);
+      await Bun.sleep(300);
+
+      await client.input("<Esc>");
+      await Bun.sleep(200);
+
+      const calls = await getSystemCalls();
+      expect(calls).toContainEqual(`kitty @ focus-window --match neighbor:${dir}`);
+      await closeAllFloats();
+    });
+  }
+
+  it("C-h preserves backspace in insert mode (no float)", async () => {
+    await ensureCleanState();
+
+    await client.input("i");
+    await Bun.sleep(100);
+    await client.input("abc");
+    await Bun.sleep(100);
+    await installSystemSpy();
+
+    await client.input("<C-h>");
+    await Bun.sleep(300);
+
+    await client.input("<Esc>");
+    await Bun.sleep(200);
+
+    expect(kittyCallsFrom(await getSystemCalls())).toHaveLength(0);
+    // Undo to restore file
+    await client.input("u");
+    await Bun.sleep(200);
+  });
+});

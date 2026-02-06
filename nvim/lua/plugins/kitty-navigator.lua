@@ -36,8 +36,8 @@ return {
 		vim.keymap.set("n", "<C-k>", nav("KittyNavigateUp", "top"))
 		vim.keymap.set("n", "<C-l>", nav("KittyNavigateRight", "right"))
 
-		-- Cmdline mode: same rule, but preserve default keys when no float
-		local function cnav(kitty_dir, key)
+		-- Insert/cmdline mode: same rule, but preserve default keys when no float
+		local function modal_nav(kitty_dir, key)
 			return function()
 				if any_float_visible() then
 					kitty_focus(kitty_dir)
@@ -46,9 +46,11 @@ return {
 				return vim.api.nvim_replace_termcodes(key, true, false, true)
 			end
 		end
-		vim.keymap.set("c", "<C-h>", cnav("left", "<C-h>"), { expr = true })
-		vim.keymap.set("c", "<C-j>", cnav("bottom", "<C-j>"), { expr = true })
-		vim.keymap.set("c", "<C-k>", cnav("top", "<C-k>"), { expr = true })
-		vim.keymap.set("c", "<C-l>", cnav("right", "<C-l>"), { expr = true })
+		for _, mode in ipairs({ "i", "c" }) do
+			vim.keymap.set(mode, "<C-h>", modal_nav("left", "<C-h>"), { expr = true })
+			vim.keymap.set(mode, "<C-j>", modal_nav("bottom", "<C-j>"), { expr = true })
+			vim.keymap.set(mode, "<C-k>", modal_nav("top", "<C-k>"), { expr = true })
+			vim.keymap.set(mode, "<C-l>", modal_nav("right", "<C-l>"), { expr = true })
+		end
 	end,
 }
