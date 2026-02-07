@@ -35,9 +35,12 @@ brew_install --cask \
   tailscale `# mesh VPN for stable Mac Mini access` \
   gureumkim `# Korean input method`
 
-# claude code
+# agents (claude, codex)
+LLM_GLOBAL="$CONFIG/.claude/CLAUDE.global.md"
 mkdir -p ~/.claude
-ln -sf "$CONFIG/.claude/CLAUDE.global.md" ~/.claude/CLAUDE.md
+ln -sf "$LLM_GLOBAL" ~/.claude/CLAUDE.md
+mkdir -p ~/.codex
+ln -sf "$LLM_GLOBAL" ~/.codex/AGENTS.md
 
 # shell
 touch ~/.hushlogin
@@ -96,4 +99,3 @@ ln -sf "$CONFIG/intellij/.ideavimrc" ~/.ideavimrc
 
 # cargo tools (stylua: lua formatter, selene: lua linter)
 cargo install stylua selene
-
