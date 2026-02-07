@@ -23,18 +23,18 @@ ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
-# claude code (cd to CLAUDE.md root if found)
-cl() {
+# codex (cd to AGENTS.md root if found)
+ai() {
   local dir="$PWD"
-  while [[ "$dir" != "/" && ! -f "$dir/CLAUDE.md" ]]; do
+  while [[ "$dir" != "/" && ! -f "$dir/AGENTS.md" ]]; do
     dir="$(dirname "$dir")"
   done
   (
     [[ "$dir" != "$PWD" ]] && builtin cd "$dir" >/dev/null
-    claude --model opus --dangerously-skip-permissions "$@"
+    codex --dangerously-bypass-approvals-and-sandbox "$@"
   )
 }
-alias clu="claude update"
+alias aiu="bun update -g @openai/codex --latest"
 
 
 # nvim
@@ -134,4 +134,3 @@ add-zsh-hook precmd _ls_once                             # on new shell (once)
 alias restart='exec zsh'
 alias g="lazygit"
 alias todo="(cd \"$MEOW_ROOT/todo/\"; $EDITOR todo.md)"
-
