@@ -31,10 +31,12 @@ ai() {
   done
   (
     [[ "$dir" != "$PWD" ]] && builtin cd "$dir" >/dev/null
-    codex --dangerously-bypass-approvals-and-sandbox "$@"
+    # codex --dangerously-bypass-approvals-and-sandbox "$@"
+    claude --model opus --dangerously-skip-permissions "$@"
   )
 }
-alias aiu="bun update -g @openai/codex --latest"
+# alias aiu="bun update -g @openai/codex --latest"
+alias clu="claude update"
 
 
 # nvim
