@@ -1,1 +1,1 @@
-/Users/jameskim/Develop/config/AGENTS.md
+AGENTS.md
