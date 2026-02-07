@@ -68,3 +68,5 @@ Themed: nvim, kitty, lazygit, bat, yazi, starship, delta
 | `setup.sh` | Homebrew, CLI tools, symlinks |
 | `setup-server.sh` | Server-specific setup (Tokyo Night) |
 | `diagnostics/` | SSH, clipboard, nvim plugin diagnostics |
+
+Run diagnostics with `cd diagnostics && bun test`.

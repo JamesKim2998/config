@@ -15,11 +15,21 @@ vim.o.smarttab = true -- recognizes some C syntax to increase/reduce the indent 
 
 -- Statusline (native, replaces lualine)
 local mode_icons = {
-	n = "󰆾", i = "󰏫", v = "󰒉", V = "󰒉", [""] = "󰒉",
-	R = "󰛔", c = "󰘳", t = "󰆍", s = "󰒉", S = "󰒉",
+	n = "󰆾",
+	i = "󰏫",
+	v = "󰒉",
+	V = "󰒉",
+	[""] = "󰒉",
+	R = "󰛔",
+	c = "󰘳",
+	t = "󰆍",
+	s = "󰒉",
+	S = "󰒉",
 }
 function _G.statusline()
-	if vim.bo.filetype == "neo-tree" then return "%#NeoTreeNormal#" end
+	if vim.bo.filetype == "neo-tree" then
+		return "%#NeoTreeNormal#"
+	end
 	local mode = mode_icons[vim.fn.mode()] or vim.fn.mode()
 	local branch = vim.b.gitsigns_head and ("   " .. vim.b.gitsigns_head) or ""
 	return " " .. mode .. branch .. "%=%p%%  %l:%c "
@@ -55,8 +65,12 @@ vim.keymap.set("n", "qq", function()
 end, { desc = "Close buffer (quit if last)" })
 vim.keymap.set("n", "Q", "<cmd>qa<CR>", { desc = "Quit nvim" })
 vim.keymap.set("n", "<leader>w", "<cmd>w<CR>", { desc = "Save file" })
-vim.keymap.set("n", "<leader>y", function() vim.fn.setreg("+", vim.fn.expand("%")) end, { desc = "Copy relative path" })
-vim.keymap.set("n", "<leader>Y", function() vim.fn.setreg("+", vim.fn.expand("%:p")) end, { desc = "Copy absolute path" })
+vim.keymap.set("n", "<leader>y", function()
+	vim.fn.setreg("+", vim.fn.expand("%"))
+end, { desc = "Copy relative path" })
+vim.keymap.set("n", "<leader>Y", function()
+	vim.fn.setreg("+", vim.fn.expand("%:p"))
+end, { desc = "Copy absolute path" })
 
 -- Add newline without entering insert mode (remap=true to trigger buffer-local o/O)
 vim.keymap.set("n", "]<Space>", "o<Esc>", { desc = "Add line below", remap = true })
@@ -98,6 +112,11 @@ vim.filetype.add({
 	extension = {
 		command = "sh",
 		plist = "xml",
+
+		-- Unity
+		asset = "yaml",
+		meta = "yaml",
+		prefab = "yaml",
 	},
 })
 
@@ -120,15 +139,15 @@ vim.o.undofile = true -- Persistent undo history
 
 -- Use OSC 52 for clipboard over SSH (yank reaches local clipboard)
 if vim.env.SSH_TTY then
-  vim.g.clipboard = {
-    name = "OSC 52",
-    copy = {
-      ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
-      ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
-    },
-    paste = {
-      ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
-      ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
-    },
-  }
+	vim.g.clipboard = {
+		name = "OSC 52",
+		copy = {
+			["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+			["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+		},
+		paste = {
+			["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+			["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+		},
+	}
 end

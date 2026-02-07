@@ -43,6 +43,9 @@ prepend_previewers = [
 	{ url = "*.csv", run = "bat" },
 	{ url = "*.md", run = "bat" },
 	{ url = "*.json", run = "bat" },
+	{ url = "*.meta", run = "bat" },
+  { url = "*.asset", run = "bat" },
+  { url = "*.prefab", run = "bat" },
 	{ mime = "application/json", run = "bat" },
 	{ url = "**/bun.lock", run = "bat" },
 	# office MIME rules
