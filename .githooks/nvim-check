@@ -1,0 +1,12 @@
+#!/bin/bash
+# Verify nvim starts without errors (called by lefthook)
+tmp=$(mktemp)
+trap 'rm -f "$tmp"' EXIT
+
+nvim --headless -n -c "silent! redir! >$tmp | silent messages | redir END | qa!" 2>>"$tmp"
+
+if grep -qi 'error\|E5107\|Failed to' "$tmp"; then
+  echo "nvim startup error:"
+  cat "$tmp"
+  exit 1
+fi

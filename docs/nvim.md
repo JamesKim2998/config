@@ -253,4 +253,4 @@ Run `:Mason` to manage language servers. Servers in `ensure_installed` auto-inst
 
 ### E2E Tests
 
-See [Plugin Testing](nvim-plugin-testing.md) for running and writing plugin tests.
+See [[nvim-plugin-testing.md|Plugin Testing]] for running and writing plugin tests.

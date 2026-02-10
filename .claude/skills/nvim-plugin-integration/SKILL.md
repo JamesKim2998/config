@@ -49,4 +49,4 @@ Update `docs/nvim.md` with new keymaps.
 
 ## E2E Testing
 
-See [nvim-remote-api-testing.md](../../../docs/nvim-remote-api-testing.md) for headless testing.
+See [[nvim-plugin-testing.md]] for headless testing.

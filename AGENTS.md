@@ -6,20 +6,20 @@ macOS dotfiles and development environment configuration.
 
 | Tool | Config | Desc |
 |------|--------|------|
-| Neovim | [`nvim/`](docs/nvim.md) | IDE with Lazy.nvim plugin manager |
+| Neovim | [[docs/nvim.md|nvim/]] | IDE with Lazy.nvim plugin manager |
 | Kitty | `kitty/` | Terminal emulator, Kanagawa theme |
 | Git | `git/` | Config with delta diff viewer |
-| Yazi | `yazi/` | File manager with plugins |
+| Yazi | [[yazi/README.md|yazi/]] | File manager with plugins |
 | Lazygit | `lazygit/` | Git TUI |
 | Bat | `bat/` | Syntax-highlighted cat |
-| Hammerspoon | [`.hammerspoon/`](.hammerspoon/README.md) | Window management, app launcher hotkeys |
+| Hammerspoon | [[.hammerspoon/README.md|.hammerspoon/]] | Window management, app launcher hotkeys |
 | IntelliJ | `intellij/` | IdeaVim (.ideavimrc), Copilot settings |
 | Gemini | `gemini/` | Gemini CLI |
 | VS Code | `.vscode/` | Editor settings |
 | Zsh | `.zshenv`, `.zshrc` | Shell config |
 | Starship | `starship.toml` | Prompt |
 | Ripgrep | `.ripgreprc` | Search settings |
-| Karabiner | [`karabiner/`](karabiner/README.md) | Keyboard remapping (manual sync via justfile) |
+| Karabiner | [[karabiner/README.md|karabiner/]] | Keyboard remapping (manual sync via justfile) |
 
 ## Shell Config
 
@@ -31,7 +31,7 @@ macOS dotfiles and development environment configuration.
 
 Note: PATH must be in `.zshenv` for subshell compatibility (e.g., `$(...)`, pipes, xargs).
 
-See [`diagnostics/shell-path.test.ts`](diagnostics/shell-path.test.ts) for PATH validation and zsh gotchas.
+See [[diagnostics/shell-path.test.ts]] for PATH validation and zsh gotchas.
 
 ## Brew Packages
 

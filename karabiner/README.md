@@ -51,7 +51,7 @@ system_profiler SPBluetoothDataType | grep -E "Minor Type|Vendor ID|Product ID"
 - Left Command <-> Left Option (swap for Mac layout)
 - Right Command -> F16 (input source switching)
 - DIP Switch 1 OFF (Windows mode for standard F-keys)
-- See [barocco_md770.pdf](barocco_md770.pdf) for DIP switch settings
+- See [[barocco_md770.pdf]] for DIP switch settings
 
 ## Complex Modifications
 
