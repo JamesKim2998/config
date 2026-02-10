@@ -11,6 +11,7 @@ return {
 			{ "<leader>f", group = "find" },
 			{ "<leader>x", group = "diagnostics" },
 			{ "<leader>c", group = "code" },
+			{ "<leader>o", group = "obsidian" },
 			{ "<leader>q", group = "session" },
 		},
 	},
