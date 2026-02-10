@@ -31,12 +31,12 @@ ai() {
   done
   (
     [[ "$dir" != "$PWD" ]] && builtin cd "$dir" >/dev/null
-    # codex --dangerously-bypass-approvals-and-sandbox "$@"
     claude --model opus --dangerously-skip-permissions "$@"
+    # codex --dangerously-bypass-approvals-and-sandbox "$@"
   )
 }
+alias aiu="claude update"
 # alias aiu="bun update -g @openai/codex --latest"
-alias clu="claude update"
 
 
 # nvim
@@ -134,5 +134,6 @@ add-zsh-hook precmd _ls_once                             # on new shell (once)
 
 # aliases
 alias restart='exec zsh'
+alias ze="$EDITOR ~/.zshrc"
 alias g="lazygit"
 alias todo="(cd \"$MEOW_ROOT/todo/\"; $EDITOR todo.md)"

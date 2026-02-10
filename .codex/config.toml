@@ -1,0 +1,10 @@
+model = "gpt-5.3-codex"
+model_reasoning_effort = "xhigh"
+
+[projects."/Users/jameskim/Develop/config"]
+trust_level = "trusted"
+[projects."/Users/jameskim/Develop/meow-tower"]
+trust_level = "trusted"
+[projects."/Users/jameskim/Develop/meow-toolbox"]
+trust_level = "trusted"
+
