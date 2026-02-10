@@ -44,6 +44,9 @@ export DOTNET_ROOT="$HOME/.dotnet"
 # claude code
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 
+# lefthook (silent on success, show failures with output)
+export LEFTHOOK_OUTPUT="failure,execution_out"
+
 # fzf (Kanagawa colors)
 export FZF_DEFAULT_OPTS=" \
   --color=bg+:#2d4f67,bg:#1f1f28,spinner:#c8c093,hl:#c34043 \
