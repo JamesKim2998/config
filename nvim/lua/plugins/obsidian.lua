@@ -34,6 +34,7 @@ return {
 			return tostring(os.time())
 		end,
 		frontmatter = { enabled = false },
+		footer = { format = "{{backlinks}} backlinks" },
 		picker = { name = "fzf-lua" },
 		-- Disable UI (render-markdown.nvim handles rendering)
 		ui = { enable = false },
