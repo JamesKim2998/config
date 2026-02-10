@@ -124,7 +124,10 @@ vim.filetype.add({
 vim.api.nvim_create_autocmd("FileType", {
 	callback = function(args)
 		pcall(vim.treesitter.start, args.buf)
-		vim.bo[args.buf].syntax = "ON" -- keep regex syntax alongside treesitter
+		-- skip markdown: regex syntax loads HTML rules that break <? and bare < rendering
+		if vim.bo[args.buf].filetype ~= "markdown" then
+			vim.bo[args.buf].syntax = "ON" -- keep regex syntax alongside treesitter
+		end
 	end,
 })
 
