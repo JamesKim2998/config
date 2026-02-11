@@ -23,22 +23,6 @@ ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
-# codex (cd to AGENTS.md root if found)
-ai() {
-  local dir="$PWD"
-  while [[ "$dir" != "/" && ! -f "$dir/AGENTS.md" ]]; do
-    dir="$(dirname "$dir")"
-  done
-  (
-    [[ "$dir" != "$PWD" ]] && builtin cd "$dir" >/dev/null
-    claude --model opus --dangerously-skip-permissions "$@"
-    # codex --dangerously-bypass-approvals-and-sandbox "$@"
-  )
-}
-alias aiu="claude update"
-# alias aiu="bun update -g @openai/codex --latest"
-
-
 # nvim
 alias v="$EDITOR"
 alias ve="$EDITOR $HOME/.config/nvim/init.lua"
@@ -120,6 +104,22 @@ alias restart='exec zsh'
 alias ze="$EDITOR ~/.zshrc"
 alias g="lazygit"
 alias todo="(cd \"$MEOW_ROOT/todo/\"; $EDITOR todo.md)"
+
+
+# llm (cd to AGENTS.md root if found)
+ai() {
+  local dir="$PWD"
+  while [[ "$dir" != "/" && ! -f "$dir/AGENTS.md" ]]; do
+    dir="$(dirname "$dir")"
+  done
+  (
+    [[ "$dir" != "$PWD" ]] && builtin cd "$dir" >/dev/null
+    claude --model opus --dangerously-skip-permissions "$@"
+    # codex --dangerously-bypass-approvals-and-sandbox "$@"
+  )
+}
+alias aiu="claude update"
+# alias aiu="bun update -g @openai/codex --latest"
 
 
 # kitty ssh (auto-reconnect in new windows/panes)
