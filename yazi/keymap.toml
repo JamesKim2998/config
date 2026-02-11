@@ -4,14 +4,15 @@ on = "/"
 run = "filter --smart"
 desc = "Filter files"
 
-# Tab navigation (Tab/S-Tab), move original info to 'i'
+# Tab navigation, move original info to 'i'
+# Use <BackTab> not <S-Tab> — legacy backtab (ESC[Z) without Kitty Keyboard Protocol
 [[mgr.prepend_keymap]]
 on = "<Tab>"
 run = "tab_switch 1 --relative"
 desc = "Next tab"
 
 [[mgr.prepend_keymap]]
-on = "<S-Tab>"
+on = "<BackTab>"
 run = "tab_switch -1 --relative"
 desc = "Previous tab"
 
