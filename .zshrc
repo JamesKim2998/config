@@ -99,6 +99,29 @@ fi
 source $_starship
 
 
+# auto ls
+autoload -U add-zsh-hook
+_ls() { ls }
+_ls_once() { ls; add-zsh-hook -d precmd _ls_once }
+add-zsh-hook chpwd _ls      # on cd
+add-zsh-hook precmd _ls_once                             # on new shell (once)
+
+
+# copy paths
+alias cpwd='pwd | pbcopy'
+cpr() {
+  local root=$(git rev-parse --show-toplevel 2>/dev/null) || { echo "not in a git repo" >&2; return 1; }
+  echo "$root" | pbcopy
+}
+
+
+# aliases
+alias restart='exec zsh'
+alias ze="$EDITOR ~/.zshrc"
+alias g="lazygit"
+alias todo="(cd \"$MEOW_ROOT/todo/\"; $EDITOR todo.md)"
+
+
 # kitty ssh (auto-reconnect in new windows/panes)
 alias kssh="kitten ssh"
 
@@ -124,16 +147,3 @@ sv() {
 }
 
 
-# auto ls
-autoload -U add-zsh-hook
-_ls() { ls }
-_ls_once() { ls; add-zsh-hook -d precmd _ls_once }
-add-zsh-hook chpwd _ls      # on cd
-add-zsh-hook precmd _ls_once                             # on new shell (once)
-
-
-# aliases
-alias restart='exec zsh'
-alias ze="$EDITOR ~/.zshrc"
-alias g="lazygit"
-alias todo="(cd \"$MEOW_ROOT/todo/\"; $EDITOR todo.md)"
