@@ -1,7 +1,8 @@
 " IdeaVim configuration for JetBrains IDEs (Rider, WebStorm, etc.)
 
 set notimeout
-nmap <Space> <Nop>  " Disable default space behavior so it can be used as leader
+" Disable default space behavior so it can be used as leader
+nmap <Space> <Nop>
 let mapleader = " "
 set clipboard=unnamedplus
 
