@@ -114,7 +114,7 @@ ai() {
   done
   (
     [[ "$dir" != "$PWD" ]] && builtin cd "$dir" >/dev/null
-    claude --model opus --dangerously-skip-permissions "$@"
+    claude --dangerously-skip-permissions "$@"
     # codex --dangerously-bypass-approvals-and-sandbox "$@"
   )
 }

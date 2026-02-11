@@ -23,7 +23,7 @@ brew_install "" \
   clipboard procs httpie wget `# system utilities` \
   7-zip ouch `# compression & archives` \
   imagemagick ffmpeg `# media processing` \
-  lazygit delta git-lfs gh copilot `# git tools` \
+  lazygit delta git-lfs gh lefthook `# git tools` \
   lua rust go node oven-sh/bun/bun dotnet `# languages & runtimes` \
   awscli `# cloud & cli tools` \
   just starship shellcheck zsh-autosuggestions `# shell tools`
@@ -34,13 +34,6 @@ brew_install --cask \
   libreoffice font-hack-nerd-font \
   tailscale `# mesh VPN for stable Mac Mini access` \
   gureumkim `# Korean input method`
-
-# agents (claude, codex)
-LLM_GLOBAL="$CONFIG/.claude/CLAUDE.global.md"
-mkdir -p ~/.claude
-ln -sf "$LLM_GLOBAL" ~/.claude/CLAUDE.md
-mkdir -p ~/.codex
-ln -sf "$LLM_GLOBAL" ~/.codex/AGENTS.md
 
 # shell
 touch ~/.hushlogin
@@ -97,5 +90,14 @@ ln -sf "$CONFIG/.vscode/settings.json" "$APP_SUPPORT/Code/User/settings.json"
 # jetbrains ideavim
 ln -sf "$CONFIG/intellij/.ideavimrc" ~/.ideavimrc
 
-# cargo tools (stylua: lua formatter, selene: lua linter)
-cargo install stylua selene
+# cargo tools (stylua: lua formatter)
+cargo install stylua
+
+# agents (claude, codex)
+LLM_GLOBAL="$CONFIG/.claude/CLAUDE.global.md"
+mkdir -p ~/.claude
+ln -sf "$LLM_GLOBAL" ~/.claude/CLAUDE.md
+ln -sf "$CONFIG/.claude/settings.json" ~/.claude/settings.json
+mkdir -p ~/.codex
+ln -sf "$LLM_GLOBAL" ~/.codex/AGENTS.md
+
