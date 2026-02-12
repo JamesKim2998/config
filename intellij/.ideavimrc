@@ -5,6 +5,8 @@ set notimeout
 nmap <Space> <Nop>
 let mapleader = " "
 set clipboard=unnamedplus
+set ignorecase
+set smartcase
 
 " Move lines with Option+j/k
 nmap <A-j> <Action>(MoveLineDown)
