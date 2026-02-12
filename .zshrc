@@ -106,12 +106,13 @@ alias g="lazygit"
 alias todo="(cd \"$MEOW_ROOT/todo/\"; $EDITOR todo.md)"
 
 
-# llm (cd to AGENTS.md root if found)
+# llm (cd to CLAUDE.md root if found)
 ai() {
   local dir="$PWD"
-  while [[ "$dir" != "/" && ! -f "$dir/AGENTS.md" ]]; do
+  while [[ "$dir" != "/" && ! -f "$dir/CLAUDE.md" ]]; do
     dir="$(dirname "$dir")"
   done
+  [[ "$dir" == "/" && ! -f /CLAUDE.md ]] && dir="$PWD"
   (
     [[ "$dir" != "$PWD" ]] && builtin cd "$dir" >/dev/null
     claude --dangerously-skip-permissions "$@"
