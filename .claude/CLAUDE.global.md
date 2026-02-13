@@ -3,8 +3,9 @@
 ## Git
 - Do NOT auto-commit or stage changes unless explicitly requested by the user.
 
-## Continuous Improvement
+## Doc Guidelines
 - While working, log any misleading docs, outdated instructions, own mistakes, or improvement opportunities to `TODO.md`.
+- Use Mermaid for diagrams in Markdown. Avoid ASCII art.
 
 ---
 
