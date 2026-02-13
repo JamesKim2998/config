@@ -6,5 +6,6 @@
     "swift-lsp@claude-plugins-official": false,
     "clangd-lsp@claude-plugins-official": false
   },
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "skipDangerousModePermissionPrompt": true
 }
