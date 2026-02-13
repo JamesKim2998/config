@@ -6,9 +6,5 @@
     "swift-lsp@claude-plugins-official": false,
     "clangd-lsp@claude-plugins-official": false
   },
-  "alwaysThinkingEnabled": true,
-  "fastMode": true,
-  "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
-  }
+  "alwaysThinkingEnabled": true
 }
