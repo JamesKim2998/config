@@ -4,6 +4,8 @@
 	excludesfile = ~/.gitignore_global
 	autocrlf = input
 	pager = delta
+	fsmonitor = true       # background daemon watches filesystem for changes
+	untrackedCache = true  # cache untracked files to speed up git status
 
 [fetch]
 	prune = true
