@@ -3,7 +3,7 @@
 
 palette = "kanagawa"
 scan_timeout = 10
-command_timeout = 500
+command_timeout = 300
 add_newline = false
 
 format = """
@@ -36,6 +36,7 @@ style = "bold purple bg:bg_dark"
 truncation_length = 20
 
 [git_status]
+ignore_submodules = true  # skip submodule status checks for speed
 format = '([$modified$behind ]($style))'
 style = "bg:bg_dark"
 modified = "[●](yellow bg:bg_dark)"
