@@ -40,6 +40,9 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 
+[submodule]
+	fetchJobs = 64  # parallel submodule fetch/clone/update
+
 [credential]
 	helper = osxkeychain
 [credential "https://github.com"]
