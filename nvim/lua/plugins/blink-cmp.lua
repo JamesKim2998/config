@@ -3,7 +3,11 @@ return {
 	"saghen/blink.cmp",
 	version = "1.*",
 	opts = {
-		keymap = { preset = "super-tab" },
+		keymap = {
+			preset = "super-tab",
+			["<C-k>"] = {}, -- free C-k for kitty-navigator
+			["<C-s>"] = { "show_signature", "hide_signature", "fallback" },
+		},
 		completion = {
 			documentation = { auto_show = true },
 		},

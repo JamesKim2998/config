@@ -100,6 +100,14 @@ vim.keymap.set("i", "<D-x>", function()
 	end
 end, { desc = "Cut line" })
 
+-- Splits
+vim.keymap.set("n", "<leader>|", "<cmd>vsplit<CR>", { desc = "Vertical split" })
+vim.keymap.set("n", "<leader>-", "<cmd>split<CR>", { desc = "Horizontal split" })
+vim.keymap.set("n", "<A-Up>", "<cmd>resize +2<CR>", { desc = "Increase height" })
+vim.keymap.set("n", "<A-Down>", "<cmd>resize -2<CR>", { desc = "Decrease height" })
+vim.keymap.set("n", "<A-Left>", "<cmd>vertical resize -2<CR>", { desc = "Decrease width" })
+vim.keymap.set("n", "<A-Right>", "<cmd>vertical resize +2<CR>", { desc = "Increase width" })
+
 -- Substitute mappings
 vim.keymap.set("n", "<leader>s", ":%s///<Left><Left>", { desc = "Substitute in file" })
 vim.keymap.set("n", "<leader>sw", function()
