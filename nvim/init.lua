@@ -101,7 +101,7 @@ vim.keymap.set("i", "<D-x>", function()
 end, { desc = "Cut line" })
 
 -- Splits
-vim.keymap.set("n", "<leader>|", "<cmd>vsplit<CR>", { desc = "Vertical split" })
+vim.keymap.set("n", "<leader>\\", "<cmd>vsplit<CR>", { desc = "Vertical split" })
 vim.keymap.set("n", "<leader>-", "<cmd>split<CR>", { desc = "Horizontal split" })
 vim.keymap.set("n", "<A-Up>", "<cmd>resize +2<CR>", { desc = "Increase height" })
 vim.keymap.set("n", "<A-Down>", "<cmd>resize -2<CR>", { desc = "Decrease height" })
