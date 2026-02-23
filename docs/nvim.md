@@ -19,7 +19,6 @@ IDE setup with Lazy.nvim plugin manager.
 | `<C-n>` | Toggle file explorer | neo-tree |
 | `<leader>e` | Focus file explorer | neo-tree |
 | `<leader>gs` | Git status (neo-tree) | neo-tree |
-| `<leader>-` | Open yazi | yazi |
 | `<leader>.` | New scratch buffer | snacks |
 | `<leader>S` | Select scratch buffer | snacks |
 | `<leader>sr` | Structural search/replace | ssr |
@@ -130,6 +129,7 @@ IDE setup with Lazy.nvim plugin manager.
 | `<Tab>` / `<S-Tab>` | Accept/navigate completion | blink.cmp (super-tab) |
 | `<C-space>` | Show completion menu | blink.cmp |
 | `<C-e>` | Hide menu | blink.cmp |
+| `<C-s>` | Toggle signature help | blink.cmp |
 | `<A-y>` | Accept minuet AI suggestion (popup) | minuet |
 | `<A-A>` | Accept entire ghost text | minuet |
 | `<A-a>` | Accept one line of ghost text | minuet |
@@ -144,6 +144,16 @@ IDE setup with Lazy.nvim plugin manager.
 | `<CR>` | List continuation in insert mode | markdown-lists |
 | `<leader>tt` | Toggle checkbox `[ ]` ↔ `[x]` | markdown-lists |
 
+
+### Splits
+
+| Key | Action | Source |
+|-----|--------|--------|
+| `<leader>\` | Vertical split | init.lua |
+| `<leader>-` | Horizontal split | init.lua |
+| `<A-Up>` / `<A-Down>` | Resize height | init.lua |
+| `<A-Left>` / `<A-Right>` | Resize width | init.lua |
+| `<C-h/j/k/l>` | Navigate splits (+ kitty panes) | kitty-navigator |
 
 ### Session
 
@@ -216,7 +226,6 @@ IDE setup with Lazy.nvim plugin manager.
 | flash.nvim | Jump anywhere | flash.lua |
 | trouble.nvim | Diagnostics, refs, quickfix | trouble.lua |
 | todo-comments.nvim | TODO highlighting | todo-comments.lua |
-| yazi.nvim | File manager | yazi.lua |
 | ssr.nvim | Structural search/replace | ssr.lua |
 | vim-kitty-navigator | Kitty/nvim panes | kitty-navigator.lua |
 | kitty-scrollback.nvim | Scrollback in kitty | kitty-scrollback.lua |
