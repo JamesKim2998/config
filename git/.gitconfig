@@ -4,7 +4,10 @@
 	excludesfile = ~/.gitignore_global
 	autocrlf = input
 	pager = delta
-	fsmonitor = true       # background daemon watches filesystem for changes
+	# fsmonitor = true     # background daemon watches filesystem for changes
+	fsmonitor = false      # disabled: IPC round-trip (~11ms) per subprocess costs more than
+	                       # raw lstat in repos with many submodules (33 × 11ms = 360ms overhead).
+	                       # preload-index lstats all files regardless, so fsmonitor saves nothing.
 	untrackedCache = true  # cache untracked files to speed up git status
 
 [fetch]
