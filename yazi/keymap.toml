@@ -127,6 +127,18 @@ on = "<C-S-PageDown>"
 run = "tab_swap 1"
 desc = "Move tab after"
 
+# macOS open / reveal
+[[mgr.prepend_keymap]]
+on = "o"
+run = "open"
+desc = "Open with default application"
+
+[[mgr.prepend_keymap]]
+on  = "O"
+for = "macos"
+run = "shell -- open -R %s1"
+desc = "Reveal in Finder"
+
 # https://github.com/yazi-rs/plugins/tree/main/jump-to-char.yazi
 [[mgr.prepend_keymap]]
 on = "f"
