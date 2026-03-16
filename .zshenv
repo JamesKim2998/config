@@ -24,7 +24,6 @@ export EDITOR=$BREW/bin/nvim
 # path
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.dotnet:$HOME/.dotnet/tools:$PATH"
 export PATH="$BREW/opt/openjdk/bin:$PATH"
 export PATH="$BREW/opt/trash-cli/bin:$PATH"
 export PATH="$HOME/Library/Android/sdk/emulator:$HOME/Library/Android/sdk/platform-tools:$PATH"
@@ -38,14 +37,15 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export PNPM_HOME="$HOME/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
+# ruby
+export PATH="$BREW/lib/ruby/gems/2.7.0/bin:$PATH"
+
 # dotnet
+export PATH="$HOME/.dotnet:$HOME/.dotnet/tools:$PATH"
 export DOTNET_ROOT="$HOME/.dotnet"
 
 # claude code
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
-
-# lefthook (silent on success, show failures with output)
-export LEFTHOOK_OUTPUT="failure,execution_out"
 
 # fzf (Kanagawa colors)
 export FZF_DEFAULT_OPTS=" \
@@ -58,3 +58,7 @@ export FZF_DEFAULT_OPTS=" \
 
 # zoxide
 export _ZO_FZF_OPTS='+e --height=40% --layout=reverse --border --no-sort'
+
+# lefthook (silent on success, show failures with output)
+export LEFTHOOK_OUTPUT="failure,execution_out"
+
