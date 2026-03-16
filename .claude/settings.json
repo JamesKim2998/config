@@ -7,5 +7,6 @@
     "clangd-lsp@claude-plugins-official": false
   },
   "alwaysThinkingEnabled": true,
+  "effortLevel": "high",
   "skipDangerousModePermissionPrompt": true
 }
