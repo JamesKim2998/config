@@ -55,5 +55,9 @@
 	helper =  # clear default helper chain
 	helper = !/opt/homebrew/bin/gh auth git-credential
 
+[http "https://ad090e.studioboxcat.com/"]
+	extraHeader = X-cab73d: b2d1746d9a7383f9
+
 [include]
 	path = ~/.gitconfig.local
+
