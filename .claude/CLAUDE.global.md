@@ -36,3 +36,4 @@ All repos live under `$MEOW_ROOT`.
 | `ffmpeg` | |
 | `just` | Make like task runner |
 | `gh` | |
+| `ilspycmd` | .NET decompiler CLI |
