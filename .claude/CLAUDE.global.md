@@ -15,13 +15,13 @@
 
 All repos live under `$MEOW_ROOT`.
 
-| Repo | Description |
-|------|-------------|
-| **meow-tower** | Unity mobile game (iOS/Android) - main game project |
-| **meow-assets** | Art, UI, sound, store, marketing assets |
-| **meow-toolbox** | Bun/TS dev tools - PSD processing, spreadsheets, Firebase, App Store Connect, automation scripts |
-| **alfredo** | Personal assistant - Slack bot, Notion, Gmail, AWS/GCS, pm2 services |
-| **config** | macOS dotfiles - nvim, kitty, zsh, git, yazi, lazygit, hammerspoon |
+| Repo | Env Var | Description |
+|------|---------|-------------|
+| **meow-tower** | `$MEOW_CLIENT` | Unity mobile game (iOS/Android) - main game project |
+| **meow-assets** | `$MEOW_ASSETS` | Art, UI, sound, store, marketing assets |
+| **meow-toolbox** | `$MEOW_TOOLBOX` | Bun/TS dev tools - PSD processing, spreadsheets, Firebase, App Store Connect, automation scripts |
+| **alfredo** | `$ALFREDO_REPO` | Personal assistant - Slack bot, Notion, Gmail, AWS/GCS, pm2 services |
+| **config** | `$CONFIG_REPO` | macOS dotfiles - nvim, kitty, zsh, git, yazi, lazygit, hammerspoon |
 
 ## CLI Tools
 
