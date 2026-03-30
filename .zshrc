@@ -119,8 +119,12 @@ ai() {
     # codex --dangerously-bypass-approvals-and-sandbox "$@"
   )
 }
+
+ai-mt() { (cd "$MEOW_CLIENT" && claude --dangerously-skip-permissions "$@") }
+ai-tb() { (cd "$MEOW_TOOLBOX" && claude --dangerously-skip-permissions "$@") }
+ai-cf() { (cd "$CONFIG_REPO" && claude --dangerously-skip-permissions "$@") }
+
 alias aiu="claude update"
-# alias aiu="bun update -g @openai/codex --latest"
 
 
 # kitty ssh (auto-reconnect in new windows/panes)
