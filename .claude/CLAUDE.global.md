@@ -23,6 +23,8 @@ All repos live under `$MEOW_ROOT`.
 | **alfredo** | `$ALFREDO_REPO` | Personal assistant - Slack bot, Notion, Gmail, AWS/GCS, pm2 services |
 | **config** | `$CONFIG_REPO` | macOS dotfiles - nvim, kitty, zsh, git, yazi, lazygit, hammerspoon |
 
+`meow-toolbox-bun <script>` runs any meow-toolbox package.json script from anywhere (e.g. `meow-toolbox-bun langpack:pull`).
+
 ## CLI Tools
 
 | Command | Description |
