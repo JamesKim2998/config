@@ -103,6 +103,7 @@ cpr() {
 alias restart='exec zsh'
 alias ze="$EDITOR ~/.zshrc"
 alias g="lazygit"
+alias gr='cd "$(git rev-parse --show-toplevel)"'
 alias todo="(cd \"$MEOW_ROOT/todo/\"; $EDITOR todo.md)"
 
 
