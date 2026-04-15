@@ -25,6 +25,8 @@ All repos live under `$MEOW_ROOT`.
 
 `meow-toolbox-just <recipe>` runs any meow-toolbox just recipe from anywhere (e.g. `meow-toolbox-just langpack-pull`).
 
+`meow-doc-finder <query>` fuzzy-finds markdown docs across Meow Tower repos. Outputs env-var-prefixed paths with summaries.
+
 ## CLI Tools
 
 | Command | Description |
@@ -39,3 +41,4 @@ All repos live under `$MEOW_ROOT`.
 | `just` | Make like task runner |
 | `gh` | |
 | `ilspycmd` | .NET decompiler CLI |
+| `build-unity-sln` | Unity solution compile check. `[platforms] [configs]`, comma-separated = cartesian product |
