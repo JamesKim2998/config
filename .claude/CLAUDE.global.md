@@ -1,11 +1,9 @@
 # Guidelines
 
-## Git
-- Do NOT auto-commit or stage changes unless explicitly requested by the user.
-
-## Doc Guidelines
-- While working, log any misleading docs, outdated instructions, own mistakes, or improvement opportunities to `TODO.md`.
-- Use Mermaid for diagrams in Markdown. Avoid ASCII art.
+- **Git**: Do NOT auto-commit or stage changes unless explicitly requested by the user.
+- **Breadcrumbs**: Where future readers need context, leave a link — vendor docs, issues, RFCs, related internal docs. Applies to code, markdown, configs, and commits. Skip when self-evident.
+- **Markdown**: Use Mermaid for diagrams; avoid ASCII art.
+- **TODO**: Log deferred items (fixes/improvements noticed mid-task) to `TODO.md`.
 
 ---
 
@@ -41,4 +39,5 @@ All repos live under `$MEOW_ROOT`.
 | `just` | Make like task runner |
 | `gh` | |
 | `ilspycmd` | .NET decompiler CLI |
-| `build-unity-sln` | Unity solution compile check. `[platforms] [configs]`, comma-separated = cartesian product |
+| `build-unity-sln` | Unity solution compile check: `{ios,android}[,...] {editor,dev,prod}[,...]` (all combinations in parallel) |
+| `md-orphan` | Markdown orphan/broken-link/anchor check |
