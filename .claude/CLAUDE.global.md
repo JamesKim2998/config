@@ -1,9 +1,29 @@
 # Guidelines
 
+## Workflow
+- **Clarification**: When uncertain, ask before proceeding.
 - **Git**: Do NOT auto-commit or stage changes unless explicitly requested by the user.
-- **Breadcrumbs**: Where future readers need context, leave a link — vendor docs, issues, RFCs, related internal docs. Applies to code, markdown, configs, and commits. Skip when self-evident.
-- **Markdown**: Use Mermaid for diagrams; avoid ASCII art.
 - **TODO**: Log deferred items (fixes/improvements noticed mid-task) to `TODO.md`.
+
+## Authoring
+Applies to code, docs, configs, and commit messages.
+- **Breadcrumbs**: Where future readers need context, leave a link — vendor docs, issues, RFCs, related internal docs. Skip when self-evident.
+- **File Headers**: Don't restate what's already covered elsewhere (related doc, CLI `--help`, etc.). If a related doc exists, link to it: `// See docs/…/foo.md` or `// See [[foo.md]]`.
+
+## Code
+- **Error Handling**: Never silently swallow errors — throw or log. Prefer natural exception flow over catch-and-swallow.
+- **Control Flow**: Prefer early return over nested conditionals.
+
+---
+
+# Documentation Policy
+
+- **Domain over Implementation:** Document *what* and *why*. Skip internal API signatures, self-explanatory patterns, and temporary code.
+- **Reference, Don't Repeat:** Each fact lives in one place — point to source/docs rather than duplicating. Don't enumerate source-discoverable items (enum members, subclass lists) — they go stale.
+- **Progressive Disclosure:** Keep `CLAUDE.md` minimal; details belong in `docs/`.
+- **Crosslink:** Start each doc with `> **Related:**` linking to related docs. Use wiki-link style (`[[doc.md]]`, `[[doc.md#Section]]`).
+- **File References:** Filename only. Subfolder suffix if ambiguous. No full paths.
+- **Diagrams:** Use Mermaid; avoid ASCII art.
 
 ---
 
