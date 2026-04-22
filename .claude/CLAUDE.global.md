@@ -39,6 +39,7 @@ All repos live under `$MEOW_ROOT`.
 | **meow-assets** | `$MEOW_ASSETS` | Art, UI, sound, store, marketing assets |
 | **meow-toolbox** | `$MEOW_TOOLBOX` | Bun/TS dev tools - PSD processing, spreadsheets, Firebase, App Store Connect, automation scripts |
 | **meow-game-server** | `$MEOW_SERVER` | Backend for gameplay services |
+| **meow-infra** | `$MEOW_INFRA` | OpenTofu infra - Route53 DNS, EC2 systemd units, Caddy, LFS relay |
 | **alfredo** | `$ALFREDO_REPO` | Personal assistant - Slack bot, Notion, Gmail, AWS/GCS, pm2 services |
 | **config** | `$CONFIG_REPO` | macOS dotfiles - nvim, kitty, zsh, git, yazi, lazygit, hammerspoon |
 
