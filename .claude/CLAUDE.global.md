@@ -13,6 +13,7 @@ Applies to code, docs, configs, and commit messages.
 ## Code
 - **Error Handling**: Never silently swallow errors — throw or log. Prefer natural exception flow over catch-and-swallow.
 - **Control Flow**: Prefer early return over nested conditionals.
+- **Strong Types**: Avoid raw primitives for non-self-contained keys/IDs or primitives reused across call sites. C#: `enum : uint` (size to fit) for scalar keys (`CatType`, `InteriorIndex`), `struct` for composite keys (`InteriorKey`). TS: branded type `T & { __brand: 'X' }` (`AbsPath`).
 
 ---
 
