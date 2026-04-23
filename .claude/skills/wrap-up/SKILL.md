@@ -13,3 +13,4 @@ Internalize them; they govern every step below.
 2. **Sync docs** — Update `CLAUDE.md` and the project doc tree entries touched by the session to match new behavior. Strip facts that moved into code; link rather than duplicate.
 3. **Log `TODO.md`** — Append deferred items with enough context to resume cold: incomplete work, follow-ups, issues noticed mid-task.
 4. **Report** — Summarize updates and queued items.
+5. **Handoff prompt** — If asked, draft a paste-ready prompt for the next session.
