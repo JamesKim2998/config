@@ -3,7 +3,7 @@ name: doc-review
 description: Sync docs with code, evaluate doc quality, and consolidate redundancies. Use when docs drift, cross-references break, or before doc-heavy reviews.
 ---
 
-Review docs against the Documentation Policy in `~/.claude/CLAUDE.md` and any project-specific additions in the project `CLAUDE.md`. Default scope: `git diff HEAD` (docs only). Accepts a commit ref (e.g. `HEAD~3..HEAD`) or file paths as an override.
+Review docs against the Documentation Policy in `~/.claude/CLAUDE.md` and project `CLAUDE.md`. Default scope: doc files in the current pending work — `git diff HEAD`, untracked doc files, plus session commits. Override with explicit refs or paths.
 
 ## Explore First
 

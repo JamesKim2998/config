@@ -3,7 +3,7 @@ name: code-review
 description: Reviews pending code for style, bugs, and reuse. Use proactively after writing or modifying code.
 ---
 
-Review recently changed code against project conventions. Default scope: `git diff HEAD`.
+Review recently changed code against project conventions. Default scope: current pending work — `git diff HEAD`, untracked files, plus session commits. Override with explicit refs or paths.
 
 ## Read First
 
