@@ -98,6 +98,7 @@ LLM_GLOBAL="$CONFIG/.claude/CLAUDE.global.md"
 mkdir -p ~/.claude
 ln -sf "$LLM_GLOBAL" ~/.claude/CLAUDE.md
 ln -sf "$CONFIG/.claude/settings.json" ~/.claude/settings.json
+ln -sf "$CONFIG/.claude/skills-global" ~/.claude/skills
 mkdir -p ~/.codex
 ln -sf "$LLM_GLOBAL" ~/.codex/AGENTS.md
 
