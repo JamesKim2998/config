@@ -39,6 +39,7 @@ All repos live under `$MEOW_ROOT`.
 | **meow-tower** | `$MEOW_CLIENT` | Unity mobile game (iOS/Android) - main game project |
 | **meow-assets** | `$MEOW_ASSETS` | Art, UI, sound, store, marketing assets |
 | **meow-toolbox** | `$MEOW_TOOLBOX` | Bun/TS dev tools - PSD processing, spreadsheets, Firebase, App Store Connect, automation scripts |
+| **meow-langpack** | `$MEOW_LANGPACK` | Game text — source files (KO + translations) |
 | **meow-game-server** | `$MEOW_SERVER` | Backend for gameplay services |
 | **meow-infra** | `$MEOW_INFRA` | OpenTofu infra - Route53 DNS, EC2 systemd units, Caddy, LFS relay |
 | **meow-dev-media** | `$MEOW_DEV_MEDIA` | Thumbnails for Google Sheets; auto-synced to S3 (`meow-dev-media.studioboxcat.com`) via GitHub Actions |
