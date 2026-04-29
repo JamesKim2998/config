@@ -22,8 +22,8 @@ Applies to code, docs, configs, and commit messages.
 - **Domain over Implementation:** Document *what* and *why*. Skip internal API signatures, self-explanatory patterns, and temporary code.
 - **Reference, Don't Repeat:** Each fact lives in one place — point to source/docs rather than duplicating. Don't enumerate source-discoverable items (enum members, subclass lists) — they go stale.
 - **Progressive Disclosure:** Keep `CLAUDE.md` minimal; details belong in `docs/`.
-- **Crosslink:** Start each doc with `> **Related:**` linking to related docs. Use wiki-link style (`[[doc.md]]`, `[[doc.md#Section]]`).
-- **File References:** Filename only. Subfolder suffix if ambiguous. No full paths.
+- **Crosslink:** Start each doc with `> **Related:**` linking to related docs.
+- **File References:** Filename only. Subfolder suffix if ambiguous. No full paths. Same-repo: wiki-link (`[[doc.md]]`, `[[doc.md#my-section]]` — anchor is kebab-case slug of heading). Cross-repo: backtick + repo suffix (`` `bar.md` `` (meow-some-repo)).
 - **Diagrams:** Use Mermaid; avoid ASCII art.
 
 ---
