@@ -8,7 +8,7 @@
 ## Authoring
 Applies to code, docs, configs, and commit messages.
 - **Breadcrumbs**: Where future readers need context, leave a link — vendor docs, issues, RFCs, related internal docs. Skip when self-evident.
-- **File Headers**: Don't restate what's already covered elsewhere (related doc, CLI `--help`, etc.). If a related doc exists, link to it: `// See docs/…/foo.md` or `// See [[foo.md]]`.
+- **File Headers**: Link to related docs (`// See [[foo.md]]`) instead of duplicating them. Cap at ~3 lines beyond the link; push longer content into the doc.
 
 ## Code
 - **Error Handling**: Never silently swallow errors — throw or log. Prefer natural exception flow over catch-and-swallow.
