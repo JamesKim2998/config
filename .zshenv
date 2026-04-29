@@ -46,6 +46,8 @@ export DOTNET_ROOT="$HOME/.dotnet"
 
 # claude code
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
+# Disable fullscreen alt-screen TUI so output stays in native scrollback (loses in-TUI mouse)
+export CLAUDE_CODE_NO_FLICKER=0
 
 # fzf (Kanagawa colors)
 export FZF_DEFAULT_OPTS=" \
