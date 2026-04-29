@@ -37,9 +37,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export PNPM_HOME="$HOME/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
-# ruby
-export PATH="$BREW/lib/ruby/gems/2.7.0/bin:$PATH"
-
 # dotnet
 export PATH="$HOME/.dotnet:$HOME/.dotnet/tools:$PATH"
 export DOTNET_ROOT="$HOME/.dotnet"
