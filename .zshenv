@@ -41,6 +41,10 @@ export PATH="$PNPM_HOME:$PATH"
 export PATH="$HOME/.dotnet:$HOME/.dotnet/tools:$PATH"
 export DOTNET_ROOT="$HOME/.dotnet"
 
+# fastlane
+export FASTLANE_SKIP_UPDATE_CHECK=1
+export SKIP_SLOW_FASTLANE_WARNING=1
+
 # claude code
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 # Disable fullscreen alt-screen TUI so output stays in native scrollback (loses in-TUI mouse)
