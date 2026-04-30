@@ -10,6 +10,7 @@
 	                       # preload-index lstats all files regardless, so fsmonitor saves nothing.
 	untrackedCache = true  # cache untracked files to speed up git status
 
+# workflow ops
 [fetch]
 	prune = true
 [pull]
@@ -18,15 +19,22 @@
 [push]
   autoSetupRemote = true
 	recurseSubmodules = on-demand
-[merge]
-	conflictstyle = zdiff3
 [rebase]
 	autoStash = true
+[merge]
+	conflictstyle = zdiff3
+	tool = nvimdiff
+[mergetool]
+	prompt = false
 
+# diff display
 [diff]
   algorithm = histogram
 	# show full submodule diffs instead of just commit pointer (lazygit ignores this)
 	submodule = diff
+	tool = nvimdiff
+[difftool]
+	prompt = false
 [delta]
 	tabs = 2
 	navigate = true
@@ -35,6 +43,7 @@
 [interactive]
 	diffFilter = delta --color-only
 
+# storage/transport
 [lfs]
 	concurrenttransfers = 64
 [filter "lfs"]
@@ -42,10 +51,10 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-
 [submodule]
 	fetchJobs = 64  # parallel submodule fetch/clone/update
 
+# auth
 [credential]
 	helper = osxkeychain
 [credential "https://github.com"]
@@ -54,10 +63,8 @@
 [credential "https://gist.github.com"]
 	helper =  # clear default helper chain
 	helper = !/opt/homebrew/bin/gh auth git-credential
-
 [http "https://ad090e.studioboxcat.com/"]
 	extraHeader = X-cab73d: b2d1746d9a7383f9
 
 [include]
 	path = ~/.gitconfig.local
-
