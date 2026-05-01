@@ -3,18 +3,6 @@
     "commit": "",
     "pr": ""
   },
-  "enabledPlugins": {
-    "typescript-lsp@claude-plugins-official": false,
-    "csharp-lsp@claude-plugins-official": false,
-    "swift-lsp@claude-plugins-official": false,
-    "clangd-lsp@claude-plugins-official": false,
-    "frontend-design@claude-plugins-official": false
-  },
-  "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
-  "autoMemoryEnabled": false,
-  "skipDangerousModePermissionPrompt": true,
-  "editorMode": "vim",
   "hooks": {
     "Stop": [
       {
@@ -26,5 +14,18 @@
         ]
       }
     ]
-  }
+  },
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": false,
+    "csharp-lsp@claude-plugins-official": false,
+    "swift-lsp@claude-plugins-official": false,
+    "clangd-lsp@claude-plugins-official": false,
+    "frontend-design@claude-plugins-official": false
+  },
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "high",
+  "autoMemoryEnabled": false,
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "auto",
+  "editorMode": "vim"
 }
