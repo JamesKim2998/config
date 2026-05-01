@@ -55,7 +55,8 @@ See [[diagnostics/shell-path.test.ts]] for PATH validation and zsh gotchas.
 
 | Environment | Theme | Control |
 |-------------|-------|---------|
-| Local | Kanagawa | Default |
+| Local (dark) | Kanagawa | Default |
+| Local (light) | Kanagawa Lotus | Auto-switched by kitty via `{dark,light}-theme.auto.conf` on macOS appearance change |
 | Server | Tokyo Night | `setup-server.sh` |
 | SSH window | Tokyo Night | `sv` function in `.zshrc` |
 
