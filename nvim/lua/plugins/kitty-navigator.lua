@@ -21,7 +21,10 @@ return {
 			return false
 		end
 
-		-- Normal mode: navigate vim splits, or kitty if any float is visible
+		-- Normal & insert mode: navigate vim splits (KittyNavigate* falls through
+		-- to the neighboring kitty window at the edge), or focus kitty directly
+		-- if a float is visible (otherwise the float would eat the navigation).
+		-- wincmd from an insert-mode callback changes window without leaving insert.
 		local function nav(cmd, kitty_dir)
 			return function()
 				if any_float_visible() then
@@ -31,13 +34,16 @@ return {
 				vim.cmd(cmd)
 			end
 		end
-		vim.keymap.set("n", "<C-h>", nav("KittyNavigateLeft", "left"))
-		vim.keymap.set("n", "<C-j>", nav("KittyNavigateDown", "bottom"))
-		vim.keymap.set("n", "<C-k>", nav("KittyNavigateUp", "top"))
-		vim.keymap.set("n", "<C-l>", nav("KittyNavigateRight", "right"))
+		for _, mode in ipairs({ "n", "i" }) do
+			vim.keymap.set(mode, "<C-h>", nav("KittyNavigateLeft", "left"))
+			vim.keymap.set(mode, "<C-j>", nav("KittyNavigateDown", "bottom"))
+			vim.keymap.set(mode, "<C-k>", nav("KittyNavigateUp", "top"))
+			vim.keymap.set(mode, "<C-l>", nav("KittyNavigateRight", "right"))
+		end
 
-		-- Insert/cmdline mode: same rule, but preserve default keys when no float
-		local function modal_nav(kitty_dir, key)
+		-- Cmdline mode: only intercept when a float is visible; otherwise preserve
+		-- defaults (<C-h> = backspace etc.) so editing the command line keeps working.
+		local function cmdline_nav(kitty_dir, key)
 			return function()
 				if any_float_visible() then
 					kitty_focus(kitty_dir)
@@ -46,11 +52,9 @@ return {
 				return vim.api.nvim_replace_termcodes(key, true, false, true)
 			end
 		end
-		for _, mode in ipairs({ "i", "c" }) do
-			vim.keymap.set(mode, "<C-h>", modal_nav("left", "<C-h>"), { expr = true })
-			vim.keymap.set(mode, "<C-j>", modal_nav("bottom", "<C-j>"), { expr = true })
-			vim.keymap.set(mode, "<C-k>", modal_nav("top", "<C-k>"), { expr = true })
-			vim.keymap.set(mode, "<C-l>", modal_nav("right", "<C-l>"), { expr = true })
-		end
+		vim.keymap.set("c", "<C-h>", cmdline_nav("left", "<C-h>"), { expr = true })
+		vim.keymap.set("c", "<C-j>", cmdline_nav("bottom", "<C-j>"), { expr = true })
+		vim.keymap.set("c", "<C-k>", cmdline_nav("top", "<C-k>"), { expr = true })
+		vim.keymap.set("c", "<C-l>", cmdline_nav("right", "<C-l>"), { expr = true })
 	end,
 }
