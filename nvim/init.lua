@@ -49,6 +49,7 @@ vim.o.listchars = "tab:▸ ,trail:·,extends:→,precedes:←,nbsp:␣"
 vim.o.showtabline = 2 -- Always show tabline
 
 -- Common Key Mappings
+vim.keymap.set({ "n", "i", "v" }, "<F1>", "<Nop>", { desc = "Disable F1 help" })
 vim.keymap.set("n", "<Esc>", "<cmd>noh<CR>", { desc = "Clear search highlight" })
 vim.keymap.set("n", "qq", function()
 	local current = vim.api.nvim_get_current_buf()
