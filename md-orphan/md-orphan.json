@@ -1,0 +1,15 @@
+{
+  "repos": {
+    "meow-tower":       "$HOME/Develop/meow-tower",
+    "meow-assets":      "$HOME/Develop/meow-assets",
+    "meow-toolbox":     "$HOME/Develop/meow-toolbox",
+    "meow-langpack":    "$HOME/Develop/meow-langpack",
+    "meow-game-server": "$HOME/Develop/meow-game-server",
+    "meow-infra":       "$HOME/Develop/meow-infra",
+    "meow-dev-media":   "$HOME/Develop/meow-dev-media",
+    "meow-docs":        "$HOME/Develop/meow-docs",
+    "alfredo":          "$HOME/Develop/alfredo",
+    "config":           "$HOME/Develop/config",
+    "md-orphan":        "$HOME/Develop/md-orphan"
+  }
+}
