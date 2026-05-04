@@ -102,3 +102,7 @@ ln -sf "$CONFIG/.claude/skills-global" ~/.claude/skills
 mkdir -p ~/.codex
 ln -sf "$LLM_GLOBAL" ~/.codex/AGENTS.md
 
+# md-orphan
+mkdir -p "$XDG_CONFIG/md-orphan/cache"
+ln -sf "$CONFIG/md-orphan/md-orphan.json" "$XDG_CONFIG/md-orphan/md-orphan.json"
+
