@@ -2,7 +2,9 @@
   "repos": {
     "alfredo":          "$HOME/Develop/alfredo",
     "config":           "$HOME/Develop/config",
+    "macmini-cron":     "$HOME/Develop/macmini-cron",
     "md-orphan":        "$HOME/Develop/md-orphan",
+    "meow-content-catalog": "$HOME/Develop/meow-content-catalog",
     "meow-assets":      "$HOME/Develop/meow-assets",
     "meow-dev-media":   "$HOME/Develop/meow-dev-media",
     "meow-docs":        "$HOME/Develop/meow-docs",
