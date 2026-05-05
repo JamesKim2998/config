@@ -126,6 +126,7 @@ vim.filetype.add({
 		asset = "yaml",
 		meta = "yaml",
 		prefab = "yaml",
+		pspec = "json",
 	},
 })
 
