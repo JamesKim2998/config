@@ -1,0 +1,7 @@
+# Third-party yazi plugins (submodules / vendored upstream READMEs)
+yazi/plugins/
+
+# IntelliJ vendor instruction templates
+intellij/global-agents-instructions.md
+intellij/global-copilot-instructions.md
+intellij/global-git-commit-instructions.md

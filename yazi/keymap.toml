@@ -128,13 +128,14 @@ run = "tab_swap 1"
 desc = "Move tab after"
 
 # macOS open / reveal
+# `O` keeps its default `open --interactive` (context menu of openers).
 [[mgr.prepend_keymap]]
 on = "o"
 run = "open"
 desc = "Open with default application"
 
 [[mgr.prepend_keymap]]
-on  = "O"
+on  = "R"
 for = "macos"
 run = "shell -- open -R %s1"
 desc = "Reveal in Finder"

@@ -3,6 +3,10 @@ show_hidden = true
 
 [open]
 prepend_rules = [
+	# Folders: 'o' should reveal in Finder, not open in $EDITOR.
+	# Default preset has `use = [ "edit", "open", "reveal" ]`, so 'o' picks `edit`.
+	# Reorder so `open` wins; .app bundles are directories so this covers them too.
+	{ url = "*/", use = [ "open", "edit", "reveal" ] },
 	{ url = "*.tps", use = ["edit", "open"] },
 	{ url = "*.xls", use = "open" },
 	{ url = "*.xlsx", use = "open" },
