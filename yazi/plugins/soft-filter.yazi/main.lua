@@ -1,13 +1,24 @@
 --- Soft filter — dim non-matching files instead of hiding (`/`).
 --- Type-to-jump (vim-style) while the prompt is open; `n`/`N` walk matches
 --- afterwards. Match-first reorder isn't implemented — see [[TODO.md]].
+--- Filters are scoped per-directory: navigating away preserves a dir's
+--- filter (still dims its files); re-entering keeps it applied. Status-bar
+--- indicator and `n`/`N`/Esc all read/write the active dir's slot.
 --- Pattern: `Entity.style` override (cf. https://github.com/sxyazi/yazi/discussions/2419).
 
 -- ya.sync's `st` IS the plugin module table (yazi-plugin/src/utils/sync.rs:50
 -- pushes `LOADER.try_load(&current)` as the first arg), so writes to
--- `st.filter` are visible to `M.filter` reads from render-context code such
--- as Entity.style and init.lua's Status:redraw.
-local M = { filter = "" }
+-- `st.filters` are visible to render-context reads from Entity.style and
+-- init.lua's Status:redraw.
+local M = { filters = {} }
+
+-- Look up the filter for whatever dir is currently active. Safe to call from
+-- render contexts (Entity.style, Status:redraw); `cx` is in scope there.
+function M.current_filter()
+	local cur = cx.active and cx.active.current
+	if not cur then return "" end
+	return M.filters[tostring(cur.cwd)] or ""
+end
 
 local function name_matches(file, needle)
 	local name = file.name
@@ -22,43 +33,41 @@ local function find_match(files, from, to, step, needle)
 	end
 end
 
--- Apply filter and (vim-style incremental) jump to the next match. Stays put
--- if cursor is already on a match; wraps from the top if no forward match.
--- Returns an `arrow` delta or nil. Single round-trip to main thread.
+-- Apply filter (to the active dir) and (vim-style incremental) jump to the
+-- next match. Stays put if cursor is already on a match; wraps from the top
+-- if no forward match. Returns an `arrow` delta or nil.
 local apply_filter = ya.sync(function(st, value)
-	st.filter = value or ""
-	ui.render()
-	if st.filter == "" then
-		return nil
-	end
 	local cur = cx.active.current
-	if not cur or not cur.hovered then
-		return nil
+	if not cur then return nil end
+	local key = tostring(cur.cwd)
+	local v = value or ""
+	if v == "" then
+		st.filters[key] = nil
+	else
+		st.filters[key] = v
 	end
-	if name_matches(cur.hovered, st.filter) then
-		return nil
-	end
+	ui.render()
+	if v == "" then return nil end
+	if not cur.hovered then return nil end
+	if name_matches(cur.hovered, v) then return nil end
 	local files = cur.files
 	local n = #files
 	local cursor_idx = cur.cursor + 1 -- cur.cursor is 0-indexed; cf. tasks.lua:34
-	local target = find_match(files, cursor_idx + 1, n, 1, st.filter)
-		or find_match(files, 1, cursor_idx - 1, 1, st.filter)
+	local target = find_match(files, cursor_idx + 1, n, 1, v)
+		or find_match(files, 1, cursor_idx - 1, 1, v)
 	if target then
 		return target - cursor_idx
 	end
 end)
 
--- Walk to next/prev match, always moving (unlike apply_filter, which stays
--- put if already on a match). Wraps around like vim's `n` with `wrapscan`.
+-- Walk to next/prev match in the active dir, always moving (unlike
+-- apply_filter, which stays put if already on a match). Wraps around like
+-- vim's `n` with `wrapscan`.
 local jump_delta = ya.sync(function(st, dir)
-	local f = st.filter or ""
-	if f == "" then
-		return nil
-	end
 	local cur = cx.active.current
-	if not cur or not cur.hovered then
-		return nil
-	end
+	if not cur or not cur.hovered then return nil end
+	local f = st.filters[tostring(cur.cwd)] or ""
+	if f == "" then return nil end
 	local files = cur.files
 	local n = #files
 	local cursor_idx = cur.cursor + 1
@@ -76,7 +85,8 @@ local jump_delta = ya.sync(function(st, dir)
 end)
 
 local clear_filter = ya.sync(function(st)
-	st.filter = ""
+	local cur = cx.active and cx.active.current
+	if cur then st.filters[tostring(cur.cwd)] = nil end
 	ui.render()
 end)
 
@@ -84,8 +94,11 @@ function M:setup()
 	local orig_style = Entity.style
 	Entity.style = function(self)
 		local s = orig_style(self)
-		local f = M.filter
-		if f == "" or not self._file.in_current then
+		if not self._file.in_current then
+			return s
+		end
+		local f = M.current_filter()
+		if f == "" then
 			return s
 		end
 		if name_matches(self._file, f) then
@@ -115,7 +128,8 @@ function M:entry(job)
 	end
 
 	-- Default: open a fresh prompt. (We deliberately don't pre-fill with the
-	-- existing filter — `/` always starts blank; existing filter is cleared.)
+	-- existing filter — `/` always starts blank; existing filter for this dir
+	-- is cleared.)
 	clear_filter()
 	local input = ya.input {
 		title = "Soft filter:",

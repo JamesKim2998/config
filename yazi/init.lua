@@ -92,7 +92,8 @@ function Status:redraw()
 	local path_span = ui.Span(" " .. path .. " "):fg("#565f89")
 
 	-- Soft-filter indicator on the left (we replaced yazi's built-in filter).
-	local soft = require("soft-filter").filter
+	-- Per-dir scoped — show the filter belonging to the active dir.
+	local soft = require("soft-filter").current_filter()
 	local filter_span = ui.Span("")
 	if soft and soft ~= "" then
 		filter_span = ui.Span(" 󰈲 " .. soft .. " "):fg("#7aa2f7")

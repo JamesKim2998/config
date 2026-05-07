@@ -50,7 +50,7 @@ instead. See `yazi/yazi.toml`.
 | mediainfo.yazi | Media file info/preview |
 | git.yazi | Git status in file list |
 | mactag.yazi | macOS Finder tags |
-| soft-filter.yazi | Local: dim non-matches on `/` (vs. yazi's hide-filter) |
+| soft-filter.yazi | Local: dim non-matches on `/` (vs. yazi's hide-filter); per-dir scoped |
 | worktree-jump.yazi | Local: fzf picker over `git worktree list`, cd to selection |
 
 ### xleak.yazi
