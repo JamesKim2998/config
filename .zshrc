@@ -105,6 +105,17 @@ alias ze="$EDITOR ~/.zshrc"
 alias g="lazygit"
 alias gr='cd "$(git rev-parse --show-toplevel)"'
 alias todo="(cd \"$MEOW_ROOT/todo/\"; $EDITOR todo.md)"
+cdw() {
+  local target="$1" path
+  [[ -z "$target" ]] && { git worktree list; return; }
+  path=$(git worktree list --porcelain | awk -v t="$target" '
+    /^worktree / { wt = $2 }
+    /^branch /   { br = $2; sub(/^refs\/heads\//, "", br)
+                   base = wt; sub(/.*\//, "", base)
+                   if (br == t || base == t) { print wt; exit } }')
+  [[ -n "$path" ]] || { echo "cdw: no worktree matching '$target'" >&2; return 1; }
+  cd "$path"
+}
 
 
 # llm (cd to CLAUDE.md root if found)
