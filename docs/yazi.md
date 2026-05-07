@@ -11,7 +11,10 @@ File manager with plugins, custom keymaps, and previewers.
 | `q` | Close tab (quit if last) |
 | `Tab` / `S-Tab` | Next/prev tab |
 | `i` | File info (spot) |
-| `/` | Filter files (smart) |
+| `/` | Soft filter (dim non-matches; ESC clears, Enter keeps) |
+| `n` / `N` | Jump to next / prev soft-filter match |
+| `Esc` (in any input prompt) | Cancel/close (overrides yazi's default vi-mode switch) |
+| `Esc` (manager) | Clear soft filter, then default escape |
 | `S` | Ripgrep search (case-insensitive) |
 | `Space` | Toggle selection (no auto-move) |
 | `l` | Smart enter (dir → cd, file → open) |
@@ -45,6 +48,7 @@ instead. See `yazi/yazi.toml`.
 | mediainfo.yazi | Media file info/preview |
 | git.yazi | Git status in file list |
 | mactag.yazi | macOS Finder tags |
+| soft-filter.yazi | Local: dim non-matches on `/` (vs. yazi's hide-filter) |
 
 ### xleak.yazi
 
@@ -78,6 +82,7 @@ cd diagnostics
 bun test yazi-fr.test.ts            # ripgrep search via fr.yazi
 bun test yazi-folder-open.test.ts   # 'o' on dirs/.app uses macOS open
 bun test yazi-tps-open.test.ts      # opener menu for .tps files
+bun test yazi-soft-filter.test.ts   # soft-filter type-to-jump, n/N, Esc clears
 bun run yazi                        # all yazi-*.test.ts
 ```
 

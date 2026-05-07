@@ -1,5 +1,25 @@
 # TODO
 
+## Yazi soft filter — visual reorder (blocked on upstream)
+
+`plugins/soft-filter.yazi` dims non-matches and offers `n`/`N` to walk
+between matches, but matches don't visually bubble to the top of the list.
+
+**Why it's deferred.** Plugin-driven reorder needs upstream changes:
+`SortBy` is a closed Rust enum dispatched in a `match` block
+(`sorting.rs:10`, `sorter.rs:36` (sxyazi/yazi)); the Lua `Files` userdata
+is read-only — no `__newindex`/`sort`/`swap` (`files.rs:32`); the `sort`
+action only deserialises `SortBy` enum values (`sort.rs:8`).
+
+A render-only reorder via `Current:redraw` is technically doable but
+would force every nav keybind (`j`/`k`/`gg`/`G`/`arrow`) to be re-mapped
+to translate between visual and data indices — too much surface for too
+little gain over dim + `n`/`N`.
+
+**Action item.** File a feature request on sxyazi/yazi for a
+plugin-pluggable comparator if/when the current behaviour proves
+insufficient.
+
 ## Kitty — random framebuffer glitch on `cmd+return` (vsplit)
 
 Intermittent (~1/3) horizontal-stripe corruption of the entire OS window when

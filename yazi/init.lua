@@ -9,6 +9,9 @@ require("toggle-pane"):entry("min-preview")
 -- https://github.com/yazi-rs/plugins/tree/main/git.yazi
 require("git"):setup()
 
+-- Soft filter — dim non-matches instead of hiding (`/`). See plugin header.
+require("soft-filter"):setup()
+
 -- https://github.com/yazi-rs/plugins/tree/main/mactag.yazi
 require("mactag"):setup({
 	-- Keys used to add or remove tags
@@ -88,11 +91,11 @@ function Status:redraw()
 	local bg_fill = ui.Span(string.rep(" ", self._area.w)):bg("#16161e")
 	local path_span = ui.Span(" " .. path .. " "):fg("#565f89")
 
-	-- Filter indicator on the left (filter is in files.filter)
-	local filter = cx.active.current.files.filter
+	-- Soft-filter indicator on the left (we replaced yazi's built-in filter).
+	local soft = require("soft-filter").filter
 	local filter_span = ui.Span("")
-	if filter then
-		filter_span = ui.Span(" 󰈲 " .. tostring(filter) .. " "):fg("#7aa2f7")
+	if soft and soft ~= "" then
+		filter_span = ui.Span(" 󰈲 " .. soft .. " "):fg("#7aa2f7")
 	end
 
 	return {

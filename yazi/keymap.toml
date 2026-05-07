@@ -1,8 +1,33 @@
-# Use / for filter instead of find
+# `/` runs our soft filter (dim non-matches) instead of yazi's hide-filter.
+# n/N jump between matches — no-ops when the filter is empty.
+# Match-first reorder isn't implemented — see plugins/soft-filter.yazi/main.lua.
 [[mgr.prepend_keymap]]
 on = "/"
-run = "filter --smart"
-desc = "Filter files"
+run = "plugin soft-filter"
+desc = "Soft filter (dim non-matches)"
+
+[[mgr.prepend_keymap]]
+on = "n"
+run = "plugin soft-filter next"
+desc = "Jump to next soft-filter match"
+
+[[mgr.prepend_keymap]]
+on = "N"
+run = "plugin soft-filter prev"
+desc = "Jump to previous soft-filter match"
+
+[[mgr.prepend_keymap]]
+on = "<Esc>"
+run = "plugin soft-filter clear"
+desc = "Clear soft filter / escape"
+
+# Yazi's default input-layer Esc switches to a vi-style normal mode rather than
+# cancelling — surprising for casual use. Make Esc cancel directly (matches the
+# Esc-clears-filter UX).
+[[input.prepend_keymap]]
+on = "<Esc>"
+run = "close"
+desc = "Cancel input"
 
 # Tab navigation, move original info to 'i'
 # Use <BackTab> not <S-Tab> — legacy backtab (ESC[Z) without Kitty Keyboard Protocol
