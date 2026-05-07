@@ -171,6 +171,12 @@ on = "f"
 run = "plugin jump-to-char"
 desc = "Jump to char"
 
+# Pick a worktree of the current repo (`git worktree list`) via fzf.
+[[mgr.prepend_keymap]]
+on = "W"
+run = "plugin worktree-jump"
+desc = "Jump to worktree"
+
 # https://github.com/yazi-rs/plugins/tree/main/toggle-pane.yazi
 [[mgr.prepend_keymap]]
 on = "T"
