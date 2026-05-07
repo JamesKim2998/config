@@ -8,3 +8,12 @@ gui:
 git:
   pagers:
     - pager: delta --dark --paging=never
+customCommands:
+  - key: 'y'
+    context: 'files'
+    command: 'yazi {{.SelectedFile.Name | quote}}'
+    output: terminal
+  - key: 'y'
+    context: 'commitFiles'
+    command: 'yazi {{.SelectedCommitFile.Name | quote}}'
+    output: terminal
