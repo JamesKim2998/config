@@ -1,5 +1,54 @@
 # TODO
 
+## Kitty — random framebuffer glitch on `cmd+return` (vsplit)
+
+Intermittent (~1/3) horizontal-stripe corruption of the entire OS window when
+splitting via `cmd+return`. Looks like GPU framebuffer corruption, not a
+content/layout bug. Env: macOS 26.3.1, M3 Pro, Retina, kitty 0.46.2.
+
+**Status:** mitigation applied, **awaiting ~1 week of normal-use visual inspection**
+to confirm. User confirmed first session looks OK but glitch is intermittent
+so single observation insufficient.
+
+- **Mitigation applied:** `window_border_width 2pt` → `2px`
+  (`kitty/kitty.conf:15`). Theory: at 2x retina, 2pt ≈ 2.67px → fractional
+  border re-rasterizes for every window on each layout change (since
+  `draw_minimal_borders no`), driver-pressure race. Integer-px removes the
+  rounding step.
+- **If it persists:** revert and try `inactive_text_alpha 1.0` next (drops
+  the per-window alpha-blend redraw on relayout). Then try
+  `draw_minimal_borders yes`.
+- **Upstream:** file at github.com/kovidgoyal/kitty with
+  `kitty --debug-rendering` log + recording + kitty.conf. Closest existing:
+  [#8012](https://github.com/kovidgoyal/kitty/issues/8012) (random,
+  undiagnosed, fixed by resizing — same fingerprint).
+
+## Kitty — equalize-on-split fires only sometimes
+
+Discovered while testing the framebuffer-glitch fix above. After `cmd+return`
+the new pane often kept a near-zero width — equalize ran some launches but
+not others. Attempts so far have **not** resolved it; user reports "still same"
+after each iteration. **Awaiting visual inspection of latest debug build.**
+
+- **Original setup:** `cmd+return → launch --location=vsplit`, with
+  `equalize.py` watcher only handling `on_close`. Splits never auto-equalized.
+- **Attempt 1 (rejected):** `combine : launch ... : kitten equalize.py` on
+  every split keybinding. Symptom persisted intermittently — kittens are
+  spawned subprocesses talking back via RPC, racing the layout update.
+- **Attempt 2 (rejected):** moved equalize into a watcher `on_resize` hook
+  guarded by `old_geometry.left/top/right/bottom == 0` (in-process, no RPC
+  race). Still intermittent — pixel coords aren't the documented "first
+  creation" signal.
+- **Attempt 3 (current):** swapped the guard to `old_geometry.xnum/ynum == 0`
+  per kitty docs (`kitty/equalize.py:34`). User reports "still same" — but
+  watcher Python modules are **cached at startup**; `ctrl+shift+f5` does not
+  re-import them. Unclear whether attempt 3 was tested with a full
+  cmd+Q + relaunch.
+- **Next step:** if still intermittent after a full kitty cmd+Q + relaunch,
+  re-add temporary logging to `/tmp/kitty-equalize.log` in `on_resize` to
+  inspect the `data` dict and confirm whether the watcher fires on launch.
+  Reference: [kitty docs — Watching launched windows](https://sw.kovidgoyal.net/kitty/launch/).
+
 ## Yazi diagnostics — harness improvements
 
 Deferred from the `o`-on-folder fix session ([[yazi.md#testing]]).

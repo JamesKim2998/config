@@ -41,6 +41,23 @@ def on_close(boss, window, data):
     _equalize_tab(boss.active_tab, relayout=False, skip_id=window.id)
 
 
+# Watcher: on_resize fires per-window. Kitty docs say the "new window just
+# created" case is detectable via old_geometry.xnum/ynum == 0 (cell counts);
+# pixel coords like left/top aren't guaranteed to be zero on first creation,
+# so checking those was the bug behind intermittent equalize.
+# In-process here is race-free, unlike `combine : launch : kitten equalize.py`
+# which spawns a subprocess that can run before/after the tree settles.
+# Subsequent resizes (including those caused by our own relayout below) have
+# non-zero xnum/ynum and are skipped, so no loop.
+def on_resize(boss, window, data):
+    old = data.get('old_geometry') if isinstance(data, dict) else None
+    if old is None:
+        return
+    if getattr(old, 'xnum', 0) or getattr(old, 'ynum', 0):
+        return
+    _equalize_tab(boss.active_tab)
+
+
 # Kitten: manual equalize via keybinding
 def main(args):
     pass
