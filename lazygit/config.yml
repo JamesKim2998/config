@@ -8,6 +8,9 @@ gui:
 git:
   pagers:
     - pager: delta --dark --paging=never
+keybinding:
+  universal:
+    openDiffTool: '<disabled>'  # default <c-t> too easy to trigger accidentally (launches nvimdiff)
 customCommands:
   - key: 'y'
     context: 'files'
