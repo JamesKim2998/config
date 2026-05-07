@@ -101,20 +101,22 @@ cpr() {
 
 # aliases
 alias restart='exec zsh'
-alias ze="$EDITOR ~/.zshrc"
+alias ze='cd "$CONFIG_REPO" && $EDITOR .zshrc'
 alias g="lazygit"
 alias gr='cd "$(git rev-parse --show-toplevel)"'
 alias todo="(cd \"$MEOW_ROOT/todo/\"; $EDITOR todo.md)"
+# NB: local var named `wt` (not `path`) — zsh ties lowercase `path` to $PATH;
+# `local path` empties PATH inside the function and breaks `git`/`awk` lookup.
 cdw() {
-  local target="$1" path
+  local target="$1" wt
   [[ -z "$target" ]] && { git worktree list; return; }
-  path=$(git worktree list --porcelain | awk -v t="$target" '
-    /^worktree / { wt = $2 }
+  wt=$(git worktree list --porcelain | awk -v t="$target" '
+    /^worktree / { p = $2 }
     /^branch /   { br = $2; sub(/^refs\/heads\//, "", br)
-                   base = wt; sub(/.*\//, "", base)
-                   if (br == t || base == t) { print wt; exit } }')
-  [[ -n "$path" ]] || { echo "cdw: no worktree matching '$target'" >&2; return 1; }
-  cd "$path"
+                   base = p; sub(/.*\//, "", base)
+                   if (br == t || base == t) { print p; exit } }')
+  [[ -n "$wt" ]] || { echo "cdw: no worktree matching '$target'" >&2; return 1; }
+  cd "$wt"
 }
 
 
