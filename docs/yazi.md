@@ -27,7 +27,8 @@ File manager with plugins, custom keymaps, and previewers.
 | `gi` | Open lazygit |
 | `gr` | Cd to git root |
 | `Y` | Copy absolute path |
-| `W` | Jump to git worktree (fzf picker over `git worktree list`) |
+| `w` | Jump to git worktree (fzf picker over `git worktree list`) — overrides default `tasks:show` |
+| `W` | Show task manager (default `w` action, moved here) |
 
 ### Open Rules
 

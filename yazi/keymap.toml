@@ -172,10 +172,16 @@ run = "plugin jump-to-char"
 desc = "Jump to char"
 
 # Pick a worktree of the current repo (`git worktree list`) via fzf.
+# `w` displaces yazi's default `w` → `tasks:show`; that moves to `W` below.
 [[mgr.prepend_keymap]]
-on = "W"
+on = "w"
 run = "plugin worktree-jump"
 desc = "Jump to worktree"
+
+[[mgr.prepend_keymap]]
+on = "W"
+run = "tasks:show"
+desc = "Show task manager (was `w`)"
 
 # https://github.com/yazi-rs/plugins/tree/main/toggle-pane.yazi
 [[mgr.prepend_keymap]]
