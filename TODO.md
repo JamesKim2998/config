@@ -89,3 +89,15 @@ Deferred from the `o`-on-folder fix session ([[yazi.md#testing]]).
   `gg` + `/<name>` + `Enter` (`diagnostics/yazi-folder-open.test.ts` `pressOOn`).
   Filter-then-Enter selects the wrong row if a future fixture creates a name
   prefix collision (e.g. adding `subdir2` would silently break the `subdir` test).
+
+## Claude busy indicator — multi-session-in-one-tab edge case
+
+`kitty/claude-busy.py` mutates *tab* title (the only signal channel for
+manually-renamed tabs, since `tab_title_template` is bypassed when
+`title_overridden: True`). If two Claude Code sessions share one kitty tab,
+a `Stop` from session A strips the icon while session B is still busy —
+the indicator no longer reflects "any Claude in this tab is working."
+
+**Possible fix.** Reference-count via a tab-level user-var (`busy_count`),
+increment on `set`, decrement on `clear`, only mutate title when count
+crosses 0↔1. Defer until the case actually hits in normal use.

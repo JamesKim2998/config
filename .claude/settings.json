@@ -4,12 +4,22 @@
     "pr": ""
   },
   "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/Develop/config/kitty/claude-busy.py set 2>/dev/null || true"
+          }
+        ]
+      }
+    ],
     "Stop": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "printf '\\a' > /dev/tty 2>/dev/null || true"
+            "command": "($HOME/Develop/config/kitty/claude-busy.py clear 2>/dev/null &); printf '\\a' > /dev/tty 2>/dev/null || true"
           }
         ]
       }
