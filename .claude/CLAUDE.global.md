@@ -65,6 +65,6 @@ All repos live under `$MEOW_ROOT`.
 | `just` | Make like task runner |
 | `gh` | |
 | `ilspycmd` | .NET decompiler CLI |
-| `build-unity-sln` | Unity solution compile check: `{ios,android,osx}[,...] {editor,dev,prod}[,...]` (all combinations in parallel) |
+| `unity-solution-generator typecheck .` | Unity solution compile check; defaults to `ios editor`, override with `... <platform> <config>` |
 | `md-orphan` | Markdown orphan/broken-link/anchor check |
 | `notion-to-md` | Notion page → md; bare image filenames (`$NOTION_IMG_CACHE`) |
