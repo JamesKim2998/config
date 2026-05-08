@@ -127,6 +127,25 @@ cdw() {
   [[ -n "$wt" ]] || { echo "cdw: no worktree matching '$target'" >&2; return 1; }
   cd "$wt"
 }
+# fzf on `cdw <TAB>`; other commands fall through to default completion.
+_cdw_fzf_tab() {
+  if [[ "$LBUFFER" =~ '^[[:space:]]*cdw([[:space:]]+[^[:space:]]*)?$' ]]; then
+    local sel
+    sel=$(git worktree list 2>/dev/null | awk '{
+        name=""
+        for (i=NF; i>=1; i--) if ($i ~ /^\[.*\]$/) { name=substr($i,2,length($i)-2); break }
+        if (name == "") { n=split($1,p,"/"); name=p[n] }
+        if (length(name) > 32) name = substr(name, 1, 32)
+        printf "%-32s  %s\n", name, $0
+      }' | fzf --height=40% --reverse --no-multi | awk '{print $1}')
+    [[ -n "$sel" ]] && LBUFFER="${LBUFFER%%cdw*}cdw $sel"
+    zle reset-prompt
+  else
+    zle expand-or-complete
+  fi
+}
+zle -N _cdw_fzf_tab
+bindkey '^I' _cdw_fzf_tab
 
 
 # llm (cd to CLAUDE.md root if found)
