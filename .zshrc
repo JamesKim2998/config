@@ -102,7 +102,16 @@ cpr() {
 # aliases
 alias restart='exec zsh'
 alias ze='cd "$CONFIG_REPO" && $EDITOR .zshrc'
-alias g="lazygit"
+# lazygit wrapper: cd to repo/worktree on switch (ctrl+r, branches `w`).
+# TMPDIR (vs ~/.cache) — lazygit's WriteFile doesn't mkdir parents.
+g() {
+  export LAZYGIT_NEW_DIR_FILE="${TMPDIR:-/tmp}/lazygit-newdir"
+  lazygit "$@"
+  if [[ -f $LAZYGIT_NEW_DIR_FILE ]]; then
+    cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
+    command rm -f -- "$LAZYGIT_NEW_DIR_FILE"
+  fi
+}
 alias gr='cd "$(git rev-parse --show-toplevel)"'
 alias todo="(cd \"$MEOW_ROOT/todo/\"; $EDITOR todo.md)"
 # NB: local var named `wt` (not `path`) — zsh ties lowercase `path` to $PATH;
