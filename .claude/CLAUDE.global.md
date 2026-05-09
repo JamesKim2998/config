@@ -9,7 +9,7 @@
 
 `wt whoami` prints the cwd type and path. Two contexts:
 
-- **worktree** — feature worktree. `wt sync "msg"` commits dirty work + ff-merges into local `main` at checkpoints. `wt ls` peeks at siblings. **Never `git stash` here** — `refs/stash` is shared across slots; concurrent sessions clobber. Commit + `git reset --soft HEAD^` instead.
+- **worktree** — feature worktree. `wt sync "msg"` commits dirty work + ff-merges into local `main` at checkpoints. `wt ls` peeks at siblings. **Never `git stash` here** — `refs/stash` is shared across worktrees; concurrent sessions clobber.
 - **source** — main worktree of the source repo.
 
 Full contract: `CLAUDE.md` (worktree-pool).
