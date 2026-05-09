@@ -54,6 +54,9 @@ Header:children_add(function()
 	for i = 1, #cx.tabs do
 		local n = nums[i] or tostring(i)
 		local name = tostring(cx.tabs[i].current.cwd):match("([^/]+)/?$") or ""
+		if utf8.len(name) and utf8.len(name) > 12 then
+			name = name:sub(1, utf8.offset(name, 13) - 1) .. "…"
+		end
 		local span = ui.Span(" " .. n .. " " .. name .. " ")
 		if i == cx.tabs.idx then
 			span = span:style(th.tabs.active)
