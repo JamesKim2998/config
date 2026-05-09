@@ -90,6 +90,24 @@ Deferred from the `o`-on-folder fix session ([[yazi.md#testing]]).
   Filter-then-Enter selects the wrong row if a future fixture creates a name
   prefix collision (e.g. adding `subdir2` would silently break the `subdir` test).
 
+## Yazi `git-status.yazi` — submodule worktrees show submodule name
+
+`yazi/plugins/git-status.yazi/main.lua` derives the repo label from
+`git rev-parse --git-common-dir`, which inside a submodule resolves to
+`<super>/.git/modules/<name>` — so the status bar reads the submodule
+slug, not the super-repo name. Strip up to `.git/modules/<name>` for that
+case if it actually shows up in normal navigation. Deferred — none of our
+tracked submodules are big enough to navigate inside in yazi.
+
+## Yazi `worktree-jump` — fzf exit-1 toast wording
+
+`worktree-jump.yazi/main.lua` notifies "no worktree selected" on `fzf` exit
+code 1. With the new pre-flight count, exit 1 is now mostly unreachable
+(zero/one-candidate cases bail earlier). If it ever fires in practice it
+means the awk pipeline produced zero rows from a multi-worktree porcelain —
+which would be a real bug. Replace the soft toast with `fail("…")` once
+that's confirmed to be the only remaining trigger.
+
 ## Claude busy indicator — multi-session-in-one-tab edge case
 
 `kitty/claude-busy.py` mutates *tab* title (the only signal channel for
