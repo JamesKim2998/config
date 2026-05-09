@@ -157,12 +157,62 @@ ya.err("message", data)  -- error level
 YAZI_LOG=debug yazi
 ```
 
-Log file: `~/.local/state/yazi/yazi.log`
+Log file: `~/.local/state/yazi/yazi.log`. Common silent-failure mode:
+runtime errors in `Status:redraw` / `Header:redraw` only surface here, never
+on screen. `tail -F` it (or `just -f yazi/justfile log`) when the UI is wrong.
+
+**Sandbox + render path gotcha.** Yazi's sync/async/plugin split is
+strict — three separate constraints conspire:
+
+1. `Status:redraw` and `Header:redraw` are sync. Calling anything that
+   yields (`Command:wait_with_output`, `child:wait_with_output`, …)
+   throws `attempt to yield from outside a coroutine`.
+2. `ps.sub` and its callback are also sync — same yield restriction.
+3. `ya.sync(fn)` and `ps.sub` are **only callable from a plugin
+   module**, not from `init.lua`. Putting them in `init.lua` throws
+   `ya.sync() must be called in a plugin` / `sub() must be called in a
+   sync plugin`.
+
+Working topology for cwd-derived state:
+
+```
+ps.sub("cd")  ──► ya.async worker (Command IO)
+              ──► ya.sync setter writes module cache + ya.render()
+              ──► Status:redraw reads the cache (plain table get)
+```
+
+See `yazi/plugins/git-status.yazi/main.lua` for the canonical
+implementation, then `require("git-status").get(cwd)` from
+`Status:redraw`.
+
+### Up-front Lua syntax check
+
+`yazi` silently fails to load a file with bad Lua — there's no on-screen
+error. Run `luac -p` before iterating in the TUI:
+
+```bash
+just -f yazi/justfile lint        # checks init.lua + worktree-jump
+bun test yazi-lua-syntax          # in diagnostics/, same check
+```
+
+Sneaky failure: `[[ ... ]]` long-strings get terminated by *any* embedded
+`]]` (e.g. awk's `t[a[1]]`). Use `[==[ ... ]==]` whenever the body might
+contain `]]`.
+
+### LSP / type stubs
+
+Official type stubs from `yazi-rs/plugins:types` are tracked in
+`yazi/package.toml` and a `.luarc.json` at `yazi/` points
+`lua-language-server` at them — autocomplete and bad-call diagnostics for
+`Command`, `ui.Span`, `cx`, `ps.sub`, etc. Refresh with
+`ya pkg upgrade yazi-rs/plugins:types`.
 
 ### Justfile Recipes
 
 | Recipe | Description |
 |--------|-------------|
+| `lint` | `luac -p` for our owned Lua (init.lua + worktree-jump) |
+| `log` | `tail -F ~/.local/state/yazi/yazi.log` |
 | `test <file>` | Capture yazi preview via tmux |
 | `test-csv` | Test with sample CSV |
 | `test-debug <file>` | With `YAZI_LOG=debug` |
