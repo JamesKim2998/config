@@ -44,7 +44,18 @@ end
 function M:setup()
 	ps.sub("cd", function()
 		local cwd = tostring(cx.active.current.cwd)
-		if not self._cache[cwd] then compute_async(cwd) end
+		if self._cache[cwd] then return end
+		-- Inherit from any cached entry whose toplevel covers `cwd` (same
+		-- repo + worktree). Avoids the async git rev-parse round-trip that
+		-- would briefly flash an empty bar on every intra-repo cd.
+		for _, info in pairs(self._cache) do
+			local top = info.toplevel
+			if top ~= "" and (cwd == top or cwd:sub(1, #top + 1) == top .. "/") then
+				self._cache[cwd] = info
+				return
+			end
+		end
+		compute_async(cwd)
 	end)
 end
 
