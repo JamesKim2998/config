@@ -86,13 +86,17 @@ function Tab:build()
 	}
 end
 
--- Status bar: filter on left, file path on right
+-- Repo + worktree (branch) indicator for the status bar. Lives as a plugin
+-- because `ps.sub`/`ya.sync` must be called in plugin context. See
+-- [[git-status.yazi/main.lua]] for the sync/async wiring.
+local git_status = require("git-status")
+git_status:setup()
+
+-- Status bar: filter + git context on left, file path on right
 -- bg: #16161e (darker than main), fg: #565f89 (dimmed)
 -- https://github.com/sxyazi/yazi/blob/main/yazi-plugin/preset/components/
 function Status:redraw()
-	local path = cx.active.current.hovered and tostring(cx.active.current.hovered.url) or ""
 	local bg_fill = ui.Span(string.rep(" ", self._area.w)):bg("#16161e")
-	local path_span = ui.Span(" " .. path .. " "):fg("#565f89")
 
 	-- Soft-filter indicator on the left (we replaced yazi's built-in filter).
 	-- Per-dir scoped — show the filter belonging to the active dir.
@@ -102,10 +106,39 @@ function Status:redraw()
 		filter_span = ui.Span(" 󰈲 " .. soft .. " "):fg("#7aa2f7")
 	end
 
+	-- Repo · branch (only when inside a git working tree). Read from the
+	-- cache populated by the `cd` subscription in `git-status.yazi`.
+	local g = git_status.get(tostring(cx.active.current.cwd))
+	local left = { filter_span }
+	if g.repo ~= "" then
+		left[#left + 1] = ui.Span(" 󰊢 " .. g.repo):fg("#98bb6c")
+		if g.branch ~= "" then
+			left[#left + 1] = ui.Span("  " .. g.branch):fg("#98bb6c")
+		end
+		left[#left + 1] = ui.Span(" ")
+	end
+
+	-- Hovered path on the right. Show repo-relative when inside a git
+	-- worktree (much shorter than absolute, and the left side already
+	-- identifies the repo). Otherwise fall back to the absolute path.
+	local hovered = cx.active.current.hovered and tostring(cx.active.current.hovered.url) or ""
+	local rel = hovered
+	if g.toplevel ~= "" and hovered ~= "" then
+		if hovered == g.toplevel then
+			rel = "."
+		elseif hovered:sub(1, #g.toplevel + 1) == g.toplevel .. "/" then
+			rel = hovered:sub(#g.toplevel + 2)
+		end
+	end
+	local path_span = ui.Span(" " .. rel .. " "):fg("#565f89")
+
+	-- Order matters: yazi paints in sequence, so the last element wins on
+	-- overlap. Left content (repo · branch · filter) takes priority over
+	-- the path on narrow widths — render it last to clip the path tail.
 	return {
 		ui.Clear(self._area),
 		ui.Line(bg_fill):area(self._area),
-		ui.Line(filter_span):area(self._area):align(ui.Align.LEFT),
 		ui.Line(path_span):area(self._area):align(ui.Align.RIGHT),
+		ui.Line(left):area(self._area):align(ui.Align.LEFT),
 	}
 end
