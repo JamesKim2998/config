@@ -183,7 +183,7 @@ _fzf_tab_dispatch() {
     sel=$(git worktree list 2>/dev/null | awk '{
         name=""
         for (i=NF; i>=1; i--) if ($i ~ /^\[.*\]$/) { name=substr($i,2,length($i)-2); break }
-        if (name == "") { n=split($1,p,"/"); name=p[n] }
+        if (name == "") next   # skip detached-HEAD (idle worktree-pool slots etc.)
         if (length(name) > 32) name = substr(name, 1, 32)
         printf "%-32s  %s\n", name, $0
       }' | fzf --height=40% --reverse --no-multi | awk '{print $1}')
