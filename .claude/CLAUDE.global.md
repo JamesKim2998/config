@@ -5,6 +5,15 @@
 - **Git**: Do NOT auto-commit or stage changes unless explicitly requested by the user.
 - **TODO**: Log deferred items (fixes/improvements noticed mid-task) to `TODO.md`.
 
+### Worktree
+
+`wt whoami` prints the cwd context — `slot <path>`, `source <path>`, or `none`.
+
+- **slot** — multi-step feature work goes here. `wt sync "msg"` commits dirty work + ff-merges into local `main` at checkpoints (local-only, idempotent; `wt sync wip` shorthand). `wt ls` peeks at concurrent slots.
+- **source** — main worktree of the source repo. Fine for quick adjustments (small commits, single-file fixes, `Agent` with `isolation: "worktree"`). For anything that wants its own branch or sustained work, ask the user to `wt go` in a new terminal.
+
+Full contract: `CLAUDE.md` (worktree-pool).
+
 ## Authoring
 Applies to code, docs, configs, and commit messages.
 - **Breadcrumbs**: Where future readers need context, leave a link — vendor docs, issues, RFCs, related internal docs. Skip when self-evident.
@@ -68,3 +77,4 @@ All repos live under `$MEOW_ROOT`.
 | `unity-solution-generator typecheck .` | Unity solution compile check; defaults to `ios editor`, override with `... <platform> <config>` |
 | `md-orphan` | Markdown orphan/broken-link/anchor check |
 | `notion-to-md` | Notion page → md; bare image filenames (`$NOTION_IMG_CACHE`) |
+
