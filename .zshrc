@@ -60,6 +60,18 @@ source $_zoxide
 zi() { __zoxide_zi "$PWD" }  # scope to cwd
 
 
+# just (lazy completions — load on first TAB, not at shell startup)
+# `just --completions zsh` is a trampoline that re-runs `just` on source; we cache the inner clap dispatcher.
+_just() {
+  local cache=~/.cache/just.zsh
+  [[ -f $cache && $cache -nt $commands[just] ]] || JUST_COMPLETE=zsh just > $cache
+  unfunction _just
+  source $cache  # redefines _clap_dynamic_completer_just and re-binds compdef for `just`
+  _clap_dynamic_completer_just "$@"
+}
+compdef _just just
+
+
 # yazi
 # automatically cd to the last used directory when running yazi
 # https://yazi-rs.github.io/docs/quick-start/
