@@ -127,25 +127,6 @@ cdw() {
   [[ -n "$wt" ]] || { echo "cdw: no worktree matching '$target'" >&2; return 1; }
   cd "$wt"
 }
-# fzf on `cdw <TAB>`; other commands fall through to default completion.
-_cdw_fzf_tab() {
-  if [[ "$LBUFFER" =~ '^[[:space:]]*cdw([[:space:]]+[^[:space:]]*)?$' ]]; then
-    local sel
-    sel=$(git worktree list 2>/dev/null | awk '{
-        name=""
-        for (i=NF; i>=1; i--) if ($i ~ /^\[.*\]$/) { name=substr($i,2,length($i)-2); break }
-        if (name == "") { n=split($1,p,"/"); name=p[n] }
-        if (length(name) > 32) name = substr(name, 1, 32)
-        printf "%-32s  %s\n", name, $0
-      }' | fzf --height=40% --reverse --no-multi | awk '{print $1}')
-    [[ -n "$sel" ]] && LBUFFER="${LBUFFER%%cdw*}cdw $sel"
-    zle reset-prompt
-  else
-    zle expand-or-complete
-  fi
-}
-zle -N _cdw_fzf_tab
-bindkey '^I' _cdw_fzf_tab
 
 
 # llm (cd to CLAUDE.md root if found)
@@ -194,3 +175,31 @@ sv() {
 }
 
 
+# fzf-driven TAB completion: dispatches on the current LBUFFER pattern;
+# unmatched buffers fall through to the default completer.
+_fzf_tab_dispatch() {
+  if [[ "$LBUFFER" =~ '^[[:space:]]*cdw([[:space:]]+[^[:space:]]*)?$' ]]; then
+    local sel
+    sel=$(git worktree list 2>/dev/null | awk '{
+        name=""
+        for (i=NF; i>=1; i--) if ($i ~ /^\[.*\]$/) { name=substr($i,2,length($i)-2); break }
+        if (name == "") { n=split($1,p,"/"); name=p[n] }
+        if (length(name) > 32) name = substr(name, 1, 32)
+        printf "%-32s  %s\n", name, $0
+      }' | fzf --height=40% --reverse --no-multi | awk '{print $1}')
+    [[ -n "$sel" ]] && LBUFFER="${LBUFFER%%cdw*}cdw $sel"
+    zle reset-prompt
+  elif [[ "$LBUFFER" =~ '^([[:space:]]*wt([[:space:]]+(--pool|-p)[[:space:]]+[^[:space:]]+)?[[:space:]]+go)([[:space:]]+[^[:space:]]*)?$' ]]; then
+    # Held slots only — fresh names are typed, not picked. Pool auto-resolves from cwd inside `wt ls`.
+    local prefix="${match[1]}" sel
+    sel=$(wt ls 2>/dev/null | awk 'NR>2 && $2=="held"' \
+          | fzf --height=40% --reverse --no-multi --header='wt go: pick slot to resume' \
+          | awk '{print $3}')
+    [[ -n "$sel" ]] && LBUFFER="$prefix $sel"
+    zle reset-prompt
+  else
+    zle expand-or-complete
+  fi
+}
+zle -N _fzf_tab_dispatch
+bindkey '^I' _fzf_tab_dispatch
