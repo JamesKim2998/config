@@ -7,10 +7,10 @@
 
 ### Worktree
 
-`wt whoami` prints the cwd context — `slot <path>`, `source <path>`, or `none`.
+`wt whoami` prints the cwd type and path. Two contexts:
 
-- **slot** — multi-step feature work goes here. `wt sync "msg"` commits dirty work + ff-merges into local `main` at checkpoints (local-only, idempotent; `wt sync wip` shorthand). `wt ls` peeks at concurrent slots.
-- **source** — main worktree of the source repo. Fine for quick adjustments (small commits, single-file fixes, `Agent` with `isolation: "worktree"`). For anything that wants its own branch or sustained work, ask the user to `wt go` in a new terminal.
+- **worktree** — feature worktree. `wt sync "msg"` commits dirty work + ff-merges into local `main` at checkpoints. `wt ls` peeks at siblings. **Never `git stash` here** — `refs/stash` is shared across slots; concurrent sessions clobber. Commit + `git reset --soft HEAD^` instead.
+- **source** — main worktree of the source repo.
 
 Full contract: `CLAUDE.md` (worktree-pool).
 
