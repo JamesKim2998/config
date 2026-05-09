@@ -14,30 +14,25 @@
 
 import { describe, it, expect, beforeAll, afterAll, beforeEach } from "bun:test";
 import { $ } from "bun";
+import { TmuxRunner, waitForFile } from "./lib";
 
 const TEST_DIR = "/tmp/yazi-folder-open-test";
 const BIN_DIR = `${TEST_DIR}/bin`;
 const EDIT_MARKER = `${TEST_DIR}/edit-called`;
 const OPEN_MARKER = `${TEST_DIR}/open-called`;
-const SESSION = "yazi-folder-open-test";
+const tmux = new TmuxRunner("yazi-folder-open-test");
 
 async function startYazi() {
-  await $`tmux kill-session -t ${SESSION}`.nothrow().quiet();
   await $`rm -f ${EDIT_MARKER} ${OPEN_MARKER}`.quiet();
-  // tmux's `-e` is overridden by the user's `update-environment`, so wrap in sh
-  // and set env there. PATH shim must come first so `open` resolves to our stub.
-  const cmd = `EDITOR='${BIN_DIR}/fake-editor' PATH='${BIN_DIR}':"$PATH" exec yazi`;
-  await $`tmux new-session -d -s ${SESSION} -c ${TEST_DIR} sh -c ${cmd}`.quiet();
-  await Bun.sleep(1500);
-}
-
-async function send(keys: string, delay = 300) {
-  await $`tmux send-keys -t ${SESSION} -- ${keys}`.quiet();
-  await Bun.sleep(delay);
-}
-
-async function killYazi() {
-  await $`tmux kill-session -t ${SESSION}`.nothrow().quiet();
+  await tmux.start({
+    cmd: "yazi",
+    cwd: TEST_DIR,
+    env: {
+      EDITOR: `${BIN_DIR}/fake-editor`,
+      PATH: `${BIN_DIR}:$PATH`, // $PATH expands inside the wrapper sh
+    },
+  });
+  await tmux.waitFor("subdir"); // directory row visible ⇒ UI ready
 }
 
 beforeAll(async () => {
@@ -58,41 +53,46 @@ beforeAll(async () => {
 }, 10000);
 
 afterAll(async () => {
-  await killYazi();
+  await tmux.kill();
   await $`rm -rf ${TEST_DIR}`.nothrow();
 });
 
 beforeEach(async () => {
-  await killYazi();
+  await tmux.kill();
 });
+
+// Soft-filter prompt has no visible state until chars are typed; small wait
+// so the next chars don't trigger manager-mode bindings.
+const PROMPT_OPEN = 100;
 
 async function pressOOn(name: string) {
   await startYazi();
-  // yazi sorts dirs first, then files alphabetically. Use 'gg' then '/' filter.
-  await send("gg", 200);
-  await send("/", 200);
-  await $`tmux send-keys -t ${SESSION} -l -- ${name}`.quiet();
-  await Bun.sleep(400);
-  await send("Enter", 400);
-  await send("o", 1000);
+  await tmux.sendRaw("gg");
+  await tmux.sendRaw("/");
+  await Bun.sleep(PROMPT_OPEN);
+  await tmux.sendLiteral(name);
+  await tmux.waitFor(`󰈲 ${name}`);  // chip with our query ⇒ filter prompt accepted input
+  await tmux.sendRaw("Enter");
+  await tmux.waitFor(`${TEST_DIR}/${name}`); // status path ⇒ cursor on target
+  await tmux.sendRaw("o");
 }
 
 describe("yazi 'o' on folders", () => {
   it("should call macOS `open` (not $EDITOR) on a regular folder", async () => {
     await pressOOn("subdir");
-    expect(await Bun.file(OPEN_MARKER).exists()).toBe(true);
+    await waitForFile(OPEN_MARKER);
     expect(await Bun.file(EDIT_MARKER).exists()).toBe(false);
   }, 15000);
 
   it("should call macOS `open` (not $EDITOR) on a .app bundle", async () => {
     await pressOOn("MyApp.app");
-    expect(await Bun.file(OPEN_MARKER).exists()).toBe(true);
+    await waitForFile(OPEN_MARKER);
     expect(await Bun.file(EDIT_MARKER).exists()).toBe(false);
   }, 15000);
 
   it("should still call $EDITOR on a regular text file (sanity)", async () => {
     await pressOOn("regular.txt");
-    expect(await Bun.file(EDIT_MARKER).exists()).toBe(true);
+    await waitForFile(EDIT_MARKER);
     expect(await Bun.file(OPEN_MARKER).exists()).toBe(false);
   }, 15000);
 });

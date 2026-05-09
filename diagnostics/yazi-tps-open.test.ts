@@ -10,10 +10,11 @@
  */
 
 import { describe, it, expect, beforeAll, afterAll } from "bun:test";
+import { $ } from "bun";
 import { TmuxRunner } from "./lib";
 
 const TEST_DIR = "/tmp/yazi-tps-test";
-const tmux = new TmuxRunner("yazi-tps-test", TEST_DIR);
+const tmux = new TmuxRunner("yazi-tps-test");
 
 beforeAll(async () => {
   await Bun.write(
@@ -22,19 +23,18 @@ beforeAll(async () => {
   );
 }, 10000);
 
-afterAll(() => tmux.cleanup());
+afterAll(async () => {
+  await tmux.kill();
+  await $`rm -rf ${TEST_DIR}`.nothrow();
+});
 
 describe("yazi .tps file open menu", () => {
   it("should show both 'edit' and 'open' options for .tps files", async () => {
-    await tmux.startYazi();
-    await tmux.sendRaw("O", 500);
-
-    const output = await tmux.capture();
-    console.log("=== Open menu ===\n" + output);
-
+    await tmux.start({ cmd: "yazi", cwd: TEST_DIR });
+    await tmux.waitFor("test.tps"); // file row visible ⇒ UI ready
+    await tmux.sendRaw("O");
+    const output = await tmux.waitFor("$EDITOR");
     expect(output).toContain("$EDITOR");
     expect(output).toContain("Open");
-
-    await tmux.kill();
   }, 15000);
 });

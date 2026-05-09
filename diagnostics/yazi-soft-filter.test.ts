@@ -6,99 +6,113 @@
  * the user-visible behavior; the Entity.style dimming itself isn't asserted (would
  * require capture-pane -e + ANSI parsing for marginal value).
  *
- * We detect "what's hovered" via the status bar — init.lua renders the hovered
- * file's full path on the right, and the active filter chip on the left.
+ * Anchors:
+ *  - hovered file's absolute path is rendered on the bottom-right status bar.
+ *  - active filter shows as ` 󰈲 <query>` on the bottom-left status bar.
  *
  * Run: bun test yazi-soft-filter.test.ts
  */
 
-import { describe, it, expect, beforeAll, afterAll } from "bun:test";
+import { describe, it, beforeAll, afterAll } from "bun:test";
 import { $ } from "bun";
 import { TmuxRunner } from "./lib";
 
 const TEST_DIR = "/tmp/yazi-soft-filter-test";
-const tmux = new TmuxRunner("yazi-soft-filter-test", TEST_DIR);
+const tmux = new TmuxRunner("yazi-soft-filter-test");
 
-const KEY_DELAY = 250;
-const PROMPT_DELAY = 600;
-const TYPE_DELAY = 400;
-// Esc waits for tmux's escape-time (default 500ms) before being dispatched as
-// a standalone key, so we have to wait longer after sending it.
-const ESC_DELAY = 1500;
+const FILTER_CHIP = "󰈲";
+// Soft-filter prompt has no visible indicator before chars are typed; a tiny
+// wait gives yazi time to enter prompt mode so the next chars don't trigger
+// manager-mode bindings (e.g. `a` = create file).
+const PROMPT_OPEN = 100;
 
 // Sorted alphabetically by yazi: apple, apricot, banana, cherry, date.
 // "ap" matches apple + apricot; "apr" matches only apricot.
 const FILES = ["apple.txt", "apricot.txt", "banana.txt", "cherry.txt", "date.txt"];
+const hoveredPath = (name: string) => `${TEST_DIR}/${name}`;
+const FILTER = (q: string) => `${FILTER_CHIP} ${q}`;
+
+async function startYazi() {
+  await tmux.start({ cmd: "yazi", cwd: TEST_DIR });
+  await tmux.waitFor(hoveredPath("apple.txt")); // status bar populated ⇒ UI ready
+}
 
 beforeAll(async () => {
   await $`rm -rf ${TEST_DIR}`.quiet();
   await $`mkdir -p ${TEST_DIR}`.quiet();
-  for (const name of FILES) {
-    await Bun.write(`${TEST_DIR}/${name}`, "x\n");
-  }
+  await Promise.all(FILES.map((name) => Bun.write(`${TEST_DIR}/${name}`, "x\n")));
 }, 10000);
 
-afterAll(() => tmux.cleanup());
+afterAll(async () => {
+  await tmux.kill();
+  await $`rm -rf ${TEST_DIR}`.nothrow();
+});
 
 describe("yazi soft-filter — type-to-jump", () => {
   it("jumps to a match when the cursor is on a non-match (wraps from cursor)", async () => {
-    await tmux.startYazi();
-    await tmux.sendRaw("G", KEY_DELAY); // bottom: date.txt (no match for "apr")
-    await tmux.sendRaw("/", PROMPT_DELAY);
-    await tmux.sendLiteral("apr", TYPE_DELAY); // matches only apricot
-    await tmux.sendRaw("Enter", KEY_DELAY); // commit, close prompt
-    expect(await tmux.capture()).toContain("apricot.txt");
-    await tmux.kill();
+    await startYazi();
+    await tmux.sendRaw("G");
+    await tmux.waitFor(hoveredPath("date.txt"));
+    await tmux.sendRaw("/");
+    await Bun.sleep(PROMPT_OPEN);
+    await tmux.sendLiteral("apr");
+    await tmux.waitFor(FILTER("apr"));
+    await tmux.sendRaw("Enter");
+    await tmux.waitFor(hoveredPath("apricot.txt"));
   }, 15000);
 
   it("stays on the current file if it already matches", async () => {
-    await tmux.startYazi();
-    await tmux.sendRaw("gg", KEY_DELAY); // top: apple.txt
-    await tmux.sendRaw("/", PROMPT_DELAY);
-    await tmux.sendLiteral("ap", TYPE_DELAY); // apple matches → stay
-    await tmux.sendRaw("Enter", KEY_DELAY);
-    expect(await tmux.capture()).toContain("apple.txt");
-    await tmux.kill();
+    await startYazi();
+    await tmux.sendRaw("gg");
+    await tmux.waitFor(hoveredPath("apple.txt"));
+    await tmux.sendRaw("/");
+    await Bun.sleep(PROMPT_OPEN);
+    await tmux.sendLiteral("ap");
+    await tmux.waitFor(FILTER("ap"));
+    await tmux.sendRaw("Enter");
+    await tmux.waitFor(hoveredPath("apple.txt"));
   }, 15000);
 });
 
 describe("yazi soft-filter — n/N navigation", () => {
   it("n advances to next match, N walks back", async () => {
-    await tmux.startYazi();
-    await tmux.sendRaw("gg", KEY_DELAY);
-    await tmux.sendRaw("/", PROMPT_DELAY);
-    await tmux.sendLiteral("ap", TYPE_DELAY); // matches apple, apricot
-    await tmux.sendRaw("Enter", KEY_DELAY); // cursor stays on apple
-    expect(await tmux.capture()).toContain("apple.txt");
+    await startYazi();
+    await tmux.sendRaw("gg");
+    await tmux.waitFor(hoveredPath("apple.txt"));
+    await tmux.sendRaw("/");
+    await Bun.sleep(PROMPT_OPEN);
+    await tmux.sendLiteral("ap");
+    await tmux.waitFor(FILTER("ap"));
+    await tmux.sendRaw("Enter");
 
-    await tmux.sendRaw("n", KEY_DELAY);
-    expect(await tmux.capture()).toContain("apricot.txt");
+    await tmux.sendRaw("n");
+    await tmux.waitFor(hoveredPath("apricot.txt"));
 
-    await tmux.sendRaw("N", KEY_DELAY);
-    expect(await tmux.capture()).toContain("apple.txt");
-    await tmux.kill();
+    await tmux.sendRaw("N");
+    await tmux.waitFor(hoveredPath("apple.txt"));
   }, 15000);
 });
 
 describe("yazi soft-filter — escape clears", () => {
   it("Esc inside the prompt clears and closes", async () => {
-    await tmux.startYazi();
-    await tmux.sendRaw("/", PROMPT_DELAY);
-    await tmux.sendLiteral("xyz", TYPE_DELAY); // matches nothing
-    await tmux.sendRaw("Escape", ESC_DELAY);
-    // The status-bar filter chip uses the 󰈲 glyph; absent ⇒ filter cleared.
-    expect(await tmux.capture()).not.toContain("󰈲");
-    await tmux.kill();
+    await startYazi();
+    await tmux.sendRaw("/");
+    await Bun.sleep(PROMPT_OPEN);
+    await tmux.sendLiteral("xyz");
+    await tmux.waitFor(FILTER("xyz"));
+    await tmux.sendRaw("Escape");
+    await tmux.waitFor((s) => !s.includes(FILTER_CHIP));
   }, 15000);
 
   it("Esc at the manager clears a committed filter", async () => {
-    await tmux.startYazi();
-    await tmux.sendRaw("/", PROMPT_DELAY);
-    await tmux.sendLiteral("xyz", TYPE_DELAY);
-    await tmux.sendRaw("Enter", KEY_DELAY); // commit, chip should appear
-    expect(await tmux.capture()).toContain("󰈲");
-    await tmux.sendRaw("Escape", ESC_DELAY);
-    expect(await tmux.capture()).not.toContain("󰈲");
-    await tmux.kill();
+    await startYazi();
+    await tmux.sendRaw("/");
+    await Bun.sleep(PROMPT_OPEN);
+    await tmux.sendLiteral("xyz");
+    await tmux.waitFor(FILTER("xyz"));
+    await tmux.sendRaw("Enter");
+    await tmux.waitFor(FILTER("xyz")); // still present after commit
+    await tmux.sendRaw("Escape");
+    await tmux.waitFor((s) => !s.includes(FILTER_CHIP));
   }, 15000);
 });

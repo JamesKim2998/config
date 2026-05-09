@@ -204,42 +204,126 @@ export async function getLine(client: NeovimClient, n: number): Promise<string> 
 }
 
 // --- Managed tmux session for TUI testing (yazi, etc.) ---
+//
+// Drive: `start({cmd, cwd, ...})` → `sendRaw|sendLiteral` → `waitFor(anchor)`.
+// Never sleep on a fixed timer — poll capture-pane until the screen reaches
+// the expected state. Pattern lifted from fzf's `test/lib/common.rb` (`Tmux#wait`).
+//
+// Pinning -x/-y/TERM/LANG keeps capture output reproducible across host
+// terminals. escape-time=0 makes <Esc> dispatch immediately instead of after
+// tmux's default 500ms grace.
+
+export interface TmuxStartOpts {
+  cmd: string;
+  cwd: string;
+  cols?: number;
+  rows?: number;
+  // Inserted as raw `KEY=value` pairs into the wrapper `sh -c`. Values are
+  // *not* shell-escaped — callers can use `$VAR` to inherit, but must quote
+  // any whitespace/specials themselves. (Wrapper exists because tmux's
+  // `-e KEY=VAL` flag is shadowed by the user's `update-environment`.)
+  env?: Record<string, string>;
+}
+
+export interface TmuxWaitOpts {
+  timeout?: number;     // ms, default 5000
+  poll?: number;        // ms, default 50
+  scrollback?: boolean; // include off-screen lines, default false
+}
+
+export type TmuxMatcher = string | RegExp | ((screen: string) => boolean);
 
 export class TmuxRunner {
-  constructor(
-    public session: string,
-    public testDir: string,
-  ) {}
+  constructor(public readonly session: string) {}
 
-  async sendRaw(keys: string, delay = 100) {
+  async start(opts: TmuxStartOpts): Promise<void> {
+    await this.kill();
+    const cols = opts.cols ?? 120;
+    const rows = opts.rows ?? 40;
+    const env = { TERM: "xterm-256color", LANG: "en_US.UTF-8", ...(opts.env ?? {}) };
+    const exports = Object.entries(env).map(([k, v]) => `${k}=${v}`).join(" ");
+    const wrapped = `${exports} exec ${opts.cmd}`;
+    // Chain new-session + set-option in one tmux invocation.
+    await $`tmux new-session -d -s ${this.session} -x ${cols} -y ${rows} -c ${opts.cwd} sh -c ${wrapped} \; set-option -t ${this.session} escape-time 0`.quiet();
+  }
+
+  async sendRaw(keys: string): Promise<void> {
     await $`tmux send-keys -t ${this.session} -- ${keys}`.quiet();
-    await Bun.sleep(delay);
   }
 
-  async sendLiteral(keys: string, delay = 100) {
-    await $`tmux send-keys -t ${this.session} -l -- ${keys}`.quiet();
-    await Bun.sleep(delay);
+  async sendLiteral(text: string): Promise<void> {
+    await $`tmux send-keys -t ${this.session} -l -- ${text}`.quiet();
   }
 
-  async capture(): Promise<string> {
-    const result = await $`tmux capture-pane -t ${this.session} -p`.quiet();
+  async capture(opts: { scrollback?: boolean } = {}): Promise<string> {
+    const result = opts.scrollback
+      ? await $`tmux capture-pane -t ${this.session} -p -S -`.quiet()
+      : await $`tmux capture-pane -t ${this.session} -p`.quiet();
     return result.text();
   }
 
-  async startYazi(startupDelay = 1500) {
-    await this.kill();
-    await $`tmux new-session -d -s ${this.session} -c ${this.testDir} yazi`.quiet();
-    await Bun.sleep(startupDelay);
+  // Poll capture until matcher passes; throw with last screen on timeout.
+  async waitFor(matcher: TmuxMatcher, opts: TmuxWaitOpts = {}): Promise<string> {
+    const test = matcherFn(matcher);
+    let lastScreen = "";
+    return pollUntil(
+      async () => (lastScreen = await this.capture({ scrollback: opts.scrollback })),
+      test,
+      {
+        timeout: opts.timeout ?? 5000,
+        poll: opts.poll ?? 50,
+        describe: () => `${describeMatcher(matcher)}\n--- last screen ---\n${lastScreen}`,
+      },
+    );
   }
 
-  async kill() {
+  async kill(): Promise<void> {
     await $`tmux kill-session -t ${this.session}`.nothrow().quiet();
   }
+}
 
-  async cleanup() {
-    await this.kill();
-    await $`rm -rf ${this.testDir}`.nothrow();
+function matcherFn(m: TmuxMatcher): (s: string) => boolean {
+  if (typeof m === "string") return (s) => s.includes(m);
+  if (m instanceof RegExp) return (s) => m.test(s);
+  return m;
+}
+
+function describeMatcher(m: TmuxMatcher): string {
+  if (typeof m === "string") return JSON.stringify(m);
+  if (m instanceof RegExp) return m.toString();
+  return "<predicate>";
+}
+
+// --- Generic poll-until-condition ---
+//
+// Used by TmuxRunner.waitFor and waitForFile. Calls `probe` every `poll` ms;
+// returns the first probed value that satisfies `test`. Throws on timeout.
+
+export interface PollOpts {
+  timeout?: number;            // ms, default 5000
+  poll?: number;               // ms, default 50
+  describe?: string | (() => string); // used in timeout message
+}
+
+export async function pollUntil<T>(
+  probe: () => Promise<T>,
+  test: (v: T) => boolean,
+  opts: PollOpts = {},
+): Promise<T> {
+  const timeout = opts.timeout ?? 5000;
+  const poll = opts.poll ?? 50;
+  const deadline = Date.now() + timeout;
+  while (Date.now() < deadline) {
+    const v = await probe();
+    if (test(v)) return v;
+    await Bun.sleep(poll);
   }
+  const detail = typeof opts.describe === "function" ? opts.describe() : opts.describe ?? "";
+  throw new Error(`pollUntil timed out after ${timeout}ms${detail ? `: ${detail}` : ""}`);
+}
+
+export async function waitForFile(path: string, opts: PollOpts = {}): Promise<void> {
+  await pollUntil(() => Bun.file(path).exists(), (v) => v, { describe: `file ${path}`, ...opts });
 }
 
 // --- Utility ---

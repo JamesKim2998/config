@@ -89,6 +89,45 @@ bun test yazi-soft-filter.test.ts   # soft-filter type-to-jump, n/N, Esc clears
 bun run yazi                        # all yazi-*.test.ts
 ```
 
+### Test pattern: send → waitFor (never sleep)
+
+`TmuxRunner` exposes `start({cmd, cwd, cols, rows, env})`, `sendRaw`,
+`sendLiteral`, `capture`, and `waitFor(matcher, opts)`. The discipline is:
+after each input, **poll the screen for an anchor** instead of sleeping. The
+helper is modeled on fzf's `Tmux#wait` ([test/lib/common.rb][fzf-wait]).
+
+```ts
+const tmux = new TmuxRunner("yazi-foo-test");
+await tmux.start({ cmd: "yazi", cwd: TEST_DIR });
+await tmux.waitFor("apple.txt");           // UI ready
+await tmux.sendRaw("/");
+await Bun.sleep(100);                      // soft-filter prompt has no visible state
+await tmux.sendLiteral("apr");
+await tmux.waitFor("󰈲 apr");               // chip ⇒ filter live
+await tmux.sendRaw("Enter");
+await tmux.waitFor(`${TEST_DIR}/apricot.txt`); // bottom status path ⇒ cursor moved
+```
+
+Anchor cheat sheet for our config:
+
+| Anchor | Confirms |
+|--------|----------|
+| `${TEST_DIR}/<file>` (bottom-right status) | Cursor is hovered on `<file>` |
+| `󰈲 <query>` (bottom-left status) | Soft-filter is active with `<query>` |
+| `<path>:1:` row (fr.yazi only) | fzf has at least one match |
+
+Pitfall: file/dir names appear in the listing regardless of filter or
+cursor state, so a bare `waitFor("apple.txt")` only proves the UI is up —
+not that anything moved. To assert state changes, anchor on the **status
+bar path** (updates on hover) or the **filter chip** (only present when
+active).
+
+`start()` pins `-x 120 -y 40`, `TERM=xterm-256color`, `LANG=en_US.UTF-8`,
+and `escape-time 0` — the last makes `<Esc>` dispatch immediately instead of
+waiting tmux's default 500ms grace.
+
+[fzf-wait]: https://github.com/junegunn/fzf/blob/master/test/lib/common.rb
+
 ### Detecting which opener fired
 
 Yazi spawns the opener as a child process. To tell whether `edit` or `open`
@@ -96,10 +135,10 @@ ran without launching a real editor or Finder window, the test:
 
 1. Writes shim scripts at `${TEST_DIR}/bin/{open,fake-editor}` that just
    `touch` a marker file.
-2. Launches yazi via `tmux new-session ... sh -c 'EDITOR=… PATH=…/bin:$PATH
-   exec yazi'`. The shell wrapper is needed because tmux's `-e` flag is
-   shadowed by `update-environment`.
-3. Sends keys, then asserts which marker exists.
+2. Launches yazi via `tmux.start({cmd: "yazi", cwd: TEST_DIR, env: {EDITOR,
+   PATH: \`${BIN_DIR}:$PATH\`}})`. `env` values are inserted raw into the
+   wrapper `sh -c`, so `$PATH` expands.
+3. Sends keys, then polls until the marker file appears.
 
 See `diagnostics/yazi-folder-open.test.ts` for the pattern.
 
