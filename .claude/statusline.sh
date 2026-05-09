@@ -19,13 +19,16 @@ FG_RD=$'\033[31m'
 
 dir_name="${cwd##*/}"
 [[ -z "$dir_name" ]] && dir_name='~'
-repo_seg="${BOLD}${dir_name}${RST}"
 
+# Repo name comes from `remote.origin.url` (last path segment, `.git` stripped) so
+# worktrees show the parent repo instead of the branch-named worktree dir. Falls
+# back to dir name for repos without a remote or non-git dirs.
 # git is the slow segment — cache per (session, cwd) for 2s to absorb rapid vim
 # toggles. cwd in the key matters because `wt`/`cdw` switch repos within a session.
+repo_name="$dir_name"
 git_seg=''
 if [[ -n "$cwd" ]]; then
-  cache="/tmp/cc-statusline-git-${session_id}${cwd//\//_}"
+  cache="/tmp/cc-statusline-${session_id}${cwd//\//_}"
   use_cache=0
   if [[ -f "$cache" ]]; then
     mtime=$(stat -f %m "$cache" 2>/dev/null || stat -c %Y "$cache" 2>/dev/null || echo 0)
@@ -33,8 +36,14 @@ if [[ -n "$cwd" ]]; then
   fi
 
   if (( use_cache )); then
-    git_seg=$(<"$cache")
+    IFS=$'\t' read -r repo_name git_seg <"$cache" || :
   elif git -C "$cwd" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    remote=$(git -C "$cwd" config --get remote.origin.url 2>/dev/null)
+    if [[ -n "$remote" ]]; then
+      r="${remote##*/}"
+      repo_name="${r%.git}"
+    fi
+
     branch=$(git -C "$cwd" symbolic-ref --short HEAD 2>/dev/null \
           || git -C "$cwd" rev-parse --short HEAD 2>/dev/null \
           || echo '?')
@@ -70,10 +79,12 @@ if [[ -n "$cwd" ]]; then
 
     git_seg="$seg"
     # atomic write so concurrent readers never see partial ANSI.
-    printf '%s' "$git_seg" >"${cache}.tmp" 2>/dev/null \
+    printf '%s\t%s' "$repo_name" "$git_seg" >"${cache}.tmp" 2>/dev/null \
       && mv -f "${cache}.tmp" "$cache" 2>/dev/null
   fi
 fi
+
+repo_seg="${BOLD}${repo_name}${RST}"
 
 case "$vim_mode" in
   NORMAL)        vim_seg=$'\033[1;37;44m N \033[0m' ;;
