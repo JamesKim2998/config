@@ -1,10 +1,25 @@
 # Yazi plugin debugging helpers
 # Usage: Run from config/yazi directory
-# Requires: tmux, sd (for add-bat-debug)
+# Requires: tmux, sd (for add-bat-debug), luac (lint)
 
 # Common settings
 session := "yt"
 test_csv := "~/Downloads/sample.csv"
+
+# === Lint ===
+
+# Up-front syntax check for our owned Lua (init.lua + worktree-jump plugin).
+# Catches the kind of bug where embedded `]]` (e.g. `t[a[1]]` in awk) silently
+# truncates a `[[ ... ]]` long string and yazi never loads the plugin.
+# Vendored plugins (managed by `ya pkg`) are excluded.
+lint:
+    @luac -p init.lua && echo "ok: init.lua"
+    @luac -p plugins/worktree-jump.yazi/main.lua && echo "ok: worktree-jump"
+    @luac -p plugins/git-status.yazi/main.lua && echo "ok: git-status"
+
+# Watch the live yazi log (errors, ya.dbg/ya.err output land here).
+log:
+    tail -F ~/.local/state/yazi/yazi.log
 
 # === Preview Testing ===
 

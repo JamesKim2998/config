@@ -1,0 +1,13 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+  "runtime.version": "Lua 5.4",
+  "runtime.special": { "ya.sync": "function" },
+  "workspace.library": [
+    "~/.config/yazi/plugins/types.yazi/"
+  ],
+  "diagnostics.globals": [
+    "ya", "ui", "cx", "fs", "rt", "ps", "th",
+    "Url", "Command", "Cha", "File",
+    "Header", "Status", "Tab", "Tabs", "Parent", "Current", "Preview", "Rail"
+  ]
+}

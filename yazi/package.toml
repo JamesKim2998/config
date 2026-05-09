@@ -78,5 +78,10 @@ use = "yazi-rs/plugins:no-status"
 rev = "03cdd4b"
 hash = "3e023d31f29201efdac2a6ae35fedb78"
 
+[[plugin.deps]]
+use = "yazi-rs/plugins:types"
+rev = "4ffa48f"
+hash = "9105494e98299f392aee95340066da9f"
+
 [flavor]
 deps = []
