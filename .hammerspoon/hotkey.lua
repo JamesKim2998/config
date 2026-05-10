@@ -24,8 +24,8 @@ for i, app_info in ipairs(app_infos) do
 	end)
 end
 
--- Execute open_unity.sh for opening Unity.
+-- Open / focus the meow-tower Unity editor via studio-boxcat/unity-launcher.
 hs.hotkey.bind(mash_app, "U", "Open Unity", function()
-	hs.execute("/Users/jameskim/Develop/meow-tower/!meow.app/Contents/MacOS/UnityLauncher", true)
+	hs.execute("/Users/jameskim/Develop/meow-tower/!meow.app/Contents/MacOS/unity-launcher", true)
 end)
 

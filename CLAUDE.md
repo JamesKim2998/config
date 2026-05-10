@@ -12,7 +12,7 @@ macOS dotfiles and development environment configuration.
 | Yazi | [[yazi.md|yazi/]] | File manager with plugins |
 | Lazygit | `lazygit/` | Git TUI |
 | Bat | `bat/` | Syntax-highlighted cat |
-| Hammerspoon | [[README.md|.hammerspoon/]] | Window management, app launcher hotkeys |
+| Hammerspoon | [[README.md|.hammerspoon/]] | Window management, app launcher hotkeys (`U` shells out to [`unity-launcher`](https://github.com/studio-boxcat/unity-launcher) for meow-tower) |
 | IntelliJ | `intellij/` | IdeaVim (.ideavimrc), Copilot settings |
 | Gemini | `gemini/` | Gemini CLI |
 | VS Code | `.vscode/` | Editor settings |

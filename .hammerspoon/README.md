@@ -13,7 +13,7 @@ App launcher hotkeys using `Cmd+Opt+Ctrl` prefix.
 | R | Rider |
 | S | Slack |
 | T | TexturePacker |
-| U | Unity (custom launcher) |
+| U | Unity — meow-tower via [`unity-launcher`](https://github.com/studio-boxcat/unity-launcher) |
 | V | Visual Studio Code |
 | W | WebStorm |
 | X | Xcode |
