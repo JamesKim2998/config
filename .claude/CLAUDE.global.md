@@ -75,6 +75,7 @@ All repos live under `$MEOW_ROOT`.
 | `gh` | |
 | `ilspycmd` | .NET decompiler CLI |
 | `unity-solution-generator typecheck .` | Unity solution compile check; defaults to `ios editor`, override with `... <platform> <config>` |
+| `unity-launcher` | Unity editor launcher: `launch [-batchmode]` / `focus` / `quit`. Walks up from the binary or cwd looking for `ProjectSettings/`. |
 | `md-orphan` | Markdown orphan/broken-link/anchor check |
 | `notion-to-md` | Notion page → md; bare image filenames (`$NOTION_IMG_CACHE`) |
 
