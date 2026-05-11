@@ -1,4 +1,19 @@
 -- https://github.com/nvim-neo-tree/neo-tree.nvim
+
+local function find_open()
+	local manager = require("neo-tree.sources.manager")
+	for _, source in ipairs({ "filesystem", "git_status" }) do
+		local winid = manager.get_state(source).winid
+		if winid and vim.api.nvim_win_is_valid(winid) then
+			return winid, source
+		end
+	end
+end
+
+local function open_last()
+	vim.cmd("Neotree " .. (vim.g.neo_tree_last_source or "filesystem"))
+end
+
 return {
 	"nvim-neo-tree/neo-tree.nvim",
 	branch = "v3.x",
@@ -15,39 +30,26 @@ return {
 		{
 			"<C-n>",
 			function()
-				local manager = require("neo-tree.sources.manager")
-				local state = manager.get_state("filesystem")
-				local git_state = manager.get_state("git_status")
-				local fs_open = state.winid and vim.api.nvim_win_is_valid(state.winid)
-				local git_open = git_state.winid and vim.api.nvim_win_is_valid(git_state.winid)
-
-				if fs_open or git_open then
-					vim.g.neo_tree_last_source = git_open and "git_status" or "filesystem"
+				local winid, source = find_open()
+				if not winid then
+					open_last()
+				elseif vim.api.nvim_get_current_win() == winid then
+					vim.g.neo_tree_last_source = source
 					vim.cmd("Neotree close")
 				else
-					local source = vim.g.neo_tree_last_source or "filesystem"
-					vim.cmd("Neotree " .. source)
+					vim.api.nvim_set_current_win(winid)
 				end
 			end,
-			desc = "Toggle Explorer",
+			desc = "Toggle/Focus Explorer",
 		},
 		{
 			"<leader>e",
 			function()
-				local manager = require("neo-tree.sources.manager")
-				local state = manager.get_state("filesystem")
-				local git_state = manager.get_state("git_status")
-				local fs_open = state.winid and vim.api.nvim_win_is_valid(state.winid)
-				local git_open = git_state.winid and vim.api.nvim_win_is_valid(git_state.winid)
-
-				if fs_open or git_open then
-					-- Just focus the existing window
-					local winid = git_open and git_state.winid or state.winid
+				local winid = find_open()
+				if winid then
 					vim.api.nvim_set_current_win(winid)
 				else
-					-- Open with last source
-					local source = vim.g.neo_tree_last_source or "filesystem"
-					vim.cmd("Neotree " .. source)
+					open_last()
 				end
 			end,
 			desc = "Focus Explorer",

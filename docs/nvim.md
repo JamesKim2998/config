@@ -16,7 +16,7 @@ IDE setup with Lazy.nvim plugin manager.
 | `<leader><leader>` | Buffers (quick) | fzf-lua |
 | `<Tab>` / `<S-Tab>` | Next/prev buffer | bufferline |
 | `<leader>1-9` | Go to buffer N | bufferline |
-| `<C-n>` | Toggle file explorer | neo-tree |
+| `<C-n>` | Toggle/focus file explorer | neo-tree |
 | `<leader>e` | Focus file explorer | neo-tree |
 | `<leader>gs` | Git status (neo-tree) | neo-tree |
 | `<leader>.` | New scratch buffer | snacks |
