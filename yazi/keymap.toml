@@ -129,6 +129,17 @@ on   = [ "g", "i" ]
 run  = "shell --block lazygit"
 desc = "run lazygit"
 
+# Override default `c c` / `c d` (copy path / dirname) to collapse $HOME → `~`.
+[[mgr.prepend_keymap]]
+on   = [ "c", "c" ]
+run  = "plugin copy-path path"
+desc = "Copy file path (~)"
+
+[[mgr.prepend_keymap]]
+on   = [ "c", "d" ]
+run  = "plugin copy-path dirname"
+desc = "Copy directory path (~)"
+
 # https://github.com/yazi-rs/plugins/tree/main/chmod.yazi#usage
 [[mgr.prepend_keymap]]
 on   = [ "c", "m" ]

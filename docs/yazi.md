@@ -27,6 +27,7 @@ File manager with plugins, custom keymaps, and previewers.
 | `gi` | Open lazygit |
 | `gr` | Cd to git root |
 | `Y` | Copy absolute path |
+| `cc` / `cd` | Copy file path / dirname with `$HOME` collapsed to `~` |
 | `w` | Jump to git worktree (fzf picker over `git worktree list`) — overrides default `tasks:show` |
 | `W` | Show task manager (default `w` action, moved here) |
 
@@ -52,6 +53,7 @@ instead. See `yazi/yazi.toml`.
 | mactag.yazi | macOS Finder tags |
 | soft-filter.yazi | Local: dim non-matches on `/` (vs. yazi's hide-filter); per-dir scoped |
 | worktree-jump.yazi | Local: fzf picker over `git worktree list`, cd to selection |
+| copy-path.yazi | Local: copy path/dirname to clipboard with `$HOME` → `~` |
 
 ### xleak.yazi
 
