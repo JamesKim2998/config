@@ -1,5 +1,6 @@
 [mgr]
 show_hidden = true
+ratio = [1, 4, 5] # parent : current : preview — preview at 50%
 
 [open]
 prepend_rules = [
