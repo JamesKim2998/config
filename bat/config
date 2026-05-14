@@ -14,5 +14,9 @@
 --map-syntax ".babelrc:JSON"
 --map-syntax ".swcrc:JSON"
 --map-syntax "bun.lock:JSON"
+
 --map-syntax "*.pspec:JSON"
 --map-syntax "*.pspec.sidecar:JSON"
+
+--map-syntax "justfile:Makefile"
+--map-syntax "Justfile:Makefile"

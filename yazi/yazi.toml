@@ -53,6 +53,9 @@ prepend_previewers = [
   { url = "*.prefab", run = "bat" },
 	{ mime = "application/json", run = "bat" },
 	{ url = "**/bun.lock", run = "bat" },
+	{ url = "**/{justfile,Justfile}", run = "bat" },
+	{ url = "*.pspec", run = "bat" },
+	{ url = "*.pspec.sidecar", run = "bat" },
 	# office MIME rules
 	{ mime = "application/openxmlformats-officedocument.*", run = "office" },
 	{ mime = "application/oasis.opendocument.*", run = "office" },
