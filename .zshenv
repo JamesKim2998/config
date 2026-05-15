@@ -23,11 +23,16 @@ export EDITOR=$BREW/bin/nvim
 
 # path
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$BREW/opt/openjdk/bin:$PATH"
 export PATH="$BREW/opt/trash-cli/bin:$PATH"
 export PATH="$HOME/Library/Android/sdk/emulator:$HOME/Library/Android/sdk/platform-tools:$PATH"
 export PATH="/Applications/Aseprite.app/Contents/MacOS:$PATH"
+
+# rust
+export PATH="$HOME/.cargo/bin:$PATH"
+export RUSTC_WRAPPER=sccache
+export CARGO_INCREMENTAL=0
+export SCCACHE_CACHE_SIZE="50G"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
