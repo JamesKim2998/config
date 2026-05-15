@@ -1,0 +1,22 @@
+# Local-checkout overrides for in-house Rust crates.
+# Each meow-tower Native~ tool (e.g. asset-catalog) pins its in-house deps to a
+# git rev. These patches override that pin with the local checkout under
+# ~/Develop/<repo>/, so `cargo build` picks up local edits without a rev bump.
+#
+# Cargo doesn't expand `~` or env vars in `path = "..."` — absolute paths only.
+# Patch keys are matched verbatim against the consumer's source URL — add a new
+# entry here when a consumer Cargo.toml uses a URL form not yet listed below.
+
+# `bridge` consumes unity-solution-generator by bare-version (no git source);
+# Cargo resolves that through crates.io indirection, so the patch lives here.
+[patch.crates-io]
+unity-solution-generator = { path = "/Users/jameskim/Develop/unity-solution-generator/crates/usg-core" }
+
+[patch."https://github.com/studio-boxcat/unity-assetdb"]
+unity-assetdb = { path = "/Users/jameskim/Develop/unity-assetdb" }
+
+[patch."https://github.com/studio-boxcat/tps-mod"]
+tps-core = { path = "/Users/jameskim/Develop/tps-mod/crates/core" }
+
+[patch."ssh://git@github.com/studio-boxcat/unity-sprite-author.git"]
+unity-sprite-author = { path = "/Users/jameskim/Develop/unity-sprite-author" }

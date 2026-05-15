@@ -90,6 +90,10 @@ ln -sf "$CONFIG/.vscode/settings.json" "$APP_SUPPORT/Code/User/settings.json"
 # jetbrains ideavim
 ln -sf "$CONFIG/intellij/.ideavimrc" ~/.ideavimrc
 
+# cargo
+mkdir -p ~/.cargo
+ln -sf "$CONFIG/.cargo/config.toml" ~/.cargo/config.toml
+
 # cargo tools (stylua: lua formatter)
 cargo install stylua
 
