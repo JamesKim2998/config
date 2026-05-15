@@ -9,8 +9,12 @@
 
 # `bridge` consumes unity-solution-generator by bare-version (no git source);
 # Cargo resolves that through crates.io indirection, so the patch lives here.
+# `unity-assetdb` is dual-keyed: pspec pulls it from crates.io while other
+# repos pull from the GitHub source — both keys point at the same local
+# checkout so either consumer picks up local edits.
 [patch.crates-io]
 unity-solution-generator = { path = "/Users/jameskim/Develop/unity-solution-generator/crates/usg-core" }
+unity-assetdb = { path = "/Users/jameskim/Develop/unity-assetdb" }
 
 [patch."https://github.com/studio-boxcat/unity-assetdb"]
 unity-assetdb = { path = "/Users/jameskim/Develop/unity-assetdb" }
