@@ -1,13 +1,14 @@
+-- Preview compiled langpack `.bytes` files. Delegates to the Rust
+-- `langpack` binary (`langpack decode <file>`) which produces a CSV
+-- table; piped through `bat` for syntax highlighting.
+-- See `decode.rs` in the langpack repo.
 local M = {}
-
-local decoder = (os.getenv("MEOW_ROOT") or os.getenv("HOME") .. "/Develop")
-	.. "/meow-toolbox/src/langpack/tools/decode"
 
 function M:peek(job)
 	if not job.file then return end
 
 	local child = Command("sh")
-		:arg({ "-c", ya.quote(decoder) .. " " .. ya.quote(tostring(job.file.url)) .. " | bat --style=plain --color=always -l csv" })
+		:arg({ "-c", "langpack --no-config decode " .. ya.quote(tostring(job.file.url)) .. " | bat --style=plain --color=always -l csv" })
 		:stdout(Command.PIPED)
 		:stderr(Command.PIPED)
 		:spawn()
