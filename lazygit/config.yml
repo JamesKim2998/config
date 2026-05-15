@@ -13,10 +13,6 @@ keybinding:
     openDiffTool: '<disabled>' # default <c-t> too easy to trigger accidentally (launches nvimdiff)
 customCommands:
   - key: 'y'
-    context: 'files'
-    command: 'yazi {{.SelectedFile.Name | quote}}'
-    output: terminal
-  - key: 'y'
-    context: 'commitFiles'
-    command: 'yazi {{.SelectedCommitFile.Name | quote}}'
+    context: 'files, commitFiles'
+    command: 'yazi {{.SelectedPath | quote}}'
     output: terminal
