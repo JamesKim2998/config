@@ -187,6 +187,18 @@ sv() {
 }
 
 
+# `wt go <TAB>` picker. `wt ls` already filters held-only and drops the
+# STATE/NAME columns from `worktree-pool ls`, so column 1 is the held slot
+# name (ID == NAME post-rename). Skip the 2-line header/separator.
+# `--bare` skips per-slot `git status --porcelain` — saves ~1s × N held slots
+# on cold Unity caches; TAB only needs the names.
+# Tested in `diagnostics/wt-completion.test.ts`.
+_wt_go_pick() {
+  wt ls --bare 2>/dev/null \
+    | awk 'NR>2 {print $1}' \
+    | fzf --height=40% --reverse --no-multi --header='wt go: pick slot to resume'
+}
+
 # fzf-driven TAB completion: dispatches on the current LBUFFER pattern;
 # unmatched buffers fall through to the default completer.
 _fzf_tab_dispatch() {
@@ -204,9 +216,7 @@ _fzf_tab_dispatch() {
   elif [[ "$LBUFFER" =~ '^([[:space:]]*wt([[:space:]]+(--pool|-p)[[:space:]]+[^[:space:]]+)?[[:space:]]+go)([[:space:]]+[^[:space:]]*)?$' ]]; then
     # Held slots only — fresh names are typed, not picked. Pool auto-resolves from cwd inside `wt ls`.
     local prefix="${match[1]}" sel
-    sel=$(wt ls 2>/dev/null | awk 'NR>2 && $2=="held"' \
-          | fzf --height=40% --reverse --no-multi --header='wt go: pick slot to resume' \
-          | awk '{print $3}')
+    sel=$(_wt_go_pick)
     [[ -n "$sel" ]] && LBUFFER="$prefix $sel"
     zle reset-prompt
   else
