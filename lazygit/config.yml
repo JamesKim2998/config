@@ -6,9 +6,10 @@ gui:
   filterMode: fuzzy
   nerdFontsVersion: "3"
 git:
-  # Highest-frequency background offender — leaks .git/index.lock under contention
+  # Background offenders — leak .git/index.lock under contention
   # (shared submodule git-dirs in worktree-pool slots). Manual refresh: `R` in lazygit.
   autoRefresh: false
+  autoFetch: false
   pagers:
     - pager: delta --dark --paging=never
 keybinding:
