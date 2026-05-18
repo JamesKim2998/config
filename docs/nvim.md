@@ -173,8 +173,8 @@ IDE setup with Lazy.nvim plugin manager.
 | `Q` | Quit nvim | init.lua |
 | `]<Space>` | Add line below | init.lua |
 | `[<Space>` | Add line above | init.lua |
-| `<leader>y` | Copy relative path | init.lua |
-| `<leader>Y` | Copy absolute path | init.lua |
+| `<leader>y` | Copy repo-relative path (or `~`-path outside git) | init.lua |
+| `<leader>Y` | Copy absolute path (`~`) | init.lua |
 | `<leader>gg` | Lazygit | snacks |
 | `<leader>gl` | Lazygit file log | snacks |
 | `<leader>gd` | Toggle diff view | diffview |
