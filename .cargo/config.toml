@@ -23,4 +23,4 @@ unity-assetdb = { path = "/Users/jameskim/Develop/unity-assetdb" }
 tps-core = { path = "/Users/jameskim/Develop/tps-mod/crates/core" }
 
 [patch."ssh://git@github.com/studio-boxcat/unity-sprite-author.git"]
-unity-sprite-author = { path = "/Users/jameskim/Develop/unity-sprite-author" }
+unity-sprite-author = { path = "/Users/jameskim/Develop/unity-sprite-author/crates/core" }
