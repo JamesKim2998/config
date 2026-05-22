@@ -187,15 +187,15 @@ sv() {
 }
 
 
-# `wt go <TAB>` picker. `wt ls` already filters held-only and drops the
-# STATE/NAME columns from `worktree-pool ls`, so column 1 is the held slot
-# name (ID == NAME post-rename). Skip the 2-line header/separator.
-# `--bare` skips per-slot `git status --porcelain` — saves ~1s × N held slots
-# on cold Unity caches; TAB only needs the names.
+# `wt go <TAB>` picker. `wt ls` filters held-only and drops the STATE column;
+# columns are `ID NAME [GROUP] AGE SHA`. Post canonical-slot refactor, ID is
+# `slot-N`/`{group}-N` and NAME is the operator's branch — we want NAME ($2).
+# Skip the 2-line header/separator. `--bare` skips per-slot `git status
+# --porcelain` (~1s × N on cold Unity caches); TAB only needs the names.
 # Tested in `diagnostics/wt-completion.test.ts`.
 _wt_go_pick() {
   wt ls --bare 2>/dev/null \
-    | awk 'NR>2 {print $1}' \
+    | awk 'NR>2 {print $2}' \
     | fzf --height=40% --reverse --no-multi --header='wt go: pick slot to resume'
 }
 
