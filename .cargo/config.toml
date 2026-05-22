@@ -19,8 +19,11 @@ unity-assetdb = { path = "/Users/jameskim/Develop/unity-assetdb" }
 [patch."https://github.com/studio-boxcat/unity-assetdb"]
 unity-assetdb = { path = "/Users/jameskim/Develop/unity-assetdb" }
 
-[patch."https://github.com/studio-boxcat/tps-mod"]
+[patch."https://github.com/studio-boxcat/tps"]
 tps-core = { path = "/Users/jameskim/Develop/tps-mod/crates/core" }
+
+[patch."https://github.com/studio-boxcat/langpack"]
+langpack-core = { path = "/Users/jameskim/Develop/langpack/crates/core" }
 
 [patch."ssh://git@github.com/studio-boxcat/unity-sprite-author.git"]
 unity-sprite-author = { path = "/Users/jameskim/Develop/unity-sprite-author/crates/core" }
