@@ -35,6 +35,12 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh",
+    "padding": 0,
+    "hideVimModeIndicator": true
+  },
   "enabledPlugins": {
     "typescript-lsp@claude-plugins-official": false,
     "csharp-lsp@claude-plugins-official": false,
@@ -47,11 +53,5 @@
   "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
   "theme": "auto",
-  "editorMode": "vim",
-  "statusLine": {
-    "type": "command",
-    "command": "~/.claude/statusline.sh",
-    "padding": 0,
-    "hideVimModeIndicator": true
-  }
+  "editorMode": "vim"
 }
