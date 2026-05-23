@@ -88,7 +88,7 @@ Rewrite the Phase 2 draft against what shipped. Patch nothing — rewrite stale 
 
 ## Phase 5 — Review pass
 
-After refactor + doc land and smoke checks are green, run two reviews back-to-back. If the project ships review skills (e.g. `/code-review`, `/doc-review`), invoke them via `Skill`; otherwise do an inline pass covering the same ground.
+After refactor + doc land and smoke checks are green, run two reviews back-to-back. If the project ships review skills (e.g. `/project-code-review`, `/project-doc-review`), invoke them via `Skill`; otherwise do an inline pass covering the same ground.
 
 1. **Code review** — full pass over the cumulative refactor (per-checkpoint passes only saw slices). If structural issues surface, return to Phase 3 with a new checkpoint; don't patch in Phase 5.
 2. **Doc review** — propagate outward: caller docs whose invariants shifted, top-level architecture index, deleted-code doc removal. Spot-check the Phase 4 subsystem doc here.

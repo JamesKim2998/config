@@ -1,5 +1,5 @@
 ---
-name: doc-review
+name: project-doc-review
 description: Sync docs with code, evaluate doc quality, and consolidate redundancies. Use when docs drift, cross-references break, or before doc-heavy reviews.
 ---
 

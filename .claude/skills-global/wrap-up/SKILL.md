@@ -11,7 +11,7 @@ description: General session wrap-up — run code/doc reviews if needed, capture
    - Read untracked files in full — they don't appear in the diff.
    - If commits landed this session, include `git log <branch-point>..HEAD` and `git diff <branch-point>..HEAD` (merge-base with the default branch).
    - Note non-repo side effects too (files written outside the repo, settings changed, external state).
-2. **Delegated reviews** — If `code-review` and `doc-review` haven't already run on the current pending changes, spawn them in parallel via agents. Hand them the step-1 scope (refs for session commits + explicit paths for untracked files) so they cover the same ground.
+2. **Delegated reviews** — If `project-code-review` and `project-doc-review` haven't already run on the current pending changes, spawn them in parallel via agents. Hand them the step-1 scope (refs for session commits + explicit paths for untracked files) so they cover the same ground.
 3. **Audit** — Two sources:
    - **From this chat** (stays in the main session — a fresh agent has no transcript): decisions, conventions, or rejected alternatives raised in conversation that belong in docs but didn't land.
    - **From the change set** (agent on the step-1 scope):

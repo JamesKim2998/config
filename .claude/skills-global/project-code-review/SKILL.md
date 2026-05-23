@@ -1,5 +1,5 @@
 ---
-name: code-review
+name: project-code-review
 description: Reviews pending code for style, bugs, and reuse. Use proactively after writing or modifying code.
 ---
 
@@ -34,7 +34,7 @@ Bugs > standards > style.
 
 ## Docs Check
 
-If the change adds/removes/renames a feature/CLI/workflow, flag any related doc that's now inaccurate. Point at the section needing edits — don't draft fixes inline. For deeper doc evaluation, defer to `doc-review`.
+If the change adds/removes/renames a feature/CLI/workflow, flag any related doc that's now inaccurate. Point at the section needing edits — don't draft fixes inline. For deeper doc evaluation, defer to `project-doc-review`.
 
 ## Test Coverage
 
