@@ -20,7 +20,7 @@ unity-assetdb = { path = "/Users/jameskim/Develop/unity-assetdb" }
 unity-assetdb = { path = "/Users/jameskim/Develop/unity-assetdb" }
 
 [patch."https://github.com/studio-boxcat/tps"]
-tps-core = { path = "/Users/jameskim/Develop/tps-mod/crates/core" }
+tps-core = { path = "/Users/jameskim/Develop/meow-toolbox/tools/tps/crates/core" }
 
 [patch."https://github.com/studio-boxcat/langpack"]
 langpack-core = { path = "/Users/jameskim/Develop/langpack/crates/core" }
