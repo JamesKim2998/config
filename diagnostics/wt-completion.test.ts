@@ -5,6 +5,8 @@
  *   1. completion used `awk '$2=="held"'` but `wt ls` strips STATE — empty TAB.
  *   2. canonical-slot refactor split ID (slot-N) from NAME (branch); picker
  *      kept printing $1, so TAB offered `slot-0` instead of the human name.
+ *   3. `wt ls` dropped the ID column entirely (c154ea7); picker still read $2,
+ *      returning AGE (e.g. `2h`) instead of NAME.
  *
  * Run: bun test wt-completion.test.ts
  */
@@ -13,21 +15,20 @@ import { describe, it, expect } from "bun:test";
 import { $ } from "bun";
 
 // `wt ls` output shapes — header + separator + held rows.
-// cmd_ls (bin/wt) drops STATE from `worktree-pool ls`; when GROUP is uniform
-// across held slots it also drops GROUP. Columns are `ID NAME [GROUP] AGE SHA`,
-// where ID is the canonical slot dir (`slot-N`) and NAME is the operator's
-// branch ref.
+// cmd_ls (bin/wt) drops ID and STATE from `worktree-pool ls`; when GROUP is
+// uniform across held slots it also drops GROUP. Columns are
+// `NAME [GROUP] AGE SHA`, where NAME is the operator's branch ref.
 const WT_LS_WITH_GROUP = [
-  "ID      NAME    GROUP  AGE  SHA       DIRTY  UNTRK  AHEAD",
-  "------  ------  -----  ---  --------  -----  -----  -----",
-  "ios-0   feat-x  ios    2h   abc12345  0      0      0",
-  "and-0   feat-y  and    1d   def67890  2      1      3",
+  "NAME    GROUP  AGE  SHA       DIRTY  UNTRK  AHEAD",
+  "------  -----  ---  --------  -----  -----  -----",
+  "feat-x  ios    2h   abc12345  0      0      0",
+  "feat-y  and    1d   def67890  2      1      3",
 ].join("\n");
 
 const WT_LS_NO_GROUP = [
-  "ID      NAME    AGE  SHA       DIRTY  UNTRK  AHEAD",
-  "------  ------  ---  --------  -----  -----  -----",
-  "slot-0  feat-x  2h   abc12345  0      0      0",
+  "NAME    AGE  SHA       DIRTY  UNTRK  AHEAD",
+  "------  ---  --------  -----  -----  -----",
+  "feat-x  2h   abc12345  0      0      0",
 ].join("\n");
 
 const WT_LS_EMPTY = "(no held slots)";
@@ -70,9 +71,9 @@ describe("_wt_go_pick", () => {
     *) sleep 2 ;;
   esac
   cat <<'EOF_WT_LS'
-ID      NAME    AGE  SHA
-------  ------  ---  --------
-slot-0  feat-x  2h   abc12345
+NAME    AGE  SHA
+------  ---  --------
+feat-x  2h   abc12345
 EOF_WT_LS
 }
 fzf() { head -n1; }

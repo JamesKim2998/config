@@ -187,15 +187,14 @@ sv() {
 }
 
 
-# `wt go <TAB>` picker. `wt ls` filters held-only and drops the STATE column;
-# columns are `ID NAME [GROUP] AGE SHA`. Post canonical-slot refactor, ID is
-# `slot-N`/`{group}-N` and NAME is the operator's branch — we want NAME ($2).
+# `wt go <TAB>` picker. `wt ls` filters held-only and drops ID + STATE;
+# columns are `NAME [GROUP] AGE SHA` — NAME ($1) is the branch ref.
 # Skip the 2-line header/separator. `--bare` skips per-slot `git status
 # --porcelain` (~1s × N on cold Unity caches); TAB only needs the names.
 # Tested in `diagnostics/wt-completion.test.ts`.
 _wt_go_pick() {
   wt ls --bare 2>/dev/null \
-    | awk 'NR>2 {print $2}' \
+    | awk 'NR>2 {print $1}' \
     | fzf --height=40% --reverse --no-multi --header='wt go: pick slot to resume'
 }
 
