@@ -76,6 +76,8 @@ All repos live under `$MEOW_ROOT`.
 | `unity-solution-generator typecheck .` | Unity solution compile check; defaults to `ios editor`, override with `... <platform> <config>` |
 | `unity-launcher` | Unity editor launcher: `launch [-batchmode]` / `focus` / `quit`. Walks up from the binary or cwd looking for `ProjectSettings/`. |
 | `unity-assetdb` | Unity asset GUID ↔ path/name index. Query with `guid` / `path` / `find` / `alias` / `usage`. |
-| `md-orphan` | Markdown orphan/broken-link/anchor check |
+| `pspec` | Unity `.prefab`/`.unity`/`.asset` ↔ compact JSON for LLM authoring |
+| `game-art-tool` | PSD/AI parsing, layer export, TexturePacker ops |
+| `langpack` | Langpack compiler + query/authoring CLI. Source at `$MEOW_LANGPACK` |
 | `notion-to-md` | Notion page → md; bare image filenames (`$NOTION_IMG_CACHE`) |
 
