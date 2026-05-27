@@ -1,8 +1,12 @@
 .DS_Store
 
+# claude code
 .claude/scheduled_tasks.lock
 .claude/settings.local.json
 .claude/worktrees/
+
+# lang specifics
+__pycache__/
 
 # JetBrains - user-specific
 .idea/**/workspace.xml
@@ -11,3 +15,4 @@
 .idea/**/dictionaries
 .idea/**/shelf
 .idea/.name
+
