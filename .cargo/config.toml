@@ -27,3 +27,16 @@ langpack-core = { path = "/Users/jameskim/Develop/langpack/crates/core" }
 
 [patch."ssh://git@github.com/studio-boxcat/unity-sprite-author.git"]
 unity-sprite-author = { path = "/Users/jameskim/Develop/unity-sprite-author/crates/core" }
+
+# Link through Homebrew lld (ld64.lld) instead of Apple ld for every Rust
+# project on this machine. Measured ~37% off a large link (pspec test binary
+# 27.1s -> 17.2s on an M3 Pro). Machine-wide here rather than per-repo: lld is
+# a toolchain preference, the path is absolute anyway (lld@20 is keg-only, not
+# on PATH so `-fuse-ld=lld` can't find it), and pspec alone has 32 worktree
+# slots that would each need their own copy. `brew install lld` — bump the
+# version path on a major lld upgrade. NOTE: a repo that sets the RUSTFLAGS env
+# var (e.g. pspec's `just profile-test`) overrides this wholesale — cargo does
+# not merge env RUSTFLAGS with config rustflags — so those builds fall back to
+# Apple ld (slower, still correct).
+[target.aarch64-apple-darwin]
+rustflags = ["-C", "link-arg=-fuse-ld=/opt/homebrew/opt/lld@20/bin/ld64.lld"]

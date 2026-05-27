@@ -30,8 +30,13 @@ export PATH="/Applications/Aseprite.app/Contents/MacOS:$PATH"
 
 # rust
 export PATH="$HOME/.cargo/bin:$PATH"
-export RUSTC_WRAPPER=sccache
-export CARGO_INCREMENTAL=0
+# sccache disabled as the global default: it forces CARGO_INCREMENTAL=0,
+# which sabotages the local edit-rebuild loop (sccache 0.15 hard-errors on
+# incremental, so it's either/or). Standard split — local dev uses
+# incremental (cargo's default) + a fast linker; reserve sccache for CI /
+# clean builds by exporting RUSTC_WRAPPER=sccache there explicitly.
+# export RUSTC_WRAPPER=sccache
+# export CARGO_INCREMENTAL=0
 export SCCACHE_CACHE_SIZE="50G"
 
 # bun
