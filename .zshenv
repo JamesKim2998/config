@@ -21,6 +21,11 @@ export HOMEBREW_NO_ENV_HINTS=1
 # editors
 export EDITOR=$BREW/bin/nvim
 
+# git: skip index.lock for read-only ops (status/diff-index/diff --index).
+# Covers gitsigns and other un-instrumented git clients. lazygit, starship,
+# VS Code, JetBrains already set this themselves. Git 2.15+.
+export GIT_OPTIONAL_LOCKS=0
+
 # path
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$BREW/opt/openjdk/bin:$PATH"
