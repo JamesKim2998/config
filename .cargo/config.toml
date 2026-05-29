@@ -1,33 +1,3 @@
-# Local-checkout overrides for in-house Rust crates.
-# Each meow-tower Native~ tool (e.g. asset-catalog) pins its in-house deps to a
-# git rev. These patches override that pin with the local checkout under
-# ~/Develop/<repo>/, so `cargo build` picks up local edits without a rev bump.
-#
-# Cargo doesn't expand `~` or env vars in `path = "..."` — absolute paths only.
-# Patch keys are matched verbatim against the consumer's source URL — add a new
-# entry here when a consumer Cargo.toml uses a URL form not yet listed below.
-
-# `bridge` consumes unity-solution-generator by bare-version (no git source);
-# Cargo resolves that through crates.io indirection, so the patch lives here.
-# `unity-assetdb` is dual-keyed: pspec pulls it from crates.io while other
-# repos pull from the GitHub source — both keys point at the same local
-# checkout so either consumer picks up local edits.
-[patch.crates-io]
-unity-solution-generator = { path = "/Users/jameskim/Develop/unity-solution-generator/crates/usg-core" }
-unity-assetdb = { path = "/Users/jameskim/Develop/unity-assetdb" }
-
-[patch."https://github.com/studio-boxcat/unity-assetdb"]
-unity-assetdb = { path = "/Users/jameskim/Develop/unity-assetdb" }
-
-[patch."https://github.com/studio-boxcat/tps"]
-tps-core = { path = "/Users/jameskim/Develop/meow-toolbox/tools/tps/crates/core" }
-
-[patch."https://github.com/studio-boxcat/langpack"]
-langpack-core = { path = "/Users/jameskim/Develop/langpack/crates/core" }
-
-[patch."ssh://git@github.com/studio-boxcat/unity-sprite-author.git"]
-unity-sprite-author = { path = "/Users/jameskim/Develop/unity-sprite-author/crates/core" }
-
 # Link through Homebrew lld (ld64.lld) instead of Apple ld for every Rust
 # project on this machine. Measured ~37% off a large link (pspec test binary
 # 27.1s -> 17.2s on an M3 Pro). Machine-wide here rather than per-repo: lld is
