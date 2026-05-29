@@ -7,42 +7,32 @@ Review recently changed code against project conventions. Default scope: current
 
 ## Read First
 
-- `~/.claude/CLAUDE.md` — global Code (error handling, control flow) and Authoring (breadcrumbs, file headers) rules.
+- `~/.claude/CLAUDE.md` — global Code (error handling, control flow, strong types) and Authoring (breadcrumbs, file headers) rules.
 - Project `CLAUDE.md` — structure, conventions, doc index.
-- Dev/style and testing guides it links to (e.g. `development-guide.md`, `testing-guide.md`, `foundation.md`).
+- Dev/style and testing guides it links to (e.g. `development-guide.md`, `testing-guide.md`).
 
 ## Explore First
 
-Trace callers, callees, tests, and related utilities — shallow review misses real issues.
+Read each touched file in full — not just the diff — and trace callers, callees, tests, and related utilities.
 
-## Priority
+## Review
 
-Bugs > standards > style.
+Bugs first, then standards, then style. For each change, ask:
 
-## Focus
-
-- **Bugs** — logic errors, unhandled null/undefined, boundary cases.
-- **Style conformance** — violations of rules in the project guides.
-- **Reuse** — duplicated logic that should use utilities already in the project.
-
-## Rubric
-
-- **Essentials missing?** Tests, edge cases, error handling at boundaries.
-- **Bloated?** Over-engineering, premature abstraction, dead code.
-- **Trivial?** Comments restating code, redundant guards, unused imports.
-- **Misleading?** Wrong types, names that don't match behavior, stale comments.
+- **Broken?** Logic errors, unhandled null/undefined, boundary cases, errors swallowed instead of surfaced.
+- **Missing?** Tests where the testing guide requires them, edge-case and boundary handling.
+- **Reinvented?** Duplicated logic that should use an existing project utility.
+- **Bloated?** Over-engineering, premature abstraction, dead code, redundant guards, unused imports.
+- **Misleading?** Wrong/weak types, names that don't match behavior, comments restating or contradicting the code.
+- **Off-convention?** Violations of rules in the global or project guides.
 
 ## Docs Check
 
-If the change adds/removes/renames a feature/CLI/workflow, flag any related doc that's now inaccurate. Point at the section needing edits — don't draft fixes inline. For deeper doc evaluation, defer to `project-doc-review`.
-
-## Test Coverage
-
-Check tests exist where the project's testing guide requires them.
+If the change adds/removes/renames a feature/CLI/workflow, flag the now-inaccurate doc section — don't draft fixes. Hand deeper doc evaluation to `project-doc-review`.
 
 ## Verify
 
-Run the project's standard checks (lint/typecheck/test) as documented in the project guides.
+Run the project's documented checks (lint/typecheck/test).
 
 ## Second Eye (optional)
 
