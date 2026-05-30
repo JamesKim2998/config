@@ -23,7 +23,12 @@ describe("claude-busy.py", () => {
     const stop = cfg.hooks?.Stop?.[0]?.hooks?.[0]?.command ?? "";
     expect(submit).toContain("claude-busy.py set");
     expect(stop).toContain("claude-busy.py clear");
-    expect(stop).toContain("\\a"); // bell still fires
+    // Bell moved off the hook: `printf '\a' > /dev/tty` silently broke once
+    // Claude began spawning hooks without a controlling terminal (child tty is
+    // `??`). The native channel rings it from the main process, which owns the
+    // tty. See settings.json `preferredNotifChannel`.
+    expect(cfg.preferredNotifChannel).toBe("terminal_bell");
+    expect(stop).not.toContain("\\a"); // dead /dev/tty bell removed
   });
 
   it("script exists and is executable", async () => {

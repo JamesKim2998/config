@@ -19,17 +19,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "($HOME/Develop/config/kitty/claude-busy.py clear 2>/dev/null &); printf '\\a' > /dev/tty 2>/dev/null || true"
-          }
-        ]
-      }
-    ],
-    "Notification": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "printf '\\a' > /dev/tty 2>/dev/null || true"
+            "command": "($HOME/Develop/config/kitty/claude-busy.py clear 2>/dev/null &) || true"
           }
         ]
       }
@@ -41,6 +31,7 @@
     "padding": 0,
     "hideVimModeIndicator": true
   },
+  "preferredNotifChannel": "terminal_bell",
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
   "autoMemoryEnabled": false,
