@@ -27,6 +27,10 @@
 [mergetool]
 	prompt = false
 
+# status display
+[status]
+	submoduleSummary = true  # list the commits a moved submodule pointer crossed (not just "modified")
+
 # diff display
 [diff]
   algorithm = histogram
