@@ -41,7 +41,6 @@ ln -sf "$CONFIG/.zshenv" ~/.zshenv
 ln -sf "$CONFIG/.zshenv.local" ~/.zshenv.local
 ln -sf "$CONFIG/.zshrc" ~/.zshrc
 ln -sf "$CONFIG/starship.toml" "$XDG_CONFIG/starship.toml"
-ln -sf "$CONFIG/.ripgreprc" ~/.ripgreprc
 
 # git
 ln -sf "$CONFIG/git/.gitconfig" ~/.gitconfig
