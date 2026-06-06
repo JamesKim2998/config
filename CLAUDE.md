@@ -20,6 +20,7 @@ macOS dotfiles and development environment configuration.
 | Starship | `starship.toml` | Prompt |
 | Karabiner | [[README.md|karabiner/]] | Keyboard remapping (manual sync via justfile) |
 | Cargo | `.cargo/` | Local-checkout patches for in-house Rust crates (per-machine) |
+| Tailscale | [[TAILSCALE.md|tailscale/]] | Mesh VPN; LaunchDaemon healing the LG U+ CGNAT route collision |
 
 ## Shell Config
 

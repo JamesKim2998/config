@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- @SCRIPT@ is substituted with the absolute script path by `cgnat-route.sh install`. See TAILSCALE.md. -->
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.studioboxcat.tailscale-cgnat-fix</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/sh</string>
+		<string>@SCRIPT@</string>
+	</array>
+	<!-- Heal at boot/load, on every network change (resolv.conf rewrite), and
+	     poll as a backstop for Wi-Fi roaming / DHCP renewal that misses it. -->
+	<key>RunAtLoad</key>
+	<true/>
+	<key>WatchPaths</key>
+	<array>
+		<string>/etc/resolv.conf</string>
+		<string>/var/run/resolv.conf</string>
+	</array>
+	<key>StartInterval</key>
+	<integer>30</integer>
+	<key>StandardErrorPath</key>
+	<string>/var/log/tailscale-cgnat-fix.log</string>
+</dict>
+</plist>

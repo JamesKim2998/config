@@ -115,3 +115,20 @@ the indicator no longer reflects "any Claude in this tab is working."
 **Possible fix.** Reference-count via a tab-level user-var (`busy_count`),
 increment on `set`, decrement on `clear`, only mutate title when count
 crosses 0↔1. Defer until the case actually hits in normal use.
+
+## Tailscale CGNAT daemon — hardening (deferred from code review)
+
+`tailscale/cgnat-route.sh` works on the home/office LAN but has latent gaps:
+
+- **`install()` bootout→bootstrap race.** `launchctl bootout` is async; the
+  immediate `bootstrap` can fail (`Bootstrap failed: 5`) on *reinstall*, which
+  under `setup.sh`'s `set -e` aborts the whole run. First install is fine
+  (bootout is a no-op). Fix: poll until the old label is gone, or `bootstrap`
+  then `kickstart -k`.
+- **`ts_if` awk under-constrained.** Matches any `inet 100.` on any interface,
+  not gated to a `utun` section nor the `100.64/10` range; on a CGNAT network
+  that puts 100.64.x directly on en0/Wi-Fi it silently no-ops or mis-targets.
+- **Misleading log.** `logger "repointed"` fires even when `route add` failed
+  (swallowed by `|| true`); log only on success.
+
+Not reachable on the private 192.168 LAN, so deferred.

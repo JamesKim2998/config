@@ -110,3 +110,6 @@ ln -sf "$LLM_GLOBAL" ~/.codex/AGENTS.md
 mkdir -p "$XDG_CONFIG/md-orphan/cache"
 ln -sf "$CONFIG/md-orphan/md-orphan.json" "$XDG_CONFIG/md-orphan/md-orphan.json"
 
+# tailscale: heal the LG U+ DS-Lite CGNAT route collision (see tailscale/TAILSCALE.md)
+"$CONFIG/tailscale/cgnat-route.sh" install
+
