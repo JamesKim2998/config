@@ -3,6 +3,7 @@
     "commit": "",
     "pr": ""
   },
+  "model": "claude-fable-5",
   "hooks": {
     "UserPromptSubmit": [
       {
@@ -31,11 +32,11 @@
     "padding": 0,
     "hideVimModeIndicator": true
   },
-  "preferredNotifChannel": "terminal_bell",
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
   "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
   "theme": "auto",
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "preferredNotifChannel": "terminal_bell"
 }
