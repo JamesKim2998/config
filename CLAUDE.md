@@ -38,7 +38,7 @@ See [[diagnostics/shell-path.test.ts]] for PATH validation and zsh gotchas.
 
 | Category | Packages |
 |----------|----------|
-| Editor | nvim |
+| Editor | nvim, tree-sitter-cli |
 | Search & find | fzf, rg, fd |
 | File viewing & data processing | bat, jq, yq, sd, glow, miller |
 | File navigation & listing | eza, zoxide, yazi, tree |

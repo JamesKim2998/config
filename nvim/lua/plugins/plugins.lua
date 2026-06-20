@@ -10,7 +10,7 @@ return {
 		event = "VeryLazy",
 		build = ":TSUpdate",
 		config = function()
-			require("nvim-treesitter").install({ "json", "typescript", "tsx" })
+			require("nvim-treesitter").install({ "json", "typescript", "tsx", "rust" })
 		end,
 	},
 

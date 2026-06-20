@@ -208,6 +208,7 @@ IDE setup with Lazy.nvim plugin manager.
 | which-key.nvim | Keymap hints | which-key.lua |
 | **Code** |||
 | mason.nvim + lspconfig | LSP support | lsp.lua |
+| rustaceanvim | Rust LSP (rust-analyzer + clippy) | rustaceanvim.lua |
 | blink.cmp | Completion (super-tab) | blink-cmp.lua |
 | minuet-ai.nvim | AI completion (Gemini) | minuet.lua |
 | conform.nvim | Formatting | conform.lua |
@@ -257,8 +258,10 @@ Treesitter parsers: `:TSInstall <lang>`
 | Lua | lua_ls | Auto-enabled |
 | TypeScript/JS | ts_ls | Inlay hints configured |
 | C# | csharp_ls | Faster than OmniSharp, finds .sln upward |
+| Rust | rust-analyzer | Via rustaceanvim (not Mason); clippy on save, rustfmt format. `:RustLsp` for extras |
 
 Run `:Mason` to manage language servers. Servers in `ensure_installed` auto-install.
+Rust toolchain (rust-analyzer/rustfmt/clippy) comes from rustup (`~/.cargo/bin`).
 
 ### E2E Tests
 

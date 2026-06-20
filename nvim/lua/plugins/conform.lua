@@ -1,6 +1,7 @@
 -- https://github.com/stevearc/conform.nvim
 -- Formatters: sh→shfmt, lua→stylua, python→isort+black, js→prettierd
 -- Format on save enabled, falls back to LSP if no formatter configured
+-- rust: unlisted on purpose — formats via rust-analyzer/rustfmt (LSP fallback, edition-aware)
 return {
 	"stevearc/conform.nvim",
 	event = { "BufWritePre" },
