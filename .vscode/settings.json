@@ -1,16 +1,53 @@
 {
+    // workbench
     "workbench.iconTheme": "vs-seti",
-
-    // editor
+    "workbench.colorTheme": "Kanagawa",
+    "workbench.editor.enablePreview": false,
     "editor.tabSize": 4,
     "editor.insertSpaces": true,
     "editor.renderWhitespace": "all",
     "editor.wordWrap": "on",
     "editor.minimap.enabled": false,
+    "editor.lineNumbers": "relative",
+    "editor.guides.bracketPairs": "active",
+    "editor.linkedEditing": true,
+
+    // files
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    // Markdown uses two trailing spaces for hard line breaks — don't strip them
+    "[markdown]": {
+        "files.trimTrailingWhitespace": false
+    },
 
     // explorer
     "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
 
-    // vim
-    "vim.disableAnnoyingNeovimMessage": true
+    // vim — mirrors intellij/.ideavimrc (VSCodeVim has no <Action>, so maps call VS Code commands)
+    "vim.leader": "<space>",
+    "vim.useSystemClipboard": true,
+    "vim.ignorecase": true,
+    "vim.smartcase": true,
+    "vim.hlsearch": true,
+    "vim.normalModeKeyBindingsNonRecursive": [
+        // Move lines with Option+j/k
+        { "before": ["<A-j>"], "commands": ["editor.action.moveLinesDownAction"] },
+        { "before": ["<A-k>"], "commands": ["editor.action.moveLinesUpAction"] },
+        // Jump cursor navigation
+        { "before": ["<C-o>"], "commands": ["workbench.action.navigateBack"] },
+        { "before": ["<C-i>"], "commands": ["workbench.action.navigateForward"] },
+        // Leader mappings
+        { "before": ["<leader>", "w"], "commands": ["workbench.action.files.saveAll"] },
+        { "before": ["<leader>", "q"], "commands": ["workbench.action.closeActiveEditor"] },
+        { "before": ["<leader>", "y"], "commands": ["copyRelativeFilePath"] },
+        { "before": ["<leader>", "Y"], "commands": ["copyFilePath"] }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        // Move lines with Option+j/k
+        { "before": ["<A-j>"], "commands": ["editor.action.moveLinesDownAction"] },
+        { "before": ["<A-k>"], "commands": ["editor.action.moveLinesUpAction"] }
+    ],
+    "diffEditor.hideUnchangedRegions.enabled": true
 }
