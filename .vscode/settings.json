@@ -13,6 +13,9 @@
     "editor.linkedEditing": true,
 
     // files
+    "files.associations": {
+        "*.pspec": "json"
+    },
     "files.trimTrailingWhitespace": true,
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
