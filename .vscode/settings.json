@@ -3,6 +3,10 @@
     "workbench.iconTheme": "vs-seti",
     "workbench.colorTheme": "Kanagawa",
     "workbench.editor.enablePreview": false,
+    "workbench.panel.defaultLocation": "right",
+    "workbench.browser.showInTitleBar": true,
+
+    // editor
     "editor.tabSize": 4,
     "editor.insertSpaces": true,
     "editor.renderWhitespace": "all",
@@ -11,6 +15,7 @@
     "editor.lineNumbers": "relative",
     "editor.guides.bracketPairs": "active",
     "editor.linkedEditing": true,
+    "diffEditor.hideUnchangedRegions.enabled": true,
 
     // files
     "files.associations": {
@@ -52,5 +57,7 @@
         { "before": ["<A-j>"], "commands": ["editor.action.moveLinesDownAction"] },
         { "before": ["<A-k>"], "commands": ["editor.action.moveLinesUpAction"] }
     ],
-    "diffEditor.hideUnchangedRegions.enabled": true
+
+    // chat
+    "chat.titleBar.openInAgentsWindow.enabled": false
 }
