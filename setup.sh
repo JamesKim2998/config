@@ -102,6 +102,7 @@ mkdir -p ~/.claude
 ln -sf "$LLM_GLOBAL" ~/.claude/CLAUDE.md
 ln -sf "$CONFIG/.claude/settings.json" ~/.claude/settings.json
 ln -sf "$CONFIG/.claude/statusline.sh" ~/.claude/statusline.sh
+ln -sf "$CONFIG/.claude/notify-done.sh" ~/.claude/notify-done.sh
 ln -sf "$CONFIG/.claude/skills-global" ~/.claude/skills
 mkdir -p ~/.codex
 ln -sf "$LLM_GLOBAL" ~/.codex/AGENTS.md
