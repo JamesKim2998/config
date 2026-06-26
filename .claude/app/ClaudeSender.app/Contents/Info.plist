@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Icon-only helper: carries the Claude logo as the banner header icon via
+     `alerter --sender com.studioboxcat.claude-notify`. See ../../notify-done.sh. -->
+<plist version="1.0"><dict>
+  <key>CFBundleIdentifier</key><string>com.studioboxcat.claude-notify</string>
+  <key>CFBundleName</key><string>Claude Code</string>
+  <key>CFBundleDisplayName</key><string>Claude Code</string>
+  <key>CFBundleExecutable</key><string>noop</string>
+  <key>CFBundleIconFile</key><string>claude</string>
+  <key>CFBundlePackageType</key><string>APPL</string>
+  <key>CFBundleInfoDictionaryVersion</key><string>6.0</string>
+  <key>CFBundleShortVersionString</key><string>1.0</string>
+  <key>LSUIElement</key><true/>
+</dict></plist>

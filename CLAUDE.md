@@ -43,7 +43,7 @@ See [[diagnostics/shell-path.test.ts]] for PATH validation and zsh gotchas.
 | File viewing & data processing | bat, jq, yq, sd, glow, miller |
 | File navigation & listing | eza, zoxide, yazi, tree |
 | Yazi previews | ffmpegthumbnailer, poppler, exiftool, mediainfo, pandoc |
-| System utilities | clipboard, procs, httpie, wget |
+| System utilities | clipboard, procs, httpie, wget, alerter |
 | Compression & archives | 7-zip, ouch |
 | Media processing | imagemagick, ffmpeg |
 | Git tools | lazygit, delta, git-lfs, gh, copilot |

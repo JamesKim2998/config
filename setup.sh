@@ -20,7 +20,7 @@ brew_install "" \
   bat jq yq sd glow miller `# file viewing & data processing` \
   eza zoxide yazi `# file navigation & listing` \
   mediainfo `# yazi previews` \
-  clipboard procs httpie wget `# system utilities` \
+  clipboard procs httpie wget vjeantet/tap/alerter `# system utilities (alerter: clickable notifications)` \
   7-zip ouch `# compression & archives` \
   imagemagick ffmpeg `# media processing` \
   lazygit delta git-lfs gh lefthook `# git tools` \
@@ -105,6 +105,8 @@ ln -sf "$CONFIG/.claude/settings.json" ~/.claude/settings.json
 ln -sf "$CONFIG/.claude/statusline.sh" ~/.claude/statusline.sh
 ln -sf "$CONFIG/.claude/notify-done.sh" ~/.claude/notify-done.sh
 ln -sf "$CONFIG/.claude/skills-global" ~/.claude/skills
+# Register the icon-only helper so alerter --sender can resolve it (see .claude/notify-done.sh).
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$CONFIG/.claude/app/ClaudeSender.app" || true
 mkdir -p ~/.codex
 ln -sf "$LLM_GLOBAL" ~/.codex/AGENTS.md
 

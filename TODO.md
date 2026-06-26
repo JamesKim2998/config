@@ -132,3 +132,11 @@ crosses 0↔1. Defer until the case actually hits in normal use.
   (swallowed by `|| true`); log only on success.
 
 Not reachable on the private 192.168 LAN, so deferred.
+
+## notify-done.sh — deferred robustness (declined for leanness)
+
+From the code reviews of the alerter notifier; not essential, so left out:
+- **No fallback when `alerter` is missing** (e.g. setup not run). The old
+  osascript banner was dependency-free; now the Stop hook silently no-ops.
+- **Banner pile-up.** Each Stop spawns a detached `alerter` blocking up to
+  `TIMEOUT`s; bursts/concurrent sessions stack live banners with no dedup.
