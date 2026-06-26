@@ -54,7 +54,9 @@ img=$(app_icon_png "$app" "$origin_id")
 args=(--title "Claude Code" --message "$name" --sound Glass --sender "$SENDER" --timeout "$TIMEOUT")
 [ -n "$img" ] && args+=(--content-image "$img")
 
-# Block in the background waiting for the click, then raise the origin app.
+# Block in the background waiting for the click, then raise the origin app. stdio is
+# detached from the Stop hook: alerter blocks up to TIMEOUT, and if the subshell kept
+# the hook's stdout open the session would wait on it for EOF.
 (
   res=$(alerter "${args[@]}" 2>/dev/null)
   case "$res" in
@@ -63,4 +65,4 @@ args=(--title "Claude Code" --message "$name" --sound Glass --sender "$SENDER" -
         "tell application \"System Events\" to set frontmost of (first process whose bundle identifier is \"$origin_id\") to true" \
         >/dev/null 2>&1 ;;
   esac
-) &
+) >/dev/null 2>&1 </dev/null &
