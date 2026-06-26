@@ -1,0 +1,5 @@
+// Place your key bindings in this file to override the defaults
+[
+    // Unbind Cmd+Shift+W (Close Window) — too easy to hit by accident
+    { "key": "cmd+shift+w", "command": "-workbench.action.closeWindow" }
+]

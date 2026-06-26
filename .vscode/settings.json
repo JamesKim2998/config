@@ -59,5 +59,12 @@
     ],
 
     // chat
-    "chat.titleBar.openInAgentsWindow.enabled": false
+    "chat.titleBar.openInAgentsWindow.enabled": false,
+
+    // terminal
+    "terminal.integrated.bellDuration": 1000,
+    "terminal.integrated.enableVisualBell": true,
+    "accessibility.signals.terminalBell": {
+        "sound": "on"
+    }
 }

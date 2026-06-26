@@ -85,6 +85,7 @@ ln -s "$CONFIG/.hammerspoon" ~/.hammerspoon
 # vscode
 mkdir -p "$APP_SUPPORT/Code/User"
 ln -sf "$CONFIG/.vscode/settings.json" "$APP_SUPPORT/Code/User/settings.json"
+ln -sf "$CONFIG/.vscode/keybindings.json" "$APP_SUPPORT/Code/User/keybindings.json"
 
 # jetbrains ideavim
 ln -sf "$CONFIG/intellij/.ideavimrc" ~/.ideavimrc
