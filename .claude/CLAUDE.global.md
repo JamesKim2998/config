@@ -5,31 +5,23 @@
 - **Git**: Do NOT auto-commit or stage changes unless explicitly requested by the user.
 - **TODO**: Log deferred items (fixes/improvements noticed mid-task) to `TODO.md`.
 
-### Worktree
-
-`wt whoami` prints the cwd type and path. Two contexts:
-
-- **worktree** — feature worktree. `wt land "msg"` commits dirty work + ff-merges into local `main` at checkpoints (local-only; no push, no PR). `wt ls` peeks at siblings. **Never `git stash` here** — `refs/stash` is shared across worktrees; concurrent sessions clobber.
-- **source** — main worktree of the source repo.
-
-Full contract: `CLAUDE.md` (worktree-pool).
-
 ## Authoring
 Applies to code, docs, configs, and commit messages.
+- **Minimal**: Only what the code can't say. No restating, no filler, no history ("used to…", "previously…") — describe current behavior only.
+- **Implementation Rationale**: "Why this over alternatives" for a local decision lives as a line comment on the code embodying it.
 - **Breadcrumbs**: Where future readers need context, leave a link — vendor docs, issues, RFCs, related internal docs. Skip when self-evident.
-- **File Headers**: Link to related docs (`// See [[foo.md]]`) instead of duplicating them. Cap at ~3 lines beyond the link; push longer content into the doc.
+- **File Headers**: Link to related docs (`// See [[foo.md]]`); cap at ~3 lines beyond the link, push longer content into the doc.
 
 ## Code
 - **Error Handling**: Never silently swallow errors — throw or log. Prefer natural exception flow over catch-and-swallow.
 - **Control Flow**: Prefer early return over nested conditionals.
 - **Strong Types**: Avoid raw primitives for non-self-contained keys/IDs or primitives reused across call sites. C#: `enum : uint` (size to fit) for scalar keys (`CatType`, `InteriorIndex`), `struct` for composite keys (`InteriorKey`). TS: branded type `T & { __brand: 'X' }` (`AbsPath`).
-- **Implementation Rationale**: "Why this over alternatives" for a local decision lives as a line comment on the code embodying it.
 
 ---
 
 # Documentation Policy
 
-- **Domain over Implementation:** Document *what* and *why*. Skip internal API signatures, self-explanatory patterns, and temporary code.
+- **Domain over Implementation:** Document *what* and *why*. Skip internal API signatures and temporary code.
 - **Reference, Don't Repeat:** Each fact lives in one place — point to source/docs rather than duplicating. Don't enumerate source-discoverable items (enum members, subclass lists) — they go stale.
 - **Progressive Disclosure:** Keep `CLAUDE.md` minimal; details belong in `docs/`.
 - **Crosslink:** Start each doc with `> **Related:**` linking to related docs.
@@ -49,6 +41,8 @@ All repos live under `$MEOW_ROOT`.
 | **meow-tower** | `$MEOW_CLIENT` | Unity mobile game (iOS/Android) - main game project |
 | **meow-assets** | `$MEOW_ASSETS` | Art, UI, sound, store, marketing assets |
 | **meow-toolbox** | `$MEOW_TOOLBOX` | Bun/TS dev tools - PSD processing, spreadsheets, Firebase, App Store Connect, automation scripts |
+| **boxcat-rust-tools** | `$MEOW_ROOT/boxcat-rust-tools` | Rust monorepo for meow-ecosystem tooling - per-domain CLIs/rlibs + C FFI / napi bridges. Hub: `CLAUDE.md` (boxcat-rust-tools) |
+| **pspec** | `$MEOW_ROOT/pspec` | Rust CLI - Unity `.prefab`/`.unity`/`.asset` ↔ JSON. Hub: `CLAUDE.md` (pspec) |
 | **meow-langpack** | `$MEOW_LANGPACK` | Game text — source files (KO + translations) |
 | **meow-game-server** | `$MEOW_SERVER` | Backend for gameplay services |
 | **meow-infra** | `$MEOW_INFRA` | OpenTofu infra - Route53 DNS, EC2 systemd units, Caddy, LFS relay |
