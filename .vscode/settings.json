@@ -66,6 +66,9 @@
         { "before": ["<A-k>"], "commands": ["editor.action.moveLinesUpAction"] }
     ],
 
+    // git
+    "git.confirmSync": false,
+
     // chat
     "chat.titleBar.openInAgentsWindow.enabled": false,
 
