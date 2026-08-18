@@ -2,6 +2,7 @@
     // workbench
     "workbench.iconTheme": "vs-seti",
     "workbench.colorTheme": "Kanagawa",
+    "workbench.startupEditor": "none",
     "workbench.editor.enablePreview": false,
     "workbench.panel.defaultLocation": "right",
     "workbench.browser.showInTitleBar": true,
@@ -12,7 +13,9 @@
     "editor.renderWhitespace": "all",
     "editor.wordWrap": "on",
     "editor.minimap.enabled": false,
-    "editor.lineNumbers": "relative",
+    "editor.lineNumbers": "off",
+    "editor.glyphMargin": false,
+    "editor.foldingImportsByDefault": true,
     "editor.guides.bracketPairs": "active",
     "editor.linkedEditing": true,
     "diffEditor.hideUnchangedRegions.enabled": true,
