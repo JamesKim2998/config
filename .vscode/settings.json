@@ -48,6 +48,9 @@
     "vim.smartcase": true,
     "vim.hlsearch": true,
     "vim.normalModeKeyBindingsNonRecursive": [
+        // Walk display lines, not logical ones (wordWrap is on)
+        { "before": ["j"], "after": ["g", "j"] },
+        { "before": ["k"], "after": ["g", "k"] },
         // Move lines with Option+j/k
         { "before": ["<A-j>"], "commands": ["editor.action.moveLinesDownAction"] },
         { "before": ["<A-k>"], "commands": ["editor.action.moveLinesUpAction"] },
