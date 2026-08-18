@@ -55,6 +55,9 @@ system_profiler SPBluetoothDataType | grep -E "Minor Type|Vendor ID|Product ID"
 
 ## Complex Modifications
 
+### Cmd + W -> no key repeat
+System key repeat (`InitialKeyRepeat` 250ms, `KeyRepeat` 33ms) makes a slightly-held Cmd+W close a burst of tabs.
+
 ### Fn + HJKL -> Arrow Keys (Vim-style)
 - Fn + H -> Left
 - Fn + J -> Down
