@@ -6,6 +6,7 @@
     "workbench.editor.enablePreview": false,
     "workbench.panel.defaultLocation": "right",
     "workbench.browser.showInTitleBar": true,
+    "window.autoDetectColorScheme": true,
 
     // editor
     "editor.tabSize": 4,
