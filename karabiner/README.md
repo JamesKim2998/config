@@ -42,7 +42,6 @@ system_profiler SPBluetoothDataType | grep -E "Minor Type|Vendor ID|Product ID"
 - Escape -> Fn (for Fn+HJKL arrows)
 - Left Command <-> Left Option (swap for Mac layout)
 - Right Command -> F16 (input source switching)
-- Right Option -> F16 (input source switching)
 - Button3 -> disabled (trackpad model)
 
 ### Mistel MD770 (Bluetooth & USB)
@@ -50,6 +49,7 @@ system_profiler SPBluetoothDataType | grep -E "Minor Type|Vendor ID|Product ID"
 - Escape -> Fn (for Fn+HJKL arrows)
 - Left Command <-> Left Option (swap for Mac layout)
 - Right Command -> F16 (input source switching)
+- Right Option -> F16 (input source switching)
 - DIP Switch 1 OFF (Windows mode for standard F-keys)
 - See `barocco_md770.pdf` for DIP switch settings, [[md770-troubleshooting.md]] for BT issues
 

@@ -234,10 +234,6 @@
                             "to": [{ "key_code": "f16" }]
                         },
                         {
-                            "from": { "key_code": "right_option" },
-                            "to": [{ "key_code": "f16" }]
-                        },
-                        {
                             "from": { "pointing_button": "button3" },
                             "to": [{ "key_code": "vk_none" }]
                         }
@@ -268,10 +264,6 @@
                         },
                         {
                             "from": { "key_code": "right_command" },
-                            "to": [{ "key_code": "f16" }]
-                        },
-                        {
-                            "from": { "key_code": "right_option" },
                             "to": [{ "key_code": "f16" }]
                         }
                     ]
