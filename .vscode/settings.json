@@ -71,6 +71,7 @@
 
     // chat
     "chat.titleBar.openInAgentsWindow.enabled": false,
+    "claudeCode.preferredLocation": "panel",
 
     // terminal
     "terminal.integrated.bellDuration": 1000,
