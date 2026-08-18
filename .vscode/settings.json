@@ -19,7 +19,10 @@
     "editor.foldingImportsByDefault": true,
     "editor.guides.bracketPairs": "active",
     "editor.linkedEditing": true,
+
+    // diff
     "diffEditor.hideUnchangedRegions.enabled": true,
+    "diffEditor.hideUnchangedRegions.minimumLineCount": 2,
 
     // files
     "files.associations": {
@@ -30,7 +33,8 @@
     "files.trimFinalNewlines": true,
     // Markdown uses two trailing spaces for hard line breaks — don't strip them
     "[markdown]": {
-        "files.trimTrailingWhitespace": false
+        "files.trimTrailingWhitespace": false,
+        "diffEditor.ignoreTrimWhitespace": true
     },
 
     // explorer
