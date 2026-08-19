@@ -29,7 +29,6 @@ export GIT_OPTIONAL_LOCKS=0
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$BREW/opt/openjdk/bin:$PATH"
 export PATH="$BREW/opt/trash-cli/bin:$PATH"
-export PATH="$HOME/Library/Android/sdk/emulator:$HOME/Library/Android/sdk/platform-tools:$PATH"
 export PATH="/Applications/Aseprite.app/Contents/MacOS:$PATH"
 
 # rust
