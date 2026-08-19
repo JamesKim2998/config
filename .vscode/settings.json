@@ -71,6 +71,8 @@
 
     // git
     "git.confirmSync": false,
+    // Repos with many submodules: the default of 10 silently drops the tail in Source Control.
+    "git.detectSubmodulesLimit": 32,
 
     // chat
     "chat.titleBar.openInAgentsWindow.enabled": false,
