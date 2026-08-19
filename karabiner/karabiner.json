@@ -4,25 +4,6 @@
             "complex_modifications": {
                 "rules": [
                     {
-                        "description": "Cmd + W never key-repeats (a held press must close one tab, not a burst)",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "w",
-                                    "modifiers": { "mandatory": ["command"] }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "w",
-                                        "modifiers": ["left_command"],
-                                        "repeat": false
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Fn + HJKL to Arrow Keys (Vim-style, passes through Cmd/Shift/etc)",
                         "manipulators": [
                             {
