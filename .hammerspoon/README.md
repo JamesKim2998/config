@@ -1,6 +1,7 @@
 # Hammerspoon Configuration
 
-App launcher hotkeys using `Cmd+Opt+Ctrl` prefix.
+App launcher hotkeys using `Cmd+Opt+Ctrl` prefix. Pressing a key while its app is already
+frontmost cycles that app's windows, like `Cmd+~`.
 
 | Key | App |
 |-----|-----|
