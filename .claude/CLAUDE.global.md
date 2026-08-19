@@ -1,13 +1,14 @@
 # Guidelines
 
 ## Workflow
-- **Clarification**: When uncertain, ask before proceeding.
 - **Git**: Do NOT auto-commit or stage changes unless explicitly requested by the user.
-- **TODO**: Log deferred items (fixes/improvements noticed mid-task) to `TODO.md`.
+- **TODO**: Log out-of-scope items to the nearest `TODO.md`.
 
 ## Authoring
 Applies to code, docs, configs, and commit messages.
 - **Minimal**: Only what the code can't say. No restating, no filler, no history ("used to…", "previously…") — describe current behavior only.
+- **Single Source**: One home per fact — logic in code, rationale in comments, domain in docs. Link, don't copy.
+- **No Enumeration**: Don't list source-discoverable items (enum members, subclass lists) — they go stale.
 - **Implementation Rationale**: "Why this over alternatives" for a local decision lives as a line comment on the code embodying it.
 - **Breadcrumbs**: Where future readers need context, leave a link — vendor docs, issues, RFCs, related internal docs. Skip when self-evident.
 - **File Headers**: Link to related docs (`// See [[foo.md]]`); cap at ~3 lines beyond the link, push longer content into the doc.
@@ -15,18 +16,14 @@ Applies to code, docs, configs, and commit messages.
 ## Code
 - **Error Handling**: Never silently swallow errors — throw or log. Prefer natural exception flow over catch-and-swallow.
 - **Control Flow**: Prefer early return over nested conditionals.
-- **Strong Types**: Avoid raw primitives for non-self-contained keys/IDs or primitives reused across call sites. C#: `enum : uint` (size to fit) for scalar keys (`CatType`, `InteriorIndex`), `struct` for composite keys (`InteriorKey`). TS: branded type `T & { __brand: 'X' }` (`AbsPath`).
+- **Strong Types**: Avoid raw primitives for keys/IDs and values reused across call sites — wrap them in an enum, struct, or branded type.
 
----
-
-# Documentation Policy
-
-- **Domain over Implementation:** Document *what* and *why*. Skip internal API signatures and temporary code.
-- **Reference, Don't Repeat:** Each fact lives in one place — point to source/docs rather than duplicating. Don't enumerate source-discoverable items (enum members, subclass lists) — they go stale.
-- **Progressive Disclosure:** Keep `CLAUDE.md` minimal; details belong in `docs/`.
-- **Crosslink:** Start each doc with `> **Related:**` linking to related docs.
-- **File References:** Filename only. Subfolder suffix if ambiguous. No full paths. Same-repo: wiki-link (`[[doc.md]]`, `[[doc.md#my-section]]` — anchor is kebab-case slug of heading). Cross-repo: backtick + repo suffix (`` `bar.md` `` (meow-some-repo)).
-- **Diagrams:** Use Mermaid; avoid ASCII art.
+## Docs
+- **Domain over Implementation**: Skip internal API signatures and temporary code.
+- **Progressive Disclosure**: Keep `CLAUDE.md` minimal; details belong in `docs/`.
+- **Crosslink**: Start each doc with `> **Related:**` linking to related docs.
+- **File References**: Filename only. Subfolder suffix if ambiguous. No full paths. Same-repo: wiki-link (`[[doc.md]]`, `[[doc.md#my-section]]` — anchor is kebab-case slug of heading). Cross-repo: backtick + repo suffix (`` `bar.md` `` (meow-some-repo)).
+- **Diagrams**: Use Mermaid; avoid ASCII art.
 
 ---
 
@@ -57,15 +54,6 @@ All repos live under `$MEOW_ROOT`.
 
 | Command | Description |
 |---------|-------------|
-| `fd` | Fast file finder (find alternative) |
-| `sd` | Fast find & replace (sed alternative) |
-| `parallel` | Run commands in parallel |
-| `jq` | |
-| `mlr` | CSV/TSV/JSON record processing |
-| `magick` | |
-| `ffmpeg` | |
-| `just` | Make like task runner |
-| `gh` | |
 | `ilspycmd` | .NET decompiler CLI |
 | `unity-solution-generator typecheck .` | Unity solution compile check; defaults to `ios editor`, override with `... <platform> <config>` |
 | `unity-launcher` | Unity editor launcher: `launch [-batchmode]` / `focus` / `quit`. Walks up from the binary or cwd looking for `ProjectSettings/`. |
@@ -75,3 +63,4 @@ All repos live under `$MEOW_ROOT`.
 | `langpack` | Langpack compiler + query/authoring CLI. Source at `$MEOW_LANGPACK` |
 | `notion-to-md` | Notion page → md; bare image filenames (`$NOTION_IMG_CACHE`) |
 
+Also preinstalled: `fd`, `ffmpeg`, `gh`, `jq`, `just`, `magick`, `mlr`, `parallel`, `sd`.
