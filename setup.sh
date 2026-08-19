@@ -82,10 +82,10 @@ ln -s "$CONFIG/lazygit" "$APP_SUPPORT/lazygit"
 rm -rf ~/.hammerspoon
 ln -s "$CONFIG/.hammerspoon" ~/.hammerspoon
 
-# vscode
+# vscode — source lives in vscode/, not .vscode/, so .vscode/ can hold this repo's own workspace settings
 mkdir -p "$APP_SUPPORT/Code/User"
-ln -sf "$CONFIG/.vscode/settings.json" "$APP_SUPPORT/Code/User/settings.json"
-ln -sf "$CONFIG/.vscode/keybindings.json" "$APP_SUPPORT/Code/User/keybindings.json"
+ln -sf "$CONFIG/vscode/settings.json" "$APP_SUPPORT/Code/User/settings.json"
+ln -sf "$CONFIG/vscode/keybindings.json" "$APP_SUPPORT/Code/User/keybindings.json"
 
 # jetbrains ideavim
 ln -sf "$CONFIG/intellij/.ideavimrc" ~/.ideavimrc
