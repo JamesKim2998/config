@@ -5,13 +5,12 @@ local app_infos = {
 	{ "Fork", "K" },
 	{ "Google Chrome", "C" },
 	{ "Notes", "N" },
-	{ "Obsidian", "O" },
 	{ "Rider", "R" },
 	{ "Slack", "S" },
 	{ "Xcode", "X" },
 	{ "kitty", "Y" },
 	{ "TexturePacker", "T" },
-	{ "Visual Studio Code", "V" },
+	{ "Visual Studio Code", "D" },
 }
 
 for i, app_info in ipairs(app_infos) do
