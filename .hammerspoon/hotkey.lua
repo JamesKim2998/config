@@ -1,7 +1,6 @@
 local mash_app = { "cmd", "alt", "ctrl" }
 
 local app_infos = {
-	{ "Android Studio", "A" },
 	{ "Finder", "F" },
 	{ "Fork", "K" },
 	{ "Google Chrome", "C" },
@@ -9,7 +8,6 @@ local app_infos = {
 	{ "Obsidian", "O" },
 	{ "Rider", "R" },
 	{ "Slack", "S" },
-	{ "WebStorm", "W" },
 	{ "Xcode", "X" },
 	{ "kitty", "Y" },
 	{ "TexturePacker", "T" },
