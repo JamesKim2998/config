@@ -6,6 +6,8 @@
     "workbench.editor.enablePreview": false,
     "workbench.panel.defaultLocation": "right",
     "workbench.browser.showInTitleBar": true,
+    // Default 500ms makes the Source Control Graph commit hover feel stuck; no graph-scoped setting exists.
+    "workbench.hover.delay": 100,
     "window.autoDetectColorScheme": true,
     // Project first so it survives truncation in Mission Control / Cmd+`.
     // Per-repo .vscode/settings.json prefixes an emoji: "🐱 ${rootName}${separator}${activeEditorShort}"
