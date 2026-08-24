@@ -43,6 +43,11 @@
         "diffEditor.ignoreTrimWhitespace": true
     },
 
+    // markdown
+    // Doc links carry an anchor ([[doc.md#section]]) — split there so the target
+    // resolves to doc.md instead of a note named "doc.md#section".
+    "vscodeMarkdownNotes.pipedWikiLinksSeparator": "#",
+
     // explorer
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
@@ -83,6 +88,7 @@
     // chat
     "chat.titleBar.openInAgentsWindow.enabled": false,
     "claudeCode.preferredLocation": "panel",
+    "claudeCode.allowDangerouslySkipPermissions": true,
 
     // terminal
     "terminal.integrated.bellDuration": 1000,
