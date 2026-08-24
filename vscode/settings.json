@@ -10,7 +10,8 @@
     "workbench.hover.delay": 100,
     "window.autoDetectColorScheme": true,
     // Project first so it survives truncation in Mission Control / Cmd+`.
-    // Per-repo .vscode/settings.json prefixes an emoji: "🐱 ${rootName}${separator}${activeEditorShort}"
+    // Per-repo .vscode/settings.json prefixes an emoji and tints titleBar.* via
+    // workbench.colorCustomizations — see [[vscode.md]] for the hue assignment.
     "window.title": "${rootName}${separator}${activeEditorShort}${separator}${profileName}",
 
     // editor

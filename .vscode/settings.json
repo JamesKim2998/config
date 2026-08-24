@@ -1,4 +1,10 @@
 {
     // Global settings live in vscode/ (symlinked to Code/User). This file is config's own workspace layer.
-    "window.title": "⚙️ ${rootName}${separator}${activeEditorShort}${separator}${profileName}"
+    "window.title": "⚙️ ${rootName}${separator}${activeEditorShort}${separator}${profileName}",
+    "workbench.colorCustomizations": {
+        "titleBar.activeBackground": "#153E31",
+        "titleBar.activeForeground": "#DCD7BA",
+        "titleBar.inactiveBackground": "#152E25",
+        "titleBar.inactiveForeground": "#9C9887"
+    }
 }
