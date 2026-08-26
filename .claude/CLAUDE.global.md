@@ -63,4 +63,4 @@ All repos live under `$MEOW_ROOT`.
 | `langpack` | Langpack compiler + query/authoring CLI. Source at `$MEOW_LANGPACK` |
 | `notion-to-md` | Notion page → md; bare image filenames (`$NOTION_IMG_CACHE`) |
 
-Also preinstalled: `fd`, `ffmpeg`, `gh`, `jq`, `just`, `magick`, `mlr`, `parallel`, `sd`.
+Also preinstalled: `aws`, `fd`, `ffmpeg`, `firebase`, `gcloud`, `gh`, `hyperfine`, `jq`, `just`, `magick`, `mlr`, `optipng`, `ouch`, `parallel`, `pngquant`, `rg`, `sd`, `tofu`, `yq`.
