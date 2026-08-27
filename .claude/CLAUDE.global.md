@@ -21,6 +21,7 @@ Applies to code, docs, configs, and commit messages.
 ## Docs
 - **Domain over Implementation**: Skip internal API signatures and temporary code.
 - **Progressive Disclosure**: Keep `CLAUDE.md` minimal; details belong in `docs/`.
+- **Harness over Rules**: Enforce with a hook, lint rule, type, or test; write a doc rule only when nothing can check it.
 - **Related Header**: Start each doc with `> **Related:**`. Per-link note okay, but no self-explaining.
 - **File References**: Filename only, no full paths; subfolder suffix if ambiguous. Same-repo: `[[doc.md]]`, `[[doc.md#section]]`. Cross-repo: `` `bar.md` (repo-name) ``.
 - **Diagrams**: Use Mermaid; avoid ASCII art.
