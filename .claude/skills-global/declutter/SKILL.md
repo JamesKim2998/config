@@ -7,7 +7,7 @@ description: Clean up and harden an existing area without changing behavior — 
 
 Make an existing area **clean and robust** without changing external behavior. Prove every removal dead; keep every move's references intact.
 
-`~/.claude/CLAUDE.md` (Code, Authoring, Documentation Policy) and the project `CLAUDE.md` **govern every edit** — re-read if not in context; project policy wins on conflict.
+`~/.claude/CLAUDE.md` (Authoring, Code, Docs) and the project `CLAUDE.md` **govern every edit** — re-read if not in context; project policy wins on conflict.
 
 ## Scope
 
