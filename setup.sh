@@ -24,7 +24,7 @@ brew_install "" \
   7-zip ouch `# compression & archives` \
   imagemagick ffmpeg `# media processing` \
   lazygit delta git-lfs gh lefthook `# git tools` \
-  lua rust go node oven-sh/bun/bun dotnet `# languages & runtimes` \
+  lua rust go node dotnet `# languages & runtimes` \
   awscli `# cloud & cli tools` \
   just starship shellcheck zsh-autosuggestions `# shell tools`
 
@@ -34,6 +34,13 @@ brew_install --cask \
   libreoffice font-hack-nerd-font \
   tailscale `# mesh VPN for stable Mac Mini access` \
   gureumkim `# Korean input method`
+
+# bun — its own installer, not brew: $BUN_INSTALL is what PATH and remote PM2 interpreters point at
+if [ -x "$HOME/.bun/bin/bun" ]; then
+  "$HOME/.bun/bin/bun" upgrade
+else
+  curl -fsSL https://bun.sh/install | bash
+fi
 
 # shell
 touch ~/.hushlogin
