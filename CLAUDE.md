@@ -34,24 +34,6 @@ Note: PATH must be in `.zshenv` for subshell compatibility (e.g., `$(...)`, pipe
 
 See [[diagnostics/shell-path.test.ts]] for PATH validation and zsh gotchas.
 
-## Brew Packages
-
-| Category | Packages |
-|----------|----------|
-| Editor | nvim, tree-sitter-cli |
-| Search & find | fzf, rg, fd |
-| File viewing & data processing | bat, jq, yq, sd, glow, miller |
-| File navigation & listing | eza, zoxide, yazi, tree |
-| Yazi previews | ffmpegthumbnailer, poppler, exiftool, mediainfo, pandoc |
-| System utilities | clipboard, procs, httpie, wget, alerter |
-| Compression & archives | 7-zip, ouch |
-| Media processing | imagemagick, ffmpeg |
-| Git tools | lazygit, delta, git-lfs, gh, copilot |
-| Languages & runtimes | lua, rust, go, node, bun, dotnet |
-| Cloud & CLI tools | gemini-cli, awscli |
-| Shell tools | just, starship, shellcheck, zsh-autosuggestions |
-| Casks | kitty, hammerspoon, libreoffice, font-hack-nerd-font, tailscale, gureumkim |
-
 ## Theme
 
 | Environment | Theme | Control |
@@ -67,7 +49,7 @@ Themed: nvim, kitty, lazygit, bat, yazi, starship, delta
 
 | Script | Desc |
 |--------|------|
-| `setup.sh` | Homebrew, CLI tools, symlinks |
+| `setup.sh` | Brew packages and casks (grouped by inline comments), bun, cargo tools, symlinks |
 | `setup-server.sh` | Server-specific setup (Tokyo Night) |
 | `diagnostics/` | SSH, clipboard, nvim, yazi diagnostics |
 
