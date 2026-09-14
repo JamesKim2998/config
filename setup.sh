@@ -42,6 +42,13 @@ else
   curl -fsSL https://bun.sh/install | bash
 fi
 
+# ntn (Notion CLI) — no brew formula; the npm build refuses `ntn update`. Auth is per-machine: `ntn login`
+if [ -x "$HOME/.local/bin/ntn" ]; then
+  "$HOME/.local/bin/ntn" update
+else
+  curl -fsSL https://ntn.dev | NTN_INSTALL_DIR="$HOME/.local/bin" bash
+fi
+
 # shell
 touch ~/.hushlogin
 ln -sf "$CONFIG/.zshenv" ~/.zshenv
