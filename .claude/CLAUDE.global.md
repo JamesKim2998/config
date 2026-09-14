@@ -10,7 +10,7 @@ Applies to code, docs, configs, and commit messages.
 - **Single Source**: One home per fact — logic in code, rationale in comments, domain in docs. Link, don't copy.
 - **No Enumeration**: Don't list source-discoverable items (enum members, subclass lists) — they go stale.
 - **Implementation Rationale**: "Why this over alternatives" for a local decision lives as a line comment on the code embodying it.
-- **Breadcrumbs**: Where future readers need context, leave a link — vendor docs, issues, RFCs, related internal docs. Skip when self-evident.
+- **Breadcrumbs**: Where future readers need context, leave a link — vendor docs, issues, RFCs, related internal docs, the harness enforcing a rule. Skip when self-evident.
 - **File Headers**: Link to related docs (`// See [[foo.md]]`); cap at ~3 lines beyond the link, push longer content into the doc.
 
 ## Code
