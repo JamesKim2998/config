@@ -62,6 +62,6 @@ All repos live under `$MEOW_ROOT`.
 | `pspec` | Unity `.prefab`/`.unity`/`.asset` ↔ JSON |
 | `game-art-tool` | PSD/AI parsing, layer export, TexturePacker ops |
 | `langpack` | Langpack compiler + query/authoring CLI. Source at `$MEOW_LANGPACK` |
-| `notion-to-md` | Notion page → md; bare image filenames (`$NOTION_IMG_CACHE`) |
+| `ntn` | Notion CLI (`ntn --help`) |
 
 Also preinstalled: `aws`, `fd`, `ffmpeg`, `firebase`, `gcloud`, `gh`, `hyperfine`, `jq`, `just`, `magick`, `mlr`, `optipng`, `ouch`, `parallel`, `pngquant`, `rg`, `sd`, `tofu`, `yq`.
