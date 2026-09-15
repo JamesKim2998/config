@@ -12,6 +12,9 @@
 SENDER="com.studioboxcat.claude-notify"
 TIMEOUT=120                       # seconds the banner stays clickable before auto-closing
 
+# The desktop app posts its own completion notification.
+[ "$CLAUDE_CODE_ENTRYPOINT" = claude-desktop ] && exit 0
+
 in=$(cat)
 transcript=$(printf '%s' "$in" | jq -r '.transcript_path // empty')
 
