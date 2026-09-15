@@ -20,5 +20,5 @@ description: General session wrap-up — run code/doc reviews if needed, capture
 4. **Apply updates** — Walk all findings:
    - Resolve (or defer with reasoning) the reviews' and audit's findings.
    - Add flagged breadcrumbs inline.
-   - Append deferred items to `TODO.md` with enough context to resume cold.
+   - Append deferred items to `TODO.md`.
 5. **Report** — Summarize updates and queued items. If asked, append a paste-ready handoff prompt for the next session.
