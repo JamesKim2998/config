@@ -60,6 +60,7 @@ All repos live under `$MEOW_ROOT`.
 | `unity-launcher` | Unity editor launcher: `launch [-batchmode]` / `focus` / `quit`. Walks up from the binary or cwd looking for `ProjectSettings/`. |
 | `unity-assetdb` | Unity asset GUID ↔ path/name index. Query with `guid` / `path` / `find` / `alias` / `usage`. |
 | `pspec` | Unity `.prefab`/`.unity`/`.asset` ↔ JSON |
+| `upextract` | `.unitypackage` extractor |
 | `game-art-tool` | PSD/AI parsing, layer export, TexturePacker ops |
 | `langpack` | Langpack compiler + query/authoring CLI. Source at `$MEOW_LANGPACK` |
 | `ntn` | Notion CLI (`ntn --help`) |

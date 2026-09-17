@@ -101,8 +101,8 @@ ln -sf "$CONFIG/intellij/.ideavimrc" ~/.ideavimrc
 mkdir -p ~/.cargo
 ln -sf "$CONFIG/.cargo/config.toml" ~/.cargo/config.toml
 
-# cargo tools (stylua: lua formatter)
-cargo install stylua
+# cargo tools (stylua: lua formatter, upextract: .unitypackage extractor)
+cargo install stylua upextract
 
 # agents (claude, codex)
 LLM_GLOBAL="$CONFIG/.claude/CLAUDE.global.md"
