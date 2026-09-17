@@ -1,7 +1,9 @@
 {
   "repos": {
     "alfredo":          "$HOME/Develop/alfredo",
+    "boxcat-jobs":      "$HOME/Develop/boxcat-jobs",
     "boxcat-llm":       "$HOME/Develop/boxcat-llm",
+    "boxcat-messaging": "$HOME/Develop/boxcat-messaging",
     "boxcat-rust-tools": "$HOME/Develop/boxcat-rust-tools",
     "boxcat-storefront": "$HOME/Develop/boxcat-storefront",
     "boxcat-ts-core":   "$HOME/Develop/boxcat-ts-core",
@@ -22,6 +24,7 @@
     "meow-referral-server": "$HOME/Develop/meow-referral-server",
     "meow-toolbox":     "$HOME/Develop/meow-toolbox",
     "meow-tower":       "$HOME/Develop/meow-tower",
+    "tax-accountant":   "$HOME/Develop/tax-accountant",
     "worktree-pool":    "$HOME/Develop/worktree-pool"
   }
 }
