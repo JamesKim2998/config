@@ -1,6 +1,8 @@
 {
   "repos": {
     "alfredo":          "$HOME/Develop/alfredo",
+    "boxcat-storefront": "$HOME/Develop/boxcat-storefront",
+    "boxcat-ts-core":   "$HOME/Develop/boxcat-ts-core",
     "config":           "$HOME/Develop/config",
     "macmini-cron":     "$HOME/Develop/macmini-cron",
     "md-orphan":        "$HOME/Develop/md-orphan",
