@@ -1,9 +1,13 @@
 {
   "repos": {
     "alfredo":          "$HOME/Develop/alfredo",
+    "boxcat-llm":       "$HOME/Develop/boxcat-llm",
+    "boxcat-rust-tools": "$HOME/Develop/boxcat-rust-tools",
     "boxcat-storefront": "$HOME/Develop/boxcat-storefront",
     "boxcat-ts-core":   "$HOME/Develop/boxcat-ts-core",
     "config":           "$HOME/Develop/config",
+    "meow-defs":        "$HOME/Develop/meow-defs",
+    "meow-inquiry":     "$HOME/Develop/meow-inquiry",
     "macmini-cron":     "$HOME/Develop/macmini-cron",
     "md-orphan":        "$HOME/Develop/md-orphan",
     "meow-account-server": "$HOME/Develop/meow-account-server",
