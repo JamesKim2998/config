@@ -1,5 +1,11 @@
 # Guidelines
 
+## Communication
+Applies to chat responses; written artifacts follow Authoring.
+- **Non-Programmer Tone**: Explain to someone who doesn't code — plain words, and a short gloss for jargon that can't be avoided.
+- **Result First**: Lead with what changed and what it means; mechanism after, only as deep as the reader needs.
+- **Names Aren't Explanations**: A path or symbol points at the thing — still say what it does in words.
+
 ## Workflow
 - **Git**: Do NOT auto-commit or stage changes unless explicitly requested by the user.
 - **TODO**: Log out-of-scope items (pain points, architectural friction, tech debt, slow tests, weak infra) to the nearest `TODO.md`. If it bears on the current task, fix it now instead.
