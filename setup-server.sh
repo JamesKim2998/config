@@ -16,10 +16,14 @@ append_if_missing() {
   grep -q "$1" "$ZSHENV_LOCAL" || { echo "$2" >> "$ZSHENV_LOCAL"; echo "Added $1 to .zshenv.local"; }
 }
 
-append_if_missing 'AM_I_SERVER' 'export AM_I_SERVER=1'
 append_if_missing 'THEME_NVIM' 'export THEME_NVIM="tokyonight-night"'
 append_if_missing 'STARSHIP_CONFIG' "export STARSHIP_CONFIG=$XDG_CONFIG/starship-server.toml"
 append_if_missing 'BAT_THEME' 'export BAT_THEME="tokyonight"'
+
+# Server-only env: it marks *this* machine as the server, so it lives in .zshenv.local, never in
+# the tracked env file a laptop would pick up. AM_I_SERVER gates every server-only operation.
+append_if_missing 'AM_I_SERVER' 'export AM_I_SERVER=1'
+append_if_missing 'GITHUB_MIRROR_ROOT' 'export GITHUB_MIRROR_ROOT="$HOME/Develop/github-mirror/cache"'
 
 # Set delta syntax theme
 git config --file ~/.gitconfig.local delta.syntax-theme tokyonight
