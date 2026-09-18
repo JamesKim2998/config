@@ -41,7 +41,5 @@ Unreachable on the 192.168 LAN:
 
 - No fallback when `alerter` is missing.
 - Concurrent Stops stack banners.
-- [ ] The other laptop's `~/.zshenv.local` still exports the `MEOW_*` paths `boxcat/env.zsh`
-      defines. They agree, so nothing breaks; delete them once it has run `setup.sh`. The mini's
-      `.zshenv.local` sources a copy of the file until `setup.sh` runs there and symlinks it — that
-      `source` line is then redundant, and harmless.
+- [ ] The other laptop's `~/.zshenv.local` still exports the `MEOW_*` paths boxcat-devenv generates.
+      They agree, so nothing breaks; delete them once it has run `just bootstrap` there.

@@ -35,7 +35,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# The global env every Boxcat repo reads — boxcat/env.zsh (config), for EVERY shell.
+# The env boxcat-devenv generates (`just bootstrap` there) — MEOW_ROOT and its siblings, for EVERY shell.
 [[ -f ~/.config/boxcat/env.zsh ]] && source ~/.config/boxcat/env.zsh
 
 # pnpm
