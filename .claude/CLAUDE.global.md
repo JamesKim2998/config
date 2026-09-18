@@ -61,6 +61,7 @@ All repos live under `$MEOW_ROOT`.
 | `unity-solution-generator typecheck .` | Unity solution compile check; defaults to `ios editor`, override with `... <platform> <config>` |
 | `unity-launcher` | Unity editor launcher: `launch [-batchmode]` / `focus` / `quit`. Walks up from the binary or cwd looking for `ProjectSettings/`. |
 | `unity-assetdb` | Unity asset GUID ↔ path/name index. Query with `guid` / `path` / `find` / `alias` / `usage`. |
+| `unity-asmdef` | Unity assembly index. Query with `which` (file → assembly) / `info` / `deps`. JSON out. |
 | `pspec` | Unity `.prefab`/`.unity`/`.asset` ↔ JSON |
 | `upextract` | `.unitypackage` extractor |
 | `game-art-tool` | PSD/AI parsing, layer export, TexturePacker ops |
