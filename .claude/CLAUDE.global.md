@@ -47,7 +47,7 @@ All repos live under `$MEOW_ROOT`.
 | **meow-dev-media** | `$MEOW_DEV_MEDIA` | Thumbnails for Google Sheets; auto-synced to S3 (`meow-dev-media.studioboxcat.com`) via GitHub Actions |
 | **config** | `$CONFIG_REPO` | macOS dotfiles - nvim, kitty, zsh, git, yazi, lazygit, hammerspoon |
 
-`boxcat-*` under `$MEOW_ROOT` are shared game-agnostic TS packages (`link:` deps), chiefly **boxcat-ts-core** and **boxcat-l10n**.
+`boxcat-*` under `$MEOW_ROOT`: shared TS packages, consumed as `link:` deps. Roster: `repos.json` (boxcat-devenv).
 
 `meow-toolbox-just <recipe>` runs any meow-toolbox just recipe from anywhere (e.g. `meow-toolbox-just langpack-sheet pull`).
 
