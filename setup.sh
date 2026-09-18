@@ -24,7 +24,8 @@ brew_install "" \
   7-zip ouch `# compression & archives` \
   imagemagick ffmpeg `# media processing` \
   lazygit delta git-lfs gh lefthook `# git tools` \
-  lua rust go node dotnet `# languages & runtimes` \
+  lua go node dotnet `# languages & runtimes` \
+  cargo-nextest `# test runner for boxcat-rust-tools` \
   awscli `# cloud & cli tools` \
   just starship shellcheck zsh-autosuggestions `# shell tools`
 
@@ -42,12 +43,24 @@ else
   curl -fsSL https://bun.sh/install | bash
 fi
 
+# rustup — its own installer, not brew: each Rust repo pins its toolchain in rust-toolchain.toml, which
+# only rustup's cargo honors
+[ -x "$HOME/.cargo/bin/rustup" ] || curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --no-modify-path
+export PATH="$HOME/.cargo/bin:$PATH"
+
 # shell
 touch ~/.hushlogin
 ln -sf "$CONFIG/.zshenv" ~/.zshenv
 ln -sf "$CONFIG/.zshenv.local" ~/.zshenv.local
 ln -sf "$CONFIG/.zshrc" ~/.zshrc
 ln -sf "$CONFIG/starship.toml" "$XDG_CONFIG/starship.toml"
+
+# boxcat/env.zsh — the global env every Boxcat repo reads
+mkdir -p "$XDG_CONFIG/boxcat"
+ln -sf "$CONFIG/boxcat/env.zsh" "$XDG_CONFIG/boxcat/env.zsh"
+# Compiled beside the link; zsh sources the .zwc while it is not older than the file, so a pulled
+# change is never masked and the next setup.sh recompiles.
+zsh -c 'zcompile "$HOME/.config/boxcat/env.zsh"'
 
 # git
 ln -sf "$CONFIG/git/.gitconfig" ~/.gitconfig
@@ -103,6 +116,11 @@ ln -sf "$CONFIG/.cargo/config.toml" ~/.cargo/config.toml
 
 # cargo tools (stylua: lua formatter, upextract: .unitypackage extractor)
 cargo install stylua upextract
+# md-orphan: every repo's pre-commit runs it; from its repo, which cuts no releases. Built with the
+# default toolchain — `cargo install --git` does not read the crate's own rust-toolchain.toml.
+cargo install --git https://github.com/studio-boxcat/md-orphan md-orphan
+# unity-launcher: the Hammerspoon hotkey and meow-tower's launcher bundle shell out to it.
+cargo install --git https://github.com/studio-boxcat/unity-launcher unity-launcher
 
 # agents (claude, codex)
 LLM_GLOBAL="$CONFIG/.claude/CLAUDE.global.md"

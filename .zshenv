@@ -3,9 +3,6 @@
 # .zshenv - ALL shells (login, interactive, scripts, subshells)
 # .zshrc - interactive shells only (aliases, functions, prompt)
 
-# local overrides (credentials, machine-specific)
-[[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
-
 # homebrew (baked from: /opt/homebrew/bin/brew shellenv)
 BREW=/opt/homebrew
 export HOMEBREW_PREFIX="$BREW"
@@ -37,6 +34,9 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# The global env every Boxcat repo reads — boxcat/env.zsh (config), for EVERY shell.
+[[ -f ~/.config/boxcat/env.zsh ]] && source ~/.config/boxcat/env.zsh
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
@@ -70,3 +70,6 @@ export _ZO_FZF_OPTS='+e --height=40% --layout=reverse --border --no-sort'
 # lefthook (silent on success, show failures with output)
 export LEFTHOOK_OUTPUT="failure,execution_out"
 
+# local overrides (credentials, machine-specific). Last: they may read the env above (MEOW_CLIENT for
+# the Unity version) and must win over everything above.
+[[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
