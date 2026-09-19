@@ -50,9 +50,11 @@ All repos live under `$MEOW_ROOT`.
 
 `boxcat-*` under `$MEOW_ROOT`: shared TS packages, consumed as `link:` deps. Roster: `repos.json` (boxcat-devenv).
 
+`boxcat-devenv <verb>` sets up and syncs this host — `bootstrap`, `setup`, `doctor`, `sync`, `push`, `deps` (`--help` for the rest). Hub: `CLAUDE.md` (boxcat-devenv).
+
 `meow-toolbox-just <recipe>` runs any meow-toolbox just recipe from anywhere (e.g. `meow-toolbox-just langpack-sheet pull`).
 
-`meow-doc-finder <query>` fuzzy-finds markdown docs across Meow Tower repos. Outputs env-var-prefixed paths with summaries.
+`boxcat-doc <query>` fuzzy-finds docs across this host's clones — env-var-prefixed paths with summaries.
 
 ## CLI Tools
 
