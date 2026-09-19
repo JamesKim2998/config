@@ -2,6 +2,7 @@
 
 ## Workflow
 - **Git**: Do NOT auto-commit or stage changes unless explicitly requested by the user.
+- **Commit Scope**: Agents share the worktree — commit your own files only (`git commit --only <files>`).
 - **TODO**: Log out-of-scope items (pain points, architectural friction, tech debt, slow tests, weak infra) to the nearest `TODO.md`. If it bears on the current task, fix it now instead.
 
 ## Authoring
