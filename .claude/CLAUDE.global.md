@@ -50,7 +50,7 @@ All repos live under `$MEOW_ROOT`.
 
 `boxcat-*` under `$MEOW_ROOT`: shared TS packages, consumed as `link:` deps. Roster: `repos.json` (boxcat-devenv).
 
-`boxcat-devenv <verb>` sets up and syncs this host — `bootstrap`, `setup`, `doctor`, `sync`, `push`, `deps` (`--help` for the rest). Hub: `CLAUDE.md` (boxcat-devenv).
+`boxcat-devenv <verb>` sets up and syncs this host — `bootstrap`, `setup`, `doctor`, `sync`, `push`, `deps`, `affected` (`--help` for the rest). Hub: `CLAUDE.md` (boxcat-devenv).
 
 `meow-toolbox-just <recipe>` runs any meow-toolbox just recipe from anywhere (e.g. `meow-toolbox-just langpack-sheet pull`).
 
