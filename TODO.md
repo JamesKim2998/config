@@ -41,3 +41,11 @@ Unreachable on the 192.168 LAN:
 
 - No fallback when `alerter` is missing.
 - Concurrent Stops stack banners.
+- [ ] The other laptop's `~/.zshenv.local` still exports the `MEOW_*` paths boxcat-devenv generates.
+      They agree, so nothing breaks; delete them once it has run `just bootstrap` there.
+## `diagnostics/` does not typecheck
+
+`boxcat-devenv typecheck` runs `bun run typecheck` in `diagnostics/` and it fails: `cursor-shape.ts` imports
+`MACMINI_DEST` and `MACMINI_SSH_KEY` that `lib.ts` no longer exports, and `nvim-startup.ts`, `yazi-worktree-jump.test.ts`
+and `macmini-latency.ts` index into arrays without a guard (29 errors). Unrelated to any package; a host-wide compile
+sweep is red until it is fixed or the package says it is not compiled (`.boxcat.env.json` `typecheck: { none }`).

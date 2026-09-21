@@ -8,6 +8,7 @@ Applies to chat responses; written artifacts follow Authoring.
 
 ## Workflow
 - **Git**: Do NOT auto-commit or stage changes unless explicitly requested by the user.
+- **Commit Scope**: Agents share the worktree — commit your own files only (`git commit --only <files>`).
 - **TODO**: Log out-of-scope items (pain points, architectural friction, tech debt, slow tests, weak infra) to the nearest `TODO.md`. If it bears on the current task, fix it now instead.
 
 ## Authoring
@@ -53,9 +54,13 @@ All repos live under `$MEOW_ROOT`.
 | **meow-dev-media** | `$MEOW_DEV_MEDIA` | Thumbnails for Google Sheets; auto-synced to S3 (`meow-dev-media.studioboxcat.com`) via GitHub Actions |
 | **config** | `$CONFIG_REPO` | macOS dotfiles - nvim, kitty, zsh, git, yazi, lazygit, hammerspoon |
 
+`boxcat-*` under `$MEOW_ROOT`: shared TS packages, consumed as `link:` deps. Roster: `repos.json` (boxcat-devenv).
+
+`boxcat-devenv <verb>` sets up and syncs this host — `bootstrap`, `setup`, `doctor`, `sync`, `push`, `deps`, `affected` (`--help` for the rest). Hub: `CLAUDE.md` (boxcat-devenv).
+
 `meow-toolbox-just <recipe>` runs any meow-toolbox just recipe from anywhere (e.g. `meow-toolbox-just langpack-sheet pull`).
 
-`meow-doc-finder <query>` fuzzy-finds markdown docs across Meow Tower repos. Outputs env-var-prefixed paths with summaries.
+`boxcat-doc <query>` fuzzy-finds docs across this host's clones — env-var-prefixed paths with summaries.
 
 ## CLI Tools
 
@@ -65,7 +70,9 @@ All repos live under `$MEOW_ROOT`.
 | `unity-solution-generator typecheck .` | Unity solution compile check; defaults to `ios editor`, override with `... <platform> <config>` |
 | `unity-launcher` | Unity editor launcher: `launch [-batchmode]` / `focus` / `quit`. Walks up from the binary or cwd looking for `ProjectSettings/`. |
 | `unity-assetdb` | Unity asset GUID ↔ path/name index. Query with `guid` / `path` / `find` / `alias` / `usage`. |
+| `unity-asmdef` | Unity assembly index. Query with `which` (file → assembly) / `info` / `deps`. JSON out. |
 | `pspec` | Unity `.prefab`/`.unity`/`.asset` ↔ JSON |
+| `upextract` | `.unitypackage` extractor |
 | `game-art-tool` | PSD/AI parsing, layer export, TexturePacker ops |
 | `langpack` | Langpack compiler + query/authoring CLI. Source at `$MEOW_LANGPACK` |
 | `ntn` | Notion CLI (`ntn --help`) |

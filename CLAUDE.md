@@ -1,5 +1,7 @@
 # Config Repository
 
+> **Related:** `CLAUDE.md` (boxcat-devenv) — the repos, once the machine is set up
+
 macOS dotfiles and development environment configuration.
 
 ## Structure
@@ -26,9 +28,12 @@ macOS dotfiles and development environment configuration.
 
 | File | When Sourced | Contents |
 |------|--------------|----------|
-| `.zshenv` | ALL shells (login, interactive, scripts, subshells) | PATH, env vars, sources `.zshenv.local` |
-| `.zshenv.local` | All shells (not tracked) | SSH agent, machine-specific overrides |
+| `.zshenv` | ALL shells (login, interactive, scripts, subshells) | PATH, the env boxcat-devenv generates (`~/.config/boxcat/env.zsh`), then `.zshenv.local` |
+| `.zshenv.local` | All shells (not tracked) | SSH agent, secrets, machine-specific overrides — not repo paths, those are boxcat-devenv's |
 | `.zshrc` | Interactive shells only | Aliases, functions, completions, prompt |
+
+`AM_I_SERVER=1` is what makes a machine the mac mini: `setup-server.sh` writes it to `~/.zshenv.local`, and
+every repo's server-only branch reads that one flag.
 
 Note: PATH must be in `.zshenv` for subshell compatibility (e.g., `$(...)`, pipes, xargs).
 
@@ -49,10 +54,12 @@ Themed: nvim, kitty, lazygit, bat, yazi, starship, delta
 
 | Script | Desc |
 |--------|------|
-| `setup.sh` | Brew packages and casks (grouped by inline comments), bun, cargo tools, symlinks |
-| `setup-server.sh` | Server-specific setup (Tokyo Night) |
+| `setup.sh` | Brew packages and casks (grouped by inline comments), bun, rustup, cargo tools, symlinks, the global env |
+| `setup-server.sh` | Marks the host as the server (`AM_I_SERVER`), Tokyo Night |
 | `diagnostics/` | SSH, clipboard, nvim, yazi diagnostics |
 
 Run diagnostics with `cd diagnostics && bun test`.
+
+The repos come after the machine: `just bootstrap` in boxcat-devenv clones and links them.
 
 Deferred follow-ups: [[TODO.md]].

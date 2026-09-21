@@ -24,7 +24,8 @@ brew_install "" \
   7-zip ouch `# compression & archives` \
   imagemagick ffmpeg `# media processing` \
   lazygit delta git-lfs gh lefthook `# git tools` \
-  lua rust go node dotnet `# languages & runtimes` \
+  lld@20 `# the linker .cargo/config.toml names` \
+  lua go node dotnet `# languages & runtimes` \
   awscli `# cloud & cli tools` \
   just starship shellcheck zsh-autosuggestions `# shell tools`
 
@@ -41,6 +42,11 @@ if [ -x "$HOME/.bun/bin/bun" ]; then
 else
   curl -fsSL https://bun.sh/install | bash
 fi
+
+# rustup — its own installer, not brew: each Rust repo pins its toolchain in rust-toolchain.toml, which
+# only rustup's cargo honors
+[ -x "$HOME/.cargo/bin/rustup" ] || curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --no-modify-path
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # shell
 touch ~/.hushlogin
@@ -101,8 +107,8 @@ ln -sf "$CONFIG/intellij/.ideavimrc" ~/.ideavimrc
 mkdir -p ~/.cargo
 ln -sf "$CONFIG/.cargo/config.toml" ~/.cargo/config.toml
 
-# cargo tools (stylua: lua formatter)
-cargo install stylua
+# cargo tools (stylua: lua formatter, upextract: .unitypackage extractor)
+cargo install stylua upextract
 
 # agents (claude, codex)
 LLM_GLOBAL="$CONFIG/.claude/CLAUDE.global.md"
@@ -116,10 +122,6 @@ ln -sf "$CONFIG/.claude/skills-global" ~/.claude/skills
 /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$CONFIG/.claude/app/ClaudeSender.app" || true
 mkdir -p ~/.codex
 ln -sf "$LLM_GLOBAL" ~/.codex/AGENTS.md
-
-# md-orphan
-mkdir -p "$XDG_CONFIG/md-orphan/cache"
-ln -sf "$CONFIG/md-orphan/md-orphan.json" "$XDG_CONFIG/md-orphan/md-orphan.json"
 
 # tailscale: heal the LG U+ DS-Lite CGNAT route collision (see tailscale/TAILSCALE.md)
 "$CONFIG/tailscale/cgnat-route.sh" install
