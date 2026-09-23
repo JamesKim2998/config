@@ -42,6 +42,11 @@
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "xhigh",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
+  },
   "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
   "theme": "auto",
