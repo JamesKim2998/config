@@ -17,6 +17,7 @@ lint:
     @luac -p plugins/worktree-jump.yazi/main.lua && echo "ok: worktree-jump"
     @luac -p plugins/git-status.yazi/main.lua && echo "ok: git-status"
     @luac -p plugins/copy-path.yazi/main.lua && echo "ok: copy-path"
+    @luac -p plugins/unity-sprite.yazi/main.lua && echo "ok: unity-sprite"
 
 # Watch the live yazi log (errors, ya.dbg/ya.err output land here).
 log:
