@@ -1,5 +1,4 @@
-import { consola } from "consola";
-import { ssh, sshGrep, check, header, section, MACMINI_DEST, MACMINI_SSH_KEY } from "./lib";
+import { ssh, sshGrep, check, header, section, macmini } from "./lib";
 
 header("Cursor Shape Diagnostic\nChain: Kitty → SSH → zsh");
 
@@ -16,5 +15,5 @@ console.log("  printf '\\e[2 q' && echo ' ← BLOCK'");
 console.log("  printf '\\e[6 q' && echo ' ← BEAM'");
 
 section(3, "Quick Test");
-console.log(`  ssh -i ${MACMINI_SSH_KEY} ${MACMINI_DEST}`);
+console.log(`  ssh ${macmini}`);
 console.log("  printf '\\e[2 q'  # Should change to block");

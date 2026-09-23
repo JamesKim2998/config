@@ -16,7 +16,7 @@ async function benchmark(): Promise<number[]> {
   for (let i = 0; i < RUNS; i++) {
     await $`nvim --headless --startuptime ${STARTUP_LOG} +q`.quiet();
     const match = (await Bun.file(STARTUP_LOG).text()).match(/(\d+\.\d+)\s+\d+\.\d+:\s+--- NVIM STARTED ---/);
-    if (match) times.push(parseFloat(match[1]));
+    if (match) times.push(parseFloat(match[1]!));
   }
   return times;
 }
@@ -24,9 +24,9 @@ async function benchmark(): Promise<number[]> {
 function parseLog(log: string): TimingEntry[] {
   return log.split("\n").flatMap((line) => {
     const m3 = line.match(/^\s*(\d+\.\d+)\s+\d+\.\d+\s+(\d+\.\d+):\s+(.+)$/);
-    if (m3) return [{ time: parseFloat(m3[1]), selfTime: parseFloat(m3[2]), name: m3[3].trim() }];
+    if (m3) return [{ time: parseFloat(m3[1]!), selfTime: parseFloat(m3[2]!), name: m3[3]!.trim() }];
     const m2 = line.match(/^\s*(\d+\.\d+)\s+(\d+\.\d+):\s+(.+)$/);
-    if (m2) return [{ time: parseFloat(m2[1]), selfTime: parseFloat(m2[2]), name: m2[3].trim() }];
+    if (m2) return [{ time: parseFloat(m2[1]!), selfTime: parseFloat(m2[2]!), name: m2[3]!.trim() }];
     return [];
   });
 }
@@ -42,11 +42,14 @@ function getPluginTimings(entries: TimingEntry[]): Map<string, number> {
   for (const e of entries) {
     for (const pat of patterns) {
       const m = e.name.match(pat);
-      if (m) { plugins.set(m[1], (plugins.get(m[1]) || 0) + e.selfTime); break; }
+      if (!m) continue;
+      const name = m[1]!;
+      plugins.set(name, (plugins.get(name) || 0) + e.selfTime);
+      break;
     }
     const req = e.name.match(/require\('([^']+)'\)/);
     if (req) {
-      const mod = req[1].split(".")[0];
+      const mod = req[1]!.split(".")[0]!;
       if (!skip.has(mod)) plugins.set(mod, (plugins.get(mod) || 0) + e.selfTime);
     }
   }
@@ -67,7 +70,8 @@ function getPhases(entries: TimingEntry[]): Map<string, number> {
 
   const phases = new Map<string, number>();
   for (let i = 1; i < times.length; i++) {
-    phases.set(`${times[i - 1].name} → ${times[i].name}`, times[i].time - times[i - 1].time);
+    const prev = times[i - 1]!, cur = times[i]!;
+    phases.set(`${prev.name} → ${cur.name}`, cur.time - prev.time);
   }
   return phases;
 }
