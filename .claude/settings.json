@@ -42,14 +42,14 @@
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "xhigh",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
+  },
   "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
   "theme": "auto",
   "editorMode": "vim",
-  "preferredNotifChannel": "terminal_bell",
-  "modelSettings": {
-    "claude-opus-5": {
-      "effortLevel": "high"
-    }
-  }
+  "preferredNotifChannel": "terminal_bell"
 }
