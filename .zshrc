@@ -125,7 +125,6 @@ g() {
   fi
 }
 alias gr='cd "$(git rev-parse --show-toplevel)"'
-alias todo="(cd \"$HOME/Develop/todo/\"; $EDITOR todo.md)"
 # NB: local var named `wt` (not `path`) — zsh ties lowercase `path` to $PATH;
 # `local path` empties PATH inside the function and breaks `git`/`awk` lookup.
 cdw() {
