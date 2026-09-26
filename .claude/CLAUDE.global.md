@@ -23,8 +23,8 @@ Applies to code, docs, configs, and commit messages.
 - **Domain over Implementation**: Skip internal API signatures and temporary code.
 - **Progressive Disclosure**: Keep `CLAUDE.md` minimal; details belong in `docs/`.
 - **Harness over Rules**: Enforce with a hook, lint rule, type, or test; write a doc rule only when nothing can check it.
-- **Related Header**: Start each doc with `> **Related:**`. Per-link note okay, but no self-explaining.
-- **File References**: Filename only, no full paths; subfolder suffix if ambiguous. Same folder: `[[doc.md]]`, `[[doc.md#section]]`. Another monorepo folder or an external repo: `` `bar.md` (folder-or-repo) ``.
+- **Frontmatter**: Start each doc with frontmatter — `description` (its scope; if it won't fit the cap, the doc is two docs) and `related` (links to read alongside; per-link note okay, no self-explaining). The filename is the title: no H1, except in conventionally named docs (`CLAUDE.md`, `README.md`, …). Format and checks: `CLAUDE.md` (md-orphan).
+- **File References**: Filename only, no full paths; root-relative path only if the basename is ambiguous. Within a repo (the monorepo included): `[[doc.md]]`, `[[doc.md#section]]`. Another repo: `` `bar.md` (repo) ``.
 - **Diagrams**: Use Mermaid; avoid ASCII art.
 
 ---
