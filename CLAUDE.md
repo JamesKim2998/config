@@ -17,7 +17,7 @@ macOS dotfiles and development environment configuration.
 | Hammerspoon | [[README.md|.hammerspoon/]] | Window management, app launcher hotkeys (`U` shells out to `unity-launcher`, a boxcat monorepo folder, for meow-tower) |
 | IntelliJ | `intellij/` | IdeaVim (.ideavimrc), Copilot settings |
 | Gemini | `gemini/` | Gemini CLI |
-| VS Code | [[vscode.md|vscode/]] | Global editor settings (symlinked to `Code/User/`); `.vscode/` is this repo's own workspace layer |
+| VS Code | [[vscode.md|vscode/]] | Global editor settings (symlinked to `Code/User/`) |
 | Zsh | `.zshenv`, `.zshrc` | Shell config |
 | Starship | `starship.toml` | Prompt |
 | Karabiner | [[README.md|karabiner/]] | Keyboard remapping (manual sync via justfile) |
