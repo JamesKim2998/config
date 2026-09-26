@@ -31,44 +31,14 @@ Applies to code, docs, configs, and commit messages.
 
 # Development Environment
 
-## Major Repositories
-
-The studio's tools, services and games are one monorepo, `studio-boxcat/boxcat`, whose main clone is `$BOXCAT_ROOT` (`~/Develop/boxcat`). Each top-level folder is a former repo with its own `CLAUDE.md`; the few external repos (roster: `repos.json`, boxcat-devenv) sit beside it under `~/Develop`.
-
-| Folder | Path | Description |
-|------|---------|-------------|
-| **meow-tower** | `$BOXCAT_ROOT/meow-tower` | Unity mobile game (iOS/Android) - main game project |
-| **meow-assets** | `$BOXCAT_ROOT/meow-assets` | Art, UI, sound, store, marketing assets |
-| **meow-toolbox** | `$BOXCAT_ROOT/meow-toolbox` | Bun/TS dev tools - PSD processing, spreadsheets, Firebase, App Store Connect, automation scripts |
-| **boxcat-rust-tools** | `$BOXCAT_ROOT/boxcat-rust-tools` | Rust monorepo for meow-ecosystem tooling - per-domain CLIs/rlibs + C FFI / napi bridges. Hub: `CLAUDE.md` (boxcat-rust-tools) |
-| **pspec** | `$BOXCAT_ROOT/pspec` | Rust CLI - Unity `.prefab`/`.unity`/`.asset` ↔ JSON. Hub: `CLAUDE.md` (pspec) |
-| **meow-langpack** | `$BOXCAT_ROOT/meow-langpack` | Game text — source files (KO + translations) |
-| **meow-game-server** | `$BOXCAT_ROOT/meow-game-server` | Backend for gameplay services |
-| **meow-infra** | `$BOXCAT_ROOT/meow-infra` | OpenTofu infra - Route53 DNS, EC2 systemd units, Caddy, LFS relay |
-| **meow-dev-media** | `$BOXCAT_ROOT/meow-dev-media` | Thumbnails for Google Sheets; auto-synced to S3 (`meow-dev-media.studioboxcat.com`) via GitHub Actions |
-| **config** (external) | `$CONFIG_REPO` | macOS dotfiles - nvim, kitty, zsh, git, yazi, lazygit, hammerspoon |
-
-`boxcat-*` folders: shared TS packages, consumed as `workspace:*` deps. Code finds a sibling folder in its own clone (`repoDir`), never through an env var.
-
-`boxcat-devenv <verb>` sets up and syncs this host — `bootstrap`, `doctor`, `sync`, `where` (`--help` for the rest). Hub: `CLAUDE.md` (boxcat-devenv).
-
-`meow-toolbox-just <recipe>` runs any meow-toolbox just recipe from anywhere (e.g. `meow-toolbox-just langpack-sheet pull`).
-
-`boxcat-doc <query>` fuzzy-finds docs across the main clone's folders and the external clones — `$BOXCAT_ROOT/<folder>/…` paths with summaries.
+Studio Boxcat's tools, services and games are one monorepo, `studio-boxcat/boxcat`, cloned at `$BOXCAT_ROOT` (`~/Develop/boxcat`); its root `CLAUDE.md` maps the folders and the commands it puts on PATH. These dotfiles are `$CONFIG_REPO`.
 
 ## CLI Tools
 
 | Command | Description |
 |---------|-------------|
 | `ilspycmd` | .NET decompiler CLI |
-| `unity-solution-generator typecheck .` | Unity solution compile check; defaults to `ios editor`, override with `... <platform> <config>` |
-| `unity-launcher` | Unity editor launcher: `launch [-batchmode]` / `focus` / `quit`. Walks up from the binary or cwd looking for `ProjectSettings/`. |
-| `unity-assetdb` | Unity asset GUID ↔ path/name index. Query with `guid` / `path` / `find` / `alias` / `usage`. |
-| `unity-asmdef` | Unity assembly index. Query with `which` (file → assembly) / `info` / `deps`. JSON out. |
-| `pspec` | Unity `.prefab`/`.unity`/`.asset` ↔ JSON |
 | `upextract` | `.unitypackage` extractor |
-| `game-art-tool` | PSD/AI parsing, layer export, TexturePacker ops |
-| `langpack` | Langpack compiler + query/authoring CLI. Source at `$BOXCAT_ROOT/meow-langpack` |
 | `ntn` | Notion CLI (`ntn --help`) |
 
 Also preinstalled: `aws`, `fd`, `ffmpeg`, `firebase`, `gcloud`, `gh`, `hyperfine`, `jq`, `just`, `magick`, `mlr`, `optipng`, `ouch`, `parallel`, `pngquant`, `rg`, `sd`, `tofu`, `yq`.

@@ -2,7 +2,7 @@
 
 Global settings live in `vscode/` (symlinked to `Code/User/`). Each repo adds a `.vscode/settings.json` workspace layer.
 
-> **Related:** [[CLAUDE.md]] (repo table)
+> **Related:** [[CLAUDE.md]] · `vscode-windows.md` (boxcat) — the monorepo folders' slots
 
 ## Window Identity
 
@@ -19,20 +19,7 @@ Generated in [OKLCH](https://bottosson.github.io/posts/oklab/), which keeps ligh
 - **Chroma is constant at `C=0.052`** — capped by cyan, the tightest hue in sRGB at this lightness. Equal chroma means no window shouts louder than the others.
 - **Foregrounds are the theme's own** `fujiWhite` / a dimmed `oldWhite`, holding ≥8:1 on active and ≥5:1 on inactive.
 
-Hues are spaced 36° apart (`h = 25 + 36k`) so no two are confusable — take an unused slot when adding a repo:
-
-| Repo | Hue | Active | Inactive |
-|------|-----|--------|----------|
-| boxcat-rust-tools 🦀 | 25 red | `#4D2A28` | `#38211F` |
-| meow-tower 🐱 | 61 orange | `#492F18` | `#352416` |
-| meow-toolbox 🧰 | 97 olive | `#3D3513` | `#2D2813` |
-| meow-langpack 🌐 | 133 green | `#2B3B1F` | `#212C1A` |
-| config ⚙️ | 169 teal | `#153E31` | `#152E25` |
-| meow-infra ☁️ | 205 cyan | `#093D42` | `#0F2D31` |
-| meow-game-server 🖥️ | 241 blue | `#1A394E` | `#172B39` |
-| pspec 🧩 | 277 violet | `#2F3350` | `#24273A` |
-| meow-assets 🎨 | 313 magenta | `#3F2D48` | `#2F2335` |
-| meow-dev-media 🖼️ | 349 pink | `#492A3A` | `#36212B` |
+Hues are spaced 36° apart (`h = 25 + 36k`) so no two are confusable — take an unused slot when adding a window. This repo is 169 teal (`#153E31` / `#152E25`); the monorepo's folders hold the rest, in `vscode-windows.md` (boxcat).
 
 Tuned for the dark scheme; `window.autoDetectColorScheme` also switches to Kanagawa Lotus, where these read as dark bars with light text — legible, but inverted from the surrounding light chrome.
 

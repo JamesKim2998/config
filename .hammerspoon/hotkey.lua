@@ -57,5 +57,5 @@ end
 
 -- Open / focus the meow-tower Unity editor via studio-boxcat/unity-launcher.
 hs.hotkey.bind(mash_app, "U", "Open Unity", function()
-	hs.execute("/Users/jameskim/Develop/meow-tower/!meow.app/Contents/MacOS/unity-launcher", true)
+	hs.execute("/Users/jameskim/Develop/boxcat/meow-tower/!meow.app/Contents/MacOS/unity-launcher", true)
 end)

@@ -3,8 +3,6 @@ model_reasoning_effort = "xhigh"
 
 [projects."/Users/jameskim/Develop/config"]
 trust_level = "trusted"
-[projects."/Users/jameskim/Develop/meow-tower"]
-trust_level = "trusted"
-[projects."/Users/jameskim/Develop/meow-toolbox"]
+[projects."/Users/jameskim/Develop/boxcat"]
 trust_level = "trusted"
 
