@@ -42,7 +42,7 @@ function extractAwkScript(): string {
   const src = readFileSync(PLUGIN_LUA, "utf8");
   const m = src.match(/local awk_script = \[=*\[\n([\s\S]*?)\n\]=*\]/);
   if (!m) throw new Error("could not find awk_script in main.lua");
-  return m[1];
+  return m[1]!;
 }
 
 const ANSI = /\x1b\[[0-9;]*m/g;
@@ -58,15 +58,8 @@ interface Row {
 }
 
 function parseRow(line: string): Row {
-  const fields = stripAnsi(line).split("\t");
-  return {
-    marker: fields[0],
-    branch: (fields[1] ?? "").replace(/\s+$/, ""),
-    date: fields[2],
-    sha: fields[3],
-    path: fields[4],
-    subject: fields[5],
-  };
+  const [marker = "", branch = "", date = "", sha = "", path = "", subject = ""] = stripAnsi(line).split("\t");
+  return { marker, branch: branch.replace(/\s+$/, ""), date, sha, path, subject };
 }
 
 let repo: string;
@@ -162,7 +155,7 @@ describe("worktree-jump awk pipeline", () => {
   it("pins current worktree at top with marker", async () => {
     const cur = join(pool, "feature-new");
     const lines = (await runPipeline(cur, cur)).trimEnd().split("\n");
-    const top = parseRow(lines[0]);
+    const top = parseRow(lines[0]!);
     expect(top.marker).toBe("●");
     expect(top.branch).toBe("feature-new");
   });
@@ -190,7 +183,7 @@ describe("worktree-jump awk pipeline", () => {
   it("emits date (YYYY-MM-DD), 8-char sha, ~-prefixed path, subject", async () => {
     const cur = join(pool, "feature-new");
     const lines = (await runPipeline(cur, cur, pool)).trimEnd().split("\n");
-    const top = parseRow(lines[0]);
+    const top = parseRow(lines[0]!);
     expect(top.date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     expect(top.date).toBe("2024-03-15");
     expect(top.sha).toMatch(/^[0-9a-f]{8}$/);
@@ -222,6 +215,6 @@ describe("worktree-jump awk pipeline", () => {
     }
     // No "current" → first row is just whatever sorts highest by date
     // (feature-new is newest).
-    expect(parseRow(lines[0]).branch).toBe("feature-new");
+    expect(parseRow(lines[0]!).branch).toBe("feature-new");
   });
 });

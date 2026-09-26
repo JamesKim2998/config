@@ -7,7 +7,7 @@ header(`Mac Mini Latency Diagnostic\nTarget: ${macmini}`);
 section(1, "Network Latency");
 
 const ping = await $`ping -c 10 ${macminiHost}`.quiet().nothrow().text();
-const times = [...ping.matchAll(/time=(\d+\.?\d*)/g)].map(m => parseFloat(m[1]));
+const times = [...ping.matchAll(/time=(\d+\.?\d*)/g)].map(m => parseFloat(m[1]!));
 
 if (times.length) {
   const avg = times.reduce((a, b) => a + b) / times.length;
