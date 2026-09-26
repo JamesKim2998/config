@@ -89,6 +89,7 @@
     "chat.titleBar.openInAgentsWindow.enabled": false,
     "claudeCode.preferredLocation": "panel",
     "claudeCode.allowDangerouslySkipPermissions": true,
+    "claudeCode.attachOpenFile": false,
 
     // terminal
     "terminal.integrated.bellDuration": 1000,
