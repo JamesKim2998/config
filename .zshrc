@@ -125,7 +125,7 @@ g() {
   fi
 }
 alias gr='cd "$(git rev-parse --show-toplevel)"'
-alias todo="(cd \"$MEOW_ROOT/todo/\"; $EDITOR todo.md)"
+alias todo="(cd \"$HOME/Develop/todo/\"; $EDITOR todo.md)"
 # NB: local var named `wt` (not `path`) — zsh ties lowercase `path` to $PATH;
 # `local path` empties PATH inside the function and breaks `git`/`awk` lookup.
 cdw() {
@@ -155,8 +155,8 @@ ai() {
   )
 }
 
-ai-mt() { (cd "$MEOW_CLIENT" && claude --dangerously-skip-permissions "$@") }
-ai-tb() { (cd "$MEOW_TOOLBOX" && claude --dangerously-skip-permissions "$@") }
+ai-mt() { (cd "$BOXCAT_ROOT/meow-tower" && claude --dangerously-skip-permissions "$@") }
+ai-tb() { (cd "$BOXCAT_ROOT/meow-toolbox" && claude --dangerously-skip-permissions "$@") }
 ai-cf() { (cd "$CONFIG_REPO" && claude --dangerously-skip-permissions "$@") }
 
 alias aiu="claude update"
@@ -187,17 +187,6 @@ sv() {
 }
 
 
-# `wt go <TAB>` picker. `wt ls` filters held-only and drops ID + STATE;
-# columns are `NAME [GROUP] AGE SHA` — NAME ($1) is the branch ref.
-# Skip the 2-line header/separator. `--bare` skips per-slot `git status
-# --porcelain` (~1s × N on cold Unity caches); TAB only needs the names.
-# Tested in `diagnostics/wt-completion.test.ts`.
-_wt_go_pick() {
-  wt ls --bare 2>/dev/null \
-    | awk 'NR>2 {print $1}' \
-    | fzf --height=40% --reverse --no-multi --header='wt go: pick slot to resume'
-}
-
 # fzf-driven TAB completion: dispatches on the current LBUFFER pattern;
 # unmatched buffers fall through to the default completer.
 _fzf_tab_dispatch() {
@@ -206,17 +195,11 @@ _fzf_tab_dispatch() {
     sel=$(git worktree list 2>/dev/null | awk '{
         name=""
         for (i=NF; i>=1; i--) if ($i ~ /^\[.*\]$/) { name=substr($i,2,length($i)-2); break }
-        if (name == "") next   # skip detached-HEAD (idle worktree-pool slots etc.)
+        if (name == "") next   # skip detached-HEAD worktrees
         if (length(name) > 32) name = substr(name, 1, 32)
         printf "%-32s  %s\n", name, $0
       }' | fzf --height=40% --reverse --no-multi | awk '{print $1}')
     [[ -n "$sel" ]] && LBUFFER="${LBUFFER%%cdw*}cdw $sel"
-    zle reset-prompt
-  elif [[ "$LBUFFER" =~ '^([[:space:]]*wt([[:space:]]+(--pool|-p)[[:space:]]+[^[:space:]]+)?[[:space:]]+go)([[:space:]]+[^[:space:]]*)?$' ]]; then
-    # Held slots only — fresh names are typed, not picked. Pool auto-resolves from cwd inside `wt ls`.
-    local prefix="${match[1]}" sel
-    sel=$(_wt_go_pick)
-    [[ -n "$sel" ]] && LBUFFER="$prefix $sel"
     zle reset-prompt
   else
     zle expand-or-complete

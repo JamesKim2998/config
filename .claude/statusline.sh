@@ -24,7 +24,7 @@ dir_name="${cwd##*/}"
 # worktrees show the parent repo instead of the branch-named worktree dir. Falls
 # back to dir name for repos without a remote or non-git dirs.
 # git is the slow segment — cache per (session, cwd) for 2s to absorb rapid vim
-# toggles. cwd in the key matters because `wt`/`cdw` switch repos within a session.
+# toggles. cwd in the key matters because `cdw` switches worktrees within a session.
 repo_name="$dir_name"
 git_seg=''
 if [[ -n "$cwd" ]]; then

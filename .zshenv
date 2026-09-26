@@ -35,7 +35,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# The env boxcat-devenv generates (`just bootstrap` there) — MEOW_ROOT and its siblings, for EVERY shell.
+# The env boxcat-devenv generates (`just bootstrap` there) — BOXCAT_ROOT, MEOW_CRED, the Unity editor — for EVERY shell.
 [[ -f ~/.config/boxcat/env.zsh ]] && source ~/.config/boxcat/env.zsh
 
 # pnpm
@@ -70,6 +70,6 @@ export _ZO_FZF_OPTS='+e --height=40% --layout=reverse --border --no-sort'
 # lefthook (silent on success, show failures with output)
 export LEFTHOOK_OUTPUT="failure,execution_out"
 
-# local overrides (credentials, machine-specific). Last: they may read the env above (MEOW_CLIENT for
-# the Unity version) and must win over everything above.
+# local overrides (credentials, machine-specific). Last: they may read the env above (BOXCAT_ROOT,
+# UNITY_VER) and must win over everything above.
 [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
