@@ -24,7 +24,7 @@ Applies to code, docs, configs, and commit messages.
 - **Progressive Disclosure**: Keep `CLAUDE.md` minimal; details belong in `docs/`.
 - **Harness over Rules**: Enforce with a hook, lint rule, type, or test; write a doc rule only when nothing can check it.
 - **Description**: A doc's frontmatter `description` states its scope; one that won't fit is two docs.
-- **File References**: Filename only, no full paths; root-relative path only if the basename is ambiguous. Within a repo: `[[doc.md]]`, `[[doc.md#section]]`. Another repo: `` `bar.md` (repo) ``.
+- **File References**: Filename only, no full paths; root-relative path only if the basename is ambiguous. Within a repo: `[[doc.md]]`, `[[doc.md#Heading Text]]` (the heading as written, not its slug). Another repo: `` `bar.md` (repo) ``.
 - **Diagrams**: Use Mermaid; avoid ASCII art.
 
 ---

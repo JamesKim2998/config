@@ -42,8 +42,8 @@
     },
 
     // markdown
-    // Doc links carry an anchor (`[[doc.md#section]]`) — split there so the target
-    // resolves to doc.md instead of a note named "doc.md#section".
+    // Doc links carry an anchor (`[[doc.md#Heading Text]]`) — split there so the target
+    // resolves to doc.md instead of a note named "doc.md#Heading Text".
     "vscodeMarkdownNotes.pipedWikiLinksSeparator": "#",
 
     // explorer
