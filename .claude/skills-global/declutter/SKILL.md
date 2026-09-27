@@ -22,7 +22,7 @@ Spawn an `Explore` agent per category below in a single message; each returns hi
 3. **Bloat & over-engineering** — premature abstractions, single-consumer indirection, unused params/options/config, speculative generality, comments restating code, docs duplicating source.
 4. **Complexity & weak types** — nesting wanting early returns; swallowed errors that should surface; raw primitives for keys/IDs that should be strong types (per global **Code**).
 5. **Structure** — code/docs in the wrong place per project layout/doc index; giant files to split along a natural seam (responsibility/topic, not line count).
-6. **TODOs & notes** — `TODO.md` items already done or stale; scratch spec/design notes load-bearing enough to graduate into a real doc (registered in the index, scratch copy replaced by a link).
+6. **TODOs & notes** — TODO items already done or stale (delete the file and its index line); scratch spec/design notes load-bearing enough to graduate into a real doc (registered in the index, scratch copy replaced by a link).
 
 ## Phase 2 — Apply
 
@@ -42,4 +42,4 @@ Spawn review over the resulting diff in a single message — `project-code-revie
 
 ## Phase 4 — Report
 
-Summarize by category with what was kept and why. Log deferred/*needs confirmation* items to `TODO.md`.
+Summarize by category with what was kept and why. File deferred/*needs confirmation* items per the global **TODO** rule.
