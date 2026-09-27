@@ -1,3 +1,6 @@
+---
+description: "Karabiner-Elements: the key remaps, and why a save needs a manual sync back into this repo."
+---
 # Karabiner-Elements Configuration
 
 ## Manual Sync Required

@@ -1,8 +1,9 @@
+---
+description: "The macOS dotfiles and dev environment: each tool's config, how setup links it in, and the global env."
+related:
+  - "`CLAUDE.md` (boxcat-devenv) — the repos, once the machine is set up"
+---
 # Config Repository
-
-> **Related:** `CLAUDE.md` (boxcat-devenv) — the repos, once the machine is set up
-
-macOS dotfiles and development environment configuration.
 
 ## Structure
 
@@ -38,7 +39,7 @@ the mirror root in `~/.zshenv.local`.
 
 Note: PATH must be in `.zshenv` for subshell compatibility (e.g., `$(...)`, pipes, xargs).
 
-See [[diagnostics/shell-path.test.ts]] for PATH validation and zsh gotchas.
+See [[shell-path.test.ts]] for PATH validation and zsh gotchas.
 
 ## Theme
 

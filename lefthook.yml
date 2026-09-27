@@ -4,9 +4,9 @@ pre-commit:
     lychee:
       glob: "*.md"
       run: lychee --offline --no-progress --exclude-path 'node_modules' --exclude-path 'yazi/plugins' {staged_files}
-    md-orphan:
+    ref-cop:
       glob: "*.md"
-      run: md-orphan CLAUDE.md --exclude '*/node_modules/*,yazi/plugins,intellij,.claude'
+      run: ref-cop CLAUDE.md --exclude '*/node_modules/*,yazi/plugins,intellij,.claude'
     nvim-check:
       glob: "nvim/**"
       run: .githooks/nvim-check
