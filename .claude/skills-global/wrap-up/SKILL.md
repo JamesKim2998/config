@@ -16,7 +16,7 @@ description: General session wrap-up — run code/doc reviews if needed, capture
    - **From this chat** (stays in the main session — a fresh agent has no transcript): decisions, conventions, or rejected alternatives raised in conversation that belong in docs but didn't land.
    - **From the change set** (agent on the step-1 scope):
      - **Breadcrumb gaps** — code sites missing the pointers called for by Authoring rules.
-     - **Deferred items** — follow-ups, dead-ends, or issues noticed mid-task that belong in a TODO item (global **TODO** rule).
+     - **Deferred items** — follow-ups, dead-ends, or issues noticed mid-task that belong in a TODO.
 4. **Apply updates** — Walk all findings:
    - Resolve (or defer with reasoning) the reviews' and audit's findings.
    - Add flagged breadcrumbs inline.

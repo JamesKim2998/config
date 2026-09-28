@@ -22,14 +22,13 @@ Spawn an `Explore` agent per category below in a single message; each returns hi
 3. **Bloat & over-engineering** — premature abstractions, single-consumer indirection, unused params/options/config, speculative generality, comments restating code, docs duplicating source.
 4. **Complexity & weak types** — nesting wanting early returns; swallowed errors that should surface; raw primitives for keys/IDs that should be strong types (per global **Code**).
 5. **Structure** — code/docs in the wrong place per project layout/doc index; giant files to split along a natural seam (responsibility/topic, not line count).
-6. **TODOs & notes** — TODO items already done or stale (delete the file and its index line); scratch spec/design notes load-bearing enough to graduate into a real doc (registered in the index, scratch copy replaced by a link).
+6. **TODOs & notes** — TODO items code unambiguously proves done (never future or cross-repo ones); scratch spec/design notes load-bearing enough to graduate into a real doc (registered in the index, scratch copy replaced by a link).
 
 ## Phase 2 — Apply
 
 Apply directly — no approval gate; Phase 3 reviews the result. **Every edit obeys these checks:**
 
 - Read the target before removing. Confirm dead against dynamic/reflection/API/persisted refs (zero static callers ≠ dead); never delete a file you haven't opened or a kind the audit didn't model (configs, fixtures, generated sources, assets).
-- Prune a TODO only if code unambiguously proves it done — never future or cross-repo items.
 - Moving/splitting updates every import, reference, wiki-link, and build path in the same step.
 - A type change crossing a serialization/persistence boundary (save data, caches, DTOs, asset/string IDs) → flag *needs confirmation*.
 - Without tests/typecheck to back "behavior preserved," restrict to provably-safe edits (dead removal, doc/comment slimming). Skip anything *needs confirmation*.
