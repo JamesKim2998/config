@@ -1,7 +1,6 @@
-# Neovim Plugin Testing
-
-E2E testing for neovim plugins using headless nvim and Bun's test framework.
-
+---
+description: "E2E testing for neovim plugins using headless nvim and Bun's test framework."
+---
 ## Running Tests
 
 ```bash

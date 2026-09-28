@@ -1,9 +1,8 @@
-# Yazi Config
-
-File manager with plugins, custom keymaps, and previewers.
-
-> **Related:** [[nvim-plugin-testing.md]] (shared test harness)
-
+---
+description: "The Yazi file manager: custom keymaps, plugins and previewers."
+related:
+  - "[[nvim-plugin-testing.md]] — shared test harness"
+---
 ## Custom Keymaps
 
 | Key | Action |

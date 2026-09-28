@@ -1,10 +1,10 @@
-# Tailscale
-
-> **Related:** `cgnat-route.sh`, `com.studioboxcat.tailscale-cgnat-fix.plist` · Tailscale on the 100.x range: https://tailscale.com/kb/1015/100.x-addresses
-
-Mesh VPN for stable Mac Mini access (`macmini.studioboxcat.com` → tailnet IP),
-installed as the `tailscale` cask.
-
+---
+description: "Tailscale for stable Mac mini access, and the fix for the ISP route that hijacks tailnet traffic."
+related:
+  - "[[cgnat-route.sh]]"
+  - "[[com.studioboxcat.tailscale-cgnat-fix.plist]]"
+  - "[Tailscale on the 100.x range](https://tailscale.com/kb/1015/100.x-addresses)"
+---
 ## The CGNAT route collision
 
 Tailscale assigns every node a `100.64.0.0/10` IP (RFC 6598 CGNAT). The

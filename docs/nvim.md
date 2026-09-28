@@ -1,7 +1,6 @@
-# Neovim Config
-
-IDE setup with Lazy.nvim plugin manager.
-
+---
+description: "Neovim on Lazy.nvim: keymaps, plugins and how each is configured."
+---
 ## Keymaps
 
 ### Files & Buffers

@@ -1,7 +1,8 @@
-# Mistel Barocco MD770 BT Troubleshooting
-
-> **Related:** [[README.md]], `barocco_md770.pdf`
-
+---
+description: "The Mistel Barocco MD770 over Bluetooth: keys that stop responding, layout cycling, full resets."
+related:
+  - "[[README.md]] — `barocco_md770.pdf`"
+---
 ## Key Not Responding (Bluetooth only, works on USB)
 
 1. Check layout hasn't changed: **PN + '** cycles QWERTY → Colemak → Dvorak (tap until back to QWERTY)

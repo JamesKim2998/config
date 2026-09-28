@@ -1,8 +1,9 @@
+---
+description: "The macOS dotfiles and dev environment: each tool's config, how setup links it in, and the global env."
+related:
+  - "`CLAUDE.md` (boxcat-devenv) — the repos, once the machine is set up"
+---
 # Config Repository
-
-> **Related:** `CLAUDE.md` (boxcat-devenv) — the repos, once the machine is set up
-
-macOS dotfiles and development environment configuration.
 
 ## Structure
 
@@ -14,10 +15,10 @@ macOS dotfiles and development environment configuration.
 | Yazi | [[yazi.md|yazi/]] | File manager with plugins |
 | Lazygit | `lazygit/` | Git TUI |
 | Bat | `bat/` | Syntax-highlighted cat |
-| Hammerspoon | [[README.md|.hammerspoon/]] | Window management, app launcher hotkeys (`U` shells out to [`unity-launcher`](https://github.com/studio-boxcat/unity-launcher) for meow-tower) |
+| Hammerspoon | [[README.md|.hammerspoon/]] | Window management, app launcher hotkeys (`U` shells out to `unity-launcher`, a boxcat monorepo folder, for meow-tower) |
 | IntelliJ | `intellij/` | IdeaVim (.ideavimrc), Copilot settings |
 | Gemini | `gemini/` | Gemini CLI |
-| VS Code | [[vscode.md|vscode/]] | Global editor settings (symlinked to `Code/User/`); `.vscode/` is this repo's own workspace layer |
+| VS Code | [[vscode.md|vscode/]] | Global editor settings (symlinked to `Code/User/`) |
 | Zsh | `.zshenv`, `.zshrc` | Shell config |
 | Starship | `starship.toml` | Prompt |
 | Karabiner | [[README.md|karabiner/]] | Keyboard remapping (manual sync via justfile) |
@@ -32,12 +33,13 @@ macOS dotfiles and development environment configuration.
 | `.zshenv.local` | All shells (not tracked) | SSH agent, secrets, machine-specific overrides — not repo paths, those are boxcat-devenv's |
 | `.zshrc` | Interactive shells only | Aliases, functions, completions, prompt |
 
-`AM_I_SERVER=1` is what makes a machine the mac mini: `setup-server.sh` writes it to `~/.zshenv.local`, and
-every repo's server-only branch reads that one flag.
+The mac mini is the server because the monorepo's root `.boxcat.env.json` names its `LocalHostName`
+(`server.ts`, boxcat-devenv); nothing in the shell marks it. `setup-server.sh` only sets its look and
+the mirror root in `~/.zshenv.local`.
 
 Note: PATH must be in `.zshenv` for subshell compatibility (e.g., `$(...)`, pipes, xargs).
 
-See [[diagnostics/shell-path.test.ts]] for PATH validation and zsh gotchas.
+See [[shell-path.test.ts]] for PATH validation and zsh gotchas.
 
 ## Theme
 
@@ -55,7 +57,7 @@ Themed: nvim, kitty, lazygit, bat, yazi, starship, delta
 | Script | Desc |
 |--------|------|
 | `setup.sh` | Brew packages and casks (grouped by inline comments), bun, rustup, cargo tools, symlinks, the global env |
-| `setup-server.sh` | Marks the host as the server (`AM_I_SERVER`), Tokyo Night |
+| `setup-server.sh` | Server-only shell env (`GITHUB_MIRROR_ROOT`), Tokyo Night |
 | `diagnostics/` | SSH, clipboard, nvim, yazi diagnostics |
 
 Run diagnostics with `cd diagnostics && bun test`.

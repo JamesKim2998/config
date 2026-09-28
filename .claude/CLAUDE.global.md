@@ -29,52 +29,22 @@ Applies to code, docs, configs, and commit messages.
 - **Domain over Implementation**: Skip internal API signatures and temporary code.
 - **Progressive Disclosure**: Keep `CLAUDE.md` minimal; details belong in `docs/`.
 - **Harness over Rules**: Enforce with a hook, lint rule, type, or test; write a doc rule only when nothing can check it.
-- **Related Header**: Start each doc with `> **Related:**`. Per-link note okay, but no self-explaining.
-- **File References**: Filename only, no full paths; subfolder suffix if ambiguous. Same-repo: `[[doc.md]]`, `[[doc.md#section]]`. Cross-repo: `` `bar.md` (repo-name) ``.
+- **Description**: A doc's frontmatter `description` states its scope; one that won't fit is two docs.
+- **File References**: Filename only, no full paths; root-relative path only if the basename is ambiguous. Within a repo: `[[doc.md]]`, `[[doc.md#section]]`. Another repo: `` `bar.md` (repo) ``.
 - **Diagrams**: Use Mermaid; avoid ASCII art.
 
 ---
 
 # Development Environment
 
-## Major Repositories
-
-All repos live under `$MEOW_ROOT`.
-
-| Repo | Env Var | Description |
-|------|---------|-------------|
-| **meow-tower** | `$MEOW_CLIENT` | Unity mobile game (iOS/Android) - main game project |
-| **meow-assets** | `$MEOW_ASSETS` | Art, UI, sound, store, marketing assets |
-| **meow-toolbox** | `$MEOW_TOOLBOX` | Bun/TS dev tools - PSD processing, spreadsheets, Firebase, App Store Connect, automation scripts |
-| **boxcat-rust-tools** | `$MEOW_ROOT/boxcat-rust-tools` | Rust monorepo for meow-ecosystem tooling - per-domain CLIs/rlibs + C FFI / napi bridges. Hub: `CLAUDE.md` (boxcat-rust-tools) |
-| **pspec** | `$MEOW_ROOT/pspec` | Rust CLI - Unity `.prefab`/`.unity`/`.asset` ↔ JSON. Hub: `CLAUDE.md` (pspec) |
-| **meow-langpack** | `$MEOW_LANGPACK` | Game text — source files (KO + translations) |
-| **meow-game-server** | `$MEOW_SERVER` | Backend for gameplay services |
-| **meow-infra** | `$MEOW_INFRA` | OpenTofu infra - Route53 DNS, EC2 systemd units, Caddy, LFS relay |
-| **meow-dev-media** | `$MEOW_DEV_MEDIA` | Thumbnails for Google Sheets; auto-synced to S3 (`meow-dev-media.studioboxcat.com`) via GitHub Actions |
-| **config** | `$CONFIG_REPO` | macOS dotfiles - nvim, kitty, zsh, git, yazi, lazygit, hammerspoon |
-
-`boxcat-*` under `$MEOW_ROOT`: shared TS packages, consumed as `link:` deps. Roster: `repos.json` (boxcat-devenv).
-
-`boxcat-devenv <verb>` sets up and syncs this host — `bootstrap`, `setup`, `doctor`, `sync`, `push`, `deps`, `affected` (`--help` for the rest). Hub: `CLAUDE.md` (boxcat-devenv).
-
-`meow-toolbox-just <recipe>` runs any meow-toolbox just recipe from anywhere (e.g. `meow-toolbox-just langpack-sheet pull`).
-
-`boxcat-doc <query>` fuzzy-finds docs across this host's clones — env-var-prefixed paths with summaries.
+Studio Boxcat's tools, services and games are one monorepo, `studio-boxcat/boxcat`, cloned at `$BOXCAT_ROOT` (`~/Develop/boxcat`); its root `CLAUDE.md` maps the folders and the commands it puts on PATH. These dotfiles are `$CONFIG_REPO`.
 
 ## CLI Tools
 
 | Command | Description |
 |---------|-------------|
 | `ilspycmd` | .NET decompiler CLI |
-| `unity-solution-generator typecheck .` | Unity solution compile check; defaults to `ios editor`, override with `... <platform> <config>` |
-| `unity-launcher` | Unity editor launcher: `launch [-batchmode]` / `focus` / `quit`. Walks up from the binary or cwd looking for `ProjectSettings/`. |
-| `unity-assetdb` | Unity asset GUID ↔ path/name index. Query with `guid` / `path` / `find` / `alias` / `usage`. |
-| `unity-asmdef` | Unity assembly index. Query with `which` (file → assembly) / `info` / `deps`. JSON out. |
-| `pspec` | Unity `.prefab`/`.unity`/`.asset` ↔ JSON |
 | `upextract` | `.unitypackage` extractor |
-| `game-art-tool` | PSD/AI parsing, layer export, TexturePacker ops |
-| `langpack` | Langpack compiler + query/authoring CLI. Source at `$MEOW_LANGPACK` |
 | `ntn` | Notion CLI (`ntn --help`) |
 
 Also preinstalled: `aws`, `fd`, `ffmpeg`, `firebase`, `gcloud`, `gh`, `hyperfine`, `jq`, `just`, `magick`, `mlr`, `optipng`, `ouch`, `parallel`, `pngquant`, `rg`, `sd`, `tofu`, `yq`.

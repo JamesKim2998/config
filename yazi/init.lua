@@ -88,7 +88,7 @@ end
 
 -- Repo + worktree (branch) indicator for the status bar. Lives as a plugin
 -- because `ps.sub`/`ya.sync` must be called in plugin context. See
--- [[git-status.yazi/main.lua]] for the sync/async wiring.
+-- `git-status.yazi/main.lua` for the sync/async wiring.
 local git_status = require("git-status")
 git_status:setup()
 

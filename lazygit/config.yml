@@ -6,8 +6,8 @@ gui:
   filterMode: fuzzy
   nerdFontsVersion: "3"
 git:
-  # Background offenders — leak .git/index.lock under contention
-  # (shared submodule git-dirs in worktree-pool slots). Manual refresh: `R` in lazygit.
+  # Background offenders — leak .git/index.lock under contention with the hooks and agents that
+  # share a clone. Manual refresh: `R` in lazygit.
   autoRefresh: false
   autoFetch: false
   pagers:

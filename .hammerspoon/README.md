@@ -13,6 +13,6 @@ frontmost cycles that app's windows, like `Cmd+~`.
 | R | Rider |
 | S | Slack |
 | T | TexturePacker |
-| U | Unity — meow-tower via [`unity-launcher`](https://github.com/studio-boxcat/unity-launcher) |
+| U | Unity — meow-tower via `unity-launcher`, a folder of the boxcat monorepo |
 | X | Xcode |
 | Y | kitty |
