@@ -9,7 +9,7 @@ Applies to chat responses; written artifacts follow Authoring.
 ## Workflow
 - **Git**: Do NOT auto-commit or stage changes unless explicitly requested by the user.
 - **Commit Scope**: Agents share the worktree — commit your own files only (`git commit --only <files>`).
-- **TODO**: Log out-of-scope items (pain points, architectural friction, tech debt, slow tests, weak infra) to the nearest `TODO.md`. If it bears on the current task, fix it now instead.
+- **TODO**: Log out-of-scope friction (tech debt, slow tests, weak infra) in the repo's TODO, only when you can name the commit that deletes it. If it bears on the current task, fix it now instead.
 
 ## Authoring
 Applies to code, docs, configs, and commit messages.
@@ -30,7 +30,7 @@ Applies to code, docs, configs, and commit messages.
 - **Progressive Disclosure**: Keep `CLAUDE.md` minimal; details belong in `docs/`.
 - **Harness over Rules**: Enforce with a hook, lint rule, type, or test; write a doc rule only when nothing can check it.
 - **Description**: A doc's frontmatter `description` states its scope; one that won't fit is two docs.
-- **File References**: Filename only, no full paths; root-relative path only if the basename is ambiguous. Within a repo: `[[doc.md]]`, `[[doc.md#section]]`. Another repo: `` `bar.md` (repo) ``.
+- **File References**: Filename only, no full paths; root-relative path only if the basename is ambiguous. Within a repo: `[[doc.md]]`, `[[doc.md#Heading Text]]` (the heading as written, not its slug). Another repo: `` `bar.md` (repo) ``.
 - **Diagrams**: Use Mermaid; avoid ASCII art.
 
 ---
