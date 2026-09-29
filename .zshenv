@@ -38,10 +38,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # The env boxcat-devenv generates (`just bootstrap` there) — BOXCAT_ROOT, MEOW_CRED, the Unity editor — for EVERY shell.
 [[ -f ~/.config/boxcat/env.zsh ]] && source ~/.config/boxcat/env.zsh
 
-# pnpm
-export PNPM_HOME="$HOME/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-
 # dotnet
 export PATH="$HOME/.dotnet:$HOME/.dotnet/tools:$PATH"
 export DOTNET_ROOT="$HOME/.dotnet"

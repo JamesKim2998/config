@@ -41,4 +41,4 @@ Studio Boxcat's tools, services and games are one monorepo, `studio-boxcat/boxca
 | `upextract` | `.unitypackage` extractor |
 | `ntn` | Notion CLI (`ntn --help`) |
 
-Also preinstalled: `aws`, `fd`, `ffmpeg`, `firebase`, `gcloud`, `gh`, `hyperfine`, `jq`, `just`, `magick`, `mlr`, `optipng`, `ouch`, `parallel`, `pngquant`, `rg`, `sd`, `tofu`, `yq`.
+Also preinstalled: `aws`, `fd`, `ffmpeg`, `firebase`, `gcloud`, `gh`, `hyperfine`, `jq`, `just`, `magick`, `optipng`, `ouch`, `parallel`, `pngquant`, `rg`, `sd`, `tofu`, `yq`.
