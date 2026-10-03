@@ -30,7 +30,10 @@
 
     // files
     "files.associations": {
-        "*.pspec": "json"
+        "*.pspec": "json",
+        "*.meta": "yaml",
+        "*.asset": "yaml",
+        "*.tps": "xml"
     },
     "files.trimTrailingWhitespace": true,
     "files.insertFinalNewline": true,
