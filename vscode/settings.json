@@ -33,7 +33,8 @@
         "*.pspec": "json",
         "*.meta": "yaml",
         "*.asset": "yaml",
-        "*.tps": "xml"
+        "*.tps": "xml",
+        "*.tpsheet": "json"
     },
     "files.trimTrailingWhitespace": true,
     "files.insertFinalNewline": true,
