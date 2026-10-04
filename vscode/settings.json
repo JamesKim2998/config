@@ -92,6 +92,7 @@
     "claudeCode.preferredLocation": "panel",
     "claudeCode.allowDangerouslySkipPermissions": true,
     "claudeCode.attachOpenFile": false,
+    "claudeCode.archiveInactiveSessions": 0,
 
     // terminal
     "terminal.integrated.bellDuration": 1000,
