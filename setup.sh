@@ -18,7 +18,7 @@ brew_install "" \
   nvim tree-sitter-cli `# editor (tree-sitter-cli: compiles nvim-treesitter parsers)` \
   fzf rg fd `# search & find` \
   bat jq yq sd `# file viewing & data processing` \
-  eza zoxide yazi `# file navigation & listing` \
+  zoxide yazi `# file navigation` \
   mediainfo `# yazi previews` \
   clipboard wget vjeantet/tap/alerter `# system utilities (alerter: clickable notifications)` \
   ouch `# compression & archives` \

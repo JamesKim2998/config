@@ -46,13 +46,6 @@ fe() {
 }
 
 
-# eza (modern ls replacement with icons and git integration)
-alias ls='eza --group-directories-first --icons'
-alias ll='eza -l --group-directories-first --icons --git --header'
-alias la='eza -la --group-directories-first --icons --git --header'
-alias lt='eza --tree --level 2 --icons'
-
-
 # zoxide (cached)
 _zoxide=~/.cache/zoxide.zsh
 [[ -f $_zoxide && $_zoxide -nt $HOMEBREW_PREFIX/bin/zoxide ]] || zoxide init zsh > $_zoxide

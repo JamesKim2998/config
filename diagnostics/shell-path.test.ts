@@ -29,7 +29,7 @@ async function shellCommandExists(cmd: string, mode: ShellMode, remote = false):
 }
 
 // Commands that should be available in login shell (.zshenv)
-const LOGIN_CMDS = ["nvim", "fzf", "rg", "fd", "bat", "eza", "zoxide", "yazi", "lazygit", "bun", "starship"];
+const LOGIN_CMDS = ["nvim", "fzf", "rg", "fd", "bat", "zoxide", "yazi", "lazygit", "bun", "starship"];
 
 // Commands that require interactive shell (.zshrc)
 const INTERACTIVE_CMDS = ["z"];
