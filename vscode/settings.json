@@ -30,7 +30,11 @@
 
     // files
     "files.associations": {
-        "*.pspec": "json"
+        "*.pspec": "json",
+        "*.meta": "yaml",
+        "*.asset": "yaml",
+        "*.tps": "xml",
+        "*.tpsheet": "json"
     },
     "files.trimTrailingWhitespace": true,
     "files.insertFinalNewline": true,
@@ -88,6 +92,7 @@
     "claudeCode.preferredLocation": "panel",
     "claudeCode.allowDangerouslySkipPermissions": true,
     "claudeCode.attachOpenFile": false,
+    "claudeCode.archiveInactiveSessions": 0,
 
     // terminal
     "terminal.integrated.bellDuration": 1000,

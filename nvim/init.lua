@@ -1,4 +1,4 @@
--- Disable node provider (using Bun's wrapper, Copilot has its own node path)
+-- Disable node provider (using Bun's wrapper)
 vim.g.loaded_node_provider = 0
 
 require("config.lazy")

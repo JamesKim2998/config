@@ -16,8 +16,7 @@ related:
 | Lazygit | `lazygit/` | Git TUI |
 | Bat | `bat/` | Syntax-highlighted cat |
 | Hammerspoon | [[README.md|.hammerspoon/]] | Window management, app launcher hotkeys (`U` shells out to `unity-launcher`, a boxcat monorepo folder, for meow-tower) |
-| IntelliJ | `intellij/` | IdeaVim (.ideavimrc), Copilot settings |
-| Gemini | `gemini/` | Gemini CLI |
+| IntelliJ | `intellij/` | IdeaVim (.ideavimrc) |
 | VS Code | [[vscode.md|vscode/]] | Global editor settings (symlinked to `Code/User/`) |
 | Zsh | `.zshenv`, `.zshrc` | Shell config |
 | Starship | `starship.toml` | Prompt |

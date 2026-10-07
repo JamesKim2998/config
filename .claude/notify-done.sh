@@ -16,6 +16,11 @@ TIMEOUT=120                       # seconds the banner stays clickable before au
 [ "$CLAUDE_CODE_ENTRYPOINT" = claude-desktop ] && exit 0
 
 in=$(cat)
+
+# A turn that ends with a background subagent still running isn't done; its completion
+# re-invokes the session, whose final Stop notifies instead.
+printf '%s' "$in" | jq -e 'any(.background_tasks[]?; .type == "subagent" and .status == "running")' >/dev/null && exit 0
+
 transcript=$(printf '%s' "$in" | jq -r '.transcript_path // empty')
 
 name=""

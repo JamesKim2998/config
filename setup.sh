@@ -17,11 +17,11 @@ brew_install() {
 brew_install "" \
   nvim tree-sitter-cli `# editor (tree-sitter-cli: compiles nvim-treesitter parsers)` \
   fzf rg fd `# search & find` \
-  bat jq yq sd glow miller `# file viewing & data processing` \
+  bat jq yq sd `# file viewing & data processing` \
   eza zoxide yazi `# file navigation & listing` \
   mediainfo `# yazi previews` \
-  clipboard procs httpie wget vjeantet/tap/alerter `# system utilities (alerter: clickable notifications)` \
-  7-zip ouch `# compression & archives` \
+  clipboard wget vjeantet/tap/alerter `# system utilities (alerter: clickable notifications)` \
+  ouch `# compression & archives` \
   imagemagick ffmpeg `# media processing` \
   lazygit delta git-lfs gh lefthook `# git tools` \
   lld@20 `# the linker .cargo/config.toml names` \
