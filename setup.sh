@@ -34,7 +34,8 @@ brew_install --cask \
   hammerspoon `# macOS automation` \
   libreoffice font-hack-nerd-font \
   tailscale `# mesh VPN for stable Mac Mini access` \
-  gureumkim `# Korean input method`
+  gureumkim `# Korean input method` \
+  syntax-highlight `# Finder Quick Look for source files; also declares .jsonc, which macOS leaves untyped`
 
 # bun — its own installer, not brew: $BUN_INSTALL is what PATH and remote PM2 interpreters point at
 if [ -x "$HOME/.bun/bin/bun" ]; then
@@ -122,6 +123,14 @@ ln -sf "$CONFIG/.claude/skills-global" ~/.claude/skills
 /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$CONFIG/.claude/app/ClaudeSender.app" || true
 mkdir -p ~/.codex
 ln -sf "$LLM_GLOBAL" ~/.codex/AGENTS.md
+
+# quicklook — Syntax Highlight skips dynamic UTIs, so FileTypes.app declares the Unity extensions macOS leaves
+# untyped. Syntax Highlight's settings live in the unsandboxed ~/Library/Preferences plist its renderer reads; a bare
+# `defaults write <domain>` lands in the app's sandbox container instead.
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$CONFIG/quicklook/FileTypes.app"
+for uti in com.unity3d.meta com.unity3d.prefab com.unity3d.mat com.unity.document; do
+  defaults write ~/Library/Preferences/org.sbarex.SourceCodeSyntaxHighlight uti-settings -dict-add "$uti" '<dict><key>syntax</key><string>yaml</string></dict>'
+done
 
 # tailscale: heal the LG U+ DS-Lite CGNAT route collision (see tailscale/TAILSCALE.md)
 "$CONFIG/tailscale/cgnat-route.sh" install
