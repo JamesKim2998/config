@@ -24,7 +24,6 @@ brew_install "" \
   ouch `# compression & archives` \
   imagemagick ffmpeg `# media processing` \
   lazygit delta git-lfs gh lefthook `# git tools` \
-  lld@20 `# the linker .cargo/config.toml names` \
   lua go node dotnet `# languages & runtimes` \
   awscli `# cloud & cli tools` \
   just starship shellcheck zsh-autosuggestions `# shell tools`
@@ -103,10 +102,6 @@ ln -sf "$CONFIG/vscode/keybindings.json" "$APP_SUPPORT/Code/User/keybindings.jso
 
 # jetbrains ideavim
 ln -sf "$CONFIG/intellij/.ideavimrc" ~/.ideavimrc
-
-# cargo
-mkdir -p ~/.cargo
-ln -sf "$CONFIG/.cargo/config.toml" ~/.cargo/config.toml
 
 # cargo tools (stylua: lua formatter, upextract: .unitypackage extractor)
 cargo install stylua upextract
