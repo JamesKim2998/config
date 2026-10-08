@@ -22,6 +22,9 @@ append_if_missing 'BAT_THEME' 'export BAT_THEME="tokyonight"'
 
 # Server-only env lives in .zshenv.local, never in the tracked env file a laptop would pick up.
 append_if_missing 'GITHUB_MIRROR_ROOT' 'export GITHUB_MIRROR_ROOT="$HOME/Develop/github-mirror/cache"'
+# The worktree pool's slots — full checkouts, the build lanes among them — on the external SSD, off
+# the boot disk they would fill. worktree-pool refuses it while unmounted.
+append_if_missing 'WORKTREE_ROOT' 'export WORKTREE_ROOT="/Volumes/EXT/worktree-pool"'
 
 # Set delta syntax theme
 git config --file ~/.gitconfig.local delta.syntax-theme tokyonight
