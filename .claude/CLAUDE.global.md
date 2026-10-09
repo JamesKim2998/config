@@ -26,6 +26,7 @@ Applies to code, docs, configs, and commit messages.
 - **Description**: A doc's frontmatter `description` states its scope; one that won't fit is two docs.
 - **File References**: Filename only, no full paths; root-relative path only if the basename is ambiguous. Within a repo: `[[doc.md]]`, `[[doc.md#Heading Text]]` (the heading as written, not its slug). Another repo: `` `bar.md` (repo) ``.
 - **Diagrams**: Use Mermaid; avoid ASCII art.
+- **Placeholder Examples**: An example showing a format uses placeholders (`Foo`, `Bar`), not real content names — those drift as content changes.
 
 ---
 
