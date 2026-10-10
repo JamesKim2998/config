@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Ahead of git on a Claude Code shell's PATH (.zshenv): `git commit` gets a `Claude-Session: <id> (<name>)`
+# Ahead of git on a Claude Code shell's PATH (session-env.sh): `git commit` gets a `Claude-Session: <id> (<name>)`
 # trailer naming the session behind it. A global hook can't: a repo's own core.hooksPath replaces it.
 dir=${BASH_SOURCE[0]%/*}
 PATH=":$PATH:"; PATH=${PATH//:$dir:/:}; PATH=${PATH#:}; PATH=${PATH%:}

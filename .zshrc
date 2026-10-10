@@ -199,8 +199,3 @@ _fzf_tab_dispatch() {
 }
 zle -N _fzf_tab_dispatch
 bindkey '^I' _fzf_tab_dispatch
-
-# Claude Code's git: a commit names the session behind it (.claude/bin/git). Here, not .zshenv: a
-# login shell's path_helper (/etc/zprofile) moves /usr/bin ahead of what .zshenv prepends, and Claude
-# Code's shell snapshot is taken from an interactive login shell.
-[[ -n $CLAUDE_CODE_SESSION_ID ]] && export PATH="$HOME/Develop/config/.claude/bin:$PATH"

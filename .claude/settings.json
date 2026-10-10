@@ -3,8 +3,17 @@
     "commit": "",
     "pr": ""
   },
-  "model": "opus",
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat $HOME/Develop/config/.claude/session-env.sh >> \"$CLAUDE_ENV_FILE\""
+          }
+        ]
+      }
+    ],
     "UserPromptSubmit": [
       {
         "hooks": [
@@ -51,5 +60,6 @@
   "skipDangerousModePermissionPrompt": true,
   "theme": "auto",
   "editorMode": "vim",
-  "preferredNotifChannel": "terminal_bell"
+  "preferredNotifChannel": "terminal_bell",
+  "model": "opus"
 }
