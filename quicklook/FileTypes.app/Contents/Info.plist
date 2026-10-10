@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Type-declaration-only bundle: gives Unity YAML files real UTIs so Quick Look extensions accept them.
+     Registered and wired to Syntax Highlight in ../../setup.sh. -->
+<plist version="1.0"><dict>
+  <key>CFBundleIdentifier</key><string>com.studioboxcat.filetypes</string>
+  <key>CFBundleName</key><string>FileTypes</string>
+  <key>CFBundlePackageType</key><string>APPL</string>
+  <key>CFBundleInfoDictionaryVersion</key><string>6.0</string>
+  <key>UTImportedTypeDeclarations</key><array>
+    <dict>
+      <key>UTTypeIdentifier</key><string>com.unity3d.meta</string>
+      <key>UTTypeDescription</key><string>Unity Meta</string>
+      <key>UTTypeConformsTo</key><array><string>public.yaml</string></array>
+      <key>UTTypeTagSpecification</key><dict>
+        <key>public.filename-extension</key><array><string>meta</string></array>
+      </dict>
+    </dict>
+    <dict>
+      <key>UTTypeIdentifier</key><string>com.unity3d.prefab</string>
+      <key>UTTypeDescription</key><string>Unity Prefab</string>
+      <key>UTTypeConformsTo</key><array><string>public.yaml</string></array>
+      <key>UTTypeTagSpecification</key><dict>
+        <key>public.filename-extension</key><array><string>prefab</string></array>
+      </dict>
+    </dict>
+    <dict>
+      <key>UTTypeIdentifier</key><string>com.unity3d.mat</string>
+      <key>UTTypeDescription</key><string>Unity Material</string>
+      <key>UTTypeConformsTo</key><array><string>public.yaml</string></array>
+      <key>UTTypeTagSpecification</key><dict>
+        <key>public.filename-extension</key><array><string>mat</string></array>
+      </dict>
+    </dict>
+  </array>
+</dict></plist>

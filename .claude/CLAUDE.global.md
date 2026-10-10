@@ -7,8 +7,7 @@ Applies to chat responses; written artifacts follow Authoring.
 - **Names Aren't Explanations**: A path or symbol points at the thing — still say what it does in words.
 
 ## Workflow
-- **Git**: Do NOT auto-commit or stage changes unless explicitly requested by the user.
-- **Commit Scope**: Agents share the worktree — commit your own files only (`git commit --only <files>`).
+- **Commit Scope**: Agents share the worktree — commit your own files only (`git commit --only <files>`). Each commit's `Claude-Session` trailer names its session (`.claude/bin/git` in `$CONFIG_REPO`).
 - **TODO**: Log out-of-scope friction (tech debt, slow tests, weak infra) in the repo's TODO, only when you can name the commit that deletes it. If it bears on the current task, fix it now instead.
 
 ## Authoring
@@ -32,6 +31,7 @@ Applies to code, docs, configs, and commit messages.
 - **Description**: A doc's frontmatter `description` states its scope; one that won't fit is two docs.
 - **File References**: Filename only, no full paths; root-relative path only if the basename is ambiguous. Within a repo: `[[doc.md]]`, `[[doc.md#Heading Text]]` (the heading as written, not its slug). Another repo: `` `bar.md` (repo) ``.
 - **Diagrams**: Use Mermaid; avoid ASCII art.
+- **Placeholder Examples**: An example showing a format uses placeholders (`Foo`, `Bar`), not real content names — those drift as content changes.
 
 ---
 

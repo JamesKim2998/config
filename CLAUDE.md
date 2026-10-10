@@ -18,6 +18,7 @@ related:
 | Hammerspoon | [[README.md|.hammerspoon/]] | Window management, app launcher hotkeys (`U` shells out to `unity-launcher`, a boxcat monorepo folder, for meow-tower) |
 | IntelliJ | `intellij/` | IdeaVim (.ideavimrc) |
 | VS Code | [[vscode.md|vscode/]] | Global editor settings (symlinked to `Code/User/`) |
+| Quick Look | `quicklook/` | Syntax-highlighted Finder previews (Syntax Highlight cask); declares Unity YAML file types |
 | Zsh | `.zshenv`, `.zshrc` | Shell config |
 | Starship | `starship.toml` | Prompt |
 | Karabiner | [[README.md|karabiner/]] | Keyboard remapping (manual sync via justfile) |

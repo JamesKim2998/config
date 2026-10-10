@@ -65,14 +65,6 @@ run  = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark "$1"'
 
 Note that there's [a bug in Glow v2.0](https://github.com/charmbracelet/glow/issues/440#issuecomment-2307992634) that causes slight color differences between tty and non-tty environments.
 
-### Preview directory tree with [`eza`](https://github.com/eza-community/eza)
-
-```toml
-[[plugin.prepend_previewers]]
-name = "*/"
-run  = 'piper -- eza -TL=3 --color=always --icons=always --group-directories-first --no-quotes "$1"'
-```
-
 ### Use [`hexyl`](https://github.com/sharkdp/hexyl) as fallback previewer
 
 Yazi defaults to using [`file -bL "$1"`](https://github.com/sxyazi/yazi/blob/main/yazi-plugin/preset/plugins/file.lua) if there's no matched previewer.

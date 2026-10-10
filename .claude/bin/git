@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Ahead of git on a Claude Code shell's PATH (session-env.sh): `git commit` gets a `Claude-Session: <id> (<name>)`
+# trailer naming the session behind it. A global hook can't: a repo's own core.hooksPath replaces it.
+dir=${BASH_SOURCE[0]%/*}
+PATH=":$PATH:"; PATH=${PATH//:$dir:/:}; PATH=${PATH#:}; PATH=${PATH%:}
+
+# The name is the session's /rename title, else its generated one. Transcripts are Claude Code's
+# undocumented JSONL; a session without one (or a format change) leaves the id alone.
+session_name() {
+  local f
+  f=$(fd -t f -1 --glob "$CLAUDE_CODE_SESSION_ID.jsonl" "${CLAUDE_CONFIG_DIR:-$HOME/.claude}/projects") && [[ -n $f ]] || return
+  local name
+  name=$(rg '"type":"custom-title"' "$f" | tail -1 | jq -r '.customTitle // empty')
+  [[ -n $name ]] || name=$(rg '"type":"ai-title"' "$f" | tail -1 | jq -r '.aiTitle // empty')
+  [[ -n $name ]] && printf ' (%s)' "$name"
+}
+
+# The subcommand follows git's global options; these take their value as the next word.
+args=("$@")
+i=0
+while (( i < ${#args[@]} )); do
+  case ${args[i]} in
+    -C|-c|--git-dir|--work-tree|--namespace|--config-env) i=$((i + 2)) ;;
+    -*) i=$((i + 1)) ;;
+    *) break ;;
+  esac
+done
+if [[ -n $CLAUDE_CODE_SESSION_ID && ${args[i]} == commit ]]; then
+  args=("${args[@]:0:i+1}" --trailer "Claude-Session: $CLAUDE_CODE_SESSION_ID$(session_name)" "${args[@]:i+1}")
+fi
+exec git "${args[@]}"

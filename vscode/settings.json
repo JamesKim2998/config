@@ -33,6 +33,8 @@
         "*.pspec": "json",
         "*.meta": "yaml",
         "*.asset": "yaml",
+        "*.prefab": "yaml",
+        "*.unity": "yaml",
         "*.tps": "xml",
         "*.tpsheet": "json"
     },

@@ -50,6 +50,9 @@ export SKIP_SLOW_FASTLANE_WARNING=1
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 # Disable fullscreen alt-screen TUI so output stays in native scrollback (loses in-TUI mouse)
 export CLAUDE_CODE_NO_FLICKER=0
+# Its Bash tool runs zsh, but agents write bash: an unquoted $FILES splits, an unmatched glob stays
+# literal (grep --include=*.rs), and `echo ===` is no `=cmd` expansion.
+[[ -n $CLAUDECODE ]] && setopt SH_WORD_SPLIT NO_NOMATCH NO_EQUALS
 
 # fzf (Kanagawa colors)
 export FZF_DEFAULT_OPTS=" \
