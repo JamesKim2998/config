@@ -53,6 +53,10 @@ export CLAUDE_CODE_NO_FLICKER=0
 # Its Bash tool runs zsh, but agents write bash: an unquoted $FILES splits, an unmatched glob stays
 # literal (grep --include=*.rs), and `echo ===` is no `=cmd` expansion.
 [[ -n $CLAUDECODE ]] && setopt SH_WORD_SPLIT NO_NOMATCH NO_EQUALS
+# Its git: a commit names the session behind it (.claude/bin/git). Guarded, as each command's
+# shell starts from a snapshot that already holds it.
+[[ -n $CLAUDE_CODE_SESSION_ID && :$PATH: != *":$HOME/Develop/config/.claude/bin:"* ]] &&
+  export PATH="$HOME/Develop/config/.claude/bin:$PATH"
 
 # fzf (Kanagawa colors)
 export FZF_DEFAULT_OPTS=" \
