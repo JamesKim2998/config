@@ -1,7 +1,7 @@
 # Guidelines
 
 ## Workflow
-- **Commit Scope**: Agents share the worktree — commit your own files only (`git commit --only <files>`). Every commit from a Claude Code shell, in any repo, gets a `Claude-Session: <id> (<name>)` trailer (`.claude/bin/git` in `$CONFIG_REPO`); `git log --grep` it to tell whose commit is whose, `claude --resume <id>` to reopen the session.
+- **Commit Scope**: Agents share the worktree — commit your own files only (`git commit --only <files>`). Each commit's `Claude-Session` trailer names its session (`.claude/bin/git` in `$CONFIG_REPO`).
 - **TODO**: Log out-of-scope friction (tech debt, slow tests, weak infra) in the repo's TODO, only when you can name the commit that deletes it. If it bears on the current task, fix it now instead.
 
 ## Authoring
